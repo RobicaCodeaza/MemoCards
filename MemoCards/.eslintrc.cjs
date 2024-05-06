@@ -1,6 +1,12 @@
 module.exports = {
     root: true,
     env: { browser: true, es2020: true },
+
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
     extends: [
         'eslint:recommended',
         `plugin:@typescript-eslint/recommended-type-checked`,
@@ -25,9 +31,7 @@ module.exports = {
         ],
         'no-unused-vars': 'off',
         'react/prop-types': 'off',
-        '@typescript-eslint/consistent-type-definitions': {
-            defaultOptions: 'type',
-        },
+        '@typescript-eslint/consistent-type-definitions': 0,
         '@typescript-eslint/no-unused-vars': 'off',
     },
 }
