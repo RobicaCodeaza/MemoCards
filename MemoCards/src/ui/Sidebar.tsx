@@ -1,5 +1,6 @@
 import Button from './Button'
 import Logo from './Logo'
+import MainNav from './MainNav'
 
 function Sidebar() {
     return (

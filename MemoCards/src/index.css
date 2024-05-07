@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.active:link,
+.active:visited {
+    @apply bg-picton-blue-100 text-mako-grey-800;
+    svg {
+        @apply text-mako-grey-600;
+    }
+}
+
 *,
 *::before,
 *::after {
