@@ -2,8 +2,8 @@ import logo from '../../public/logo.png'
 
 function Logo() {
     return (
-        <div className="text-center">
-            <img alt="Logo" src={logo}></img>
+        <div className="flex justify-center particular-small-laptop:h-24">
+            <img className="object-contain" alt="Logo" src={logo}></img>
         </div>
     )
 }

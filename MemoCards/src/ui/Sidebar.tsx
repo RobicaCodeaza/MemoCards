@@ -1,10 +1,14 @@
-import Button from './Button'
+import { useMobileNav } from '@/context/ToggleMobileNav'
 import Logo from './Logo'
 import MainNav from './MainNav'
 
 function Sidebar() {
+    const { openMenu } = useMobileNav()
+
     return (
-        <div className="row-span-full flex flex-col  gap-[3.2rem] border-r border-mako-grey-100 bg-picton-blue-50 px-[2.4rem] py-[3.2rem]">
+        <div
+            className={`absolute row-span-full flex  h-screen translate-x-[-100%] flex-col gap-[3.2rem] border-r border-mako-grey-100 bg-picton-blue-50 px-6 py-6 transition-[all] duration-300 ease-in-out phone:relative phone:translate-x-0 phone:px-[2.4rem] phone:py-[3.2rem] ${openMenu ? 'translate-x-0' : 'translate-x-[-100%]'}`}
+        >
             <Logo></Logo>
             <MainNav></MainNav>
         </div>

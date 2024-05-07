@@ -1,4 +1,11 @@
 import { GoHome } from 'react-icons/go'
+import {
+    PiCardsThreeLight,
+    PiExamLight,
+    PiUserCircleGearLight,
+} from 'react-icons/pi'
+
+import { CiSettings } from 'react-icons/ci'
 import { NavLink } from 'react-router-dom'
 
 function MainNav() {
@@ -7,57 +14,59 @@ function MainNav() {
             <li>
                 <NavLink
                     to={'dashboard'}
-                    className=" flex items-center gap-5 rounded px-10 py-5 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
                     "
                 >
-                    <GoHome className="h-10 w-10 text-mako-grey-400"></GoHome>
-                    <span>Home</span>
+                    <GoHome className="text-inherit block h-10 w-10"></GoHome>
+                    <span className="phone:hidden tab-port:block">Home</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink
                     to={'flashcards'}
-                    className=" flex items-center gap-5 rounded px-10 py-5 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
                     "
                 >
-                    <GoHome className="h-10 w-10 text-mako-grey-400"></GoHome>
-                    <span>Flashcards</span>
+                    <PiCardsThreeLight className="text-inherit block h-10 w-10"></PiCardsThreeLight>
+                    <span className="phone:hidden tab-port:block">Cards</span>
                 </NavLink>
             </li>
 
             <li>
                 <NavLink
                     to={'quiz'}
-                    className=" flex items-center gap-5 rounded px-10 py-5 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
                     "
                 >
-                    <GoHome className="h-10 w-10 text-mako-grey-400"></GoHome>
-                    <span>Quiz</span>
+                    <PiExamLight className="text-inherit block h-10 w-10"></PiExamLight>
+                    <span className="phone:hidden tab-port:block">Quiz</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink
                     to={'account'}
-                    className=" flex items-center gap-5 rounded px-10 py-5 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
                     "
                 >
-                    <GoHome className="h-10 w-10 text-mako-grey-400"></GoHome>
-                    <span>Account</span>
+                    <PiUserCircleGearLight className="text-inherit block h-10 w-10"></PiUserCircleGearLight>
+                    <span className="phone:hidden tab-port:block">Account</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink
                     to={'settings'}
-                    className=" flex items-center gap-5 rounded px-10 py-5 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
                     "
                 >
-                    <GoHome className="h-10 w-10 text-mako-grey-400"></GoHome>
-                    <span>Settings</span>
+                    <CiSettings className="text-inherit block h-10 w-10"></CiSettings>
+                    <span className="phone:hidden tab-port:block">
+                        Settings
+                    </span>
                 </NavLink>
             </li>
         </ul>
