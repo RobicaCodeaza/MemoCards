@@ -18,9 +18,17 @@ type ButtonProps<T extends ElementType> = {
         | 'danger'
     size: 'tiny' | 'small' | 'medium' | 'large' | 'huge'
     children: ReactNode
+    otherClasses: string
 } & ComponentPropsWithoutRef<T>
 
-function Button<C extends ElementType>(props: ButtonProps<C>) {
+function Button<C extends ElementType>({
+    as,
+    variation,
+    children,
+    size,
+    otherClasses,
+    ...props
+}: ButtonProps<C>) {
     const button = {
         variation: {
             fancyPrimary: '',
@@ -35,9 +43,9 @@ function Button<C extends ElementType>(props: ButtonProps<C>) {
             simpleTertiary: `border rounded border-chateau-green-500 hover:border-chateau-green-600 text-chateau-green-500 hover:text-chateau-green-600 active:border-chateau-green-700  active:text-chateau-green-700`,
             simpleSecondary: `border rounded border-neon-carrot-500 hover:border-neon-carrot-600 text-neon-carrot-500 hover:text-neon-carrot-600 active:border-neon-carrot-700  active:text-neon-carrot-700`,
             subtleGrey:
-                'bg-mako-grey-100 rounded outline outline-offset-0 outline-none   text-mako-grey-500 hover  hover:text-mako-grey-700 hover:outline-2 hover:outline-picton-blue-400',
+                'bg-mako-grey-100 rounded outline outline-offset-0 outline-none   text-mako-grey-500 hover:bg-mako-grey-50  hover:text-mako-grey-700 hover:outline-2 hover:outline-picton-blue-400 focus:bg-mako-grey-50',
             subtleWhite:
-                'bg-mako-grey-50 rounded outline outline-none outline-offset-0  text-mako-grey-500 hover:bg-mako-grey-100 hover:text-mako-grey-700 hover:outline-2  hover:outline-picton-blue-400',
+                'bg-picton-blue-50 rounded outline outline-none outline-offset-0  text-mako-grey-500 hover:bg-picton-blue-100 hover:text-mako-grey-700 hover:outline-2  hover:outline-picton-blue-400',
             danger: 'rounded bg-danger-600 hover:bg-danger-700 text-mako-grey-100 hover:text-mako-grey-200 active:bg-danger-800  active:text-mako-grey-300',
         },
         size: {
@@ -49,13 +57,13 @@ function Button<C extends ElementType>(props: ButtonProps<C>) {
         },
     }
 
-    const Component = props.as ?? 'button'
+    const Component = as ?? 'button'
     return (
         <Component
-            className={`${button.variation[props.variation]} ${button.size[props.size]}`}
+            className={`flex items-center justify-center  ${button.variation[variation]} ${button.size[size]} ${otherClasses}`}
             {...props}
         >
-            {props.children}
+            {children}
         </Component>
     )
 }
