@@ -86,6 +86,14 @@ export default {
         },
 
         extend: {
+            screens: {
+                phone: '37.5em',
+                'tab-port': '56.25em',
+                'tab-land': '75em',
+                'particular-small-laptop': '98.5em',
+                laptop: '112.5em',
+                'big-desktop': '120em',
+            },
             keyframes: {
                 'accordion-down': {
                     from: { height: '0' },
@@ -102,5 +110,6 @@ export default {
             },
         },
     },
+
     plugins: [tailwindcssAnimate],
 }

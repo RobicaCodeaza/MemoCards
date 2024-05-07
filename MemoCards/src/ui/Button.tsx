@@ -13,19 +13,14 @@ type ButtonProps<T extends ElementType> = {
         | 'simplePrimary'
         | 'simpleSecondary'
         | 'simpleTertiary'
-        | 'subtle'
+        | 'subtleGrey'
+        | 'subtleWhite'
         | 'danger'
     size: 'tiny' | 'small' | 'medium' | 'large' | 'huge'
     children: ReactNode
 } & ComponentPropsWithoutRef<T>
 
-function Button<C extends ElementType>({
-    as,
-    variation,
-    size,
-    children,
-    ...props
-}: ButtonProps<C>) {
+function Button<C extends ElementType>(props: ButtonProps<C>) {
     const button = {
         variation: {
             fancyPrimary: '',
@@ -39,7 +34,10 @@ function Button<C extends ElementType>({
             simplePrimary: `border rounded border-picton-blue-500 hover:border-picton-blue-600 text-picton-blue-500 hover:text-picton-blue-600 active:border-picton-blue-700  active:text-picton-blue-700`,
             simpleTertiary: `border rounded border-chateau-green-500 hover:border-chateau-green-600 text-chateau-green-500 hover:text-chateau-green-600 active:border-chateau-green-700  active:text-chateau-green-700`,
             simpleSecondary: `border rounded border-neon-carrot-500 hover:border-neon-carrot-600 text-neon-carrot-500 hover:text-neon-carrot-600 active:border-neon-carrot-700  active:text-neon-carrot-700`,
-            subtle: '',
+            subtleGrey:
+                'bg-mako-grey-100 rounded outline outline-offset-0 outline-none   text-mako-grey-500 hover  hover:text-mako-grey-700 hover:outline-2 hover:outline-picton-blue-400',
+            subtleWhite:
+                'bg-mako-grey-50 rounded outline outline-none outline-offset-0  text-mako-grey-500 hover:bg-mako-grey-100 hover:text-mako-grey-700 hover:outline-2  hover:outline-picton-blue-400',
             danger: 'rounded bg-danger-600 hover:bg-danger-700 text-mako-grey-100 hover:text-mako-grey-200 active:bg-danger-800  active:text-mako-grey-300',
         },
         size: {
@@ -51,13 +49,13 @@ function Button<C extends ElementType>({
         },
     }
 
-    const Component = as ?? 'button'
+    const Component = props.as ?? 'button'
     return (
         <Component
-            className={`${button.variation[variation]} ${button.size[size]}`}
+            className={`${button.variation[props.variation]} ${button.size[props.size]}`}
             {...props}
         >
-            {children}
+            {props.children}
         </Component>
     )
 }
