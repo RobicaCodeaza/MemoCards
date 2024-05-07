@@ -9,10 +9,9 @@
     padding: 0;
     margin: 0;
 
-    /* Creating animations for dark mode */
-    transition:
+    /* transition:
         background-color 0.3s,
-        border 0.3s;
+        border 0.3s; */
 }
 
 html {
@@ -42,7 +41,7 @@ select {
 }
 
 button {
-    transition: all 0.3s;
+    transition: all 0.3s border 0s;
     cursor: pointer;
 }
 
@@ -52,16 +51,16 @@ button {
 
 select:disabled,
 input:disabled {
-    /* background-color: var(--color-grey-200); */
-    /* color: var(--color-grey-500); */
+    background-color: #cdd0d4;
+    color: #656d75;
 }
 
 input:focus,
 button:focus,
 textarea:focus,
 select:focus {
-    /* outline: 2px solid var(--color-brand-600); */
-    /* outline-offset: -1px; */
+    outline: 2px solid #15a1e2;
+    outline-offset: -1px;
 }
 
 /* Parent selector, finally 😃 */
