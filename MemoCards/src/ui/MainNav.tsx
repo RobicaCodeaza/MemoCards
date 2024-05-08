@@ -27,7 +27,7 @@ function MainNav() {
                     "
                 >
                     <GoHome className="text-inherit block h-10 w-10"></GoHome>
-                    <span className="phone:hidden tab-port:block">Home</span>
+                    <span className=" tab-port:block">Home</span>
                 </NavLink>
             </li>
             <li>
@@ -39,7 +39,7 @@ function MainNav() {
                     "
                 >
                     <PiCardsThreeLight className="text-inherit block h-10 w-10"></PiCardsThreeLight>
-                    <span className="phone:hidden tab-port:block">Cards</span>
+                    <span className=" tab-port:block">Cards</span>
                 </NavLink>
             </li>
 
@@ -52,7 +52,7 @@ function MainNav() {
                     "
                 >
                     <PiExamLight className="text-inherit block h-10 w-10"></PiExamLight>
-                    <span className="phone:hidden tab-port:block">Quiz</span>
+                    <span className=" tab-port:block">Quiz</span>
                 </NavLink>
             </li>
             <li>
@@ -64,7 +64,7 @@ function MainNav() {
                     "
                 >
                     <PiUserCircleGearLight className="text-inherit block h-10 w-10"></PiUserCircleGearLight>
-                    <span className="phone:hidden tab-port:block">Account</span>
+                    <span className=" tab-port:block">Account</span>
                 </NavLink>
             </li>
             <li>
@@ -76,9 +76,7 @@ function MainNav() {
                     "
                 >
                     <CiSettings className="text-inherit block h-10 w-10"></CiSettings>
-                    <span className="phone:hidden tab-port:block">
-                        Settings
-                    </span>
+                    <span className=" tab-port:block">Settings</span>
                 </NavLink>
             </li>
         </ul>
