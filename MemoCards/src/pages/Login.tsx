@@ -76,9 +76,6 @@ const customTheme: CustomThemeType = {
 }
 
 function Login() {
-    {
-        /* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */
-    }
     return (
         <div className="flex min-h-screen items-center justify-center bg-picton-blue-100 py-8">
             <div className="w-[87.5%] rounded-[12px] border-2 border-mako-grey-200 bg-picton-blue-50 p-8 shadow-md phone:w-1/2 phone:p-10 tab-port:w-2/5 tab-port:p-12 tab-land:w-1/3 tab-land:p-16 particular-small-laptop:w-[30%] particular-small-laptop:p-24">
@@ -87,8 +84,8 @@ function Login() {
                     Take a look at the next flashcards app
                 </p>
                 <Auth
+                    providers={['google']}
                     supabaseClient={supabase}
-                    providers={['google', 'github']}
                     appearance={{ theme: ThemeSupa, variables: customTheme }}
                 />
             </div>
