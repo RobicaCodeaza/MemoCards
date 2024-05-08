@@ -7,8 +7,16 @@ import {
 
 import { CiSettings } from 'react-icons/ci'
 import { NavLink } from 'react-router-dom'
+import { useMobileNav } from '@/context/ToggleMobileNav'
 
 function MainNav() {
+    const { toggleMobileNav, openMenu } = useMobileNav()
+
+    function handleToggle() {
+        if (openMenu) toggleMobileNav()
+        else return
+    }
+
     return (
         <ul className="flex flex-col gap-3">
             <li>
@@ -24,6 +32,7 @@ function MainNav() {
             </li>
             <li>
                 <NavLink
+                    onClick={openMenu ? toggleMobileNav : ''}
                     to={'flashcards'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -36,6 +45,7 @@ function MainNav() {
 
             <li>
                 <NavLink
+                    onClick={openMenu ? toggleMobileNav : ''}
                     to={'quiz'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -47,6 +57,7 @@ function MainNav() {
             </li>
             <li>
                 <NavLink
+                    onClick={openMenu ? toggleMobileNav : ''}
                     to={'account'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -58,6 +69,7 @@ function MainNav() {
             </li>
             <li>
                 <NavLink
+                    onClick={openMenu ? toggleMobileNav : ''}
                     to={'settings'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
