@@ -1,10 +1,16 @@
 import { HiEllipsisVertical } from 'react-icons/hi2'
 import Button from './Button'
 import { useMobileNav } from '@/context/ToggleMobileNav'
+import { useEffect } from 'react'
 
 function ToggleMenu() {
-    const { toggleMobileNav } = useMobileNav()
-
+    const { toggleMobileNav, openMenu } = useMobileNav()
+    useEffect(
+        function () {
+            console.log(openMenu)
+        },
+        [openMenu]
+    )
     return (
         <Button
             as="button"
