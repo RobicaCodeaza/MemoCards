@@ -1,8 +1,11 @@
 import supabase from '@/services/supabase'
 import { ThemeVariables, ThemeSupa } from '@supabase/auth-ui-shared'
-
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import { Auth } from '@supabase/auth-ui-react'
 import Logo from '@/ui/Logo'
+// import { useAuthStateChange } from 'node_modules/react-supabase/dist/types'
 
 type CustomThemeType = {
     default: ThemeVariables
@@ -75,7 +78,22 @@ const customTheme: CustomThemeType = {
     },
 }
 
-function Login() {
+function Authentication() {
+    const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
+    useEffect(
+        function () {
+            supabase.auth.onAuthStateChange((event, session) => {
+                if (event === 'SIGNED_IN') {
+                    queryClient.setQueryData(['user'], session?.user)
+                    navigate('/dashboard', { replace: true })
+                } else return
+            })
+        },
+        [navigate, queryClient]
+    )
+
     return (
         <div className="flex min-h-screen items-center justify-center bg-picton-blue-100 py-8">
             <div className="w-[87.5%] rounded-[12px] border-2 border-mako-grey-200 bg-picton-blue-50 p-8 shadow-md phone:w-1/2 phone:p-10 tab-port:w-2/5 tab-port:p-12 tab-land:w-1/3 tab-land:p-16 particular-small-laptop:w-[30%] particular-small-laptop:p-24">
@@ -86,11 +104,14 @@ function Login() {
                 <Auth
                     providers={['google']}
                     supabaseClient={supabase}
-                    appearance={{ theme: ThemeSupa, variables: customTheme }}
+                    appearance={{
+                        theme: ThemeSupa,
+                        variables: customTheme,
+                    }}
                 />
             </div>
         </div>
     )
 }
 
-export default Login
+export default Authentication

@@ -9,12 +9,11 @@ type ProtectedRouteProps = PropsWithChildren
 function ProtectedRoute({ children }: ProtectedRouteProps) {
     const navigate = useNavigate()
 
-    console.log('protected')
     const { isLoading, isAuthenticated } = useUser()
 
     useEffect(
         function () {
-            if (!isAuthenticated && !isLoading) navigate('/login')
+            if (!isAuthenticated && !isLoading) navigate('/auth')
         },
         [isAuthenticated, isLoading, navigate]
     )

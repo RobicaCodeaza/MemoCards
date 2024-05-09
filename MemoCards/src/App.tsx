@@ -5,8 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Flashcards from './pages/Flashcards'
 import Quiz from './pages/Quiz'
 import Account from './pages/Account'
-import Login from './pages/Login'
-import SignUp from './pages/SignUp'
+import Authentication from './pages/Authentication'
 import PageNotFound from './pages/PageNotFound'
 import Settings from './pages/Settings'
 import { MobileNavProvider } from './context/ToggleMobileNav'
@@ -69,13 +68,10 @@ function App() {
                                 ></Route>
                             </Route>
                             <Route
-                                path="login"
-                                element={<Login></Login>}
+                                path="auth"
+                                element={<Authentication></Authentication>}
                             ></Route>
-                            <Route
-                                path="signup"
-                                element={<SignUp></SignUp>}
-                            ></Route>
+
                             <Route
                                 path="*"
                                 element={<PageNotFound></PageNotFound>}

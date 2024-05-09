@@ -2,7 +2,6 @@ import supabase from './supabase'
 
 export async function getCurrentUser() {
     const { data: session } = await supabase.auth.getSession()
-
     // If there is no user
     if (!session.session) return
 
