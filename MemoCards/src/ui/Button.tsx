@@ -18,7 +18,7 @@ type ButtonProps<T extends ElementType> = {
         | 'danger'
     size: 'tiny' | 'small' | 'medium' | 'large' | 'huge'
     children: ReactNode
-    otherClasses: string
+    otherClasses?: string
 } & ComponentPropsWithoutRef<T>
 
 function Button<C extends ElementType>({
