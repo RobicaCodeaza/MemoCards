@@ -6,7 +6,7 @@ import Container from './Container'
 
 function AppLayout() {
     return (
-        <div className="grid min-h-screen grid-cols-[1fr] grid-rows-[auto_1fr] phone:grid-cols-[20rem_1fr] tab-port:grid-cols-[20rem_1fr] tab-land:grid-cols-[20rem_1fr]">
+        <div className="grid min-h-screen grid-cols-[1fr] grid-rows-[auto_1fr] tab-port:grid-cols-[20rem_1fr] tab-land:grid-cols-[20rem_1fr]">
             <Sidebar></Sidebar>
             <Header></Header>
             <Main>

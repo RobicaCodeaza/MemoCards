@@ -21,6 +21,7 @@ function MainNav() {
         <ul className="flex flex-col gap-3">
             <li>
                 <NavLink
+                    onClick={handleToggle}
                     to={'dashboard'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -32,7 +33,7 @@ function MainNav() {
             </li>
             <li>
                 <NavLink
-                    onClick={openMenu ? toggleMobileNav : ''}
+                    onClick={handleToggle}
                     to={'flashcards'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -45,7 +46,7 @@ function MainNav() {
 
             <li>
                 <NavLink
-                    onClick={openMenu ? toggleMobileNav : ''}
+                    onClick={handleToggle}
                     to={'quiz'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -57,7 +58,7 @@ function MainNav() {
             </li>
             <li>
                 <NavLink
-                    onClick={openMenu ? toggleMobileNav : ''}
+                    onClick={handleToggle}
                     to={'account'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -69,7 +70,7 @@ function MainNav() {
             </li>
             <li>
                 <NavLink
-                    onClick={openMenu ? toggleMobileNav : ''}
+                    onClick={handleToggle}
                     to={'settings'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
