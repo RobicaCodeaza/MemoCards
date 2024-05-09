@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import Logout from '@/features/authentication/Logout'
 
 function HeaderMenu() {
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
     return (
-        <ul className="ml-auto flex items-center gap-2 ">
+        <ul className="ml-auto mr-2 flex items-center  gap-2">
             <li>
                 <ButtonIcon onClick={() => navigate('/account')}>
                     <PiUserCircleGearLight></PiUserCircleGearLight>
