@@ -3,14 +3,14 @@ import Button from './Button'
 import { useMobileNav } from '@/context/ToggleMobileNav'
 
 function ToggleMenu() {
-    const { toggleMobileNav, openMenu } = useMobileNav()
+    const { toggleMobileNav } = useMobileNav()
 
     return (
         <Button
             as="button"
             variation="subtleWhite"
             size="tiny"
-            otherClasses="ml-auto block h-16 w-16 p-2 phone:hidden"
+            otherClasses="block h-16 w-16 p-2 phone:hidden"
             onClick={toggleMobileNav}
         >
             <HiEllipsisVertical
