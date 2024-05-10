@@ -13,6 +13,12 @@ export default {
         fontFamily: {
             sans: 'K2D, sans-serif',
         },
+        gridTemplateColumns: {
+            decks: 'repeat(auto-fit,minmax(30rem,1fr))',
+        },
+        gridTemplateRows: {
+            decks: 'repeat(auto-fit,30rem)',
+        },
         colors: {
             'neon-carrot': {
                 50: '#fff7ed',
