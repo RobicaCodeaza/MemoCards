@@ -10,6 +10,9 @@ export default {
     ],
     prefix: '',
     theme: {
+        fontFamily: {
+            sans: 'K2D, sans-serif',
+        },
         colors: {
             'neon-carrot': {
                 50: '#fff7ed',
