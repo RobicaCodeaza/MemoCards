@@ -11,6 +11,7 @@ import Settings from './pages/Settings'
 import { MobileNavProvider } from './context/ToggleMobileNav'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Decks from './pages/Decks'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -49,6 +50,10 @@ function App() {
                                 <Route
                                     path="dashboard"
                                     element={<Dashboard></Dashboard>}
+                                ></Route>
+                                <Route
+                                    path="decks"
+                                    element={<Decks></Decks>}
                                 ></Route>
                                 <Route
                                     path="flashcards"

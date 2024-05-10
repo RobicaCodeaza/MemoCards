@@ -3,6 +3,7 @@ import {
     PiCardsThreeLight,
     PiExamLight,
     PiUserCircleGearLight,
+    PiBookLight,
 } from 'react-icons/pi'
 
 import { CiSettings } from 'react-icons/ci'
@@ -34,6 +35,19 @@ function MainNav() {
             <li>
                 <NavLink
                     onClick={handleToggle}
+                    to={'decks'}
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
+                    active:bg-picton-blue-100 active:text-mako-grey-800
+                    "
+                >
+                    <PiBookLight className="text-inherit block h-10 w-10"></PiBookLight>
+                    <span className=" tab-port:block">Decks</span>
+                </NavLink>
+            </li>
+
+            <li>
+                <NavLink
+                    onClick={handleToggle}
                     to={'flashcards'}
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
                     active:bg-picton-blue-100 active:text-mako-grey-800
@@ -43,7 +57,6 @@ function MainNav() {
                     <span className=" tab-port:block">Cards</span>
                 </NavLink>
             </li>
-
             <li>
                 <NavLink
                     onClick={handleToggle}
