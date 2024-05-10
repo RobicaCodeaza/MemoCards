@@ -14,10 +14,10 @@ export default {
             sans: 'K2D, sans-serif',
         },
         gridTemplateColumns: {
-            decks: 'repeat(auto-fit,minmax(45rem,1fr))',
+            decks: 'repeat(auto-fit,minmax(40rem,1fr))',
         },
         gridTemplateRows: {
-            decks: 'repeat(auto-fit,35rem)',
+            decks: 'repeat(auto-fill,25rem)',
         },
         colors: {
             'neon-carrot': {
