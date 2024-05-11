@@ -14,7 +14,7 @@ export default {
             sans: 'K2D, sans-serif',
         },
         gridTemplateColumns: {
-            decks: 'repeat(auto-fit,minmax(30rem,1fr))',
+            decks: 'repeat(auto-fit,35rem)',
         },
         gridTemplateRows: {
             decks: 'repeat(auto-fit,max-content)',

@@ -19,7 +19,7 @@ function ButtonIcon({
 }: ButtonIconProps) {
     return (
         <button
-            className="flexitems-center  justify-center rounded border-none bg-none   p-2 transition-all
+            className="flex items-center  justify-center rounded border-none bg-none   p-2 transition-all
         duration-200 hover:bg-picton-blue-100"
             onClick={onClick}
             {...props}
