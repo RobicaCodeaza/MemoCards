@@ -17,7 +17,7 @@ export default {
             decks: 'repeat(auto-fit,minmax(30rem,1fr))',
         },
         gridTemplateRows: {
-            decks: 'repeat(auto-fit,30rem)',
+            decks: 'repeat(auto-fit,max-content)',
         },
         colors: {
             'neon-carrot': {
