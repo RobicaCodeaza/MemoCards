@@ -9,18 +9,22 @@ type ButtonIconProps = {
     children: ReactNode
     otherClasses?: string
     onClick?: () => void
+    positionAlign?: string
+    positionJustify?: string
 } & ComponentPropsWithoutRef<'button'>
 
 function ButtonIcon({
     children,
     onClick,
     otherClasses,
+    positionAlign,
+    positionJustify,
     ...props
 }: ButtonIconProps) {
     return (
         <button
-            className="flex items-center  justify-center rounded border-none bg-none   p-2 transition-all
-        duration-200 hover:bg-picton-blue-100"
+            className={`flex  items-center justify-center rounded border-none   bg-none p-2
+        transition-all duration-200 hover:bg-picton-blue-100 self-${positionAlign} justify-self-${positionJustify}`}
             onClick={onClick}
             {...props}
         >

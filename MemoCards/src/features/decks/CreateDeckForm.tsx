@@ -1,0 +1,82 @@
+import Button from '@/ui/Button'
+import Form from '@/ui/Form'
+import FormRow from '@/ui/FormRow'
+import Input from '@/ui/Input'
+import { FieldError, type SubmitHandler, useForm } from 'react-hook-form'
+
+type FormValues = {
+    chapter: string
+    subchapter: string
+    lesson: string
+}
+
+type CreateDeckForm = { onCloseModal: () => void }
+
+function CreateDeckForm({ onCloseModal }: CreateDeckForm) {
+    const { handleSubmit, register, reset, getValues, formState } =
+        useForm<FormValues>()
+    const { errors } = formState
+
+    const onSubmit: SubmitHandler<FormValues> = (data) => {
+        console.log(data)
+    }
+
+    function onError() {
+        console.log('error')
+    }
+
+    return (
+        <Form
+            onSubmit={() => handleSubmit(onSubmit, onError)}
+            variation="modal"
+        >
+            <FormRow label="chapter" error={errors?.chapter?.message}>
+                <Input
+                    id="chapter"
+                    type={'text'}
+                    {...register('chapter', {
+                        required: 'This Field is Required',
+                    })}
+                ></Input>
+            </FormRow>
+            <FormRow label="subchapter" error={errors?.subchapter?.message}>
+                <Input
+                    id="subchapter"
+                    type={'text'}
+                    {...register('subchapter', {
+                        required: 'This Field is Required',
+                    })}
+                ></Input>
+            </FormRow>
+            <FormRow label="lesson" error={errors?.lesson?.message}>
+                <Input
+                    id="lesson"
+                    type={'text'}
+                    {...register('lesson', {
+                        required: 'This Field is Required',
+                    })}
+                ></Input>
+            </FormRow>
+            <FormRow>
+                <Button
+                    as="button"
+                    variation="subtleWhite"
+                    size="small"
+                    type="reset"
+                >
+                    Reset
+                </Button>
+                <Button
+                    as="button"
+                    variation="simplePrimary"
+                    size="small"
+                    onClick={(e) => e.preventDefault()}
+                >
+                    Edit
+                </Button>
+            </FormRow>
+        </Form>
+    )
+}
+
+export default CreateDeckForm

@@ -79,6 +79,7 @@ export default {
                 'dark-1': '#0d0e0f',
                 'dark-2': '#070707',
             },
+            'backdrop-color': { 50: '#ffffff1a' },
             danger: {
                 50: '#fef2f3',
                 100: '#ffe1e3',
