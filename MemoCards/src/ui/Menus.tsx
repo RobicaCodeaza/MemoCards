@@ -78,8 +78,6 @@ function Toggle({ id }: ToggleProps) {
             ?.closest('button')
             ?.getBoundingClientRect()
 
-        console.log(rect)
-
         setPosition({
             x: window.innerWidth - rect!.x - rect!.width,
             y: rect!.y + rect!.height + 8,
@@ -136,7 +134,7 @@ function Button<T>({ children, onClick, icon }: ButtonProps<T>) {
     return (
         <li>
             <button
-                className="items-left flex w-full items-center gap-2 rounded-md border-none bg-none px-4 py-2 text-[1.4rem] hover:bg-picton-blue-200"
+                className="items-left flex w-full items-center gap-2 rounded-md border-none bg-none px-5 py-3 text-[1.4rem] hover:bg-picton-blue-200"
                 onClick={handlerButton}
             >
                 {icon}

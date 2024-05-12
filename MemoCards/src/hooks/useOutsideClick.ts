@@ -3,10 +3,10 @@ import { useEffect, useRef, type LegacyRef } from 'react'
 type UseOutsideProps = (
     handler: () => void,
     listenCapturing: boolean
-) => LegacyRef<HTMLElement>
+) => LegacyRef<HTMLDivElement>
 
 const useOutsideClick: UseOutsideProps = (handler, listenCapturing) => {
-    const ref = useRef<HTMLElement | null>(null)
+    const ref = useRef<HTMLDivElement | null>(null)
 
     useEffect(
         function () {

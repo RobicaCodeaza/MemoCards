@@ -1,6 +1,6 @@
 import { Progress } from '@/components/ui/progress'
 import { IoIosAdd } from 'react-icons/io'
-import { AiOutlineDelete } from 'react-icons/ai'
+import { RiDeleteBin7Line } from 'react-icons/ri'
 import { CiEdit } from 'react-icons/ci'
 import Menus from '@/ui/Menus'
 
@@ -54,7 +54,7 @@ function DeckCard() {
                         </Menus.Button>
                         <Menus.Button
                             icon={
-                                <AiOutlineDelete className="h-8 w-8 text-danger-500"></AiOutlineDelete>
+                                <RiDeleteBin7Line className="h-7 w-8 text-danger-500"></RiDeleteBin7Line>
                             }
                         >
                             Delete Deck
