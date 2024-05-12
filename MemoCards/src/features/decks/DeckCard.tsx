@@ -3,6 +3,8 @@ import { IoIosAdd } from 'react-icons/io'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 import { CiEdit } from 'react-icons/ci'
 import Menus from '@/ui/Menus'
+import Modal from '@/ui/Modal'
+import CreateDeckForm from './CreateDeckForm'
 
 function DeckCard() {
     return (
@@ -28,39 +30,52 @@ function DeckCard() {
                         Picior
                     </p>
                 </div>
-                <Menus.Menu>
-                    <Menus.Toggle id={1}></Menus.Toggle>
-                    <Menus.List id={1}>
-                        <Menus.Button
-                            icon={
-                                <IoIosAdd className="h-8 w-8 text-chateau-green-600"></IoIosAdd>
-                            }
-                        >
-                            Add new card
-                        </Menus.Button>
-                        <Menus.Button
-                            icon={
-                                <CiEdit className="h-8 w-8 text-picton-blue-600"></CiEdit>
-                            }
-                        >
-                            Edit Deck
-                        </Menus.Button>
-                        <Menus.Button
-                            icon={
-                                <CiEdit className="h-8 w-8 text-picton-blue-600"></CiEdit>
-                            }
-                        >
-                            Edit Flashcards
-                        </Menus.Button>
-                        <Menus.Button
-                            icon={
-                                <RiDeleteBin7Line className="h-7 w-8 text-danger-500"></RiDeleteBin7Line>
-                            }
-                        >
-                            Delete Deck
-                        </Menus.Button>
-                    </Menus.List>
-                </Menus.Menu>
+
+                <Modal>
+                    <Menus.Menu>
+                        <Menus.Toggle id={1}></Menus.Toggle>
+                        <Menus.List id={1}>
+                            <Menus.Button
+                                icon={
+                                    <IoIosAdd className="h-8 w-8 text-chateau-green-600"></IoIosAdd>
+                                }
+                            >
+                                Add new card
+                            </Menus.Button>
+                            <Modal.Open opens="editDeck">
+                                <Menus.Button
+                                    icon={
+                                        <CiEdit className="h-8 w-8 text-picton-blue-600"></CiEdit>
+                                    }
+                                >
+                                    Edit Deck
+                                </Menus.Button>
+                            </Modal.Open>
+                            <Menus.Button
+                                icon={
+                                    <CiEdit className="h-8 w-8 text-picton-blue-600"></CiEdit>
+                                }
+                            >
+                                Edit Flashcards
+                            </Menus.Button>
+                            <Modal.Open opens="deleteDeck">
+                                <Menus.Button
+                                    icon={
+                                        <RiDeleteBin7Line className="h-7 w-8 text-danger-500"></RiDeleteBin7Line>
+                                    }
+                                >
+                                    Delete Deck
+                                </Menus.Button>
+                            </Modal.Open>
+                        </Menus.List>
+                    </Menus.Menu>
+                    <Modal.Window name="deleteDeck">
+                        <div>Delete</div>
+                    </Modal.Window>
+                    <Modal.Window name="editDeck">
+                        <CreateDeckForm></CreateDeckForm>
+                    </Modal.Window>
+                </Modal>
             </div>
 
             <div className="mt-14 flex flex-col gap-4  px-8 text-[1.3rem] uppercase tracking-wide">

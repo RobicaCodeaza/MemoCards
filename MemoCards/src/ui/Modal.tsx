@@ -8,10 +8,12 @@ import {
     type ReactNode,
     useContext,
     cloneElement,
-    ReactElement,
+    type ReactElement,
+    type LegacyRef,
+    type PropsWithChildren,
+    createContext,
 } from 'react'
 
-import { createContext } from 'react'
 import { createPortal } from 'react-dom'
 
 import ButtonIcon from './ButtonIcon'
@@ -24,11 +26,7 @@ type ModalContextType = {
 
 const ModalContext = createContext<ModalContextType | null>(null)
 
-type ModalProps = {
-    children: ReactNode
-}
-
-function Modal({ children }: ModalProps) {
+function Modal({ children }: PropsWithChildren) {
     const [openName, setOpenName] = useState<string>('')
 
     const open = setOpenName
@@ -37,31 +35,35 @@ function Modal({ children }: ModalProps) {
     }
 
     return (
-        <ModalContext.Provider
-            value={{ openName, open, close }}
-        ></ModalContext.Provider>
+        <ModalContext.Provider value={{ openName, open, close }}>
+            {children}
+        </ModalContext.Provider>
     )
 }
 
 type OpenProps = {
-    children: ReactNode
     opens: string
+    children: ReactNode
 }
 
 function Open({ children, opens: opensWinadowName }: OpenProps) {
     const context = useContext(ModalContext)
     if (context === null)
         throw new Error(
-            'Accessed the Modal s context inside a component that does not have access to it/'
+            'Accessed the Modal s context inside a component that does not have access to it.'
         )
 
-    const { open, openName } = context
+    const { open } = context
 
     function handleClick() {
-        if (openName !== opensWinadowName) open(opensWinadowName)
+        open(opensWinadowName)
     }
 
-    return cloneElement(children as ReactElement, { onClick: handleClick })
+    return (
+        <div>
+            {cloneElement(children as ReactElement, { onClick: handleClick })}
+        </div>
+    )
 }
 
 type WindowProps = {
@@ -78,14 +80,22 @@ function Window({ children, name }: WindowProps) {
 
     const { openName, close } = context
 
-    const ref = useOutsideClick(close, false)
+    const ref = useOutsideClick(close, true) as LegacyRef<HTMLDivElement>
+    console.log(openName)
 
     if (openName !== name) return
 
     return createPortal(
-        <div>
-            <div ref={ref}>
-                <ButtonIcon onClick={close} otherClasses="text-picton-blue-900">
+        <div className="bg-backdrop-color-50 fixed left-0 top-0 h-screen w-full  backdrop-blur-sm transition-all duration-500">
+            <div
+                className="fixed left-1/2 top-1/2 flex translate-x-[-50%] translate-y-[-50%]  flex-col items-center gap-4 rounded-2xl bg-picton-blue-50 px-14 py-14 shadow-lg "
+                ref={ref}
+            >
+                <ButtonIcon
+                    positionAlign="end"
+                    onClick={close}
+                    otherClasses="text-mako-grey-950 w-10 h-10"
+                >
                     <IoCloseOutline></IoCloseOutline>
                 </ButtonIcon>
                 <div>

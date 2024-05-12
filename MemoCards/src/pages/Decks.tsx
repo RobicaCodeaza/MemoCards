@@ -3,7 +3,6 @@ import DecksModifiers from '@/features/decks/DecksModifiers'
 import DecksTableOperations from '@/features/decks/DecksTableOperations'
 import Heading from '@/ui/Heading'
 import Row from '@/ui/Row'
-import TableOperations from '@/ui/TableOperations'
 
 function Decks() {
     return (

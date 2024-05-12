@@ -8,6 +8,7 @@ import {
     useContext,
     type ReactNode,
     type ReactElement,
+    LegacyRef,
 } from 'react'
 import { createContext } from 'react'
 import { createPortal } from 'react-dom'
@@ -26,7 +27,6 @@ const MenusContext = createContext<MenusContextType | null>(null)
 function Menus({ children }: PropsWithChildren) {
     const [openId, setIsOpenId] = useState<number>(0)
     const [position, setPosition] = useState<{ x: number; y: number }>({})
-    console.log(openId)
     const open = setIsOpenId
     function close() {
         setIsOpenId(0)
@@ -104,7 +104,7 @@ type ListProps = {
 
 function List({ id, children }: ListProps) {
     const { openId, position, close } = useContext(MenusContext)!
-    const ref = useOutsideClick(close, false)
+    const ref = useOutsideClick(close, false) as LegacyRef<HTMLUListElement>
 
     if (openId !== id) return
 
@@ -126,6 +126,8 @@ type ButtonProps<T> = {
     onClick?: () => T
 }
 function Button<T>({ children, onClick, icon }: ButtonProps<T>) {
+    const { close } = useContext(MenusContext)!
+
     function handlerButton() {
         if (onClick) onClick()
         close()
