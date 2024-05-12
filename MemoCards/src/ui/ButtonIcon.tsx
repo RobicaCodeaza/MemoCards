@@ -24,7 +24,8 @@ function ButtonIcon({
     return (
         <button
             className={`flex  items-center justify-center rounded border-none   bg-none p-2
-        transition-all duration-200 hover:bg-picton-blue-100 self-${positionAlign} justify-self-${positionJustify}`}
+        transition-all duration-200 hover:bg-picton-blue-100`}
+            style={{ alignSelf: positionAlign, justifySelf: positionJustify }}
             onClick={onClick}
             {...props}
         >

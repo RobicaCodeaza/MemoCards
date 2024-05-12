@@ -86,7 +86,7 @@ function Window({ children, name }: WindowProps) {
     if (openName !== name) return
 
     return createPortal(
-        <div className="bg-backdrop-color-50 fixed left-0 top-0 h-screen w-full  backdrop-blur-sm transition-all duration-500">
+        <div className="fixed left-0 top-0 h-screen w-full bg-backdrop-color-50  backdrop-blur-sm transition-all duration-500">
             <div
                 className="fixed left-1/2 top-1/2 flex translate-x-[-50%] translate-y-[-50%]  flex-col items-center gap-4 rounded-2xl bg-picton-blue-50 px-14 py-14 shadow-lg "
                 ref={ref}
@@ -94,7 +94,7 @@ function Window({ children, name }: WindowProps) {
                 <ButtonIcon
                     positionAlign="end"
                     onClick={close}
-                    otherClasses="text-mako-grey-950 w-10 h-10"
+                    otherClasses="text-mako-grey-900 w-10 h-10"
                 >
                     <IoCloseOutline></IoCloseOutline>
                 </ButtonIcon>

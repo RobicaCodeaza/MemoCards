@@ -2,7 +2,11 @@ import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
-import { FieldError, type SubmitHandler, useForm } from 'react-hook-form'
+import {
+    type SubmitHandler,
+    SubmitErrorHandler,
+    useForm,
+} from 'react-hook-form'
 
 type FormValues = {
     chapter: string
@@ -10,26 +14,24 @@ type FormValues = {
     lesson: string
 }
 
-type CreateDeckForm = { onCloseModal: () => void }
+type CreateDeckFormProps = { onCloseModal?: () => void }
 
-function CreateDeckForm({ onCloseModal }: CreateDeckForm) {
+function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     const { handleSubmit, register, reset, getValues, formState } =
         useForm<FormValues>()
     const { errors } = formState
-
+    console.log(errors)
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         console.log(data)
     }
 
-    function onError() {
+    const onError: SubmitErrorHandler<FormValues> = () => {
         console.log('error')
     }
 
     return (
-        <Form
-            onSubmit={() => handleSubmit(onSubmit, onError)}
-            variation="modal"
-        >
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        <Form onSubmit={handleSubmit(onSubmit, onError)} variation="modal">
             <FormRow label="chapter" error={errors?.chapter?.message}>
                 <Input
                     id="chapter"
@@ -66,12 +68,7 @@ function CreateDeckForm({ onCloseModal }: CreateDeckForm) {
                 >
                     Reset
                 </Button>
-                <Button
-                    as="button"
-                    variation="simplePrimary"
-                    size="small"
-                    onClick={(e) => e.preventDefault()}
-                >
+                <Button as="button" variation="simplePrimary" size="small">
                     Edit
                 </Button>
             </FormRow>
