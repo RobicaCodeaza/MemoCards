@@ -1,3 +1,5 @@
+import { createEditDeck } from '@/services/apiDecks'
+import { Tables } from '@/types/database.types'
 import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
@@ -7,24 +9,52 @@ import {
     SubmitErrorHandler,
     useForm,
 } from 'react-hook-form'
+import { useCreateDeck } from './useCreateDeck'
+import { useEditDeck } from './useEditDeck'
 
-type FormValues = {
-    chapter: string
-    subchapter: string
-    lesson: string
+type CreateDeckFormProps = {
+    deckToEdit: Tables<'Decks'> | undefined
+    onCloseModal?: () => void
 }
 
-type CreateDeckFormProps = { onCloseModal?: () => void }
-
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
-    const { handleSubmit, register, reset, getValues, formState } =
-        useForm<FormValues>()
+    const { id: editId, ...editValues } = deckToEdit ?? {}
+
+    const isEditingSession = Boolean(editId)
+
+    const { handleSubmit, register, reset, getValues, formState } = useForm<
+        Tables<'Decks'>
+    >({
+        defaultValues: isEditingSession ? editValues : undefined,
+    })
 
     const { errors } = formState
 
-    const onSubmit: SubmitHandler<FormValues> = (data) => {}
+    const { isCreating, createDeck } = useCreateDeck()
+    const { isUpdating, updateDeck } = useEditDeck()
+    const isWorking = isCreating ?? isUpdating
 
-    const onError: SubmitErrorHandler<FormValues> = () => {
+    const onSubmit: SubmitHandler<Tables<'Decks'>> = (data) => {
+        if (isEditingSession)
+            updateDeck(
+                { newData: data, id: editId },
+                {
+                    onSuccess: () => {
+                        reset()
+                        onCloseModal?.()
+                    },
+                }
+            )
+        else
+            createDeck(data, {
+                onSuccess: () => {
+                    reset()
+                    onCloseModal?.()
+                },
+            })
+    }
+
+    const onError: SubmitErrorHandler<Tables<'Decks'>> = () => {
         console.log('error')
     }
 
@@ -64,11 +94,17 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                     variation="subtleWhite"
                     size="small"
                     type="reset"
+                    disabled={isWorking}
                 >
                     Reset
                 </Button>
-                <Button as="button" variation="simplePrimary" size="small">
-                    Edit
+                <Button
+                    as="button"
+                    variation="simplePrimary"
+                    size="small"
+                    disabled={isWorking}
+                >
+                    {isEditingSession ? 'Edit' : 'Add'}
                 </Button>
             </FormRow>
         </Form>

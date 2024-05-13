@@ -78,7 +78,7 @@ function DeckCard({ deck }: DeckCardProps) {
                         <div>Delete</div>
                     </Modal.Window>
                     <Modal.Window name="editDeck">
-                        <CreateDeckForm></CreateDeckForm>
+                        <CreateDeckForm deckToEdit={deck}></CreateDeckForm>
                     </Modal.Window>
                 </Modal>
             </div>
@@ -91,7 +91,6 @@ function DeckCard({ deck }: DeckCardProps) {
                     Perfection Score
                 </label>
                 <Progress
-
                     value={
                         deck.perfectionScore
                             ? deck.perfectionScore[
@@ -99,17 +98,14 @@ function DeckCard({ deck }: DeckCardProps) {
                               ]
                             : 0
                     }
-
                     className="border border-neon-carrot-500 bg-neon-carrot-300"
                 />
             </div>
             <p className="mt-12 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
                 Last tested:{' '}
                 <strong>
-
                     {deck.lastTested
                         ? deck.lastTested[deck.lastTested.length - 1]
-
                         : 'Not tested'}
                 </strong>
             </p>

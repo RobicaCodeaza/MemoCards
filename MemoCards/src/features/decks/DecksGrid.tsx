@@ -1,17 +1,16 @@
 import Grid from '@/ui/Grid'
 import DeckCard from './DeckCard'
 import Menus from '@/ui/Menus'
-
-import { useDecks } from './useDecks'
 import Spinner from '@/ui/Spinner'
+import Empty from '@/ui/Empty'
+import { useDecks } from './useDecks'
 
 function DecksGrid() {
-    const { isLoading, decks, error } = useDecks()
+    const { isLoading, decks } = useDecks()
 
     if (isLoading) return <Spinner></Spinner>
 
-    console.log(decks)
-
+    if (!decks?.length) return <Empty resource="decks"></Empty>
     return (
         <Grid>
             <Menus>

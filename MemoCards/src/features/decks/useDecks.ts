@@ -6,7 +6,7 @@ export function useDecks() {
         isLoading,
         data: decks,
         error,
-    } = useQuery({ queryKey: ['cabins'], queryFn: getDecks })
+    } = useQuery({ queryKey: ['decks'], queryFn: getDecks })
 
     return { isLoading, error, decks }
 }
