@@ -5,7 +5,7 @@ import { CiEdit } from 'react-icons/ci'
 import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import CreateDeckForm from './CreateDeckForm'
-import { Tables } from '@/types/database'
+import { Tables } from '../../types/database.types'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>

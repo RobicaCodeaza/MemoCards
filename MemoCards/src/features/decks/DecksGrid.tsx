@@ -4,6 +4,7 @@ import Menus from '@/ui/Menus'
 
 import { useDecks } from './useDecks'
 import Spinner from '@/ui/Spinner'
+import { Tables } from 'public/types/database'
 
 function DecksGrid() {
     const { isLoading, decks, error } = useDecks()
