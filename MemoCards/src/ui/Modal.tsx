@@ -87,7 +87,7 @@ function Window({ children, name }: WindowProps) {
     return createPortal(
         <div className="fixed left-0 top-0 h-screen w-full bg-backdrop-color-50  backdrop-blur-sm transition-all duration-500">
             <div
-                className="fixed left-1/2 top-1/2 flex translate-x-[-50%] translate-y-[-50%]  flex-col items-center gap-4 rounded-2xl bg-picton-blue-50 px-14 py-14 shadow-lg "
+                className="tab-land:px-18 tab-land:py-18 fixed left-1/2 top-1/2 flex  translate-x-[-50%] translate-y-[-50%]  flex-col gap-4 rounded-2xl bg-picton-blue-50  px-8 py-8 shadow-lg phone:px-10 phone:py-10 tab-port:px-14 tab-land:py-14"
                 ref={ref}
             >
                 <ButtonIcon
