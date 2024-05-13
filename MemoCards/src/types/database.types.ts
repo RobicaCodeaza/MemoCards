@@ -48,21 +48,27 @@ export type Database = {
         Row: {
           chapter: string
           id: number
+          lastTested: string[] | null
           lesson: string | null
+          perfectionScore: number[] | null
           subchapter: string | null
           user_id: number | null
         }
         Insert: {
           chapter: string
           id?: number
+          lastTested?: string[] | null
           lesson?: string | null
+          perfectionScore?: number[] | null
           subchapter?: string | null
           user_id?: number | null
         }
         Update: {
           chapter?: string
           id?: number
+          lastTested?: string[] | null
           lesson?: string | null
+          perfectionScore?: number[] | null
           subchapter?: string | null
           user_id?: number | null
         }

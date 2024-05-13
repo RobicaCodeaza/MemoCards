@@ -1,5 +1,5 @@
 import supabase from './supabase'
-import { Tables } from 'public/types/database'
+import { Tables } from '../types/database.types'
 
 export async function getDecks() {
     const { data, error } = await supabase.from('Decks').select('*')
