@@ -81,7 +81,6 @@ function Window({ children, name }: WindowProps) {
     const { openName, close } = context
 
     const ref = useOutsideClick(close, true) as LegacyRef<HTMLDivElement>
-    console.log(openName)
 
     if (openName !== name) return
 

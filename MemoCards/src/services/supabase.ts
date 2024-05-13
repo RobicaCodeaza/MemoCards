@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { Database } from './database.types'
+import { Database } from '../../public/types/database'
 
 const supabaseUrl = 'https://bicvqgmxkyigtsiltrns.supabase.co'
 const supabaseKey =

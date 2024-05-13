@@ -5,8 +5,13 @@ import { CiEdit } from 'react-icons/ci'
 import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import CreateDeckForm from './CreateDeckForm'
+import { Tables } from 'public/types/database'
 
-function DeckCard() {
+type DeckCardProps = {
+    deck: Tables<'Decks'>
+}
+
+function DeckCard({ deck }: DeckCardProps) {
     return (
         <div className="flex flex-col   rounded-lg border border-solid  border-picton-blue-200 bg-picton-blue-50  px-10 py-10 shadow-lg">
             <div className="flex items-start justify-between">
@@ -15,19 +20,19 @@ function DeckCard() {
                         className=" rounded-xl border border-picton-blue-200 bg-picton-blue-400 p-2 text-center text-[1.6rem] font-medium uppercase leading-[1.25] tracking-tight text-picton-blue-50 "
                         id="chapter"
                     >
-                        Sistemul Muscular
+                        {deck.chapter}
                     </p>
                     <p
                         className="leading[1.5] text-center text-[1.6rem] text-picton-blue-800"
                         id="subchapter "
                     >
-                        Membre Inferioare
+                        {deck.subchapter}
                     </p>
                     <p
                         className="rounded-xl border border-picton-blue-400  p-1 text-center text-[1.3rem] font-semibold uppercase tracking-wider text-picton-blue-700"
                         id="lesson "
                     >
-                        Picior
+                        {deck.lesson}
                     </p>
                 </div>
 

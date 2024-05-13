@@ -8,7 +8,7 @@ import CreateDeckForm from './CreateDeckForm'
 function DecksModifiers() {
     return (
         <Modal>
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 phone:flex-row">
                 <Modal.Open opens="addDeck">
                     <Button as="div" variation="subtleWhite" size="small">
                         <ButtonIcon otherClasses="w-9 h-9 text-picton-blue-800">
