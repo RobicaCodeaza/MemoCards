@@ -98,9 +98,7 @@ function DeckCard({ deck }: DeckCardProps) {
             <p className="mt-12 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
                 Last tested:{' '}
                 <strong>
-                    {deck.lastTested.slice(-1)
-                        ? deck.lastTested.slice(-1)
-                        : 'Not tested'}
+                    {deck.lastTested ? deck.lastTested.slice(-1) : 'Not tested'}
                 </strong>
             </p>
         </div>
