@@ -19,11 +19,10 @@ type CreateDeckFormProps = { onCloseModal?: () => void }
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     const { handleSubmit, register, reset, getValues, formState } =
         useForm<FormValues>()
+
     const { errors } = formState
-    console.log(errors)
-    const onSubmit: SubmitHandler<FormValues> = (data) => {
-        console.log(data)
-    }
+
+    const onSubmit: SubmitHandler<FormValues> = (data) => {}
 
     const onError: SubmitErrorHandler<FormValues> = () => {
         console.log('error')
