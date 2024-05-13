@@ -5,7 +5,7 @@ import { CiEdit } from 'react-icons/ci'
 import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import CreateDeckForm from './CreateDeckForm'
-import { Tables } from 'public/types/database'
+import { Tables } from '@/types/database'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>
@@ -91,12 +91,17 @@ function DeckCard({ deck }: DeckCardProps) {
                     Perfection Score
                 </label>
                 <Progress
-                    value={32}
+                    value={deck.perfectionScore}
                     className="border border-neon-carrot-500 bg-neon-carrot-300"
                 />
             </div>
             <p className="mt-12 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
-                Last used: <strong>09/08/2001</strong>
+                Last tested:{' '}
+                <strong>
+                    {deck.lastTested.slice(-1)
+                        ? deck.lastTested.slice(-1)
+                        : 'Not tested'}
+                </strong>
             </p>
         </div>
     )
