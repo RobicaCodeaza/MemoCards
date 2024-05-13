@@ -12,11 +12,13 @@ export async function getDecks() {
     return data
 }
 
-export async function createEditDeck(newDeck: Tables<'Decks'>) {
-    const query = supabase.from('Decks').insert([newDeck])
+export async function createEditDeck(newDeck: Tables<'Decks'>, id: number) {
+    let query
 
-    const { data, error } = await query.select('*')
-    console.log(data)
+    if (!id) query = supabase.from('Decks').insert([newDeck])
+    else query = supabase.from('Decks').update(newDeck).eq('id', id)
+
+    const { data, error } = await query.select().single()
 
     if (error) {
         console.error(error)
