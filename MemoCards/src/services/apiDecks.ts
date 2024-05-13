@@ -12,7 +12,10 @@ export async function getDecks() {
     return data
 }
 
-export async function createEditDeck(newDeck: Tables<'Decks'>, id: number) {
+export async function createEditDeck(
+    newDeck: Tables<'Decks'>,
+    id: number | null
+) {
     let query
 
     if (!id) query = supabase.from('Decks').insert([newDeck])
