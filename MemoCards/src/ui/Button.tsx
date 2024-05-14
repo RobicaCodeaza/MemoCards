@@ -60,7 +60,7 @@ function Button<C extends ElementType>({
     const Component = as ?? 'button'
     return (
         <Component
-            className={`flex items-center justify-center gap-1  ${button.variation[variation]} ${button.size[size]} ${otherClasses}`}
+            className={`flex cursor-pointer items-center justify-center gap-1  ${button.variation[variation]} ${button.size[size]} ${otherClasses}`}
             {...props}
         >
             {children}
