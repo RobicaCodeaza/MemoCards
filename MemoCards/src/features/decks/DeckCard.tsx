@@ -74,10 +74,10 @@ function DeckCard({ deck }: DeckCardProps) {
                             </Modal.Open>
                         </Menus.List>
                     </Menus.Menu>
-                    <Modal.Window name="deleteDeck">
+                    <Modal.Window windowTitle="Delete a deck" name="deleteDeck">
                         <div>Delete</div>
                     </Modal.Window>
-                    <Modal.Window name="editDeck">
+                    <Modal.Window windowTitle="Edit a deck" name="editDeck">
                         <CreateDeckForm deckToEdit={deck}></CreateDeckForm>
                     </Modal.Window>
                 </Modal>

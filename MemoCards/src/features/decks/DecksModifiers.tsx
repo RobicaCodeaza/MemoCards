@@ -18,7 +18,7 @@ function DecksModifiers() {
                     </Button>
                 </Modal.Open>
 
-                <Modal.Window name="addDeck">
+                <Modal.Window windowTitle="Create a deck" name="addDeck">
                     <CreateDeckForm deckToEdit={undefined}></CreateDeckForm>
                 </Modal.Window>
 
