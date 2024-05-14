@@ -69,7 +69,7 @@ function Open({ children, opens: opensWinadowName }: OpenProps) {
 type WindowProps = {
     children: ReactNode
     name: string
-    windowTitle: string
+    windowTitle?: string
 }
 
 function Window({ children, name, windowTitle }: WindowProps) {
