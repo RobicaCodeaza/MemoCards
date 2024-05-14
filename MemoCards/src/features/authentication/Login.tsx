@@ -2,6 +2,9 @@ import { Auth } from '@supabase/auth-ui-react'
 
 import { ThemeVariables, ThemeSupa } from '@supabase/auth-ui-shared'
 import supabase from '@/services/supabase'
+import { useNavigate } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
 
 type CustomThemeType = {
     default: ThemeVariables
@@ -75,6 +78,20 @@ const customTheme: CustomThemeType = {
 }
 
 function Login() {
+    const navigate = useNavigate()
+    const queryClient = useQueryClient()
+    useEffect(
+        function () {
+            supabase.auth.onAuthStateChange((event, session) => {
+                if (event === 'SIGNED_IN') {
+                    queryClient.setQueryData(['user'], session?.user)
+                    navigate('/dashboard', { replace: true })
+                } else return
+            })
+        },
+        [navigate, queryClient]
+    )
+
     return (
         <Auth
             providers={['google']}
