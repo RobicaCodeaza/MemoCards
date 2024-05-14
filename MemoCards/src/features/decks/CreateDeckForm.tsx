@@ -35,6 +35,10 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     const isWorking = isCreating ?? isUpdating
 
     const onSubmit: SubmitHandler<Tables<'Decks'>> = (data) => {
+        data.chapter = data.chapter.toLowerCase()
+        data.subchapter = data.chapter.toLowerCase()
+        data.lesson = data.chapter.toLowerCase()
+
         if (isEditingSession)
             updateDeck(
                 { newData: data, id: editId! },
@@ -87,7 +91,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                 <Input
                     disabled={isWorking}
                     id="lesson"
-                    type="email"
+                    type="text"
                     placeholder="Lesson 1"
                     {...register('lesson', {
                         required: 'This Field is Required',
