@@ -14,9 +14,9 @@ function Decks() {
                 <DecksModifiers></DecksModifiers>
                 <DecksTableOperations></DecksTableOperations>
             </Row>
-            <Row type="horizontal">
+            <div className="flex items-center justify-center">
                 <DecksGrid></DecksGrid>
-            </Row>
+            </div>
         </>
     )
 }

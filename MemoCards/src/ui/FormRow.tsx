@@ -19,7 +19,7 @@ function FormRow({ children, label, error }: FormRowProps) {
 
     return (
         <div
-            className={`flex flex-col items-center justify-center  gap-5   border-b border-mako-grey-100 py-4 has-[button]:flex   has-[button]:flex-row  has-[button]:justify-end has-[button]:gap-4 has-[button]:border-none  phone:grid phone:grid-cols-[20rem_1fr_minmax(max-content,1fr)] phone:gap-10`}
+            className={`flex flex-col items-center justify-center  gap-5   border-b border-mako-grey-100 py-4 has-[button]:flex   has-[button]:flex-row  has-[button]:justify-end has-[button]:gap-4 has-[button]:border-none  phone:grid phone:grid-cols-[25rem_1fr_minmax(max-content,1fr)] phone:gap-10`}
             style={{}}
         >
             {React.Children.map(children, (child) => {
