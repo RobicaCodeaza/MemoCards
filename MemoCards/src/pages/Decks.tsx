@@ -14,7 +14,9 @@ function Decks() {
                 <DecksModifiers></DecksModifiers>
                 <DecksTableOperations></DecksTableOperations>
             </Row>
-            <DecksGrid></DecksGrid>
+            <Row type="horizontal">
+                <DecksGrid></DecksGrid>
+            </Row>
         </>
     )
 }

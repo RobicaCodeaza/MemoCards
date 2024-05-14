@@ -11,7 +11,7 @@ function DecksGrid() {
 
     if (!decks?.length) return <Empty resource="decks"></Empty>
     return (
-        <div className="grid grid-cols-[minmax(32.5rem,45rem)] grid-rows-decks  justify-center gap-16  phone:grid-cols-decks">
+        <div className="grid w-full grid-cols-[minmax(32.5rem,45rem)]  grid-rows-decks justify-center  gap-16 phone:grid-cols-decks">
             <Menus>
                 {decks?.map((deck) => (
                     <DeckCard deck={deck} key={deck.id}></DeckCard>
