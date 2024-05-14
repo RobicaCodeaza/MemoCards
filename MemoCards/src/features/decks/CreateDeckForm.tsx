@@ -66,6 +66,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                     disabled={isWorking}
                     id="chapter"
                     type="text"
+                    placeholder="Chapter 1"
                     {...register('chapter', {
                         required: 'This Field is Required',
                     })}
@@ -75,6 +76,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                 <Input
                     disabled={isWorking}
                     id="subchapter"
+                    placeholder="Subchapter 1"
                     type="text"
                     {...register('subchapter', {
                         required: 'This Field is Required',
@@ -85,7 +87,8 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                 <Input
                     disabled={isWorking}
                     id="lesson"
-                    type="text"
+                    type="email"
+                    placeholder="Lesson 1"
                     {...register('lesson', {
                         required: 'This Field is Required',
                     })}
