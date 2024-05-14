@@ -13,7 +13,7 @@ type DeckCardProps = {
 
 function DeckCard({ deck }: DeckCardProps) {
     return (
-        <div className="flex flex-col   rounded-lg border border-solid  border-picton-blue-200 bg-picton-blue-50  px-10 py-10 shadow-lg">
+        <div className="flex flex-col   rounded-lg border  border-solid border-picton-blue-200  bg-picton-blue-50 px-10 py-10 shadow-lg">
             <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-2">
                     <p
