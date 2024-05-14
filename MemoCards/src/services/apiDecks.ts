@@ -6,7 +6,7 @@ export async function getDecks() {
 
     if (error) {
         console.error(error)
-        throw new Error('Cabins could not be loaded')
+        throw new Error('Decks could not be loaded.')
     }
 
     return data
@@ -24,9 +24,18 @@ export async function createEditDeck(
     const { data, error } = await query.select().single()
 
     if (error) {
-        console.error(error)
-        throw new Error('Deck could not be created')
+        throw new Error('Deck could not be created.')
     }
 
     return data
+}
+
+export async function deleteDeck(id: number) {
+    const { error } = await supabase
+        .from('Decks')
+        .delete()
+        .eq('id', id)
+        .select()
+
+    if (error) throw new Error('Could not delete the deck.')
 }
