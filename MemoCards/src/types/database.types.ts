@@ -49,27 +49,27 @@ export type Database = {
           chapter: string
           id: number
           lastTested: string[] | null
-          lesson: string | null
+          lesson: string
           perfectionScore: number[] | null
-          subchapter: string | null
+          subchapter: string
           user_id: number | null
         }
         Insert: {
           chapter: string
           id?: number
           lastTested?: string[] | null
-          lesson?: string | null
+          lesson: string
           perfectionScore?: number[] | null
-          subchapter?: string | null
+          subchapter: string
           user_id?: number | null
         }
         Update: {
           chapter?: string
           id?: number
           lastTested?: string[] | null
-          lesson?: string | null
+          lesson?: string
           perfectionScore?: number[] | null
-          subchapter?: string | null
+          subchapter?: string
           user_id?: number | null
         }
         Relationships: []
