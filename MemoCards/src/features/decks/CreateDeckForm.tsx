@@ -63,8 +63,9 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
         <Form onSubmit={handleSubmit(onSubmit, onError)} variation="modal">
             <FormRow label="chapter" error={errors?.chapter?.message}>
                 <Input
+                    disabled={isWorking}
                     id="chapter"
-                    type={'text'}
+                    type="text"
                     {...register('chapter', {
                         required: 'This Field is Required',
                     })}
@@ -72,8 +73,9 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
             </FormRow>
             <FormRow label="subchapter" error={errors?.subchapter?.message}>
                 <Input
+                    disabled={isWorking}
                     id="subchapter"
-                    type={'text'}
+                    type="text"
                     {...register('subchapter', {
                         required: 'This Field is Required',
                     })}
@@ -81,8 +83,9 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
             </FormRow>
             <FormRow label="lesson" error={errors?.lesson?.message}>
                 <Input
+                    disabled={isWorking}
                     id="lesson"
-                    type={'text'}
+                    type="text"
                     {...register('lesson', {
                         required: 'This Field is Required',
                     })}
