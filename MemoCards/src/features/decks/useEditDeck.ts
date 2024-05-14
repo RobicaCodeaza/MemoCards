@@ -20,7 +20,10 @@ export function useEditDeck() {
                 queryKey: ['decks'],
             })
         },
-        onError: (err: Error) => toast.error(err.message),
+        onError: (err: Error) =>
+            toast.error(
+                `${err.message}.Check if there is any duplicate naming.`
+            ),
     })
 
     return { isUpdating, updateDeck }
