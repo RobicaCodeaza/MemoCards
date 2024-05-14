@@ -28,6 +28,19 @@ function DecksModifiers() {
                     </ButtonIcon>
                     New Card
                 </Button>
+
+                <Modal.Open opens="addDeck">
+                    <Button as="div" variation="subtleWhite" size="small">
+                        <ButtonIcon otherClasses="w-9 h-9 text-picton-blue-800">
+                            <PiPlusThin></PiPlusThin>
+                        </ButtonIcon>
+                        Delete All Decks
+                    </Button>
+                </Modal.Open>
+
+                <Modal.Window name="deleteDeck">
+                    <CreateDeckForm deckToEdit={undefined}></CreateDeckForm>
+                </Modal.Window>
             </div>
         </Modal>
     )

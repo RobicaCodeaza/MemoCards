@@ -37,7 +37,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     const onSubmit: SubmitHandler<Tables<'Decks'>> = (data) => {
         if (isEditingSession)
             updateDeck(
-                { newData: data, id: editId },
+                { newData: data, id: editId! },
                 {
                     onSuccess: () => {
                         reset()
