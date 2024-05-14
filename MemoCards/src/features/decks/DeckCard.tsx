@@ -6,12 +6,16 @@ import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import CreateDeckForm from './CreateDeckForm'
 import { Tables } from '../../types/database.types'
+import ConfirmDelete from '@/ui/ConfirmDelete'
+import { useDeleteDeck } from './useDeleteDeck'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>
 }
 
 function DeckCard({ deck }: DeckCardProps) {
+    const { isDeleting, deleteDeck } = useDeleteDeck()
+
     return (
         <div className="flex flex-col   rounded-lg border  border-solid border-picton-blue-200  bg-picton-blue-50 px-10 py-10 shadow-lg">
             <div className="flex items-start justify-between">
@@ -75,7 +79,11 @@ function DeckCard({ deck }: DeckCardProps) {
                         </Menus.List>
                     </Menus.Menu>
                     <Modal.Window windowTitle="Delete a deck" name="deleteDeck">
-                        <div>Delete</div>
+                        <ConfirmDelete
+                            resourceName="Deck"
+                            disabled={isDeleting}
+                            onConfirm={() => deleteDeck(deck.id)}
+                        ></ConfirmDelete>
                     </Modal.Window>
                     <Modal.Window windowTitle="Edit a deck" name="editDeck">
                         <CreateDeckForm deckToEdit={deck}></CreateDeckForm>

@@ -31,11 +31,16 @@ export async function createEditDeck(
 }
 
 export async function deleteDeck(id: number) {
+    const { error } = await supabase.from('Decks').delete().eq('id', id)
+
+    if (error) throw new Error('Could not delete the deck.')
+}
+
+export async function deleteAllDecks() {
     const { error } = await supabase
         .from('Decks')
         .delete()
-        .eq('id', id)
-        .select()
+        .not('id', 'is', null)
 
-    if (error) throw new Error('Could not delete the deck.')
+    if (error) throw new Error(error.message)
 }

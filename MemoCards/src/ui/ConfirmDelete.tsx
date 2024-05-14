@@ -5,7 +5,7 @@ type ConfirmDeleteProps = {
     resourceName: string
     onConfirm: () => void
     disabled: boolean
-    onCloseModal: () => void
+    onCloseModal?: () => void
 }
 
 function ConfirmDelete({
@@ -14,6 +14,11 @@ function ConfirmDelete({
     disabled,
     onCloseModal,
 }: ConfirmDeleteProps) {
+    function handleDelete() {
+        onConfirm()
+        onCloseModal?.()
+    }
+
     return (
         <div className="flex w-[30rem] flex-col gap-5 phone:w-[40rem]">
             <Heading as="h3">Delete {resourceName}</Heading>
@@ -35,7 +40,7 @@ function ConfirmDelete({
                     variation="danger"
                     size="small"
                     disabled={disabled}
-                    onClick={onConfirm}
+                    onClick={handleDelete}
                 >
                     Delete
                 </Button>
