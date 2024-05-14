@@ -5,7 +5,6 @@ export async function getDecks() {
     const { data, error } = await supabase.from('Decks').select('*')
 
     if (error) {
-        console.error(error)
         throw new Error('Decks could not be loaded.')
     }
 
