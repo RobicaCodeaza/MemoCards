@@ -9,7 +9,10 @@ function HeaderMenu() {
     return (
         <ul className="ml-auto mr-2 flex items-center  gap-2">
             <li>
-                <ButtonIcon onClick={() => navigate('/account')}>
+                <ButtonIcon
+                    otherClasses="text-picton-blue-700"
+                    onClick={() => navigate('/account')}
+                >
                     <PiUserCircleGearLight></PiUserCircleGearLight>
                 </ButtonIcon>
             </li>
