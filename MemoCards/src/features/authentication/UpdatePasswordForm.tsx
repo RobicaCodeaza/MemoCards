@@ -2,13 +2,14 @@ import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
-import { error } from 'console'
 import {
     type SubmitHandler,
     type SubmitErrorHandler,
     useForm,
     type FieldErrors,
 } from 'react-hook-form'
+import { UserType } from '@/ui/ProtectedRoute'
+import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 
 type FieldValuesType = {
     passwordCurrent: string
@@ -16,13 +17,19 @@ type FieldValuesType = {
 }
 
 function UpdatePasswordForm() {
-    const { handleSubmit, register, reset, getValues, formState } =
+    const [user, _] = useLocalStorageState<UserType>(
+        { user_id: '', user_provider: '' },
+        'user'
+    )
+    const isNotEmailProvider = user.user_provider !== 'email'
+
+    const { handleSubmit, register, getValues, formState } =
         useForm<FieldValuesType>()
 
     const { errors } = formState
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
-        console.log(data)
+        console.log(typeof data.passwordConfirm)
     }
     const onError: SubmitErrorHandler<FieldErrors> = (error) => {
         console.log(error)
@@ -38,6 +45,7 @@ function UpdatePasswordForm() {
                 <Input
                     type="password"
                     id="passwordCurrent"
+                    disabled={isNotEmailProvider}
                     autoComplete="current-password"
                     {...register('passwordCurrent', {
                         required: 'This field is required',
@@ -56,6 +64,7 @@ function UpdatePasswordForm() {
                 <Input
                     type="password"
                     autoComplete="new-password"
+                    disabled={isNotEmailProvider}
                     id="passwordConfirm"
                     {...register('passwordConfirm', {
                         required: 'This field is required',
@@ -66,10 +75,20 @@ function UpdatePasswordForm() {
                 />
             </FormRow>
             <FormRow>
-                <Button type="reset" variation="subtleWhite" size="small">
+                <Button
+                    type="reset"
+                    variation="subtleWhite"
+                    disabled={isNotEmailProvider}
+                    size="small"
+                >
                     Cancel
                 </Button>
-                <Button type="submit" variation="simplePrimary" size="small">
+                <Button
+                    type="submit"
+                    variation="simplePrimary"
+                    disabled={isNotEmailProvider}
+                    size="small"
+                >
                     Update password
                 </Button>
             </FormRow>

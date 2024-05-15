@@ -110,7 +110,7 @@ function DeckCard({ deck }: DeckCardProps) {
                 />
             </div>
             <p className="mt-12 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
-                Last tested:{' '}
+                Last tested:
                 <strong>
                     {deck.lastTested
                         ? deck.lastTested[deck.lastTested.length - 1]

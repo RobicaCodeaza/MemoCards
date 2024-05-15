@@ -16,7 +16,6 @@ function MobileNavProvider({ children }: MobileNavProviderProps) {
 
     function toggleMobileNav() {
         setOpenMenu((openMenu) => !openMenu)
-        console.log(openMenu)
     }
     const ctx: ToggleMobileNavCtx = {
         openMenu,
