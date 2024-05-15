@@ -36,5 +36,6 @@ export async function updateUser(updateData: UpdateData) {
 
     if (error) throw new Error(error.message)
 
+    console.log(Boolean(data?.user.user_metadata.avatar))
     return data?.user
 }
