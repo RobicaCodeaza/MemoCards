@@ -43,7 +43,7 @@ function DecksModifiers() {
                 <Modal.Open opens="deleteAllDecks">
                     <Button as="div" variation="danger" size="tiny">
                         <ButtonIcon
-                            otherClasses="w-8 h-9 text-mako-grey-50 "
+                            otherClasses="w-8 h-9 text-picton-blue-100 "
                             hoverNone="true"
                         >
                             <RiDeleteBin7Line></RiDeleteBin7Line>
