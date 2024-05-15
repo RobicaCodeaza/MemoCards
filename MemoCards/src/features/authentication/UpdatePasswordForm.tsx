@@ -2,14 +2,11 @@ import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
-import {
-    type SubmitHandler,
-    type SubmitErrorHandler,
-    useForm,
-    type FieldErrors,
-} from 'react-hook-form'
+import { type SubmitHandler, useForm } from 'react-hook-form'
 import { UserType } from '@/ui/ProtectedRoute'
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
+import { useUpdateUser } from './useUpdateUser'
+import Spinner from '@/ui/Spinner'
 
 type FieldValuesType = {
     passwordCurrent: string
@@ -25,19 +22,23 @@ function UpdatePasswordForm() {
 
     const { handleSubmit, register, getValues, formState } =
         useForm<FieldValuesType>()
-
     const { errors } = formState
 
+    const { isUpdatingUser, updateUser } = useUpdateUser()
+
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
-        console.log(typeof data.passwordConfirm)
+        const updateData = { password: data.passwordConfirm }
+        updateUser(updateData)
     }
-    const onError: SubmitErrorHandler<FieldErrors> = (error) => {
-        console.log(error)
-    }
+    // const onError: SubmitErrorHandler<FieldErrors> = (error) => {
+    //     console.log(error)
+    // }
+
+    if (isUpdatingUser) return <Spinner></Spinner>
 
     return (
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        <Form onSubmit={handleSubmit(onSubmit, onError)} variation="regular">
+        <Form onSubmit={handleSubmit(onSubmit)} variation="regular">
             <FormRow
                 label="Password (min 8 characters)"
                 error={errors?.passwordCurrent?.message}
