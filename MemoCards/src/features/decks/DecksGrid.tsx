@@ -3,7 +3,6 @@ import Menus from '@/ui/Menus'
 import Spinner from '@/ui/Spinner'
 import Empty from '@/ui/Empty'
 import { useDecks } from './useDecks'
-import FullPage from '@/ui/FullPage'
 
 function DecksGrid() {
     const { isLoading, decks } = useDecks()

@@ -14,7 +14,9 @@ function Account() {
             </Row>
 
             <Row type="vertical">
-                <Heading as="h3">Update password</Heading>
+                <Heading as="h3">
+                    Update password (only for email logins)
+                </Heading>
                 <UpdatePasswordForm></UpdatePasswordForm>
             </Row>
         </>
