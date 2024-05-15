@@ -1,4 +1,3 @@
-import { createEditDeck } from '@/services/apiDecks'
 import { Tables } from '@/types/database.types'
 import Button from '@/ui/Button'
 import Form from '@/ui/Form'
@@ -6,11 +5,13 @@ import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
 import {
     type SubmitHandler,
-    SubmitErrorHandler,
+    type SubmitErrorHandler,
     useForm,
+    FieldErrors,
 } from 'react-hook-form'
 import { useCreateDeck } from './useCreateDeck'
 import { useEditDeck } from './useEditDeck'
+import toast from 'react-hot-toast'
 
 type CreateDeckFormProps = {
     deckToEdit: Tables<'Decks'> | undefined
@@ -60,8 +61,8 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
             })
     }
 
-    const onError: SubmitErrorHandler<Tables<'Decks'>> = () => {
-        console.log('error')
+    const onError: SubmitErrorHandler<FieldErrors> = () => {
+        toast.error('Error in form completion.')
     }
 
     return (

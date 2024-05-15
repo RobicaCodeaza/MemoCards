@@ -20,7 +20,7 @@ function UpdateUserDataForm() {
             </FormRow>
 
             <FormRow>
-                <Button type="reset" size="small" variation="simpleSecondary">
+                <Button type="reset" size="small" variation="subtleWhite">
                     Cancel
                 </Button>
                 <Button type="submit" size="small" variation="simplePrimary">
