@@ -8,7 +8,10 @@ function Logout() {
     const { isLoading, logout } = useLogout()
 
     return (
-        <ButtonIcon onClick={() => logout()}>
+        <ButtonIcon
+            otherClasses="text-picton-blue-700"
+            onClick={() => logout()}
+        >
             {isLoading ? (
                 <SpinnerMini></SpinnerMini>
             ) : (
