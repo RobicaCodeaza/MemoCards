@@ -33,7 +33,7 @@ function ButtonIcon({
         >
             {children &&
                 cloneElement(children as ReactElement, {
-                    className: `w-12 h-12 text-picton-blue-600
+                    className: `w-12 h-12 
                 ${otherClasses ? otherClasses : ''}`,
                 })}
         </button>
