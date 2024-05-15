@@ -18,3 +18,23 @@ export async function logout() {
 
     if (error) throw new Error(error.message)
 }
+
+export type UpdatePassword = {
+    password: string
+}
+
+export type UpdateMetadata = {
+    data: { fullname: string; avatar: File }
+}
+
+type UpdateData = UpdatePassword | UpdateMetadata
+
+export async function updateUser(updateData: UpdateData) {
+    const { data, error } = await supabase.auth.updateUser({
+        ...updateData,
+    })
+
+    if (error) throw new Error("Error updating user's data.Check the inputs.")
+
+    return data
+}
