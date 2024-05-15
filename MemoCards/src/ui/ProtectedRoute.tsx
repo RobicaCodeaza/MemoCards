@@ -9,12 +9,12 @@ type ProtectedRouteProps = PropsWithChildren
 
 export type UserType = {
     user_id: string
-    user_provider: string
+    user_provider: string | undefined
 }
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
     const navigate = useNavigate()
-    const [_, setUserId] = useLocalStorageState<object>(
+    const [_, setUserId] = useLocalStorageState<UserType>(
         { user_id: '', user_provider: '' },
         'user'
     )

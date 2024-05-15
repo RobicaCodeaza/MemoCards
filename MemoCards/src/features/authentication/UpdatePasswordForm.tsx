@@ -20,7 +20,7 @@ function UpdatePasswordForm() {
     )
     const isNotEmailProvider = user.user_provider !== 'email'
 
-    const { handleSubmit, register, getValues, formState } =
+    const { handleSubmit, register, getValues, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
 
@@ -29,6 +29,7 @@ function UpdatePasswordForm() {
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
         const updateData = { password: data.passwordConfirm }
         updateUser(updateData)
+        reset()
     }
     // const onError: SubmitErrorHandler<FieldErrors> = (error) => {
     //     console.log(error)

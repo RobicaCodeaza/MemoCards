@@ -1,5 +1,3 @@
-import supabase from '@/services/supabase'
-
 import Logo from '@/ui/Logo'
 import Login from '@/features/authentication/Login'
 

@@ -24,7 +24,7 @@ export type UpdatePassword = {
 }
 
 export type UpdateMetadata = {
-    data: { fullname: string; avatar: File }
+    data: { fullName: string; avatar: File }
 }
 
 type UpdateData = UpdatePassword | UpdateMetadata
@@ -34,7 +34,7 @@ export async function updateUser(updateData: UpdateData) {
         ...updateData,
     })
 
-    if (error) throw new Error("Error updating user's data.Check the inputs.")
+    if (error) throw new Error(error.message)
 
-    return data
+    return data?.user
 }
