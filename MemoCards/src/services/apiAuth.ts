@@ -81,7 +81,11 @@ export async function updateUser(updateData: UpdateData) {
             },
         })
 
-    if (errorUpdatingAvatar) throw new Error(errorUpdatingAvatar.message)
+    if (errorUpdatingAvatar)
+        throw new Error(
+            `${errorUpdatingAvatar.message},
+            Error in updating avatar.`
+        )
 
     //---------------------------------------------
 
