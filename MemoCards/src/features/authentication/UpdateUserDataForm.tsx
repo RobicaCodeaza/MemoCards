@@ -11,12 +11,13 @@ import { User } from '@supabase/supabase-js'
 
 type FieldValuesType = {
     fullName: string
-    avatar: File
+    avatar: FileList
 }
 
 type UserMetadata = {
     fullName?: string // fullName is an optional string
     // other properties can be defined here
+    avatar: string
 }
 
 // Extend the Supabase User type to include your custom metadata
@@ -29,17 +30,21 @@ function UpdateUserDataForm() {
         useForm<FieldValuesType>()
     const { errors } = formState
 
+    //Retrieving User's Data
     const { user } = useUser()
-
     const { fullName } = (user && user.user_metadata) ?? {
         fullName: 'Default Name',
     }
-
+    //Retrieving Update User Functionality
     const { isUpdatingUser, updateUser } = useUpdateUser()
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
+        console.log(data.avatar[0])
         const updateData = {
-            data: { fullName: data.fullName, avatar: data.avatar },
+            data: {
+                fullName: (data.fullName || fullName) ?? 'Default Name',
+                avatar: data.avatar[0],
+            },
         }
         updateUser(updateData, {
             onSuccess: () => {
