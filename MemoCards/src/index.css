@@ -4,7 +4,7 @@
 
 .active:link,
 .active:visited {
-    @apply bg-chateau-green-500 text-mako-grey-100;
+    @apply bg-picton-blue-500 text-mako-grey-100;
 
     svg {
         @apply text-mako-grey-100;

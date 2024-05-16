@@ -6,14 +6,18 @@ import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import CreateDeckForm from './CreateDeckForm'
 import { Tables } from '../../types/database.types'
+import ConfirmDelete from '@/ui/ConfirmDelete'
+import { useDeleteDeck } from './useDeleteDeck'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>
 }
 
 function DeckCard({ deck }: DeckCardProps) {
+    const { isDeleting, deleteDeck } = useDeleteDeck()
+
     return (
-        <div className="flex flex-col   rounded-lg border border-solid  border-picton-blue-200 bg-picton-blue-50  px-10 py-10 shadow-lg">
+        <div className="flex flex-col   rounded-lg border  border-solid border-picton-blue-200  bg-picton-blue-50 px-10 py-10 shadow-lg">
             <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-2">
                     <p
@@ -74,11 +78,15 @@ function DeckCard({ deck }: DeckCardProps) {
                             </Modal.Open>
                         </Menus.List>
                     </Menus.Menu>
-                    <Modal.Window name="deleteDeck">
-                        <div>Delete</div>
+                    <Modal.Window windowTitle="Delete a deck" name="deleteDeck">
+                        <ConfirmDelete
+                            resourceName="Deck"
+                            disabled={isDeleting}
+                            onConfirm={() => deleteDeck(deck.id)}
+                        ></ConfirmDelete>
                     </Modal.Window>
-                    <Modal.Window name="editDeck">
-                        <CreateDeckForm></CreateDeckForm>
+                    <Modal.Window windowTitle="Edit a deck" name="editDeck">
+                        <CreateDeckForm deckToEdit={deck}></CreateDeckForm>
                     </Modal.Window>
                 </Modal>
             </div>
@@ -91,7 +99,6 @@ function DeckCard({ deck }: DeckCardProps) {
                     Perfection Score
                 </label>
                 <Progress
-
                     value={
                         deck.perfectionScore
                             ? deck.perfectionScore[
@@ -99,17 +106,14 @@ function DeckCard({ deck }: DeckCardProps) {
                               ]
                             : 0
                     }
-
                     className="border border-neon-carrot-500 bg-neon-carrot-300"
                 />
             </div>
             <p className="mt-12 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
-                Last tested:{' '}
+                Last tested:
                 <strong>
-
                     {deck.lastTested
                         ? deck.lastTested[deck.lastTested.length - 1]
-
                         : 'Not tested'}
                 </strong>
             </p>

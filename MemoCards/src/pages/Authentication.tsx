@@ -1,28 +1,7 @@
-import supabase from '@/services/supabase'
-
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
-
 import Logo from '@/ui/Logo'
 import Login from '@/features/authentication/Login'
 
 function Authentication() {
-    const navigate = useNavigate()
-    const queryClient = useQueryClient()
-    useEffect(
-        function () {
-            supabase.auth.onAuthStateChange((event, session) => {
-                console.log(event, session)
-                if (event === 'SIGNED_IN') {
-                    queryClient.setQueryData(['user'], session?.user)
-                    navigate('/dashboard', { replace: true })
-                } else return
-            })
-        },
-        [navigate, queryClient]
-    )
-
     return (
         <div className="flex min-h-screen items-center justify-center bg-picton-blue-100 py-8">
             <div className="w-[87.5%] rounded-[12px] border-2 border-mako-grey-200 bg-picton-blue-50 p-8 shadow-md phone:w-1/2 phone:p-10 tab-port:w-2/5 tab-port:p-12 tab-land:w-1/3 tab-land:p-16 particular-small-laptop:w-[30%] particular-small-laptop:p-24">

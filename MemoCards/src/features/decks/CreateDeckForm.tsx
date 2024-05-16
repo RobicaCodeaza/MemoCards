@@ -1,33 +1,68 @@
+import { Tables } from '@/types/database.types'
 import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
 import {
     type SubmitHandler,
-    SubmitErrorHandler,
+    type SubmitErrorHandler,
     useForm,
+    FieldErrors,
 } from 'react-hook-form'
+import { useCreateDeck } from './useCreateDeck'
+import { useEditDeck } from './useEditDeck'
+import toast from 'react-hot-toast'
 
-type FormValues = {
-    chapter: string
-    subchapter: string
-    lesson: string
+type CreateDeckFormProps = {
+    deckToEdit: Tables<'Decks'> | undefined
+    onCloseModal?: () => void
 }
 
-type CreateDeckFormProps = { onCloseModal?: () => void }
-
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
-    const { handleSubmit, register, reset, getValues, formState } =
-        useForm<FormValues>()
+    const { id: editId, ...editValues } = deckToEdit ?? {}
+
+    const isEditingSession = Boolean(editId)
+
+    const { handleSubmit, register, reset, getValues, formState } = useForm<
+        Tables<'Decks'>
+    >({
+        defaultValues: isEditingSession ? editValues : undefined,
+    })
 
     const { errors } = formState
 
-    const onSubmit: SubmitHandler<FormValues> = (data) => {
-        console.log(data)
+    const { isCreating, createDeck } = useCreateDeck()
+    const { isUpdating, updateDeck } = useEditDeck()
+    const isWorking = isCreating ?? isUpdating
+
+    const onSubmit: SubmitHandler<Tables<'Decks'>> = (data) => {
+        data.chapter = data.chapter.toLowerCase()
+        data.subchapter =
+            data.subchapter.slice(0, 1).toUpperCase() +
+            data.subchapter.slice(1, -1).toLowerCase()
+        data.lesson = data.lesson.toLowerCase()
+
+        if (isEditingSession)
+            updateDeck(
+                { newData: data, id: editId! },
+                {
+                    onSuccess: () => {
+                        reset()
+                        onCloseModal?.()
+                    },
+                }
+            )
+        else
+            createDeck(data, {
+                onSuccess: () => {
+                    reset()
+                    onCloseModal?.()
+                },
+            })
     }
 
-    const onError: SubmitErrorHandler<FormValues> = () => {
-        console.log('error')
+    const onError: SubmitErrorHandler<FieldErrors> = () => {
+        toast.error('Error in form completion.')
     }
 
     return (
@@ -35,8 +70,10 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
         <Form onSubmit={handleSubmit(onSubmit, onError)} variation="modal">
             <FormRow label="chapter" error={errors?.chapter?.message}>
                 <Input
+                    disabled={isWorking}
                     id="chapter"
-                    type={'text'}
+                    type="text"
+                    placeholder="Chapter 1"
                     {...register('chapter', {
                         required: 'This Field is Required',
                     })}
@@ -44,8 +81,10 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
             </FormRow>
             <FormRow label="subchapter" error={errors?.subchapter?.message}>
                 <Input
+                    disabled={isWorking}
                     id="subchapter"
-                    type={'text'}
+                    placeholder="Subchapter 1"
+                    type="text"
                     {...register('subchapter', {
                         required: 'This Field is Required',
                     })}
@@ -53,8 +92,10 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
             </FormRow>
             <FormRow label="lesson" error={errors?.lesson?.message}>
                 <Input
+                    disabled={isWorking}
                     id="lesson"
-                    type={'text'}
+                    type="text"
+                    placeholder="Lesson 1"
                     {...register('lesson', {
                         required: 'This Field is Required',
                     })}
@@ -66,11 +107,17 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                     variation="subtleWhite"
                     size="small"
                     type="reset"
+                    disabled={isWorking}
                 >
                     Reset
                 </Button>
-                <Button as="button" variation="simplePrimary" size="small">
-                    Edit
+                <Button
+                    as="button"
+                    variation="simplePrimary"
+                    size="small"
+                    disabled={isWorking}
+                >
+                    {isEditingSession ? 'Edit' : 'Add'}
                 </Button>
             </FormRow>
         </Form>

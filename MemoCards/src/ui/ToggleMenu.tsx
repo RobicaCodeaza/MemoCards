@@ -10,7 +10,7 @@ function ToggleMenu() {
             as="button"
             variation="subtleWhite"
             size="tiny"
-            otherClasses="block h-16 w-16 p-2 tab-port:hidden"
+            otherClasses="block h-16 w-16 p-2 tab-port:hidden text-picton-blue-700"
             onClick={toggleMobileNav}
         >
             <HiEllipsisVertical

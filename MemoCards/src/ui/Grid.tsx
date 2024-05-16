@@ -6,7 +6,7 @@ type GridProps = {
 
 function Grid({ children }: GridProps) {
     return (
-        <div className="grid-cols-1 grid min-h-max grid-rows-decks gap-16  phone:grid phone:grid-cols-decks">
+        <div className="grid grid-rows-decks  justify-center gap-16   phone:grid-cols-decks">
             {children}
         </div>
     )

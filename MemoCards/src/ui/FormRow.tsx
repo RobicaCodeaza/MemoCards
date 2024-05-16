@@ -19,7 +19,8 @@ function FormRow({ children, label, error }: FormRowProps) {
 
     return (
         <div
-            className={`flex flex-row flex-wrap  items-center justify-end gap-5 has-[button]:justify-end  has-[button]:gap-4  phone:gap-4`}
+            className={`flex flex-col items-center justify-center  gap-5   border-b border-mako-grey-100 py-4 has-[button]:flex   has-[button]:flex-row  has-[button]:justify-end has-[button]:gap-4 has-[button]:border-none  phone:grid phone:grid-cols-[24rem_1fr_1.5fr]    phone:gap-6 tab-port:gap-8   tab-land:gap-10`}
+            style={{}}
         >
             {React.Children.map(children, (child) => {
                 if (isReactElementWithId(child)) {
@@ -35,7 +36,7 @@ function FormRow({ children, label, error }: FormRowProps) {
                             )}
                             {child}
                             {error && (
-                                <span className="flex  text-center text-danger-500">
+                                <span className="flex text-center  text-danger-500 phone:text-left">
                                     {error as ReactNode}
                                 </span>
                             )}
