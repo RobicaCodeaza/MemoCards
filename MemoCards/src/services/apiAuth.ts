@@ -1,3 +1,4 @@
+import { ExtendedUser } from '@/features/authentication/UpdateUserDataForm'
 import supabase from './supabase'
 
 export async function getCurrentUser() {
@@ -10,7 +11,7 @@ export async function getCurrentUser() {
 
     if (error) throw new Error(error.message)
 
-    return data?.user
+    return data?.user as ExtendedUser
 }
 
 export async function logout() {
@@ -30,12 +31,20 @@ export type UpdateMetadata = {
 type UpdateData = UpdatePassword | UpdateMetadata
 
 export async function updateUser(updateData: UpdateData) {
+    let newData
+    if (
+        ('data' in updateData && 'avatar' in updateData.data) ||
+        'password' in updateData
+    )
+        newData = updateData
+    else newData = { data: { fullName: updateData.data.fullName } }
+
     const { data, error } = await supabase.auth.updateUser({
-        ...updateData,
+        ...newData,
     })
 
     if (error) throw new Error(error.message)
 
-    console.log(Boolean(data?.user.user_metadata.avatar))
+    // console.log(Boolean(data?.user.user_metadata.avatar))
     return data?.user
 }
