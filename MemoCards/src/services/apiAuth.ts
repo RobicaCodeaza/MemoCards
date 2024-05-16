@@ -1,5 +1,5 @@
 import { ExtendedUser } from '@/features/authentication/UpdateUserDataForm'
-import supabase, { supabaseUrl } from './supabase'
+import supabase, { supabaseKey, supabaseUrl } from './supabase'
 
 export async function getCurrentUser() {
     const { data: session } = await supabase.auth.getSession()
@@ -42,25 +42,52 @@ export async function updateUser(updateData: UpdateData) {
 
     if ('password' in updateData) return data?.user
 
-    //----------------------------------------------
-    //Updating Metadata for Avatar
-    const fileName = `avatar-${data.user?.id}-${Math.random()}`
-    const { data: updatedUser, error: errorUpdatingAvatar } =
-        await supabase.auth.updateUser({
-            data: {
-                avatar: `${supabaseUrl}/storage/v1/object/public/avatars/${fileName}`,
-            },
-        })
-
-    if (errorUpdatingAvatar) throw new Error(errorUpdatingAvatar.message)
-
-    //----------------------------------------------
     //Updating Storage for Avatars
+    const fileName = `avatar-${data.user?.id}-${Math.random()}`
+    const url = `${supabaseUrl}/storage/v1/object/authenticated/avatars/${fileName}`
+
     const { error: storageError } = await supabase.storage
         .from('avatars')
         .upload(fileName, updateData.data.avatar)
 
-    if (storageError) throw new Error(storageError.message)
+    if (storageError)
+        throw new Error(`{${storageError.message}}.Error coming from storage`)
+
+    //----------------------------------------------
+    //Updating Metadata for Avatar
+
+    //1. Getting the token in order to fetch the file
+    const {
+        data: { session },
+    } = await supabase.auth.getSession()
+
+    //2.Getting the file from the private bucket
+    const response = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${session?.access_token}`,
+        },
+    })
+    if (!response.ok)
+        throw new Error(`Error in fetching the avatar.${response.statusText}`)
+
+    //3.Creating a URL of the photo to be used in the app
+    const dataUsed = await response.blob()
+    const avatarUrl = URL.createObjectURL(dataUsed)
+
+    const { data: updatedUser, error: errorUpdatingAvatar } =
+        await supabase.auth.updateUser({
+            data: {
+                avatar: avatarUrl,
+            },
+        })
+
+    if (errorUpdatingAvatar)
+        throw new Error(
+            `${errorUpdatingAvatar.message},
+            Error in updating avatar.`
+        )
+
+    //---------------------------------------------
 
     return updatedUser?.user
 }
