@@ -9,12 +9,12 @@ function UserAvatar() {
             <img
                 className="block aspect-square w-14 rounded-full     border border-mako-grey-100 object-cover"
                 src={defaultUser}
-                alt={`Avatar of ${user?.user_metadata.fullName ? user.user_metadata.fullName : 'Nume'}`}
+                alt={`Avatar of ${user?.user_metadata.fullName ? user.user_metadata.fullName : 'DefaultName'}`}
             ></img>
             <span>
                 {user?.user_metadata.fullName
                     ? user.user_metadata.fullName
-                    : 'Nume'}
+                    : 'DefaultName'}
             </span>
         </div>
     )
