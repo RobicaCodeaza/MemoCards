@@ -39,7 +39,6 @@ function UpdateUserDataForm() {
     const { isUpdatingUser, updateUser } = useUpdateUser()
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
-        console.log(data.avatar[0])
         const updateData = {
             data: {
                 fullName: (data.fullName || fullName) ?? 'Default Name',
