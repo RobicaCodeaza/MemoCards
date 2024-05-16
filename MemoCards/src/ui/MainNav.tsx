@@ -24,8 +24,7 @@ function MainNav() {
                 <NavLink
                     onClick={handleToggle}
                     to={'dashboard'}
-                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
-                    active:bg-picton-blue-100 active:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-700 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-900
                     "
                 >
                     <GoHome className="text-inherit block h-10 w-10"></GoHome>
@@ -36,8 +35,7 @@ function MainNav() {
                 <NavLink
                     onClick={handleToggle}
                     to={'decks'}
-                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
-                    active:bg-picton-blue-100 active:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-700 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-900
                     "
                 >
                     <PiBookLight className="text-inherit block h-10 w-10"></PiBookLight>
@@ -49,8 +47,7 @@ function MainNav() {
                 <NavLink
                     onClick={handleToggle}
                     to={'flashcards'}
-                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
-                    active:bg-picton-blue-100 active:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-700 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-900
                     "
                 >
                     <PiCardsThreeLight className="text-inherit block h-10 w-10"></PiCardsThreeLight>
@@ -61,8 +58,7 @@ function MainNav() {
                 <NavLink
                     onClick={handleToggle}
                     to={'quiz'}
-                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
-                    active:bg-picton-blue-100 active:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-700 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-900
                     "
                 >
                     <PiExamLight className="text-inherit block h-10 w-10"></PiExamLight>
@@ -73,8 +69,7 @@ function MainNav() {
                 <NavLink
                     onClick={handleToggle}
                     to={'account'}
-                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
-                    active:bg-picton-blue-100 active:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-700 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-900
                     "
                 >
                     <PiUserCircleGearLight className="text-inherit block h-10 w-10"></PiUserCircleGearLight>
@@ -85,8 +80,7 @@ function MainNav() {
                 <NavLink
                     onClick={handleToggle}
                     to={'settings'}
-                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-600 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-800
-                    active:bg-picton-blue-100 active:text-mako-grey-800
+                    className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-700 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-900
                     "
                 >
                     <CiSettings className="text-inherit block h-10 w-10"></CiSettings>
