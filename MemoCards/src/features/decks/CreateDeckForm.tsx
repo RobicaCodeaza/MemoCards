@@ -22,7 +22,9 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
 
     const { errors } = formState
 
-    const onSubmit: SubmitHandler<FormValues> = (data) => {}
+    const onSubmit: SubmitHandler<FormValues> = (data) => {
+        console.log(data)
+    }
 
     const onError: SubmitErrorHandler<FormValues> = () => {
         console.log('error')
