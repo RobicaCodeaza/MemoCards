@@ -7,18 +7,33 @@ import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useUpdateUser } from './useUpdateUser'
 import { useUser } from './useUser'
 import Spinner from '@/ui/Spinner'
+import { User } from '@supabase/supabase-js'
 
 type FieldValuesType = {
     fullName: string
     avatar: File
 }
 
+type UserMetadata = {
+    fullName?: string // fullName is an optional string
+    // other properties can be defined here
+}
+
+// Extend the Supabase User type to include your custom metadata
+export type ExtendedUser = User & {
+    user_metadata: UserMetadata
+}
+
 function UpdateUserDataForm() {
-    const { handleSubmit, register, getValues, formState, reset } =
+    const { handleSubmit, register, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
 
     const { user } = useUser()
+
+    const { fullName } = (user && user.user_metadata) ?? {
+        fullName: 'Default Name',
+    }
 
     const { isUpdatingUser, updateUser } = useUpdateUser()
 
@@ -26,7 +41,11 @@ function UpdateUserDataForm() {
         const updateData = {
             data: { fullName: data.fullName, avatar: data.avatar },
         }
-        updateUser(updateData)
+        updateUser(updateData, {
+            onSuccess: () => {
+                reset()
+            },
+        })
     }
 
     if (isUpdatingUser) return <Spinner></Spinner>
@@ -41,6 +60,7 @@ function UpdateUserDataForm() {
             <FormRow label="Full name" error={errors?.fullName?.message}>
                 <Input
                     id="fullName"
+                    placeholder={fullName ?? 'Default Name'}
                     type="text"
                     {...register('fullName', {})}
                 />

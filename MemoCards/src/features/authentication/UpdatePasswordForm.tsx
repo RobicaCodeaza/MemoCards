@@ -28,8 +28,11 @@ function UpdatePasswordForm() {
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
         const updateData = { password: data.passwordConfirm }
-        updateUser(updateData)
-        reset()
+        updateUser(updateData, {
+            onSuccess: () => {
+                reset()
+            },
+        })
     }
     // const onError: SubmitErrorHandler<FieldErrors> = (error) => {
     //     console.log(error)
