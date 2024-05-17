@@ -91,12 +91,20 @@ function DeckCard({ deck }: DeckCardProps) {
                 </Modal>
             </div>
 
-            <div className="mt-14 flex flex-col gap-4  px-8 text-[1.3rem] uppercase tracking-wide">
+            <div className="mt-14 flex flex-col gap-6  px-8 text-[1.35rem] uppercase tracking-wide">
                 <label
                     htmlFor="progress"
                     className="text-center text-neon-carrot-900"
                 >
-                    Perfection Score
+                    Perfection Score:{' '}
+                    <strong>
+                        {deck.perfectionScore
+                            ? deck.perfectionScore[
+                                  deck.perfectionScore.length - 1
+                              ]
+                            : 0}
+                        /100
+                    </strong>
                 </label>
                 <Progress
                     value={
@@ -109,7 +117,7 @@ function DeckCard({ deck }: DeckCardProps) {
                     className="border border-neon-carrot-500 bg-neon-carrot-300"
                 />
             </div>
-            <p className="mt-12 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
+            <p className="mt-8 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
                 Last tested:
                 <strong>
                     {deck.lastTested
