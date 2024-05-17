@@ -38,11 +38,11 @@ export async function deleteDeck(id: number) {
     if (error) throw new Error('Could not delete the deck.')
 }
 
-export async function deleteAllDecks() {
+export async function deleteAllDecks(userId: string) {
     const { error } = await supabase
         .from('Decks')
         .delete()
-        .not('id', 'is', null)
+        .eq('user_id', userId)
 
     if (error) throw new Error(error.message)
 }
