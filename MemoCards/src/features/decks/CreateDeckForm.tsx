@@ -38,7 +38,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
         },
         'user'
     )
-    console.log(typeof user.user_id)
+    console.log(user)
 
     //Handling Form
     const { handleSubmit, register, reset, formState } = useForm<

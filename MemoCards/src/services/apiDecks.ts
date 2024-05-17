@@ -1,8 +1,11 @@
 import supabase from './supabase'
 import { Tables } from '../types/database.types'
 
-export async function getDecks() {
-    const { data, error } = await supabase.from('Decks').select('*')
+export async function getDecks(userId: string) {
+    const { data, error } = await supabase
+        .from('Decks')
+        .select('*')
+        .eq('user_id', userId)
 
     if (error) {
         throw new Error('Decks could not be loaded.')
