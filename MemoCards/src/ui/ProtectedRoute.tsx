@@ -20,7 +20,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
     )
 
     const { isLoading, isAuthenticated, user } = useUser()
-
+    console.log(user)
     useEffect(
         function () {
             if (!isAuthenticated && !isLoading)

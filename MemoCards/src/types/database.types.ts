@@ -52,7 +52,7 @@ export type Database = {
           lesson: string
           perfectionScore: number[] | null
           subchapter: string
-          user_id: number | null
+          user_id: string | null
         }
         Insert: {
           chapter: string
@@ -61,7 +61,7 @@ export type Database = {
           lesson: string
           perfectionScore?: number[] | null
           subchapter: string
-          user_id?: number | null
+          user_id?: string | null
         }
         Update: {
           chapter?: string
@@ -70,7 +70,7 @@ export type Database = {
           lesson?: string
           perfectionScore?: number[] | null
           subchapter?: string
-          user_id?: number | null
+          user_id?: string | null
         }
         Relationships: []
       }

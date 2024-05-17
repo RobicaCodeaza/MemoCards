@@ -12,6 +12,8 @@ import {
 import { useCreateDeck } from './useCreateDeck'
 import { useEditDeck } from './useEditDeck'
 import toast from 'react-hot-toast'
+import { useLocalStorageState } from '@/hooks/useLocalStorageState'
+import { UserType } from '@/ui/ProtectedRoute'
 
 type CreateDeckFormProps = {
     deckToEdit: Tables<'Decks'> | undefined
@@ -19,21 +21,32 @@ type CreateDeckFormProps = {
 }
 
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
+    //Defining if we deal with an edit or a create
     const { id: editId, ...editValues } = deckToEdit ?? {}
-
     const isEditingSession = Boolean(editId)
 
-    const { handleSubmit, register, reset, getValues, formState } = useForm<
+    //Handling Create || Edit Deck
+    const { isCreating, createDeck } = useCreateDeck()
+    const { isUpdating, updateDeck } = useEditDeck()
+    const isWorking = isCreating ?? isUpdating
+
+    //Getting User_id for the form creation of an object
+    const [user, setUser] = useLocalStorageState<UserType>(
+        {
+            user_id: '',
+            user_provider: '',
+        },
+        'user'
+    )
+    console.log(typeof user.user_id)
+
+    //Handling Form
+    const { handleSubmit, register, reset, formState } = useForm<
         Tables<'Decks'>
     >({
         defaultValues: isEditingSession ? editValues : undefined,
     })
-
     const { errors } = formState
-
-    const { isCreating, createDeck } = useCreateDeck()
-    const { isUpdating, updateDeck } = useEditDeck()
-    const isWorking = isCreating ?? isUpdating
 
     const onSubmit: SubmitHandler<Tables<'Decks'>> = (data) => {
         data.chapter = data.chapter.toLowerCase()
@@ -52,13 +65,15 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                     },
                 }
             )
-        else
-            createDeck(data, {
+        else {
+            const newData = { ...data, user_id: user.user_id }
+            createDeck(newData, {
                 onSuccess: () => {
                     reset()
                     onCloseModal?.()
                 },
             })
+        }
     }
 
     const onError: SubmitErrorHandler<FieldErrors> = () => {
