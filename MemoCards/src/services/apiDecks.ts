@@ -20,8 +20,23 @@ export async function createEditDeck(
 ) {
     let query
 
-    if (!id) query = supabase.from('Decks').insert([newDeck])
-    else query = supabase.from('Decks').update(newDeck).eq('id', id)
+    if (!id) {
+        const { data: existingData, error } = await supabase
+            .from('Decks')
+            .select('*')
+            .eq('user_id', newDeck.user_id)
+            .eq('lesson', newDeck.lesson)
+
+        if (error) {
+            throw new Error(error.message)
+        }
+
+        // Check if data already exists
+        if (existingData && existingData.length > 0) {
+            throw new Error('Data already exists.')
+        }
+        query = supabase.from('Decks').insert([newDeck])
+    } else query = supabase.from('Decks').update(newDeck).eq('id', id)
 
     const { data, error } = await query.select().single()
 
