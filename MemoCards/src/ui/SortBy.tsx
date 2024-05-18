@@ -1,6 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
 import Select from './Select'
-import { ChangeEvent } from 'react'
 
 export type OptionsType = { value: string; label: string }[]
 
