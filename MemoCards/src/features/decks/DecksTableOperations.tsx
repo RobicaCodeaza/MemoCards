@@ -3,7 +3,7 @@ import SortBy from '@/ui/SortBy'
 
 function DecksTableOperations() {
     return (
-        <div className="flex flex-col items-center gap-6 tab-land:flex-row">
+        <div className="flex flex-col items-center gap-2 tab-land:flex-row tab-land:gap-6">
             <Filter
                 filteredValue="tested"
                 options={[

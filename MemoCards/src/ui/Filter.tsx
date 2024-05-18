@@ -25,7 +25,7 @@ function Filter({ filteredValue, options }: FilterProps) {
                     onClick={() => handleChange(option.value)}
                     key={option.value}
                     disabled={currentFilter === option.value}
-                    className={`rounded border-none bg-mako-grey-50 px-2 py-3 text-[1.4rem] font-medium transition-all duration-300 hover:bg-picton-blue-700 disabled:bg-mako-grey-50 ${currentFilter === option.value ? 'bg-picton-blue-600 text-picton-blue-50' : ''}`}
+                    className={`rounded border-none bg-mako-grey-50 px-2 py-3 text-[1.4rem] font-medium transition-all duration-300 hover:bg-picton-blue-700 hover:text-picton-blue-100 disabled:bg-picton-blue-600 ${currentFilter === option.value ? 'bg-picton-blue-600 text-picton-blue-50' : ''}`}
                 >
                     {option.label}
                 </button>
