@@ -9,7 +9,7 @@ type SelectProps = {
 function Select({ options, value, ...otherProps }: SelectProps) {
     return (
         <select
-            className="rounded border border-mako-grey-100 bg-mako-grey-50 px-3 py-5 text-[1.4rem] font-medium shadow-sm"
+            className="w-[18.5rem] rounded border border-mako-grey-100 bg-mako-grey-50 px-2 py-4 text-[1.4rem] font-medium shadow-sm phone:px-3 phone:py-5 tab-land:w-auto"
             value={value}
             {...otherProps}
         >

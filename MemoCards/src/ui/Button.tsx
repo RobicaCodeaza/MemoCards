@@ -50,7 +50,7 @@ function Button<C extends ElementType>({
         },
         size: {
             tiny: 'px-2 py-1 text-center text-[1.2rem] font-medium uppercase',
-            small: 'px-4 py-2 text-center text-[1.3rem] font-semibold uppercase tracking-wider',
+            small: 'px-3 py-1 text-center text-[1.3rem] font-semibold uppercase tracking-wider phone:px-4 py-2',
             medium: 'px-7 py-3 text-[1.4rem] tracking-wide',
             large: 'px-10 py-5 text-[1.6rem] ',
             huge: 'px-12 py-6 text-[2.4rem]',

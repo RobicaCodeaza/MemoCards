@@ -13,7 +13,7 @@ function DecksModifiers() {
 
     return (
         <Modal>
-            <div className="flex flex-col gap-4 phone:flex-row">
+            <div className="flex flex-col gap-2 phone:flex-row phone:gap-6">
                 <Modal.Open opens="addDeck">
                     <Button as="div" variation="subtleWhite" size="tiny">
                         <ButtonIcon
