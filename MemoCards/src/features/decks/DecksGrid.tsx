@@ -41,24 +41,29 @@ function DecksGrid() {
             return 0 // Handle null or undefined values
         }
 
-        if (typeof aValue === 'number[]' && typeof bValue !== 'number') {
-            if (field === 'perfectionScore') {
+        if (Array.isArray(aValue) && Array.isArray(bValue)) {
+            if (
+                aValue.every((item) => typeof item === 'string') &&
+                bValue.every((item) => typeof item === 'string')
+            ) {
                 // Handle date strings
-                const aValue2 = aValue[aValue.length - 1]
-                const bValue2 = bValue[aValue.length - 1]
-                return modifier * (aValue2 - bValue2)
-            }
-        } else if (typeof aValue === 'string' && typeof bValue === 'string') {
-            if (field === 'lastTested') {
-                // Handle date strings
-                const aDate = new Date(aValue[aValue.length - 1])
-                const bDate = new Date(bValue[aValue.length - 1])
+                const aDate = new Date(aValue[aValue.length - 1] as string)
+                const bDate = new Date(bValue[aValue.length - 1] as string)
                 return modifier * (aDate.getTime() - bDate.getTime())
             } else {
+                const aNumber = aValue[aValue.length - 1] as number
+                const bNumber = aValue[bValue.length - 1] as number
+                return modifier * (aNumber - bNumber)
+            }
+        } else {
+            if (typeof aValue === 'string' && typeof bValue === 'string')
                 return modifier * aValue.localeCompare(bValue)
+            else {
+                const aNumber = aValue as number
+                const bNumber = bValue as number
+                return modifier * (aNumber - bNumber)
             }
         }
-        return modifier * (a[field] - b[field])
     })
 
     return (
