@@ -10,7 +10,6 @@ function Filter({ filteredValue, options }: FilterProps) {
     const [searchParams, setSearchParams] = useSearchParams()
     const currentFilter =
         searchParams.get(filteredValue) ?? options.at(0)?.value
-    console.log(currentFilter)
 
     function handleChange(value: string) {
         searchParams.set(filteredValue, value)

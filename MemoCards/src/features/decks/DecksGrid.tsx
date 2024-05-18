@@ -52,7 +52,7 @@ function DecksGrid() {
                 return modifier * (aDate.getTime() - bDate.getTime())
             } else {
                 const aNumber = aValue[aValue.length - 1] as number
-                const bNumber = aValue[bValue.length - 1] as number
+                const bNumber = bValue[bValue.length - 1] as number
                 return modifier * (aNumber - bNumber)
             }
         } else {
