@@ -7,6 +7,7 @@ import Button from '@/ui/Button'
 import CreateDeckForm from './CreateDeckForm'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteAllDecks } from './useDeleteAllDecks'
+import FormTrigger from '@/ui/FormTrigger'
 
 function DecksModifiers() {
     const { isDeletingAll, deleteAllDecks } = useDeleteAllDecks()
@@ -29,16 +30,17 @@ function DecksModifiers() {
                 <Modal.Window windowTitle="Create a deck" name="addDeck">
                     <CreateDeckForm deckToEdit={undefined}></CreateDeckForm>
                 </Modal.Window>
-
-                <Button as="div" variation="subtleWhite" size="tiny">
-                    <ButtonIcon
-                        otherClasses="w-9 h-9 text-picton-blue-950"
-                        hoverNone="true"
-                    >
-                        <PiStackPlusThin></PiStackPlusThin>
-                    </ButtonIcon>
-                    New Card
-                </Button>
+                <FormTrigger>
+                    <Button as="div" variation="subtleWhite" size="tiny">
+                        <ButtonIcon
+                            otherClasses="w-9 h-9 text-picton-blue-950"
+                            hoverNone="true"
+                        >
+                            <PiStackPlusThin></PiStackPlusThin>
+                        </ButtonIcon>
+                        New Card
+                    </Button>
+                </FormTrigger>
 
                 <Modal.Open opens="deleteAllDecks">
                     <Button as="div" variation="danger" size="tiny">

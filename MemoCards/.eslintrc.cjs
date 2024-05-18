@@ -31,6 +31,7 @@ module.exports = {
         ],
         'no-unused-vars': 'off',
         'react/prop-types': 'off',
+        '@typescript-eslint/no-misused-promises': 'off',
         '@typescript-eslint/consistent-type-definitions': 0,
         '@typescript-eslint/no-unused-vars': 'off',
     },

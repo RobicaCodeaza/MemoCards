@@ -17,124 +17,133 @@ import { Tables } from '@/types/database.types'
 
 import { IoCloseOutline } from 'react-icons/io5'
 
-import FormRow from './FormRow.js'
-import Form from './Form.js'
+import FormRow from './FormRow.tsx'
+import Form from './Form.tsx'
 import toast from 'react-hot-toast'
-import { PropsWithChildren, useRef } from 'react'
-import ButtonIcon from './ButtonIcon.js'
-import Input from './Input.js'
+import { type PropsWithChildren, useRef } from 'react'
+import ButtonIcon from './ButtonIcon.tsx'
+import Input from './Input.tsx'
+import Button from './Button.tsx'
+import Select from './Select.tsx'
+
+type Answer = {
+    answer: string
+}
+
+type FormTypes = {
+    question: string
+    numberAnswers: number
+    answers: Answer[]
+    correctAnswer: string
+}
 
 function FormTrigger({ children }: PropsWithChildren) {
-    const { register, handleSubmit, formState } = useForm<Tables<'Card'>>()
+    const { register, handleSubmit, formState } = useForm<FormTypes>()
     const close = useRef(null)
 
     const { errors } = formState
-    const onSubmit: SubmitHandler<Tables<'Card'>> = (data) => {
+    const onSubmit: SubmitHandler<FormTypes> = (data) => {
         console.log(data)
     }
-    const onError: SubmitErrorHandler<FieldError> = (errors) => {
-        toast.error(
-            'Eroare la completarea formularului.Verifica campurile introduse.'
-        )
+    const onError: SubmitErrorHandler<FieldError> = () => {
+        toast.error(`Error in completing fields.`)
     }
 
     return (
         <Drawer>
             <DrawerTrigger>{children}</DrawerTrigger>
-            <DrawerContent className="bg-white  mx-auto flex flex-col  items-center justify-items-center px-10 py-5 2xl:px-32 ">
+            <DrawerContent className="tab-port:px-30 mx-auto flex flex-col   justify-items-center bg-picton-blue-50   px-10 py-5 phone:w-[90%] phone:px-24  phone:py-16 tab-port:w-[75%] tab-port:py-12 tab-land:w-[60%] tab-land:px-36 tab-land:py-16 particular-small-laptop:w-1/2 particular-small-laptop:px-44 particular-small-laptop:py-20">
                 <DrawerClose ref={close} className="absolute  right-6 top-6">
                     <ButtonIcon color={'#626262'}>
                         <IoCloseOutline></IoCloseOutline>
                     </ButtonIcon>
                 </DrawerClose>
-
                 <DrawerHeader>
-                    <DrawerTitle className="mb-5 text-center text-[24px] leading-none sm:text-[32px] md:text-[4.4rem] xl:mb-2 xl:leading-normal">
-                        Afla mai multe despre oferta noastra
+                    <DrawerTitle className="mb-10 ml-auto mr-auto text-[2.4rem] font-medium text-picton-blue-900">
+                        Create a new card
                     </DrawerTitle>
-                    <DrawerDescription className="text-greyDark text-center text-[14px]  sm:text-[16px] md:text-[18px] ">
+                    {/* <DrawerDescription className="text-greyDark text-center text-[14px]  sm:text-[16px] md:text-[18px] ">
                         Fie ca doresti sa vorbim despre serviciile oferite sau
                         pentru alte sugestii, dorim sa-ti auzim opinia.
-                    </DrawerDescription>
+                    </DrawerDescription> */}
                 </DrawerHeader>
 
-                <Form onSubmit={handleSubmit(onSubmit, onError)}>
-                    {/* <DrawerFooter> */}
-                    <FormRow
-                        label="Nume si prenume"
-                        error={errors?.question?.message}
+                <div className="flex flex-col gap-10">
+                    <Form variation="regular">
+                        <FormRow
+                            label="Email"
+                            error={errors?.numberAnswers?.message}
+                        >
+                            <Input
+                                placeholder="a.Correct answer"
+                                type="text"
+                                id="numberAnswers"
+                                {...register('numberAnswers', {
+                                    required: 'This field is required',
+                                })}
+                            />
+                        </FormRow>
+                    </Form>
+
+                    <Form
+                        variation="regular"
+                        onSubmit={handleSubmit(onSubmit, onError)}
                     >
-                        <Input
-                            className="border-accent2 text-primrayDark border-greyLight bg-primaryLight text-primaryDark accent-colorAccent2 focus:ring-colorAccent2 border-2 border-solid px-4  py-2  text-[16px] focus:outline-none focus:ring focus:ring-offset-1"
-                            type="text"
-                            id="question"
-                            placeholder="ex: Popescu Gabriel"
-                            {...register('question', {
-                                required: 'This field is required',
-                            })}
-                        />
-                    </FormRow>
-                    <FormRow label="Email" error={errors?.answers?.message}>
-                        <Input
-                            className="border-accent2 border-greyLight bg-primaryLight accent-colorAccent2 focus:ring-colorAccent2 border-2 border-solid px-4  py-2 text-[16px] focus:outline-none focus:ring  focus:ring-offset-2"
-                            placeholder="ex: youremail@yahoo.com"
-                            type="email"
-                            id="answers"
-                            {...register('answers', {
-                                required: 'This field is required',
-                            })}
-                        />
-                    </FormRow>
-                    <FormRow label="Telefon" error={errors?.phone?.message}>
-                        <Input
-                            className="border-accent2 border-greyLight bg-primaryLight accent-colorAccent2 focus:ring-colorAccent2 border-2 border-solid px-4 py-2 text-[16px] focus:outline-none focus:ring focus:ring-offset-2"
-                            placeholder="ex: 0760...."
-                            type="tel"
-                            id="phone"
-                            {...register('phone', {})}
-                        />
-                    </FormRow>
-
-                    <FormRow label="Subiect" error={errors?.subiect?.message}>
-                        <Input
-                            className="border-accent2 border-greyLight bg-primaryLight accent-colorAccent2 focus:ring-colorAccent2 border-2 border-solid px-4 py-2 text-[18px] focus:outline-none focus:ring focus:ring-offset-2 "
-                            placeholder="ex: Administrare completa"
-                            type="text"
-                            id="subiect"
-                            {...register('subiect', {
-                                required: 'This field is required',
-                            })}
-                        />
-                    </FormRow>
-
-                    <FormRow label="Mesaj" error={errors?.mesaj?.message}>
-                        <textarea
-                            className="border-accent2 border-greyLight bg-primaryLight accent-colorAccent2  focus:ring-colorAccent2 border-2 border-solid px-4 py-2 text-[16px] focus:outline-none focus:ring focus:ring-offset-2"
-                            id="mesaj"
-                            placeholder="Mesajul tau"
-                            {...register('mesaj', {
-                                required: 'This field is required',
-                            })}
-                        />
-                    </FormRow>
-                    <div className="flex justify-between gap-6">
-                        <Button
-                            type="reset"
-                            $variation="secondary"
-                            $size="medium"
+                        {/* <DrawerFooter> */}
+                        <FormRow
+                            label="Question"
+                            error={errors?.question?.message}
                         >
-                            Cancel
-                        </Button>
-                        <Button
-                            // onClick={(e) => e.preventDefault()}
-                            $variation="primary"
-                            $size="medium"
+                            <Input
+                                type="text"
+                                id="question"
+                                placeholder="ex: What types of muscles...?"
+                                {...register('question', {
+                                    required: 'This field is required',
+                                })}
+                            />
+                        </FormRow>
+
+                        <FormRow
+                            label="Num of answers(optional)"
+                            error={errors?.numberAnswers?.message}
                         >
-                            Submit
-                        </Button>
-                    </div>
-                    {/* </DrawerFooter> */}
-                </Form>
+                            <Input
+                                placeholder="ex:3"
+                                type="number"
+                                id="numberAnswers"
+                                // {...register('numberAnswers', {
+                                //     required: 'This field is required',
+                                // })}
+                            />
+                        </FormRow>
+
+                        <FormRow label="Email" error={errors?.answers?.message}>
+                            <Select
+                                value="smth"
+                                options={[{ value: 'smth', label: 'smth' }]}
+                            />
+                        </FormRow>
+
+                        <div className="flex justify-between gap-6">
+                            <Button
+                                type="reset"
+                                variation="subtleWhite"
+                                size="small"
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                // onClick={(e) => e.preventDefault()}
+                                variation="simplePrimary"
+                                size="small"
+                            >
+                                Submit
+                            </Button>
+                        </div>
+                        {/* </DrawerFooter> */}
+                    </Form>
+                </div>
             </DrawerContent>
         </Drawer>
     )
