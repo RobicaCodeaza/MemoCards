@@ -17,12 +17,12 @@ function DecksTableOperations() {
                     { value: 'chapter-asc', label: 'Sort by Chapter(A-Z)' },
                     { value: 'chapter-desc', label: 'Sort by Chapter(Z-A)' },
                     {
-                        value: 'subChapter-asc',
-                        label: 'Sort by SubChapter(A-Z)',
+                        value: 'subchapter-asc',
+                        label: 'Sort by subchapter(A-Z)',
                     },
                     {
-                        value: 'subChapter-desc',
-                        label: 'Sort by SubChapter(Z-A)',
+                        value: 'subchapter-desc',
+                        label: 'Sort by subchapter(Z-A)',
                     },
 
                     {
@@ -43,11 +43,11 @@ function DecksTableOperations() {
                         label: 'Sort by Perfection Score(high first)',
                     },
                     {
-                        value: 'date-oldest',
+                        value: 'lastTested-oldest',
                         label: 'Sort by date(oldest first)',
                     },
                     {
-                        value: 'date-latest',
+                        value: 'lastTested-latest',
                         label: 'Sort by date(latest first)',
                     },
                 ]}
