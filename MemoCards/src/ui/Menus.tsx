@@ -70,7 +70,7 @@ function Toggle({ id }: ToggleProps) {
     const { openId, open, close, setPosition } = useContext(MenusContext)!
 
     function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        e.stopPropagation()
+        // e.stopPropagation()
 
         if (!e) return
 
@@ -104,7 +104,7 @@ type ListProps = {
 
 function List({ id, children }: ListProps) {
     const { openId, position, close } = useContext(MenusContext)!
-    const ref = useOutsideClick(close, false) as LegacyRef<HTMLUListElement>
+    const ref = useOutsideClick(close, true) as LegacyRef<HTMLUListElement>
 
     if (openId !== id) return
 
