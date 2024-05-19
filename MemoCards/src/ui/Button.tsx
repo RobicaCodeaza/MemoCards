@@ -19,6 +19,7 @@ type ButtonProps<T extends ElementType> = {
     size: 'tiny' | 'small' | 'medium' | 'large' | 'huge'
     children: ReactNode
     otherClasses?: string
+    handleClick?: () => void
 } & ComponentPropsWithoutRef<T>
 
 function Button<C extends ElementType>({
@@ -27,8 +28,13 @@ function Button<C extends ElementType>({
     children,
     size,
     otherClasses,
+    handleClick,
     ...props
 }: ButtonProps<C>) {
+    function onClickFunction() {
+        handleClick?.()
+    }
+
     const button = {
         variation: {
             fancyPrimary: '',
@@ -60,6 +66,7 @@ function Button<C extends ElementType>({
     const Component = as ?? 'button'
     return (
         <Component
+            onClick={onClickFunction}
             className={`flex cursor-pointer items-center justify-center gap-1  ${button.variation[variation]} ${button.size[size]} ${otherClasses}`}
             {...props}
         >

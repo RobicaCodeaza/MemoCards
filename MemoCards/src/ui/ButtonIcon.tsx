@@ -3,6 +3,7 @@ import {
     cloneElement,
     type ComponentPropsWithoutRef,
     ReactElement,
+    ElementType,
 } from 'react'
 
 type ButtonIconProps = {
@@ -12,7 +13,8 @@ type ButtonIconProps = {
     positionAlign?: string
     positionJustify?: string
     hoverNone?: 'true'
-} & ComponentPropsWithoutRef<'button'>
+    as?: ElementType
+} & ComponentPropsWithoutRef<ElementType>
 
 function ButtonIcon({
     children,
@@ -21,10 +23,13 @@ function ButtonIcon({
     positionAlign,
     positionJustify,
     hoverNone,
+    as,
     ...props
 }: ButtonIconProps) {
+    const Component = as ?? 'button'
+
     return (
-        <button
+        <Component
             className={`flex  items-center justify-center rounded border-none   bg-none p-2
         transition-all duration-200 hover:bg-picton-blue-100 ${!hoverNone ? '' : 'pointer-events-none'}`}
             style={{ alignSelf: positionAlign, justifySelf: positionJustify }}
@@ -36,7 +41,7 @@ function ButtonIcon({
                     className: `w-12 h-12 
                 ${otherClasses ? otherClasses : ''}`,
                 })}
-        </button>
+        </Component>
     )
 }
 
