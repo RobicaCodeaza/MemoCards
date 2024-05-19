@@ -114,7 +114,7 @@ function List({ id, children }: ListProps) {
         <ul
             className={`fixed rounded-sm bg-picton-blue-100 shadow-sm`}
             style={{ top: `${position.y}px`, right: `${position.x}px` }}
-            // ref={ref}
+            ref={ref}
         >
             {children}
         </ul>,
@@ -139,7 +139,7 @@ function Button<T extends ElementType>({
 
     function handlerButton() {
         if (onClick) onClick()
-        // close()
+        close()
     }
     const Component = as ?? 'button'
 

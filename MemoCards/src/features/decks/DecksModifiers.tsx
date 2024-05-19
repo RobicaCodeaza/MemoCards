@@ -32,16 +32,18 @@ function DecksModifiers() {
                     <CreateDeckForm deckToEdit={undefined}></CreateDeckForm>
                 </Modal.Window>
 
-                {/* <Button as="div" variation="subtleWhite" size="tiny">
-                    <ButtonIcon
-                        otherClasses="w-9 h-9 text-picton-blue-950"
-                        hoverNone="true"
-                        as="div"
-                    >
-                        <IoCloseOutline></IoCloseOutline>
-                    </ButtonIcon>
-                    New Card
-                </Button> */}
+                <FormTriggerFlashcards>
+                    <Button as="div" variation="subtleWhite" size="tiny">
+                        <ButtonIcon
+                            otherClasses="w-9 h-9 text-picton-blue-950"
+                            hoverNone="true"
+                            as="div"
+                        >
+                            <PiStackPlusThin></PiStackPlusThin>
+                        </ButtonIcon>
+                        New Card
+                    </Button>
+                </FormTriggerFlashcards>
 
                 <Modal.Open opens="deleteAllDecks">
                     <Button as="div" variation="danger" size="tiny">
