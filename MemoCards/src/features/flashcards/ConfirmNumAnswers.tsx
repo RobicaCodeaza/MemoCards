@@ -1,38 +1,64 @@
 import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
-import Heading from '@/ui/Heading'
 import Input from '@/ui/Input'
-import FormTriggerFlashcards from './FormTriggerFlashcards'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
+import {
+    FieldError,
+    FieldErrors,
+    SubmitErrorHandler,
+    useForm,
+    type SubmitHandler,
+} from 'react-hook-form'
+import toast from 'react-hot-toast'
 
-type ConfirmAnswersProps = {
-    onCloseModal?: () => void
+type FieldValuesType = {
+    numAnswers: number
 }
 
-type FormFieldsType = { numAnswers: number }
+type ConfirmNumAnswersProps = {
+    setNumAnswers: Dispatch<SetStateAction<number>>
+}
 
-function ConfirmAnswers({ onCloseModal }: ConfirmAnswersProps) {
-    const { handleSubmit, register, formState } = useForm<FormFieldsType>()
+function ConfirmNumAnswers({ setNumAnswers }: ConfirmNumAnswersProps) {
+    const { register, handleSubmit, formState, reset } =
+        useForm<FieldValuesType>()
     const { errors } = formState
-    const [numAnswers, setNumAnswers] = useState<number>(1)
 
-    const onSubmit: SubmitHandler<FormFieldsType> = (data) => {
+    const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
         setNumAnswers(data.numAnswers)
-        onCloseModal?.()
+        reset()
     }
-    function handleClick() {
-        onCloseModal?.()
+    const onError: SubmitErrorHandler<FieldError> = () => {
+        toast.error('Error in completing fields.')
     }
 
     return (
-        <div className="flex max-w-[75rem] flex-col gap-6">
-            <p className=" text-mako-grey-500 ">
-                How many answers do you expect to have your question?
-            </p>
-        </div>
+        <Form onSubmit={handleSubmit(onSubmit, onError)} variation="regular">
+            <FormRow
+                label="number of answers"
+                error={errors?.numAnswers?.message}
+            >
+                <Input
+                    type="number"
+                    id="numAnswers"
+                    placeholder="ex: 1"
+                    {...register('numAnswers', {
+                        required: 'This field is required',
+                    })}
+                ></Input>
+            </FormRow>
+
+            <div className="flex justify-end gap-5">
+                <Button variation="subtleWhite" size="small">
+                    Cancel
+                </Button>
+                <Button variation="simplePrimary" size="small">
+                    Next
+                </Button>
+            </div>
+        </Form>
     )
 }
 
-export default ConfirmAnswers
+export default ConfirmNumAnswers
