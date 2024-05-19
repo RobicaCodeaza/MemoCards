@@ -24,6 +24,7 @@ function ConfirmNumAnswers({ setNumAnswers }: ConfirmNumAnswersProps) {
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
+    console.log('Entered trigger')
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
         setNumAnswers(data.numAnswers)

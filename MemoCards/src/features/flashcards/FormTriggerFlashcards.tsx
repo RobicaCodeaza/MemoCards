@@ -19,16 +19,14 @@ import ButtonIcon from '../../ui/ButtonIcon.tsx'
 import CreateCardForm from './CreateCardForm.tsx'
 import ConfirmNumAnswers from './ConfirmNumAnswers.tsx'
 
-type FormTypeFieldsType = { numAnswers: number }
-
 function FormTriggerFlashcards({ children }: PropsWithChildren) {
     const close = useRef(null)
 
     const [numAnswers, setNumAnswers] = useState<number>(0)
     function resetNumAnswers() {
+        console.log('trigger ')
         setNumAnswers(0)
     }
-
     return (
         <Drawer>
             <DrawerTrigger>
@@ -47,6 +45,7 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
                         Create a new card
                     </DrawerTitle>
                 </DrawerHeader>
+                {numAnswers === 0 && console.log('trigger content')}
                 {numAnswers === 0 && (
                     <ConfirmNumAnswers
                         setNumAnswers={setNumAnswers}

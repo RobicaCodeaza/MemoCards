@@ -7,8 +7,8 @@ import Button from '@/ui/Button'
 import CreateDeckForm from './CreateDeckForm'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteAllDecks } from './useDeleteAllDecks'
-import ConfirmAnswers from '../flashcards/ConfirmNumAnswers'
 import FormTriggerFlashcards from '@/features/flashcards/FormTriggerFlashcards'
+import { IoCloseOutline } from 'react-icons/io5'
 
 function DecksModifiers() {
     const { isDeletingAll, deleteAllDecks } = useDeleteAllDecks()
@@ -32,18 +32,16 @@ function DecksModifiers() {
                     <CreateDeckForm deckToEdit={undefined}></CreateDeckForm>
                 </Modal.Window>
 
-                <FormTriggerFlashcards>
-                    <Button as="div" variation="subtleWhite" size="tiny">
-                        <ButtonIcon
-                            otherClasses="w-9 h-9 text-picton-blue-950"
-                            hoverNone="true"
-                            as="div"
-                        >
-                            <PiStackPlusThin></PiStackPlusThin>
-                        </ButtonIcon>
-                        New Card
-                    </Button>
-                </FormTriggerFlashcards>
+                {/* <Button as="div" variation="subtleWhite" size="tiny">
+                    <ButtonIcon
+                        otherClasses="w-9 h-9 text-picton-blue-950"
+                        hoverNone="true"
+                        as="div"
+                    >
+                        <IoCloseOutline></IoCloseOutline>
+                    </ButtonIcon>
+                    New Card
+                </Button> */}
 
                 <Modal.Open opens="deleteAllDecks">
                     <Button as="div" variation="danger" size="tiny">
