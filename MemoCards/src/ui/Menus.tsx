@@ -9,6 +9,8 @@ import {
     type ReactNode,
     type ReactElement,
     LegacyRef,
+    ElementType,
+    ComponentPropsWithoutRef,
 } from 'react'
 import { createContext } from 'react'
 import { createPortal } from 'react-dom'
@@ -70,7 +72,7 @@ function Toggle({ id }: ToggleProps) {
     const { openId, open, close, setPosition } = useContext(MenusContext)!
 
     function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        // e.stopPropagation()
+        e.stopPropagation()
 
         if (!e) return
 
@@ -104,7 +106,7 @@ type ListProps = {
 
 function List({ id, children }: ListProps) {
     const { openId, position, close } = useContext(MenusContext)!
-    const ref = useOutsideClick(close, true) as LegacyRef<HTMLUListElement>
+    const ref = useOutsideClick(close, false) as LegacyRef<HTMLUListElement>
 
     if (openId !== id) return
 
@@ -112,7 +114,7 @@ function List({ id, children }: ListProps) {
         <ul
             className={`fixed rounded-sm bg-picton-blue-100 shadow-sm`}
             style={{ top: `${position.y}px`, right: `${position.x}px` }}
-            ref={ref}
+            // ref={ref}
         >
             {children}
         </ul>,
@@ -120,28 +122,36 @@ function List({ id, children }: ListProps) {
     )
 }
 
-type ButtonProps<T> = {
+type ButtonProps<T extends ElementType> = {
     children: ReactNode
     icon: ReactElement
-    onClick?: () => T
-}
-function Button<T>({ children, onClick, icon }: ButtonProps<T>) {
+    as?: T
+    onClick?: () => void
+} & ComponentPropsWithoutRef<T>
+function Button<T extends ElementType>({
+    children,
+    onClick,
+    icon,
+    as,
+    ...otherProps
+}: ButtonProps<T>) {
     const { close } = useContext(MenusContext)!
 
     function handlerButton() {
         if (onClick) onClick()
-        close()
+        // close()
     }
+    const Component = as ?? 'button'
 
     return (
         <li>
-            <button
+            <Component
                 className="items-left flex w-full items-center gap-2 rounded-md border-none bg-none px-5 py-3 text-[1.4rem] hover:bg-picton-blue-200"
                 onClick={handlerButton}
             >
                 {icon}
                 <span>{children}</span>
-            </button>
+            </Component>
         </li>
     )
 }
