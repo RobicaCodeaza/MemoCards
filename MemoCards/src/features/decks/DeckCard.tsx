@@ -8,6 +8,10 @@ import CreateDeckForm from './CreateDeckForm'
 import { Tables } from '../../types/database.types'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteDeck } from './useDeleteDeck'
+import { PiStackPlusThin } from 'react-icons/pi'
+import FormTriggerFlashcards from '../flashcards/FormTriggerFlashcards'
+import ButtonIcon from '@/ui/ButtonIcon'
+import Button from '@/ui/Button'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>
@@ -45,12 +49,22 @@ function DeckCard({ deck }: DeckCardProps) {
                         <Menus.Toggle id={1}></Menus.Toggle>
                         <Menus.List id={1}>
                             <Menus.Button
+                                as="div"
                                 icon={
-                                    <IoIosAdd className="h-8 w-8 text-chateau-green-600"></IoIosAdd>
+                                    <PiStackPlusThin className="h-8 w-8 text-chateau-green-600"></PiStackPlusThin>
                                 }
                             >
-                                Add new card
+                                <FormTriggerFlashcards>
+                                    <Button
+                                        as="div"
+                                        variation="subtleWhite"
+                                        size="small"
+                                    >
+                                        El
+                                    </Button>
+                                </FormTriggerFlashcards>
                             </Menus.Button>
+
                             <Modal.Open opens="editDeck">
                                 <Menus.Button
                                     icon={
