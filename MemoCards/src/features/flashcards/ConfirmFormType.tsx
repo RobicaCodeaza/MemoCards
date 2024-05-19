@@ -4,9 +4,8 @@ import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
 import { Dispatch, SetStateAction } from 'react'
 import {
-    FieldError,
-    FieldErrors,
-    SubmitErrorHandler,
+    type FieldError,
+    type SubmitErrorHandler,
     useForm,
     type SubmitHandler,
 } from 'react-hook-form'
@@ -16,15 +15,14 @@ type FieldValuesType = {
     numAnswers: number
 }
 
-type ConfirmNumAnswersProps = {
+type ConfirmFormTypeProps = {
     setNumAnswers: Dispatch<SetStateAction<number>>
 }
 
-function ConfirmNumAnswers({ setNumAnswers }: ConfirmNumAnswersProps) {
+function ConfirmFormType({ setNumAnswers }: ConfirmFormTypeProps) {
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
-    console.log('Entered trigger')
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
         setNumAnswers(data.numAnswers)
@@ -62,4 +60,4 @@ function ConfirmNumAnswers({ setNumAnswers }: ConfirmNumAnswersProps) {
     )
 }
 
-export default ConfirmNumAnswers
+export default ConfirmFormType

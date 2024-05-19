@@ -17,7 +17,7 @@ import {
 } from 'react'
 import ButtonIcon from '../../ui/ButtonIcon.tsx'
 import CreateCardForm from './CreateCardForm.tsx'
-import ConfirmNumAnswers from './ConfirmNumAnswers.tsx'
+import ConfirmFormType from './ConfirmFormType.tsx'
 
 function FormTriggerFlashcards({ children }: PropsWithChildren) {
     const close = useRef(null)
@@ -45,11 +45,10 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
                         Create a new card
                     </DrawerTitle>
                 </DrawerHeader>
-                {numAnswers === 0 && console.log('trigger content')}
                 {numAnswers === 0 && (
-                    <ConfirmNumAnswers
+                    <ConfirmFormType
                         setNumAnswers={setNumAnswers}
-                    ></ConfirmNumAnswers>
+                    ></ConfirmFormType>
                 )}
 
                 {numAnswers > 0 && (
