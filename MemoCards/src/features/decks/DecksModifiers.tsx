@@ -7,7 +7,7 @@ import Button from '@/ui/Button'
 import CreateDeckForm from './CreateDeckForm'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteAllDecks } from './useDeleteAllDecks'
-import FormTrigger from '@/ui/FormTrigger'
+import FormTrigger from '@/features/flashcards/FormTrigger'
 
 function DecksModifiers() {
     const { isDeletingAll, deleteAllDecks } = useDeleteAllDecks()

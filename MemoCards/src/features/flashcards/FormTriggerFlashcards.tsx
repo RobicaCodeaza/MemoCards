@@ -17,14 +17,14 @@ import { Tables } from '@/types/database.types'
 
 import { IoCloseOutline } from 'react-icons/io5'
 
-import FormRow from './FormRow.tsx'
-import Form from './Form.tsx'
+import FormRow from '../../ui/FormRow.tsx'
+import Form from '../../ui/Form.tsx'
 import toast from 'react-hot-toast'
 import { type PropsWithChildren, useRef } from 'react'
-import ButtonIcon from './ButtonIcon.tsx'
-import Input from './Input.tsx'
-import Button from './Button.tsx'
-import Select from './Select.tsx'
+import ButtonIcon from '../../ui/ButtonIcon.tsx'
+import Input from '../../ui/Input.tsx'
+import Button from '../../ui/Button.tsx'
+import Select from '../../ui/Select.tsx'
 
 type Answer = {
     answer: string
@@ -37,7 +37,7 @@ type FormTypes = {
     correctAnswer: string
 }
 
-function FormTrigger({ children }: PropsWithChildren) {
+function FormTriggerFlashcards({ children }: PropsWithChildren) {
     const { register, handleSubmit, formState } = useForm<FormTypes>()
     const close = useRef(null)
 
@@ -149,4 +149,4 @@ function FormTrigger({ children }: PropsWithChildren) {
     )
 }
 
-export default FormTrigger
+export default FormTriggerFlashcards

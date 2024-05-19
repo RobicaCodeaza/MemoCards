@@ -1,11 +1,21 @@
-import React, { ReactNode, type ReactElement } from 'react'
+import React, {
+    ComponentPropsWithoutRef,
+    ReactNode,
+    type ReactElement,
+} from 'react'
 
 type FormRowProps = {
     children: ReactElement[] | ReactElement
     label?: string
     error?: string
-}
-function FormRow({ children, label, error }: FormRowProps) {
+} & ComponentPropsWithoutRef<'div'>
+function FormRow({
+    children,
+    label,
+    error,
+    className,
+    ...otherProps
+}: FormRowProps) {
     function isReactElementWithId(
         node: ReactElement
     ): node is ReactElement<{ id: string }> {
@@ -19,7 +29,7 @@ function FormRow({ children, label, error }: FormRowProps) {
 
     return (
         <div
-            className={`flex flex-col items-center justify-center  gap-5   border-b border-mako-grey-100 py-4 has-[button]:flex   has-[button]:flex-row  has-[button]:justify-end has-[button]:gap-4 has-[button]:border-none  phone:grid phone:grid-cols-[24rem_1fr_1.5fr]    phone:gap-6 tab-port:gap-8   tab-land:gap-10`}
+            className={`flex flex-col items-center justify-center  gap-5   border-b border-mako-grey-100 py-4 has-[button]:flex   has-[button]:flex-row  has-[button]:justify-end has-[button]:gap-4 has-[button]:border-none  phone:grid phone:grid-cols-[24rem_1fr_1.5fr]    phone:gap-6 tab-port:gap-8   tab-land:gap-10 ${className}`}
             style={{}}
         >
             {React.Children.map(children, (child) => {
