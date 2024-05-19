@@ -6,17 +6,17 @@ import {
     ElementType,
 } from 'react'
 
-type ButtonIconProps = {
+type ButtonIconProps<T extends ElementType> = {
     children: ReactNode
     otherClasses?: string
     onClick?: () => void
     positionAlign?: string
     positionJustify?: string
     hoverNone?: 'true'
-    as?: ElementType
-} & ComponentPropsWithoutRef<ElementType>
+    as?: T
+} & ComponentPropsWithoutRef<T>
 
-function ButtonIcon({
+function ButtonIcon<T extends ElementType>({
     children,
     onClick,
     otherClasses,
@@ -25,7 +25,7 @@ function ButtonIcon({
     hoverNone,
     as,
     ...props
-}: ButtonIconProps) {
+}: ButtonIconProps<T>) {
     const Component = as ?? 'button'
 
     return (

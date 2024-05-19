@@ -9,13 +9,7 @@ type FormRowProps = {
     label?: string
     error?: string
 } & ComponentPropsWithoutRef<'div'>
-function FormRow({
-    children,
-    label,
-    error,
-    className,
-    ...otherProps
-}: FormRowProps) {
+function FormRow({ children, label, error, className }: FormRowProps) {
     function isReactElementWithId(
         node: ReactElement
     ): node is ReactElement<{ id: string }> {

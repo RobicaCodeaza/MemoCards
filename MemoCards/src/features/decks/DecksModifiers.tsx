@@ -7,7 +7,6 @@ import Button from '@/ui/Button'
 import CreateDeckForm from './CreateDeckForm'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteAllDecks } from './useDeleteAllDecks'
-import FormTrigger from '@/features/flashcards/FormTriggerFlashcards'
 import ConfirmAnswers from '../flashcards/ConfirmNumAnswers'
 import FormTriggerFlashcards from '@/features/flashcards/FormTriggerFlashcards'
 
@@ -57,10 +56,6 @@ function DecksModifiers() {
                         Delete All Decks
                     </Button>
                 </Modal.Open>
-
-                <Modal.Window name="addCard" windowTitle="Create new card">
-                    <ConfirmAnswers></ConfirmAnswers>
-                </Modal.Window>
 
                 <Modal.Window name="deleteAllDecks">
                     <ConfirmDelete
