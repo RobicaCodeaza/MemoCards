@@ -40,7 +40,11 @@ export async function updateUser(updateData: UpdateData) {
     })
     if (error) throw new Error(error.message)
 
-    if ('password' in updateData) return data?.user
+    if (
+        'password' in updateData ||
+        ('data' in updateData && !updateData.data.avatar)
+    )
+        return data?.user
 
     //Updating Storage for Avatars
     const fileName = `avatar-${data.user?.id}-${Math.random()}`
