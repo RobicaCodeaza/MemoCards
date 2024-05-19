@@ -20,7 +20,13 @@ import { IoCloseOutline } from 'react-icons/io5'
 import FormRow from '../../ui/FormRow.tsx'
 import Form from '../../ui/Form.tsx'
 import toast from 'react-hot-toast'
-import { type PropsWithChildren, useRef } from 'react'
+import {
+    type PropsWithChildren,
+    useRef,
+    useState,
+    cloneElement,
+    ReactElement,
+} from 'react'
 import ButtonIcon from '../../ui/ButtonIcon.tsx'
 import Input from '../../ui/Input.tsx'
 import Button from '../../ui/Button.tsx'
@@ -37,12 +43,27 @@ type FormTypes = {
     correctAnswer: string
 }
 
-function FormTriggerFlashcards({ children }: PropsWithChildren) {
-    const { register, handleSubmit, formState } = useForm<FormTypes>()
-    const close = useRef(null)
+type FormTypeFieldsType = { numAnswers: number }
 
+function FormTriggerFlashcards({ children }: PropsWithChildren) {
+    const { register, handleSubmit, formState, reset } = useForm<
+        FormTypes & FormTypeFieldsType
+    >()
+    const close = useRef(null)
     const { errors } = formState
-    const onSubmit: SubmitHandler<FormTypes> = (data) => {
+
+    const [numAnswers, setNumAnswers] = useState<number>(0)
+    function resetNumAnswers() {
+        setNumAnswers(0)
+        reset()
+    }
+
+    const onSubmitFormType: SubmitHandler<FormTypeFieldsType> = (data) => {
+        setNumAnswers(data.numAnswers)
+        console.log(data.numAnswers)
+    }
+
+    const onSubmitHandler: SubmitHandler<FormTypes> = (data) => {
         console.log(data)
     }
     const onError: SubmitErrorHandler<FieldError> = () => {
@@ -51,8 +72,12 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
 
     return (
         <Drawer>
-            <DrawerTrigger>{children}</DrawerTrigger>
-            <DrawerContent className="tab-port:px-30 mx-auto flex flex-col   justify-items-center bg-picton-blue-50   px-10 py-5 phone:w-[90%] phone:px-24  phone:py-16 tab-port:w-[75%] tab-port:py-12 tab-land:w-[60%] tab-land:px-36 tab-land:py-16 particular-small-laptop:w-1/2 particular-small-laptop:px-44 particular-small-laptop:py-20">
+            <DrawerTrigger>
+                {cloneElement(children as ReactElement, {
+                    handleClick: resetNumAnswers,
+                })}
+            </DrawerTrigger>
+            <DrawerContent className="tab-port:px-30 mx-auto flex flex-col   justify-items-center bg-picton-blue-50   px-10 py-5  phone:px-24  phone:py-16 tab-port:py-12  tab-land:px-36 tab-land:py-16 particular-small-laptop:w-2/3 particular-small-laptop:px-44 particular-small-laptop:py-20">
                 <DrawerClose ref={close} className="absolute  right-6 top-6">
                     <ButtonIcon color={'#626262'}>
                         <IoCloseOutline></IoCloseOutline>
@@ -62,32 +87,41 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
                     <DrawerTitle className="mb-10 ml-auto mr-auto text-[2.4rem] font-medium text-picton-blue-900">
                         Create a new card
                     </DrawerTitle>
-                    {/* <DrawerDescription className="text-greyDark text-center text-[14px]  sm:text-[16px] md:text-[18px] ">
-                        Fie ca doresti sa vorbim despre serviciile oferite sau
-                        pentru alte sugestii, dorim sa-ti auzim opinia.
-                    </DrawerDescription> */}
                 </DrawerHeader>
 
-                <div className="flex flex-col gap-10">
-                    <Form variation="regular">
+                {numAnswers === 0 && (
+                    <Form
+                        onSubmit={handleSubmit(onSubmitFormType)}
+                        variation="modal"
+                    >
                         <FormRow
-                            label="Email"
-                            error={errors?.numberAnswers?.message}
+                            label="number of answers"
+                            error={errors.numAnswers?.message}
                         >
                             <Input
-                                placeholder="a.Correct answer"
-                                type="text"
-                                id="numberAnswers"
-                                {...register('numberAnswers', {
+                                type="number"
+                                id="numAnswers"
+                                placeholder="ex: 1"
+                                {...register('numAnswers', {
                                     required: 'This field is required',
                                 })}
-                            />
+                            ></Input>
                         </FormRow>
-                    </Form>
 
+                        <div className="flex justify-end gap-5">
+                            <Button variation="subtleWhite" size="small">
+                                Cancel
+                            </Button>
+                            <Button variation="simplePrimary" size="small">
+                                Next
+                            </Button>
+                        </div>
+                    </Form>
+                )}
+                {numAnswers > 0 && (
                     <Form
                         variation="regular"
-                        onSubmit={handleSubmit(onSubmit, onError)}
+                        onSubmit={handleSubmit(onSubmitHandler, onError)}
                     >
                         {/* <DrawerFooter> */}
                         <FormRow
@@ -104,7 +138,7 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
                             />
                         </FormRow>
 
-                        <FormRow
+                        {/* <FormRow
                             label="Num of answers(optional)"
                             error={errors?.numberAnswers?.message}
                         >
@@ -116,14 +150,23 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
                                 //     required: 'This field is required',
                                 // })}
                             />
-                        </FormRow>
+                        </FormRow> */}
 
-                        <FormRow label="Email" error={errors?.answers?.message}>
-                            <Select
-                                value="smth"
-                                options={[{ value: 'smth', label: 'smth' }]}
-                            />
-                        </FormRow>
+                        {Array.from({ length: numAnswers }, (_, index) => (
+                            <FormRow
+                                label={`Answer - ${index + 1}`}
+                                error={errors?.answers?.message}
+                                key={index}
+                            >
+                                <Input
+                                    type="text"
+                                    id="answer"
+                                    {...register('answer', {
+                                        required: 'This field is required',
+                                    })}
+                                ></Input>
+                            </FormRow>
+                        ))}
 
                         <div className="flex justify-between gap-6">
                             <Button
@@ -143,7 +186,7 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
                         </div>
                         {/* </DrawerFooter> */}
                     </Form>
-                </div>
+                )}
             </DrawerContent>
         </Drawer>
     )
