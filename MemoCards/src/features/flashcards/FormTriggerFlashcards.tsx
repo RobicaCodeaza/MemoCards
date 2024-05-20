@@ -25,6 +25,7 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
     const [numAnswers, setNumAnswers] = useState<number>(0)
     const [deckId, setDeckId] = useState<number>(-1)
     function resetNumAnswers() {
+        console.log('trigger ')
         setNumAnswers(0)
     }
     return (
@@ -48,6 +49,7 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
                 {numAnswers === 0 && (
                     <ConfirmFormType
                         setDeckId={setDeckId}
+
                         setNumAnswers={setNumAnswers}
                     ></ConfirmFormType>
                 )}
