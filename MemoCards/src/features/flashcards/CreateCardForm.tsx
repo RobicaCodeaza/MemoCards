@@ -25,7 +25,7 @@ function CreateCardForm({
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
-    console.log('Entered trigger')
+    console.log(deckId)
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
         reset()
