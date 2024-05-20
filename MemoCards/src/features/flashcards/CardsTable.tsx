@@ -32,12 +32,7 @@ function CardsTable() {
                 <Table.Body
                     data={cards}
                     render={(card, index) => (
-                        <CardRow
-                            index={index}
-                            itemsLength={cards.length}
-                            key={card.id}
-                            card={card}
-                        />
+                        <CardRow index={index} key={card.id} card={card} />
                     )}
                 />
                 <Table.Footer>
