@@ -9,21 +9,55 @@ import {
     type FieldError,
 } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { useCreateDeck } from './useCreateCard'
+import { useEditCard } from './useEditCard'
+import { type UserType } from '@/ui/ProtectedRoute'
+import { useLocalStorageState } from '@/hooks/useLocalStorageState'
+import { Tables } from '@/types/database.types'
 type FieldValuesType = {
     question: string
     numberAnswers: number
     answer: string
-    correctAnswer: string
+    correctAnswer: number
 }
+type CreateCardFormProps = {
+    cardToEdit: Tables<'Card'> | undefined
+    numAnswers: number
+    deckId: number
+}
+
 function CreateCardForm({
     numAnswers,
     deckId,
-}: {
-    numAnswers: number
-    deckId: number
-}) {
+    cardToEdit,
+}: CreateCardFormProps) {
+    //Verifying if it is editing session or creating session
+    const { id: editId, ...editValues } = cardToEdit ?? {}
+    const isEditingSession = Boolean(editId)
+
+    const { isCreating, createCard } = useCreateDeck()
+    const { isUpdating, updateCard } = useEditCard()
+    const isWorking = isCreating ?? isUpdating
+
+    //Getting User_id for the form creation of an object
+    const [user, setUser] = useLocalStorageState<UserType>(
+        {
+            user_id: '',
+            user_provider: '',
+        },
+        'user'
+    )
+
     const { register, handleSubmit, formState, reset } =
-        useForm<FieldValuesType>()
+        useForm<FieldValuesType>({
+            defaultValues:
+                isEditingSession && cardToEdit
+                    ? {
+                          question: cardToEdit.question,
+                          correctAnswer: cardToEdit.correctAnswer,
+                      }
+                    : undefined,
+        })
     const { errors } = formState
     console.log(deckId)
 
@@ -48,21 +82,40 @@ function CreateCardForm({
                 />
             </FormRow>
 
-            {Array.from({ length: numAnswers }, (_, index) => (
-                <FormRow
-                    label={`Answer - ${index + 1}`}
-                    error={errors?.answer?.message}
-                    key={index}
-                >
-                    <Input
-                        type="text"
-                        id="answer"
-                        {...register('answer', {
-                            required: 'This field is required',
-                        })}
-                    ></Input>
-                </FormRow>
-            ))}
+            {numAnswers > 1 &&
+                Array.from({ length: numAnswers }, (_, index) => (
+                    <FormRow
+                        label={`Answer - ${index + 1}`}
+                        error={errors?.answer?.message}
+                        key={index}
+                    >
+                        <Input
+                            type="text"
+                            id="answer"
+                            defaultValue={
+                                isEditingSession
+                                    ? cardToEdit?.answers?.[index]
+                                    : ''
+                            }
+                            {...register(`answer`, {
+                                required: 'This field is required',
+                            })}
+                        ></Input>
+                    </FormRow>
+                ))}
+
+            <FormRow
+                label={`Correct answer`}
+                error={errors?.correctAnswer?.message}
+            >
+                <Input
+                    type="number"
+                    id="correctAnswer"
+                    {...register('correctAnswer', {
+                        required: 'This field is required',
+                    })}
+                ></Input>
+            </FormRow>
 
             <div className="flex justify-between gap-6">
                 <Button type="reset" variation="subtleWhite" size="small">

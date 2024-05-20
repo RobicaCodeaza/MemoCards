@@ -52,7 +52,7 @@ export async function createEditDeck(
 
         // Check if data already exists
         if (existingData && existingData.length > 0) {
-            throw new Error('Data already exists.')
+            throw new Error('Deck with the same lesson already exists.')
         }
         query = supabase.from('Decks').insert([newDeck])
     } else query = supabase.from('Decks').update(newDeck).eq('id', id)

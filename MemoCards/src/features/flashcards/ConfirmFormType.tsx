@@ -2,7 +2,6 @@ import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
-import Select from '@/ui/Select'
 import { Dispatch, SetStateAction } from 'react'
 import {
     type FieldError,
@@ -59,13 +58,31 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
     if (!decks) return
 
     const selectOptionsChapter = decks.map((deck) => {
-        return { value: deck.chapter, label: deck.chapter }
+        return {
+            value: deck.chapter,
+            label: deck.chapter
+                .split(' ')
+                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1, -1))
+                .join(' '),
+        }
     })
     const selectOptionsSubChapter = decks.map((deck) => {
-        return { value: deck.subchapter, label: deck.subchapter }
+        return {
+            value: deck.subchapter,
+            label: deck.subchapter
+                .split(' ')
+                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1, -1))
+                .join(' '),
+        }
     })
     const selectOptionsLesson = decks.map((deck) => {
-        return { value: deck.lesson, label: deck.lesson }
+        return {
+            value: deck.lesson,
+            label: deck.lesson
+                .split(' ')
+                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1, -1))
+                .join(' '),
+        }
     })
 
     if (isLoading) return <Spinner></Spinner>
