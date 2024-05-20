@@ -16,13 +16,13 @@ import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 import { UserType } from '@/ui/ProtectedRoute'
 
 type CreateDeckFormProps = {
-    deckToEdit: Tables<'Decks'> | undefined
+    deckToEdit: Tables<'Decks'>
     onCloseModal?: () => void
 }
 
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     //Defining if we deal with an edit or a create
-    const { id: editId, ...editValues } = deckToEdit ?? {}
+    const { id: editId, ...editValues } = deckToEdit
     const isEditingSession = Boolean(editId)
 
     //Handling Create || Edit Deck
@@ -54,7 +54,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
 
         if (isEditingSession)
             updateDeck(
-                { newData: data, id: editId! },
+                { newData: data, id: editId },
                 {
                     onSuccess: () => {
                         reset()

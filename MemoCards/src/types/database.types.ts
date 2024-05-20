@@ -11,7 +11,7 @@ export type Database = {
     Tables: {
       Card: {
         Row: {
-          answers: string[] | null
+          answers: string[]
           correctAnswer: number
           deckId: number | null
           id: number
@@ -19,7 +19,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          answers?: string[] | null
+          answers: string[]
           correctAnswer?: number
           deckId?: number | null
           id?: number
@@ -27,7 +27,7 @@ export type Database = {
           user_id: string
         }
         Update: {
-          answers?: string[] | null
+          answers?: string[]
           correctAnswer?: number
           deckId?: number | null
           id?: number
