@@ -14,7 +14,6 @@ function SortBy({ options }: SortByProps) {
     function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
         searchParams.set('sortBy', e.target.value)
         setSearchParams(searchParams)
-        console.log(searchParams.get('sortBy'))
     }
 
     return (

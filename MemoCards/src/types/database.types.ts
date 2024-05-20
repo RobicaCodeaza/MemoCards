@@ -12,27 +12,27 @@ export type Database = {
       Card: {
         Row: {
           answers: string[] | null
-          correctAnswer: number | null
+          correctAnswer: number
           deckId: number | null
           id: number
           question: string
-          user_id: number | null
+          user_id: string
         }
         Insert: {
           answers?: string[] | null
-          correctAnswer?: number | null
+          correctAnswer?: number
           deckId?: number | null
           id?: number
           question: string
-          user_id?: number | null
+          user_id: string
         }
         Update: {
           answers?: string[] | null
-          correctAnswer?: number | null
+          correctAnswer?: number
           deckId?: number | null
           id?: number
           question?: string
-          user_id?: number | null
+          user_id?: string
         }
         Relationships: [
           {
