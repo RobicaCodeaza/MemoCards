@@ -62,7 +62,7 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
             value: deck.chapter,
             label: deck.chapter
                 .split(' ')
-                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1, -1))
+                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1))
                 .join(' '),
         }
     })
@@ -71,7 +71,7 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
             value: deck.subchapter,
             label: deck.subchapter
                 .split(' ')
-                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1, -1))
+                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1))
                 .join(' '),
         }
     })
@@ -80,7 +80,7 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
             value: deck.lesson,
             label: deck.lesson
                 .split(' ')
-                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1, -1))
+                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1))
                 .join(' '),
         }
     })
@@ -139,7 +139,6 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
                     disabled={isGettingDeck}
                     id="lesson"
                     options={selectOptionsLesson}
-                    value={''}
                     {...register('lesson', {
                         required: 'This field is required',
                     })}
