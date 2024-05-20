@@ -43,11 +43,10 @@ function Header({ children }: HeaderProps) {
 export type RowProps = {
     children: ReactNode
     index: number
-    itemsLength: number
     type: 'question' | 'answer'
 }
 
-function Row({ children, index, itemsLength, type }: RowProps) {
+function Row({ children, index, type }: RowProps) {
     const { columns } = useContext(TableContext)!
     console.log(index === 0)
     if (type === 'question')

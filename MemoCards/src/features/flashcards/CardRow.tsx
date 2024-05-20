@@ -3,23 +3,17 @@ import Table, { RowProps } from './TableFlashcards'
 
 type CardProps = {
     card: Tables<'Card'>
-    itemsLength: number
     index: number
 }
 
-function CardRow({ card, itemsLength, index }: CardProps) {
+function CardRow({ card, index }: CardProps) {
     return (
         <>
-            <Table.Row type="question" index={index} itemsLength={itemsLength}>
+            <Table.Row type="question" index={index}>
                 {card.question}
             </Table.Row>
             {card.answers.map((answer, index) => (
-                <Table.Row
-                    key={answer}
-                    type="answer"
-                    index={index}
-                    itemsLength={itemsLength}
-                >
+                <Table.Row key={answer} type="answer" index={index}>
                     {answer}
                 </Table.Row>
             ))}
