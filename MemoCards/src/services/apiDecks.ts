@@ -14,6 +14,25 @@ export async function getDecks(userId: string) {
     return data
 }
 
+export async function getDeckIdForCard(
+    chapter: string,
+    subChapter: string,
+    lesson: string
+) {
+    console.log(chapter, subChapter, lesson)
+    const { data, error } = await supabase
+        .from('Decks')
+        .select('id')
+        .eq('chapter', chapter)
+        .eq('subchapter', subChapter)
+        .eq('lesson', lesson)
+
+    if (error ?? data?.length === 0) {
+        throw new Error("Couldn't find a deck with the data provided.")
+    }
+    return data?.[0].id
+}
+
 export async function createEditDeck(
     newDeck: Tables<'Decks'>,
     id: number | null

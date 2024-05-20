@@ -49,9 +49,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
 
     const onSubmit: SubmitHandler<Tables<'Decks'>> = (data) => {
         data.chapter = data.chapter.toLowerCase()
-        data.subchapter =
-            data.subchapter.slice(0, 1).toUpperCase() +
-            data.subchapter.slice(1, -1).toLowerCase()
+        data.subchapter = data.subchapter.toLowerCase()
         data.lesson = data.lesson.toLowerCase()
 
         if (isEditingSession)

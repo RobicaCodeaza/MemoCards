@@ -1,14 +1,18 @@
-import { type ComponentPropsWithoutRef } from 'react'
+import { forwardRef, type ComponentPropsWithoutRef } from 'react'
 import { OptionsType } from './SortBy'
 
 type SelectProps = {
     options: OptionsType
-    value: string
+    value?: string
 } & ComponentPropsWithoutRef<'select'>
 
-function Select({ options, value, ...otherProps }: SelectProps) {
+const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
+    { options, value, ...otherProps },
+    ref
+) {
     return (
         <select
+            ref={ref}
             className="w-[18.5rem] rounded border border-mako-grey-100 bg-mako-grey-50 px-2 py-4 text-[1.4rem] font-medium shadow-sm phone:px-3 phone:py-5 tab-land:w-auto"
             value={value}
             {...otherProps}
@@ -20,6 +24,6 @@ function Select({ options, value, ...otherProps }: SelectProps) {
             ))}
         </select>
     )
-}
+})
 
 export default Select
