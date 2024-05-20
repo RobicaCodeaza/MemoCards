@@ -2,6 +2,7 @@ import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
+import Select from '@/ui/Select'
 import { Dispatch, SetStateAction } from 'react'
 import {
     type FieldError,
@@ -46,6 +47,18 @@ function ConfirmFormType({ setNumAnswers }: ConfirmFormTypeProps) {
                         required: 'This field is required',
                     })}
                 ></Input>
+            </FormRow>
+
+            <FormRow
+                label="number of answers"
+                error={errors?.numAnswers?.message}
+            >
+                <Select
+                    options=ă
+                    {...register('numAnswers', {
+                        required: 'This field is required',
+                    })}
+                ></Select>
             </FormRow>
 
             <div className="flex justify-end gap-5">
