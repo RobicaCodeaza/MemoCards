@@ -1,6 +1,14 @@
 import { Tables } from '@/types/database.types'
 import supabase from './supabase'
 
+export async function getCards() {
+    const { data: cards, error } = await supabase.from('Card').select('*')
+    if (error) {
+        throw new Error(error.message)
+    }
+    return cards
+}
+
 export async function createEditCard(
     newCard: Tables<'Card'>,
     id: number | null
