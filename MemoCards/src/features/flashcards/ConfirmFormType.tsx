@@ -20,8 +20,7 @@ type FieldValuesType = {
     chapter: string
     subChapter: string
     lesson: string
-
-
+}
 
 type ConfirmFormTypeProps = {
     setNumAnswers: Dispatch<SetStateAction<number>>
@@ -30,7 +29,6 @@ type ConfirmFormTypeProps = {
 
 function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
     const { getDeckIdForCard, isGettingDeck } = useGetDeckIdForCard()
-
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
@@ -48,7 +46,6 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
                 reset()
             },
         })
-
     }
     const onError: SubmitErrorHandler<FieldError> = () => {
         toast.error('Error in completing fields.')
@@ -74,7 +71,6 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
 
     if (isGettingDeck) return <Spinner></Spinner>
 
-
     return (
         <Form onSubmit={handleSubmit(onSubmit, onError)} variation="regular">
             <FormRow
@@ -83,7 +79,6 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
             >
                 <Input
                     disabled={isGettingDeck}
-
                     type="number"
                     id="numAnswers"
                     placeholder="ex: 1"
@@ -92,7 +87,6 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
                     })}
                 ></Input>
             </FormRow>
-
 
             <FormRow
                 label="Select the Chapter"
@@ -133,7 +127,6 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
                     })}
                 ></Select>
             </FormRow>
-
 
             <div className="flex justify-end gap-5">
                 <Button variation="subtleWhite" size="small">
