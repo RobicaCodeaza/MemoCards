@@ -10,27 +10,70 @@ import {
     type SubmitHandler,
 } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { useDecks } from '../decks/useDecks'
+import Select from '@/ui/Select'
+import { useGetDeckIdForCard } from '../decks/useGetDeckIdForCard'
+import Spinner from '@/ui/Spinner'
 
 type FieldValuesType = {
     numAnswers: number
-}
+    chapter: string
+    subChapter: string
+    lesson: string
+
+
 
 type ConfirmFormTypeProps = {
     setNumAnswers: Dispatch<SetStateAction<number>>
+    setDeckId: Dispatch<SetStateAction<number>>
 }
 
-function ConfirmFormType({ setNumAnswers }: ConfirmFormTypeProps) {
+function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
+    const { getDeckIdForCard, isGettingDeck } = useGetDeckIdForCard()
+
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
-        setNumAnswers(data.numAnswers)
-        reset()
+        const dataForGettingCard = {
+            chapter: data.chapter.toLowerCase(),
+            subChapter: data.subChapter.toLowerCase(),
+            lesson: data.lesson.toLowerCase(),
+        }
+        getDeckIdForCard(dataForGettingCard, {
+            onSuccess: (deckId) => {
+                setDeckId(deckId)
+                setNumAnswers(data.numAnswers)
+                reset()
+            },
+        })
+
     }
     const onError: SubmitErrorHandler<FieldError> = () => {
         toast.error('Error in completing fields.')
     }
+
+    const { decks, isLoading } = useDecks()
+
+    //Taking into account if there is no existing deck but deck.length === 0 still allows the component to render
+    //This is the behavior we want for the app
+    if (!decks) return
+
+    const selectOptionsChapter = decks.map((deck) => {
+        return { value: deck.chapter, label: deck.chapter }
+    })
+    const selectOptionsSubChapter = decks.map((deck) => {
+        return { value: deck.subchapter, label: deck.subchapter }
+    })
+    const selectOptionsLesson = decks.map((deck) => {
+        return { value: deck.lesson, label: deck.lesson }
+    })
+
+    if (isLoading) return <Spinner></Spinner>
+
+    if (isGettingDeck) return <Spinner></Spinner>
+
 
     return (
         <Form onSubmit={handleSubmit(onSubmit, onError)} variation="regular">
@@ -39,6 +82,8 @@ function ConfirmFormType({ setNumAnswers }: ConfirmFormTypeProps) {
                 error={errors?.numAnswers?.message}
             >
                 <Input
+                    disabled={isGettingDeck}
+
                     type="number"
                     id="numAnswers"
                     placeholder="ex: 1"
@@ -47,6 +92,48 @@ function ConfirmFormType({ setNumAnswers }: ConfirmFormTypeProps) {
                     })}
                 ></Input>
             </FormRow>
+
+
+            <FormRow
+                label="Select the Chapter"
+                error={errors?.chapter?.message}
+            >
+                <Select
+                    disabled={isGettingDeck}
+                    id="chapter"
+                    options={selectOptionsChapter}
+                    {...register('chapter', {
+                        required: 'This field is required',
+                    })}
+                ></Select>
+            </FormRow>
+
+            <FormRow
+                label="Select the SubChapter"
+                error={errors?.subChapter?.message}
+            >
+                <Select
+                    disabled={isGettingDeck}
+                    id="subChapter"
+                    options={selectOptionsSubChapter}
+                    // value={''}
+                    {...register('subChapter', {
+                        required: 'This field is required',
+                    })}
+                ></Select>
+            </FormRow>
+            <FormRow label="Select the Lesson" error={errors?.lesson?.message}>
+                <Select
+                    disabled={isGettingDeck}
+                    id="lesson"
+                    options={selectOptionsLesson}
+                    value={''}
+                    {...register('lesson', {
+                        required: 'This field is required',
+                    })}
+                ></Select>
+            </FormRow>
+
 
             <div className="flex justify-end gap-5">
                 <Button variation="subtleWhite" size="small">

@@ -15,14 +15,19 @@ type FieldValuesType = {
     answer: string
     correctAnswer: string
 }
-function CreateCardForm({ numAnswers }: { numAnswers: number }) {
+function CreateCardForm({
+    numAnswers,
+    deckId,
+}: {
+    numAnswers: number
+    deckId: number
+}) {
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
     console.log('Entered trigger')
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
-        console.log(data)
         reset()
     }
     const onError: SubmitErrorHandler<FieldError> = () => {
