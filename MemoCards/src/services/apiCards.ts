@@ -1,12 +1,43 @@
 import { Tables } from '@/types/database.types'
 import supabase from './supabase'
 
-export async function getCards() {
-    const { data: cards, error } = await supabase.from('Card').select('*')
+export async function getCards(
+    userId: string,
+    filter: {
+        chapter: { value: string; field: string } | null
+        subchapter: { value: string; field: string } | null
+        lesson: { value: string; field: string } | null
+    }
+) {
+    let query = supabase.from('Decks').select('id').eq('user_id', userId)
+
+    if (filter.chapter !== null)
+        query = query.eq(filter.chapter.field, filter.chapter.value)
+
+    if (filter.subchapter !== null)
+        query = query.eq(filter.subchapter.field, filter.subchapter.value)
+
+    if (filter.lesson !== null)
+        query = query.eq(filter.lesson.field, filter.lesson.value)
+
+    const { data: deck, error } = await query
+    console.log(deck)
+
     if (error) {
         throw new Error(error.message)
     }
-    return cards
+
+    const {
+        data: card,
+        errorGettingCard,
+        count,
+    } = await supabase
+        .from('Card')
+        .select('*', { count: 'exact' })
+        .eq('deckId', deck[0].id)
+    console.log(card)
+
+    return card
 }
 
 export async function createEditCard(
