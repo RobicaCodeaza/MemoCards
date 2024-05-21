@@ -14,6 +14,7 @@ import { useDecks } from '../decks/useDecks'
 import Select from '@/ui/Select'
 import { useGetDeckIdForCard } from '../decks/useGetDeckIdForCard'
 import Spinner from '@/ui/Spinner'
+import { capitalizeHeader } from '@/utils/formatHeaders'
 
 type FieldValuesType = {
     numAnswers: number
@@ -60,28 +61,19 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
     const selectOptionsChapter = decks.map((deck) => {
         return {
             value: deck.chapter,
-            label: deck.chapter
-                .split(' ')
-                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1))
-                .join(' '),
+            label: capitalizeHeader(deck.chapter),
         }
     })
     const selectOptionsSubChapter = decks.map((deck) => {
         return {
             value: deck.subchapter,
-            label: deck.subchapter
-                .split(' ')
-                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1))
-                .join(' '),
+            label: capitalizeHeader(deck.subchapter),
         }
     })
     const selectOptionsLesson = decks.map((deck) => {
         return {
             value: deck.lesson,
-            label: deck.lesson
-                .split(' ')
-                .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1))
-                .join(' '),
+            label: capitalizeHeader(deck.lesson),
         }
     })
 
