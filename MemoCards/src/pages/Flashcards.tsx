@@ -1,3 +1,5 @@
+import DecksModifiers from '@/features/decks/DecksModifiers'
+import DecksTableOperations from '@/features/decks/DecksTableOperations'
 import CardsTable from '@/features/flashcards/CardsTable'
 import Heading from '@/ui/Heading'
 import Row from '@/ui/Row'
@@ -8,10 +10,10 @@ function Flashcards() {
             <Row type="horizontal">
                 <Heading as="h1">Your Cards 🃏</Heading>
             </Row>
-            {/* <Row type="horizontal">
+            <Row type="horizontal">
                 <DecksModifiers></DecksModifiers>
                 <DecksTableOperations></DecksTableOperations>
-            </Row> */}
+            </Row>
             <div className="flex items-center ">
                 <CardsTable></CardsTable>
             </div>

@@ -19,14 +19,11 @@ function CardsTable() {
 
     return (
         <Menus>
-            <Table columns="0.6fr 2fr 2.4fr 1.4fr 1fr 1fr">
+            <Table columns="0.05fr 1fr 0.125fr">
                 <Table.Header>
-                    <div>Cabin</div>
-                    <div>Guest</div>
-                    <div>Dates</div>
-                    <div>Status</div>
-                    <div>Amount</div>
-                    <div></div>
+                    <div className="text-center">Num</div>
+                    <div className="text-center">Text(Question/Content)</div>
+                    <div className="text-center">Correct answer</div>
                 </Table.Header>
 
                 <Table.Body
