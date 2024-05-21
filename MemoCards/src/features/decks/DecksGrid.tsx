@@ -12,7 +12,8 @@ function DecksGrid() {
 
     if (isLoading) return <Spinner></Spinner>
 
-    if (!decks?.length) return <Empty resource="decks"></Empty>
+    if (!decks?.length || decks === undefined)
+        return <Empty resource="decks"></Empty>
 
     // 1.Filter
     const filterValue = searchParams.get('tested') ?? 'all'

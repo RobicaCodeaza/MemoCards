@@ -21,7 +21,7 @@ type FieldValuesType = {
     correctAnswer: number
 }
 type CreateCardFormProps = {
-    cardToEdit: Tables<'Card'>
+    cardToEdit: Tables<'Card'> | undefined
     numAnswers: number
     deckId: number
 }
@@ -35,12 +35,24 @@ function CreateCardForm({
     const { id: editId, ...editValues } = cardToEdit ?? {}
     const isEditingSession = Boolean(editId)
 
+    let editValuesDefined
+    if (
+        'question' in editValues &&
+        'correctAnswer' in editValues &&
+        'answers' in editValues
+    )
+        editValuesDefined = {
+            question: cardToEdit?.question,
+            correctAnswer: cardToEdit?.correctAnswer,
+            answers: cardToEdit?.answers,
+        }
+
     const { isCreating, createCard } = useCreateDeck()
     const { isUpdating, updateCard } = useEditCard()
     const isWorking = isCreating ?? isUpdating
 
     //Getting User_id for the form creation of an object
-    const [user, setUser] = useLocalStorageState<UserType>(
+    const [user, _] = useLocalStorageState<UserType>(
         {
             user_id: '',
             user_provider: '',
@@ -51,13 +63,7 @@ function CreateCardForm({
     const { register, handleSubmit, formState, reset } = useForm<
         Tables<'Card'>
     >({
-        defaultValues: isEditingSession
-            ? {
-                  question: cardToEdit.question,
-                  correctAnswer: cardToEdit.correctAnswer,
-                  answers: cardToEdit.answers,
-              }
-            : undefined,
+        defaultValues: isEditingSession ? editValuesDefined : undefined,
     })
     const { errors } = formState
     console.log(deckId)
@@ -65,7 +71,7 @@ function CreateCardForm({
     const onSubmit: SubmitHandler<Tables<'Card'>> = (data) => {
         if (isEditingSession)
             updateCard(
-                { newData: data, id: editId },
+                { newData: data, id: editId! },
                 {
                     onSuccess: () => {
                         reset()
