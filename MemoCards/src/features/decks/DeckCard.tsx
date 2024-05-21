@@ -7,6 +7,7 @@ import CreateDeckForm from './CreateDeckForm'
 import { Tables } from '../../types/database.types'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteDeck } from './useDeleteDeck'
+import { capitalizeHeader } from '@/utils/formatHeaders'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>
@@ -23,19 +24,19 @@ function DeckCard({ deck }: DeckCardProps) {
                         className=" rounded-xl border border-picton-blue-200 bg-picton-blue-400 p-2 text-center text-[1.6rem] font-medium uppercase leading-[1.25] tracking-tight text-picton-blue-50 "
                         id="chapter"
                     >
-                        {deck.chapter}
+                        {capitalizeHeader(deck.chapter)}
                     </p>
                     <p
                         className="leading[1.5] text-center text-[1.6rem] text-picton-blue-800"
                         id="subchapter "
                     >
-                        {deck.subchapter}
+                        {capitalizeHeader(deck.subchapter)}
                     </p>
                     <p
                         className="rounded-xl border border-picton-blue-400  p-1 text-center text-[1.3rem] font-semibold uppercase tracking-wider text-picton-blue-700"
                         id="lesson "
                     >
-                        {deck.lesson}
+                        {capitalizeHeader(deck.lesson)}
                     </p>
                 </div>
 
