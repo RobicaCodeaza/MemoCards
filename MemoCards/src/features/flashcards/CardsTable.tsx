@@ -7,13 +7,11 @@ import CardRow from './CardRow'
 
 function CardsTable() {
     const { isLoading, cards } = useCards()
-    // console.log(bookings);
 
     if (isLoading) return <Spinner></Spinner>
 
-    if (cards === undefined) return <Empty resource="undefined"></Empty>
-
-    if (!cards?.length) return <Empty resource="cards"></Empty>
+    if (!cards?.length || cards === undefined)
+        return <Empty resource="cards"></Empty>
 
     return (
         <Menus>
