@@ -28,6 +28,7 @@ function CardRow({ card, index }: CardProps) {
                     >
                         {answer}
                     </Answer>
+                    <div></div>
                 </Table.Row>
             ))}
         </>
