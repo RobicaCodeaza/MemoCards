@@ -13,8 +13,6 @@ function CardsTable() {
 
     if (cards === undefined) return <Empty resource="undefined"></Empty>
 
-    console.log(cards)
-
     if (!cards?.length) return <Empty resource="cards"></Empty>
 
     return (

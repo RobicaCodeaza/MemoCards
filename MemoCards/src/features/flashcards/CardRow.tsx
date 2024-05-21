@@ -20,7 +20,7 @@ function CardRow({ card, index }: CardProps) {
                 <CorrectAnswer>{card.correctAnswer}</CorrectAnswer>
             </Table.Row>
             {card.answers.map((answer, index) => (
-                <Table.Row key={answer} type="answer" index={index}>
+                <Table.Row key={index} type="answer" index={index}>
                     <NumberAnswer>{index + 1}</NumberAnswer>
                     <Answer
                         correctAnswer={card.correctAnswer}
