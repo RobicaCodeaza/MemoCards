@@ -23,17 +23,23 @@ type CreateDeckFormProps = {
 
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     //Defining if we deal with an edit or a create
-    const { ...editValues } = deckToEdit
-    const editId = editValues.id
-    const isEditingSession = Boolean(editId)
+    const { id: editId, ...editValues } = deckToEdit ?? {}
 
-    const editValuesCapitalized = {
-        chapter: capitalizeHeader(editValues?.chapter),
+    let editValuesCapitalized
+    if (
+        'chapter' in editValues &&
+        'subchapter' in editValues &&
+        'lesson' in editValues
+    ) {
+        editValuesCapitalized = {
+            chapter: capitalizeHeader(editValues?.chapter),
 
-        subchapter: capitalizeHeader(editValues?.subchapter),
+            subchapter: capitalizeHeader(editValues?.subchapter),
 
-        lesson: capitalizeHeader(editValues?.lesson),
+            lesson: capitalizeHeader(editValues?.lesson),
+        }
     }
+    const isEditingSession = Boolean(editId)
 
     //Handling Create || Edit Deck
     const { isCreating, createDeck } = useCreateDeck()
@@ -41,7 +47,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     const isWorking = isCreating ?? isUpdating
 
     //Getting User_id for the form creation of an object
-    const [user, setUser] = useLocalStorageState<UserType>(
+    const [user, _] = useLocalStorageState<UserType>(
         {
             user_id: '',
             user_provider: '',
@@ -64,7 +70,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
 
         if (isEditingSession)
             updateDeck(
-                { newData: data, id: editId },
+                { newData: data, id: editId! },
                 {
                     onSuccess: () => {
                         reset()
