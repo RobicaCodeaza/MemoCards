@@ -14,6 +14,7 @@ import { useEditDeck } from './useEditDeck'
 import toast from 'react-hot-toast'
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 import { UserType } from '@/ui/ProtectedRoute'
+import { capitalizeHeader } from '@/utils/formatHeaders'
 
 type CreateDeckFormProps = {
     deckToEdit: Tables<'Decks'>
@@ -22,7 +23,15 @@ type CreateDeckFormProps = {
 
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     //Defining if we deal with an edit or a create
-    const { id: editId, ...editValues } = deckToEdit
+    const { id: editId, ...editValues } = deckToEdit ?? {}
+    const editValuesCapitalized = {
+        chapter: capitalizeHeader(editValues.chapter),
+
+        subchapter: capitalizeHeader(editValues.subchapter),
+
+        lesson: capitalizeHeader(editValues.lesson),
+    }
+
     const isEditingSession = Boolean(editId)
 
     //Handling Create || Edit Deck
@@ -43,7 +52,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     const { handleSubmit, register, reset, formState } = useForm<
         Tables<'Decks'>
     >({
-        defaultValues: isEditingSession ? editValues : undefined,
+        defaultValues: isEditingSession ? editValuesCapitalized : undefined,
     })
     const { errors } = formState
 
