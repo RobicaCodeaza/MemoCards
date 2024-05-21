@@ -2,15 +2,16 @@ import Select from '@/ui/Select'
 import { useDecks } from '../decks/useDecks'
 import { capitalizeHeader } from '@/utils/formatHeaders'
 import Spinner from '@/ui/Spinner'
+import Empty from '@/ui/Empty'
 
 function FlaschardsTableOperation() {
     const { decks, isLoading } = useDecks()
 
     //Taking into account if there is no existing deck but deck.length === 0 still allows the component to render
     //This is the behavior we want for the app
-    if (isLoading) <Spinner></Spinner>
+    if (isLoading) return <Spinner></Spinner>
 
-    if (!decks) return
+    if (!decks) return <Empty resource="cards"></Empty>
 
     const selectOptionsChapter = decks.map((deck) => {
         return {
@@ -30,7 +31,6 @@ function FlaschardsTableOperation() {
         value: '*',
         label: 'All - SubChapters',
     })
-
     const selectOptionsLesson = decks.map((deck) => {
         return {
             value: deck.lesson,
