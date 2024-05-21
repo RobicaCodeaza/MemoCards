@@ -20,24 +20,28 @@ export async function getCards(
     if (filter.lesson !== null)
         query = query.eq(filter.lesson.field, filter.lesson.value)
 
-    const { data: deck, error } = await query
-    console.log(deck)
+    const { data: decks, error } = await query
+    console.log('decks', decks)
 
     if (error) {
-        throw new Error(error.message)
+        throw new Error('Could not find cards from this deck.')
     }
 
-    const {
-        data: card,
-        errorGettingCard,
-        count,
-    } = await supabase
-        .from('Card')
-        .select('*', { count: 'exact' })
-        .eq('deckId', deck[0].id)
-    console.log(card)
+    if (decks.length === 0)
+        throw new Error('Could not find cards for this combination.')
+    let queryCards = supabase.from('Card').select('*', { count: 'exact' })
 
-    return card
+    if (decks.length === 1) queryCards = queryCards.eq('deckId', decks[0].id)
+    if (decks.length > 1) {
+        const ids = decks.map((deck) => deck.id)
+        query = query.in('deckId', ids)
+    }
+
+    const { data: card, error: errorGettingCard, count } = await queryCards
+
+    if (errorGettingCard) throw new Error('Could not fetch the card.')
+
+    return { card, count }
 }
 
 export async function createEditCard(
