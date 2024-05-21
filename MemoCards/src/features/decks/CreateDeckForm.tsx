@@ -23,7 +23,6 @@ type CreateDeckFormProps = {
 
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     //Defining if we deal with an edit or a create
-    console.log(deckToEdit)
 
     const { id: editId, ...editValues } = deckToEdit ?? {}
 

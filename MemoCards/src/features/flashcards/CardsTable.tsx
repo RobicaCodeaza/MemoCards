@@ -6,7 +6,7 @@ import Spinner from '@/ui/Spinner'
 import CardRow from './CardRow'
 
 function CardsTable() {
-    const { isLoading, cards } = useCards()
+    const { isLoading, cards, count } = useCards()
 
     if (isLoading) return <Spinner></Spinner>
 
