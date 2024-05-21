@@ -32,12 +32,12 @@ type HeaderProps = {
 function Header({ children }: HeaderProps) {
     const { columns } = useContext(TableContext)!
     return (
-        <h3
+        <div
             className={`grid items-center gap-10 border-b border-mako-grey-100 bg-picton-blue-200 px-10  py-7 font-semibold uppercase tracking-wider text-mako-grey-600 transition-none`}
             style={{ gridTemplateColumns: columns }}
         >
             {children}
-        </h3>
+        </div>
     )
 }
 export type RowProps = {
