@@ -21,7 +21,6 @@ function DeckCard({ deck }: DeckCardProps) {
     console.log(deck)
 
     function handleEditFlashcards() {
-        console.log(deck)
         navigate(
             `/flashcards?chapter=${deck.chapter}&subchapter=${deck.subchapter}&lesson=${deck.lesson}`
         )
@@ -53,8 +52,8 @@ function DeckCard({ deck }: DeckCardProps) {
 
                 <Modal>
                     <Menus.Menu>
-                        <Menus.Toggle id={1}></Menus.Toggle>
-                        <Menus.List id={1}>
+                        <Menus.Toggle id={deck.id}></Menus.Toggle>
+                        <Menus.List id={deck.id}>
                             <Modal.Open opens="editDeck">
                                 <Menus.Button
                                     icon={
