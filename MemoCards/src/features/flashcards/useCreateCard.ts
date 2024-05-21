@@ -11,7 +11,7 @@ export function useCreateDeck() {
         onSuccess: async () => {
             toast.success('Card successfully created.')
             await queryClient.invalidateQueries({
-                queryKey: ['card'],
+                queryKey: ['cards'],
             })
         },
         onError: (err: Error) =>
