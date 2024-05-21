@@ -15,11 +15,7 @@ import { type UserType } from '@/ui/ProtectedRoute'
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 import { Tables } from '@/types/database.types'
 import Spinner from '@/ui/Spinner'
-type FieldValuesType = {
-    question: string
-    answers: { value: string }[]
-    correctAnswer: number
-}
+
 type CreateCardFormProps = {
     cardToEdit: Tables<'Card'> | undefined
     numAnswers: number
@@ -66,7 +62,6 @@ function CreateCardForm({
         defaultValues: isEditingSession ? editValuesDefined : undefined,
     })
     const { errors } = formState
-    console.log(deckId)
 
     const onSubmit: SubmitHandler<Tables<'Card'>> = (data) => {
         if (isEditingSession)
@@ -131,7 +126,7 @@ function CreateCardForm({
             {numAnswers > 1 && (
                 <FormRow
                     label={`Correct answer`}
-                    error={errors?.correctAnswer?.message}
+                    error={errors.correctAnswer?.message}
                 >
                     <Input
                         type="number"
@@ -155,7 +150,6 @@ function CreateCardForm({
                     Cancel
                 </Button>
                 <Button
-                    // onClick={(e) => e.preventDefault()}
                     variation="simplePrimary"
                     size="small"
                     disabled={isWorking}
@@ -163,7 +157,6 @@ function CreateCardForm({
                     Submit
                 </Button>
             </div>
-            {/* </DrawerFooter> */}
         </Form>
     )
 }
