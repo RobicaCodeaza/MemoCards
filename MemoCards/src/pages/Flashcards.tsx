@@ -2,6 +2,7 @@ import DecksModifiers from '@/features/decks/DecksModifiers'
 import DecksTableOperations from '@/features/decks/DecksTableOperations'
 import CardsModifiers from '@/features/flashcards/CardsModifiers'
 import CardsTable from '@/features/flashcards/CardsTable'
+import FlaschardsTableOperation from '@/features/flashcards/FlashcardsTableOperations'
 import Heading from '@/ui/Heading'
 import Row from '@/ui/Row'
 
@@ -13,7 +14,7 @@ function Flashcards() {
             </Row>
             <Row type="horizontal">
                 <CardsModifiers></CardsModifiers>
-                <DecksTableOperations></DecksTableOperations>
+                <FlaschardsTableOperation></FlaschardsTableOperation>
             </Row>
             <div className="flex items-center ">
                 <CardsTable></CardsTable>

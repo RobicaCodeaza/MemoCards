@@ -48,7 +48,6 @@ export type RowProps = {
 
 function Row({ children, index, type }: RowProps) {
     const { columns } = useContext(TableContext)!
-    console.log(index === 0)
     if (type === 'question')
         return (
             <div
