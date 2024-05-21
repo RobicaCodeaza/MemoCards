@@ -42,3 +42,9 @@ export async function createEditCard(
 
     return data
 }
+
+export async function deleteAllCards(userId: string) {
+    const { error } = await supabase.from('Card').delete().eq('user_id', userId)
+
+    if (error) throw new Error(error.message)
+}

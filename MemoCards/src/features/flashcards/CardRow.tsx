@@ -1,10 +1,10 @@
 import { type Tables } from '@/types/database.types'
 import Table from './TableFlashcards'
-import NumberCard from '@/pages/NumberCard'
 import Question from './Question'
 import CorrectAnswer from './CorrectAnswer'
 import NumberAnswer from './NumberAnswer'
 import Answer from './Answer'
+import NumberQuestion from '@/pages/NumberCard'
 
 type CardProps = {
     card: Tables<'Card'>
@@ -15,7 +15,7 @@ function CardRow({ card, index }: CardProps) {
     return (
         <>
             <Table.Row type="question" index={index}>
-                <NumberCard>{index + 1}.</NumberCard>
+                <NumberQuestion>{index + 1}.</NumberQuestion>
                 <Question>{card.question}</Question>
                 <CorrectAnswer>{card.correctAnswer}</CorrectAnswer>
             </Table.Row>
