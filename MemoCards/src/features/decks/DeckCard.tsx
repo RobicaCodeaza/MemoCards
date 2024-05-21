@@ -8,6 +8,7 @@ import { Tables } from '../../types/database.types'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteDeck } from './useDeleteDeck'
 import { capitalizeHeader } from '@/utils/formatHeaders'
+import { useNavigate } from 'react-router-dom'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>
@@ -15,6 +16,13 @@ type DeckCardProps = {
 
 function DeckCard({ deck }: DeckCardProps) {
     const { isDeleting, deleteDeck } = useDeleteDeck()
+    const navigate = useNavigate()
+
+    function handleEditFlashcards() {
+        navigate(
+            `/flashcards?chapter=${deck.chapter}&subchapter=${deck.subchapter}&lesson=${deck.lesson}`
+        )
+    }
 
     return (
         <div className="flex flex-col   rounded-lg border  border-solid border-picton-blue-200  bg-picton-blue-50 px-10 py-10 shadow-lg">
@@ -54,6 +62,7 @@ function DeckCard({ deck }: DeckCardProps) {
                                 </Menus.Button>
                             </Modal.Open>
                             <Menus.Button
+                                onClick={handleEditFlashcards}
                                 icon={
                                     <CiEdit className="h-8 w-8 text-picton-blue-600"></CiEdit>
                                 }

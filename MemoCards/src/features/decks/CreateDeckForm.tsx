@@ -17,22 +17,23 @@ import { UserType } from '@/ui/ProtectedRoute'
 import { capitalizeHeader } from '@/utils/formatHeaders'
 
 type CreateDeckFormProps = {
-    deckToEdit: Tables<'Decks'>
+    deckToEdit: Tables<'Decks'> | undefined
     onCloseModal?: () => void
 }
 
 function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     //Defining if we deal with an edit or a create
-    const { id: editId, ...editValues } = deckToEdit ?? {}
-    const editValuesCapitalized = {
-        chapter: capitalizeHeader(editValues.chapter),
-
-        subchapter: capitalizeHeader(editValues.subchapter),
-
-        lesson: capitalizeHeader(editValues.lesson),
-    }
-
+    const { ...editValues } = deckToEdit
+    const editId = editValues.id
     const isEditingSession = Boolean(editId)
+
+    const editValuesCapitalized = {
+        chapter: capitalizeHeader(editValues?.chapter),
+
+        subchapter: capitalizeHeader(editValues?.subchapter),
+
+        lesson: capitalizeHeader(editValues?.lesson),
+    }
 
     //Handling Create || Edit Deck
     const { isCreating, createDeck } = useCreateDeck()
