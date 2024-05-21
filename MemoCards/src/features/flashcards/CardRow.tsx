@@ -1,5 +1,5 @@
 import { type Tables } from '@/types/database.types'
-import Table, { RowProps } from './TableFlashcards'
+import Table from './TableFlashcards'
 
 type CardProps = {
     card: Tables<'Card'>
