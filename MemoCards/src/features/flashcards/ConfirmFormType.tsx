@@ -28,7 +28,11 @@ type ConfirmFormTypeProps = {
     setDeckId: Dispatch<SetStateAction<number>>
 }
 
-function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
+function ConfirmFormType({
+    setNumAnswers,
+    setDeckId,
+    cardToEdit,
+}: ConfirmFormTypeProps) {
     const { getDeckIdForCard, isGettingDeck } = useGetDeckIdForCard()
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
