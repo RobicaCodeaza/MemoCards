@@ -51,7 +51,7 @@ function Button<C extends ElementType>({
             subtleGrey:
                 'bg-mako-grey-100 rounded outline outline-offset-0 outline-none   text-mako-grey-500 hover:bg-mako-grey-50  hover:text-mako-grey-700 hover:outline-2 hover:outline-picton-blue-400 focus:bg-mako-grey-50',
             subtleWhite:
-                'bg-picton-blue-50 rounded outline outline-none outline-offset-0  text-mako-grey-500 hover:bg-picton-blue-100 hover:text-mako-grey-700 hover:outline-2  hover:outline-picton-blue-400',
+                'bg-picton-blue-50 rounded outline outline-none outline-offset-0  text-mako-grey-500  hover:text-mako-grey-700 hover:outline-2  hover:outline-picton-blue-400',
             danger: 'rounded bg-danger-600 hover:bg-danger-700 text-mako-grey-100 hover:text-mako-grey-200 active:bg-danger-800  active:text-mako-grey-300',
         },
         size: {
