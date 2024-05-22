@@ -60,9 +60,7 @@ function Open({ children, opens: opensWinadowName }: OpenProps) {
     }
 
     return (
-        <div>
-            {cloneElement(children as ReactElement, { onClick: handleClick })}
-        </div>
+        <>{cloneElement(children as ReactElement, { onClick: handleClick })}</>
     )
 }
 
