@@ -10,6 +10,7 @@ import Modal from '@/ui/Modal'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteCard } from './useDeleteCard'
+import FormTriggerFlashcards from './FormTriggerFlashcards'
 
 type CardProps = {
     card: Tables<'Card'>
@@ -29,6 +30,9 @@ function CardRow({ card, index }: CardProps) {
                     <Menus.Menu>
                         <Menus.Toggle id={card.id}></Menus.Toggle>
                         <Menus.List id={card.id}>
+                            <FormTriggerFlashcards>
+                                <Menus.Button as="div"></Menus.Button>
+                            </FormTriggerFlashcards>
                             <Modal.Open opens="deleteCard">
                                 <Menus.Button
                                     icon={

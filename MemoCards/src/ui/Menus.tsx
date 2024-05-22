@@ -112,7 +112,7 @@ function List({ id, children }: ListProps) {
 
     return createPortal(
         <ul
-            className={`fixed rounded-sm bg-picton-blue-100 shadow-sm`}
+            className={`fixed rounded-md border border-picton-blue-300 bg-picton-blue-100  shadow-sm`}
             style={{ top: `${position.y}px`, right: `${position.x}px` }}
             ref={ref}
         >
@@ -146,7 +146,7 @@ function Button<T extends ElementType>({
     return (
         <li>
             <Component
-                className="items-left flex w-full items-center gap-2 rounded-md border-none bg-none px-5 py-3 text-[1.4rem] hover:bg-picton-blue-200"
+                className="items-left flex w-full items-center gap-2 rounded-md border-none bg-none px-5 py-3 text-[1.4rem] hover:bg-picton-blue-200 "
                 onClick={handlerButton}
             >
                 {icon}
