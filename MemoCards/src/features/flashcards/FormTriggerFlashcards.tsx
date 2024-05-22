@@ -19,15 +19,18 @@ import {
 import ButtonIcon from '../../ui/ButtonIcon.tsx'
 import CreateCardForm from './CreateCardForm.tsx'
 import ConfirmFormType from './ConfirmFormType.tsx'
+import { Tables } from '@/types/database.types.ts'
 
 type FormTriggerFlashcardsProps = {
     children: ReactNode
     width: 'full' | 'auto'
+    cardToEdit?: Tables<'Card'>
 }
 
 function FormTriggerFlashcards({
     children,
     width,
+    cardToEdit,
 }: FormTriggerFlashcardsProps) {
     const close = useRef(null)
 
@@ -36,6 +39,7 @@ function FormTriggerFlashcards({
     function resetNumAnswers() {
         setNumAnswers(0)
     }
+    console.log(deckId)
     return (
         <Drawer>
             <DrawerTrigger className={`w-${width}`}>
@@ -65,6 +69,7 @@ function FormTriggerFlashcards({
                     <CreateCardForm
                         deckId={deckId}
                         numAnswers={numAnswers}
+                        cardToEdit={cardToEdit}
                     ></CreateCardForm>
                 )}
             </DrawerContent>

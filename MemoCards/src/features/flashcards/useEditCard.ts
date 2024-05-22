@@ -17,7 +17,7 @@ export function useEditCard() {
         onSuccess: async () => {
             toast.success('Card successfully edited.')
             await queryClient.invalidateQueries({
-                queryKey: ['card'],
+                queryKey: ['cards'],
             })
         },
         onError: (err: Error) =>

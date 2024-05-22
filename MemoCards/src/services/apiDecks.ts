@@ -14,25 +14,6 @@ export async function getDecks(userId: string) {
     return data
 }
 
-export async function getDeckIdForCard(
-    chapter: string,
-    subChapter: string,
-    lesson: string
-) {
-    console.log(chapter, subChapter, lesson)
-    const { data, error } = await supabase
-        .from('Decks')
-        .select('id')
-        .eq('chapter', chapter)
-        .eq('subchapter', subChapter)
-        .eq('lesson', lesson)
-
-    if (error ?? data?.length === 0) {
-        throw new Error("Couldn't find a deck with the data provided.")
-    }
-    return data?.[0].id
-}
-
 export async function createEditDeck(
     newDeck: Tables<'Decks'>,
     id: number | null
@@ -52,7 +33,7 @@ export async function createEditDeck(
 
         // Check if data already exists
         if (existingData && existingData.length > 0) {
-            throw new Error('Deck with the same lesson already exists.')
+            throw new Error('Data already exists.')
         }
         query = supabase.from('Decks').insert([newDeck])
     } else query = supabase.from('Decks').update(newDeck).eq('id', id)
@@ -79,4 +60,25 @@ export async function deleteAllDecks(userId: string) {
         .eq('user_id', userId)
 
     if (error) throw new Error(error.message)
+}
+
+export async function getDeckIdForCard(
+    chapter: string,
+    subChapter: string,
+    lesson: string
+) {
+    console.log(chapter, subChapter, lesson)
+    const { data, error } = await supabase
+        .from('Decks')
+        .select('id')
+        .eq('chapter', chapter)
+        .eq('subchapter', subChapter)
+        .eq('lesson', lesson)
+
+    if (error ?? data?.length === 0) {
+        throw new Error("Couldn't find a deck with the data provided.")
+    }
+
+    console.log(data?.[0].id)
+    return data?.[0].id
 }

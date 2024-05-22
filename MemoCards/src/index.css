@@ -73,6 +73,7 @@ input:focus,
 button:focus,
 textarea:focus,
 select:focus {
+    border-radius: 0.125rem;
     outline: 2px solid #15a1e2;
     outline-offset: -1px;
 }

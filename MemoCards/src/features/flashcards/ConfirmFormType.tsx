@@ -15,6 +15,7 @@ import Select from '@/ui/Select'
 import { useGetDeckIdForCard } from '../decks/useGetDeckIdForCard'
 import Spinner from '@/ui/Spinner'
 import { capitalizeHeader } from '@/utils/formatHeaders'
+import { createSelectOptions } from './FlashcardsTableOperations'
 
 type FieldValuesType = {
     numAnswers: number
@@ -28,7 +29,11 @@ type ConfirmFormTypeProps = {
     setDeckId: Dispatch<SetStateAction<number>>
 }
 
-function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
+function ConfirmFormType({
+    setNumAnswers,
+    setDeckId,
+    cardToEdit,
+}: ConfirmFormTypeProps) {
     const { getDeckIdForCard, isGettingDeck } = useGetDeckIdForCard()
     const { register, handleSubmit, formState, reset } =
         useForm<FieldValuesType>()
@@ -58,24 +63,9 @@ function ConfirmFormType({ setNumAnswers, setDeckId }: ConfirmFormTypeProps) {
     //This is the behavior we want for the app
     if (!decks) return
 
-    const selectOptionsChapter = decks.map((deck) => {
-        return {
-            value: deck.chapter,
-            label: capitalizeHeader(deck.chapter),
-        }
-    })
-    const selectOptionsSubChapter = decks.map((deck) => {
-        return {
-            value: deck.subchapter,
-            label: capitalizeHeader(deck.subchapter),
-        }
-    })
-    const selectOptionsLesson = decks.map((deck) => {
-        return {
-            value: deck.lesson,
-            label: capitalizeHeader(deck.lesson),
-        }
-    })
+    const selectOptionsChapter = createSelectOptions(decks, 'chapter')
+    const selectOptionsSubChapter = createSelectOptions(decks, 'subchapter')
+    const selectOptionsLesson = createSelectOptions(decks, 'lesson')
 
     if (isLoading) return <Spinner></Spinner>
 
