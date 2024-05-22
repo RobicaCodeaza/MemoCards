@@ -5,6 +5,11 @@ import CorrectAnswer from './CorrectAnswer'
 import NumberAnswer from './NumberAnswer'
 import Answer from './Answer'
 import NumberQuestion from '@/pages/NumberCard'
+import Menus from '@/ui/Menus'
+import Modal from '@/ui/Modal'
+import { RiDeleteBin7Line } from 'react-icons/ri'
+import ConfirmDelete from '@/ui/ConfirmDelete'
+import { useDeleteCard } from './useDeleteCard'
 
 type CardProps = {
     card: Tables<'Card'>
@@ -12,12 +17,37 @@ type CardProps = {
 }
 
 function CardRow({ card, index }: CardProps) {
+    const { isDeleting, deleteCard } = useDeleteCard()
+
     return (
         <>
             <Table.Row type="question" index={index}>
                 <NumberQuestion>{index + 1}.</NumberQuestion>
                 <Question>{card.question}</Question>
                 <CorrectAnswer>{card.correctAnswer}</CorrectAnswer>
+                <Modal>
+                    <Menus.Menu>
+                        <Menus.Toggle id={card.id}></Menus.Toggle>
+                        <Menus.List id={card.id}>
+                            <Modal.Open opens="deleteCard">
+                                <Menus.Button
+                                    icon={
+                                        <RiDeleteBin7Line className="h-7 w-8 text-danger-500"></RiDeleteBin7Line>
+                                    }
+                                >
+                                    Delete Card
+                                </Menus.Button>
+                            </Modal.Open>
+                        </Menus.List>
+                    </Menus.Menu>
+                    <Modal.Window name="deleteCard">
+                        <ConfirmDelete
+                            resourceName="Card"
+                            disabled={isDeleting}
+                            onConfirm={() => deleteCard(card.id)}
+                        ></ConfirmDelete>
+                    </Modal.Window>
+                </Modal>
             </Table.Row>
             {card.answers.map((answer, index) => (
                 <Table.Row key={index} type="answer" index={index}>

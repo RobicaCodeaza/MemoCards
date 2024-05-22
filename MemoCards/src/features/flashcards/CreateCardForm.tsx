@@ -17,7 +17,7 @@ import { Tables } from '@/types/database.types'
 import Spinner from '@/ui/Spinner'
 
 type CreateCardFormProps = {
-    cardToEdit: Tables<'Card'> | undefined
+    cardToEdit?: Tables<'Card'>
     numAnswers: number
     deckId: number
 }

@@ -37,11 +37,11 @@ export async function getCards(
         query = query.in('deckId', ids)
     }
 
-    const { data: card, error: errorGettingCard, count } = await queryCards
+    const { data: cards, error: errorGettingCard, count } = await queryCards
 
-    if (errorGettingCard) throw new Error('Could not fetch the card.')
+    if (errorGettingCard) throw new Error('Could not fetch the cards.')
 
-    return { card, count }
+    return { cards, count }
 }
 
 export async function createEditCard(
@@ -76,6 +76,12 @@ export async function createEditCard(
     }
 
     return data
+}
+
+export async function deleteCard(id: number) {
+    const { error } = await supabase.from('Card').delete().eq('id', id)
+
+    if (error) throw new Error('Could not delete the card.')
 }
 
 export async function deleteAllCards(userId: string) {

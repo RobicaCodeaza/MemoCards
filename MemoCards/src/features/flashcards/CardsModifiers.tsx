@@ -1,7 +1,7 @@
 import Button from '@/ui/Button'
 import ButtonIcon from '@/ui/ButtonIcon'
 import Modal from '@/ui/Modal'
-import { PiPlusThin, PiStackPlusThin } from 'react-icons/pi'
+import { PiStackPlusThin } from 'react-icons/pi'
 import FormTriggerFlashcards from './FormTriggerFlashcards'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 import ConfirmDelete from '@/ui/ConfirmDelete'
