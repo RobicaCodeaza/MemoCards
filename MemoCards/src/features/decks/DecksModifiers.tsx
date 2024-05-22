@@ -31,7 +31,7 @@ function DecksModifiers() {
                     <CreateDeckForm deckToEdit={undefined}></CreateDeckForm>
                 </Modal.Window>
 
-                <FormTriggerFlashcards>
+                <FormTriggerFlashcards width="auto">
                     <Button as="div" variation="subtleWhite" size="tiny">
                         <ButtonIcon
                             otherClasses="w-9 h-9 text-picton-blue-950"
