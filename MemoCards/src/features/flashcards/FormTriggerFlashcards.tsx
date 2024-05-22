@@ -39,6 +39,7 @@ function FormTriggerFlashcards({
     function resetNumAnswers() {
         setNumAnswers(0)
     }
+    console.log(deckId)
     return (
         <Drawer>
             <DrawerTrigger className={`w-${width}`}>

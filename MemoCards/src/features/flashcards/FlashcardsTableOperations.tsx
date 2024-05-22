@@ -4,6 +4,30 @@ import { capitalizeHeader } from '@/utils/formatHeaders'
 import Spinner from '@/ui/Spinner'
 import Empty from '@/ui/Empty'
 import { useSearchParams } from 'react-router-dom'
+import { Tables } from '@/types/database.types'
+
+type FieldTypes = 'chapter' | 'subchapter' | 'lesson'
+
+const createSelectOptions = function (
+    array: Tables<'Decks'>[],
+    field: FieldTypes
+) {
+    const arrayOptions = array.map((el) => {
+        return {
+            value: el[field],
+            label: capitalizeHeader(el[field]),
+        }
+    })
+
+    const arrayWithoutDuplicates = Array.from(
+        new Map(arrayOptions.map((el) => [el.label, el.value]))
+    )
+    const arrayOptionsWithoutDuplicates = arrayWithoutDuplicates.map((el) => {
+        return { label: capitalizeHeader(el[0]), value: el[1] }
+    })
+    // console.log('Array', arrayOptionsWithoutDuplicates)
+    return arrayOptionsWithoutDuplicates
+}
 
 function FlaschardsTableOperation() {
     const { decks, isLoading } = useDecks()
@@ -28,30 +52,16 @@ function FlaschardsTableOperation() {
     if (decks === undefined || decks.length === 0)
         return <Empty resource="cards"></Empty>
 
-    const selectOptionsChapter = decks.map((deck) => {
-        return {
-            value: deck.chapter,
-            label: capitalizeHeader(deck.chapter),
-        }
-    })
+    const selectOptionsChapter = createSelectOptions(decks, 'chapter')
     selectOptionsChapter.unshift({ value: 'All', label: 'All - Chapters' })
 
-    const selectOptionsSubChapter = decks.map((deck) => {
-        return {
-            value: deck.subchapter,
-            label: capitalizeHeader(deck.subchapter),
-        }
-    })
+    const selectOptionsSubChapter = createSelectOptions(decks, 'subchapter')
     selectOptionsSubChapter.unshift({
         value: 'All',
         label: 'All - SubChapters',
     })
-    const selectOptionsLesson = decks.map((deck) => {
-        return {
-            value: deck.lesson,
-            label: capitalizeHeader(deck.lesson),
-        }
-    })
+
+    const selectOptionsLesson = createSelectOptions(decks, 'lesson')
     selectOptionsLesson.unshift({ value: 'All', label: 'All - Lessons' })
 
     return (
@@ -74,5 +84,5 @@ function FlaschardsTableOperation() {
         </div>
     )
 }
-
+export { createSelectOptions }
 export default FlaschardsTableOperation
