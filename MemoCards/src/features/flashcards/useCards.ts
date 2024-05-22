@@ -37,7 +37,7 @@ export function useCards() {
             ? null
             : { field: 'lesson', value: filterValue }
 
-    const { isLoading, data: { card: cards, count } = {} } = useQuery({
+    const { isLoading, data: { cards, count } = {} } = useQuery({
         queryKey: ['cards', filterChapter, filterSubChapter, filterLesson],
         queryFn: () =>
             getCards(user.user_id, {

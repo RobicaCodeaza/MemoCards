@@ -8,7 +8,6 @@ import CreateDeckForm from './CreateDeckForm'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteAllDecks } from './useDeleteAllDecks'
 import FormTriggerFlashcards from '@/features/flashcards/FormTriggerFlashcards'
-import { IoCloseOutline } from 'react-icons/io5'
 
 function DecksModifiers() {
     const { isDeletingAll, deleteAllDecks } = useDeleteAllDecks()

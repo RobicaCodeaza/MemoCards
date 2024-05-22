@@ -38,7 +38,7 @@ function DecksGrid() {
         const aValue = a[field]
         const bValue = b[field]
 
-        if (aValue == null || bValue == null) {
+        if (aValue === null || bValue === null) {
             return 0 // Handle null or undefined values
         }
 
