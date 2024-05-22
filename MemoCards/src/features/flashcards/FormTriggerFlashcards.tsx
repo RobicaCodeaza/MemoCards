@@ -33,13 +33,12 @@ function FormTriggerFlashcards({
     cardToEdit,
 }: FormTriggerFlashcardsProps) {
     const close = useRef(null)
-
     const [numAnswers, setNumAnswers] = useState<number>(0)
     const [deckId, setDeckId] = useState<number>(-1)
     function resetNumAnswers() {
         setNumAnswers(0)
     }
-    console.log(deckId)
+    console.log('FormTrigger', deckId)
     return (
         <Drawer>
             <DrawerTrigger className={`w-${width}`}>
@@ -55,7 +54,7 @@ function FormTriggerFlashcards({
                 </DrawerClose>
                 <DrawerHeader>
                     <DrawerTitle className="mb-10 ml-auto mr-auto text-[2.4rem] font-medium text-picton-blue-900">
-                        Create a new card
+                        {numAnswers > 0 ? 'Create a new card' : 'Edit a card'}
                     </DrawerTitle>
                 </DrawerHeader>
                 {numAnswers === 0 && (
@@ -70,6 +69,7 @@ function FormTriggerFlashcards({
                         deckId={deckId}
                         numAnswers={numAnswers}
                         cardToEdit={cardToEdit}
+                        setNumAnswers={setNumAnswers}
                     ></CreateCardForm>
                 )}
             </DrawerContent>

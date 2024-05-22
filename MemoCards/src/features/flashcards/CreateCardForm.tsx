@@ -15,14 +15,17 @@ import { type UserType } from '@/ui/ProtectedRoute'
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 import { Tables } from '@/types/database.types'
 import Spinner from '@/ui/Spinner'
+import { type Dispatch, type SetStateAction } from 'react'
 
 type CreateCardFormProps = {
     cardToEdit?: Tables<'Card'>
     numAnswers: number
     deckId: number
+    setNumAnswers: Dispatch<SetStateAction<number>>
 }
 
 function CreateCardForm({
+    setNumAnswers,
     numAnswers,
     deckId,
     cardToEdit,
@@ -30,6 +33,7 @@ function CreateCardForm({
     //Verifying if it is editing session or creating session
     const { id: editId, ...editValues } = cardToEdit ?? {}
     const isEditingSession = Boolean(editId)
+    console.log(deckId)
 
     let editValuesDefined
     if (
@@ -64,20 +68,23 @@ function CreateCardForm({
     const { errors } = formState
 
     const onSubmit: SubmitHandler<Tables<'Card'>> = (data) => {
-        if (isEditingSession)
+        if (isEditingSession) {
+            const newData = { ...data, deckId }
             updateCard(
-                { newData: data, id: editId! },
+                { newData, id: editId! },
                 {
                     onSuccess: () => {
                         reset()
+                        setNumAnswers(0)
                     },
                 }
             )
-        else {
+        } else {
             const newData = { ...data, user_id: user.user_id, deckId }
             createCard(newData, {
                 onSuccess: () => {
                     reset()
+                    setNumAnswers(0)
                 },
             })
         }
