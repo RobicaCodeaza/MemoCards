@@ -13,7 +13,7 @@ export type Database = {
         Row: {
           answers: string[]
           correctAnswer: number
-          deckId: number | null
+          deckId: number
           id: number
           question: string
           user_id: string
@@ -21,7 +21,7 @@ export type Database = {
         Insert: {
           answers: string[]
           correctAnswer?: number
-          deckId?: number | null
+          deckId: number
           id?: number
           question: string
           user_id: string
@@ -29,7 +29,7 @@ export type Database = {
         Update: {
           answers?: string[]
           correctAnswer?: number
-          deckId?: number | null
+          deckId?: number
           id?: number
           question?: string
           user_id?: string
