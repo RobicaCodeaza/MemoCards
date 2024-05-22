@@ -14,12 +14,21 @@ import {
     useState,
     cloneElement,
     type ReactElement,
+    type ReactNode,
 } from 'react'
 import ButtonIcon from '../../ui/ButtonIcon.tsx'
 import CreateCardForm from './CreateCardForm.tsx'
 import ConfirmFormType from './ConfirmFormType.tsx'
 
-function FormTriggerFlashcards({ children }: PropsWithChildren) {
+type FormTriggerFlashcardsProps = {
+    children: ReactNode
+    width: 'full' | 'auto'
+}
+
+function FormTriggerFlashcards({
+    children,
+    width,
+}: FormTriggerFlashcardsProps) {
     const close = useRef(null)
 
     const [numAnswers, setNumAnswers] = useState<number>(0)
@@ -29,7 +38,7 @@ function FormTriggerFlashcards({ children }: PropsWithChildren) {
     }
     return (
         <Drawer>
-            <DrawerTrigger>
+            <DrawerTrigger className={`w-${width}`}>
                 {cloneElement(children as ReactElement, {
                     handleClick: resetNumAnswers,
                 })}

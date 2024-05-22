@@ -12,7 +12,7 @@ function CardsModifiers() {
 
     return (
         <Modal>
-            <div className="flex flex-col gap-2 phone:flex-row phone:gap-6">
+            <div className="flex  flex-col gap-2 phone:flex-row phone:gap-6">
                 {/* <Modal.Open opens="addDeck">
                     <Button as="div" variation="subtleWhite" size="tiny">
                         <ButtonIcon
@@ -29,7 +29,7 @@ function CardsModifiers() {
                     <CreateDeckForm deckToEdit={undefined}></CreateDeckForm>
                 </Modal.Window> */}
 
-                <FormTriggerFlashcards>
+                <FormTriggerFlashcards width="auto">
                     <Button as="div" variation="subtleWhite" size="tiny">
                         <ButtonIcon
                             otherClasses="w-9 h-9 text-picton-blue-950"
