@@ -67,6 +67,8 @@ function ConfirmFormType({
     const selectOptionsSubChapter = createSelectOptions(decks, 'subchapter')
     const selectOptionsLesson = createSelectOptions(decks, 'lesson')
 
+    //Getting Default filter Value
+
     if (isLoading) return <Spinner></Spinner>
 
     if (isGettingDeck) return <Spinner></Spinner>

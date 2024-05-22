@@ -21,7 +21,6 @@ export async function getCards(
         query = query.eq(filter.lesson.field, filter.lesson.value)
 
     const { data: decks, error } = await query
-    console.log('decks', decks)
 
     if (error) {
         throw new Error('Could not find cards from this deck.')
