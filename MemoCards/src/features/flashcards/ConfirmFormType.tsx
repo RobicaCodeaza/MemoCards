@@ -14,8 +14,8 @@ import { useDecks } from '../decks/useDecks'
 import Select from '@/ui/Select'
 import { useGetDeckIdForCard } from '../decks/useGetDeckIdForCard'
 import Spinner from '@/ui/Spinner'
-import { capitalizeHeader } from '@/utils/formatHeaders'
 import { createSelectOptions } from './FlashcardsTableOperations'
+import { Tables } from '@/types/database.types'
 
 type FieldValuesType = {
     numAnswers: number
@@ -27,6 +27,7 @@ type FieldValuesType = {
 type ConfirmFormTypeProps = {
     setNumAnswers: Dispatch<SetStateAction<number>>
     setDeckId: Dispatch<SetStateAction<number>>
+    cardToEdit?: Tables<'Card'>
 }
 
 function ConfirmFormType({
@@ -66,8 +67,6 @@ function ConfirmFormType({
     const selectOptionsChapter = createSelectOptions(decks, 'chapter')
     const selectOptionsSubChapter = createSelectOptions(decks, 'subchapter')
     const selectOptionsLesson = createSelectOptions(decks, 'lesson')
-
-    //Getting Default filter Value
 
     if (isLoading) return <Spinner></Spinner>
 

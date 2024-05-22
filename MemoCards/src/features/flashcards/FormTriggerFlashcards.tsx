@@ -9,7 +9,6 @@ import {
 
 import { IoCloseOutline } from 'react-icons/io5'
 import {
-    type PropsWithChildren,
     useRef,
     useState,
     cloneElement,
@@ -61,6 +60,7 @@ function FormTriggerFlashcards({
                     <ConfirmFormType
                         setDeckId={setDeckId}
                         setNumAnswers={setNumAnswers}
+                        cardToEdit={cardToEdit}
                     ></ConfirmFormType>
                 )}
 
