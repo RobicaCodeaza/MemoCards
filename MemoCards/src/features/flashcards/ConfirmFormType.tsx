@@ -2,6 +2,10 @@ import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
+import Spinner from '@/ui/Spinner'
+import Select from '@/ui/Select'
+import toast from 'react-hot-toast'
+
 import { Dispatch, SetStateAction } from 'react'
 import {
     type FieldError,
@@ -9,13 +13,9 @@ import {
     useForm,
     type SubmitHandler,
 } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import { useDecks } from '../decks/useDecks'
-import Select from '@/ui/Select'
 import { useGetDeckIdForCard } from '../decks/useGetDeckIdForCard'
-import Spinner from '@/ui/Spinner'
 import { createSelectOptions } from './FlashcardsTableOperations'
-import { Tables } from '@/types/database.types'
 
 type FieldValuesType = {
     numAnswers: number
@@ -27,13 +27,13 @@ type FieldValuesType = {
 type ConfirmFormTypeProps = {
     setNumAnswers: Dispatch<SetStateAction<number>>
     setDeckId: Dispatch<SetStateAction<number>>
-    cardToEdit?: Tables<'Card'>
+    deckIdFromEditing?: number
 }
 
 function ConfirmFormType({
     setNumAnswers,
     setDeckId,
-    cardToEdit,
+    deckIdFromEditing,
 }: ConfirmFormTypeProps) {
     const { getDeckIdForCard, isGettingDeck } = useGetDeckIdForCard()
     const { register, handleSubmit, formState, reset } =
@@ -63,6 +63,16 @@ function ConfirmFormType({
     //Taking into account if there is no existing deck but deck.length === 0 still allows the component to render
     //This is the behavior we want for the app
     if (!decks) return
+
+    const defaultChapter = decks.find(
+        (deck) => deck.id === deckIdFromEditing
+    )?.chapter
+    const defaultSubchapter = decks.find(
+        (deck) => deck.id === deckIdFromEditing
+    )?.subchapter
+    const defaultLesson = decks.find(
+        (deck) => deck.id === deckIdFromEditing
+    )?.lesson
 
     const selectOptionsChapter = createSelectOptions(decks, 'chapter')
     const selectOptionsSubChapter = createSelectOptions(decks, 'subchapter')
@@ -96,6 +106,7 @@ function ConfirmFormType({
                 <Select
                     disabled={isGettingDeck}
                     id="chapter"
+                    defaultValue={defaultChapter}
                     options={selectOptionsChapter}
                     {...register('chapter', {
                         required: 'This field is required',
@@ -110,6 +121,7 @@ function ConfirmFormType({
                 <Select
                     disabled={isGettingDeck}
                     id="subChapter"
+                    defaultValue={defaultSubchapter}
                     options={selectOptionsSubChapter}
                     // value={''}
                     {...register('subChapter', {
@@ -121,6 +133,7 @@ function ConfirmFormType({
                 <Select
                     disabled={isGettingDeck}
                     id="lesson"
+                    defaultValue={defaultLesson}
                     options={selectOptionsLesson}
                     {...register('lesson', {
                         required: 'This field is required',

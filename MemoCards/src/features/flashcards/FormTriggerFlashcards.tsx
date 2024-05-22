@@ -60,7 +60,7 @@ function FormTriggerFlashcards({
                     <ConfirmFormType
                         setDeckId={setDeckId}
                         setNumAnswers={setNumAnswers}
-                        cardToEdit={cardToEdit}
+                        deckIdFromEditing={cardToEdit?.deckId}
                     ></ConfirmFormType>
                 )}
 
