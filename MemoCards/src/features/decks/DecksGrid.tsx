@@ -76,15 +76,16 @@ function DecksGrid() {
     })
 
     return (
-        <div className="grid w-full grid-cols-[minmax(32.5rem,45rem)]  grid-rows-decks justify-center  gap-16 phone:grid-cols-decks">
-            <Menus>
-                {sortedDecks?.map((deck) => (
-                    <DeckCard deck={deck} key={deck.id}></DeckCard>
-                ))}
-            </Menus>
-
+        <>
+            <div className="grid w-full grid-cols-[minmax(32.5rem,45rem)]  grid-rows-decks justify-center  gap-16 phone:grid-cols-decks">
+                <Menus>
+                    {sortedDecks?.map((deck) => (
+                        <DeckCard deck={deck} key={deck.id}></DeckCard>
+                    ))}
+                </Menus>
+            </div>
             <Pagination count={count} PAGE_SIZE={PAGE_SIZE_DECKS}></Pagination>
-        </div>
+        </>
     )
 }
 
