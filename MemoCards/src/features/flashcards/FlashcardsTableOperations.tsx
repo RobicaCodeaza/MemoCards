@@ -25,7 +25,6 @@ const createSelectOptions = function (
     const arrayOptionsWithoutDuplicates = arrayWithoutDuplicates.map((el) => {
         return { label: capitalizeHeader(el[0]), value: el[1] }
     })
-    // console.log('Array', arrayOptionsWithoutDuplicates)
     return arrayOptionsWithoutDuplicates
 }
 
@@ -49,8 +48,7 @@ function FlaschardsTableOperation() {
     //This is the behavior we want for the app
     if (isLoading) return <Spinner></Spinner>
 
-    if (decks === undefined || decks.length === 0)
-        return <Empty resource="cards"></Empty>
+    if (decks === undefined) return <Empty resource="cards"></Empty>
 
     const selectOptionsChapter = createSelectOptions(decks, 'chapter')
     selectOptionsChapter.unshift({ value: 'All', label: 'All - Chapters' })
