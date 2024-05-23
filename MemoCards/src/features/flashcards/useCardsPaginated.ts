@@ -77,6 +77,8 @@ export function useCardsPaginated() {
                     pagination + 1,
                 ],
                 queryFn: () => {
+                    console.log('pre-fetch')
+
                     return getCardsPaginated(
                         user.user_id,
                         {
@@ -108,7 +110,7 @@ export function useCardsPaginated() {
                             subchapter: filterSubChapter,
                             lesson: filterLesson,
                         },
-                        pagination + 1
+                        pagination - 1
                     )
                 },
                 retry: false,
