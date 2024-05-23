@@ -19,7 +19,7 @@ export function useDeleteAllDecks() {
         onSuccess: async () => {
             toast.success('All Decks successfully deleted.')
             await queryClient.invalidateQueries({
-                queryKey: ['decks'],
+                queryKey: ['decks', 'cards'],
             })
         },
         onError: (err: Error) => toast.error(err.message),
