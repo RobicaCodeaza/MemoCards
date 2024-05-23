@@ -2,9 +2,11 @@ import DeckCard from './DeckCard'
 import Menus from '@/ui/Menus'
 import Spinner from '@/ui/Spinner'
 import Empty from '@/ui/Empty'
-import { useDecks } from './useDecks'
 import { useSearchParams } from 'react-router-dom'
 import { Tables } from '@/types/database.types'
+import Pagination from '@/ui/Pagination'
+import { useDecksPaginated } from './useDecksPaginated'
+import { useDecks } from './useDecks'
 
 function DecksGrid() {
     const [searchParams, _] = useSearchParams()
@@ -74,6 +76,8 @@ function DecksGrid() {
                     <DeckCard deck={deck} key={deck.id}></DeckCard>
                 ))}
             </Menus>
+
+            <Pagination></Pagination>
         </div>
     )
 }

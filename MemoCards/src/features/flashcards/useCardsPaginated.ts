@@ -1,11 +1,11 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
-import { getCards } from '@/services/apiCards'
+import { getCardsPaginated } from '@/services/apiCards'
 import { UserType } from '@/ui/ProtectedRoute'
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { useSearchParams } from 'react-router-dom'
 
-export function useCards() {
+export function useCardsPaginated() {
     const [user, __] = useLocalStorageState<UserType>(
         {
             user_id: '',
@@ -50,7 +50,7 @@ export function useCards() {
             pagination,
         ],
         queryFn: () =>
-            getCards(
+            getCardsPaginated(
                 user.user_id,
                 {
                     chapter: filterChapter,

@@ -2,7 +2,7 @@ import { Tables } from '@/types/database.types'
 import supabase from './supabase'
 import { PAGE_SIZE_CARDS } from '@/utils/constants'
 
-export async function getCards(
+export async function getCardsPaginated(
     userId: string,
     filter: {
         chapter: { value: string; field: string } | null
