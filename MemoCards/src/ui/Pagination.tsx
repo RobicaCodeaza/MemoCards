@@ -16,6 +16,7 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
         : 1
 
     const pageCount = Math.ceil(count / PAGE_SIZE)
+    console.log(pageCount)
 
     function handlePrevPage() {
         const page = currentPage === 1 ? currentPage : currentPage - 1
@@ -27,19 +28,18 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
         searchParams.set('page', String(page))
         setSearchParams(searchParams)
     }
-    if (pageCount <= 1) return
+    if (pageCount <= 1) return null
 
     return (
         <div className="flex w-full items-center justify-between">
             <p className="ml-3 text-[1.4rem]">
                 Showing <span className="font-semibold">Page</span> to{' '}
-                <span className="font-semibold">X</span>
-                of <span className="font-semibold">Y</span> results
+                <span className="font-semibold">X</span> of{' '}
+                <span className="font-semibold">Y</span> results
             </p>
             <div className="flex gap-3">
                 <button
-                    className="text-inherit  items 
-                center flex justify-center gap-2 rounded border-none bg-mako-grey-100 px-5 py-2 text-[1.4rem] font-medium text-picton-blue-50 transition-all duration-300 hover:bg-picton-blue-600
+                    className="text-inherit  flex items-center justify-center gap-2 rounded border-none bg-mako-grey-400 px-5 py-2 text-[1.4rem] font-medium text-mako-grey-50 transition-all duration-300 hover:bg-picton-blue-600
                 active:bg-picton-blue-600 active:text-picton-blue-100
                 "
                     onClick={handlePrevPage}
@@ -49,8 +49,8 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
                     <span className="pl-2">Previous</span>
                 </button>
                 <button
-                    className="text-inherit  items 
-                    center flex justify-center gap-2 rounded border-none bg-mako-grey-100 px-5 py-2  text-[1.4rem] font-medium transition-all duration-300 active:bg-picton-blue-600 active:text-picton-blue-100"
+                    className="text-inherit  flex items-center justify-center gap-2 rounded border-none bg-mako-grey-400 px-5 py-2 text-[1.4rem] font-medium text-mako-grey-50 transition-all duration-300 hover:bg-picton-blue-600
+                    active:bg-picton-blue-600 active:text-picton-blue-100"
                     onClick={handleNextPage}
                     disabled={currentPage === pageCount}
                 >

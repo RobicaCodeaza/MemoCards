@@ -37,14 +37,28 @@ export function useCards() {
             ? null
             : { field: 'lesson', value: filterValue }
 
+    const pagination = searchParams.get('page')
+        ? Number(searchParams.get('page'))
+        : 1
+
     const { isLoading, data: { cards, count } = {} } = useQuery({
-        queryKey: ['cards', filterChapter, filterSubChapter, filterLesson],
+        queryKey: [
+            'cards',
+            filterChapter,
+            filterSubChapter,
+            filterLesson,
+            pagination,
+        ],
         queryFn: () =>
-            getCards(user.user_id, {
-                chapter: filterChapter,
-                subchapter: filterSubChapter,
-                lesson: filterLesson,
-            }),
+            getCards(
+                user.user_id,
+                {
+                    chapter: filterChapter,
+                    subchapter: filterSubChapter,
+                    lesson: filterLesson,
+                },
+                pagination
+            ),
         onError: (err: Error) => toast.error(err.message),
     })
 
