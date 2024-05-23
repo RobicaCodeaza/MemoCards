@@ -19,7 +19,7 @@ type TableProps = TableContextType & PropsWithChildren
 function Table({ columns, children }: TableProps) {
     return (
         <TableContext.Provider value={{ columns }}>
-            <div className=" w-full overflow-x-scroll rounded-lg border border-mako-grey-200 bg-picton-blue-50 text-[1.4rem]  tab-land:overflow-hidden">
+            <div className=" w-full overflow-x-scroll rounded-lg border border-mako-grey-300 bg-picton-blue-50 text-[1.4rem]  tab-land:overflow-hidden">
                 {children}
             </div>
         </TableContext.Provider>
@@ -33,7 +33,7 @@ function Header({ children }: HeaderProps) {
     const { columns } = useContext(TableContext)!
     return (
         <div
-            className={`flex flex-col items-center gap-4 border-b border-mako-grey-100 bg-picton-blue-200 px-10 py-7 font-semibold uppercase  tracking-wider text-mako-grey-600 transition-none phone:grid phone:flex-row phone:gap-10`}
+            className={`bg-picton-blue-150 border-mako-grey-250 flex flex-col items-center gap-4 border-b px-10 py-7 font-semibold uppercase  tracking-wider text-mako-grey-600 transition-none phone:grid phone:flex-row phone:gap-10`}
             style={{ gridTemplateColumns: columns }}
         >
             {children}
@@ -52,7 +52,7 @@ function Row({ children, index, type }: RowProps) {
         return (
             <div
                 role="row"
-                className={`flex flex-col items-center  gap-5 px-10  py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left`}
+                className={`flex w-full flex-col  items-center gap-5  px-10 py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left`}
                 style={{
                     gridTemplateColumns: columns,
                     borderTop: index !== 0 ? '1px solid #cdd0d4' : 'none',
@@ -65,8 +65,8 @@ function Row({ children, index, type }: RowProps) {
         return (
             <div
                 role="row"
-                className={` flex  
-                flex-col items-center gap-5  bg-picton-blue-100 px-10  py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left
+                className={` bg-picton-blue-90  
+                flex flex-col items-center  gap-5 px-10  py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left
                 `}
                 style={{
                     gridTemplateColumns: columns,

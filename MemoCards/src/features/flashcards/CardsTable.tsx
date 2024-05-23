@@ -15,7 +15,7 @@ function CardsTable() {
 
     return (
         <Menus>
-            <Table columns="0.05fr 1fr 0.125fr 0.055fr">
+            <Table columns="10rem minmax(30rem,90vw) 10rem 6.5rem">
                 <Table.Header>
                     <div className="text-center">Num</div>
                     <div className="text-center">Text(Question/Answer)</div>
