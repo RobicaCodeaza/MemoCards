@@ -32,9 +32,18 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
     return (
         <div className="flex w-full items-center justify-between px-10 phone:px-14">
             <p className="ml-3 text-[1.4rem]">
-                Showing <span className="font-semibold">Page</span> to{' '}
-                <span className="font-semibold">X</span> of{' '}
-                <span className="font-semibold">Y</span> results
+                Showing{' '}
+                <span className="font-semibold">
+                    {(currentPage - 1) * PAGE_SIZE}
+                </span>{' '}
+                to{' '}
+                <span className="font-semibold">
+                    {' '}
+                    {currentPage === pageCount
+                        ? count
+                        : currentPage * PAGE_SIZE}
+                </span>{' '}
+                of <span className="font-semibold">{count}</span> results
             </p>
             <div className="flex gap-3">
                 <button
