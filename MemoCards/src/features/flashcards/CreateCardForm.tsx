@@ -33,7 +33,6 @@ function CreateCardForm({
     //Verifying if it is editing session or creating session
     const { id: editId, ...editValues } = cardToEdit ?? {}
     const isEditingSession = Boolean(editId)
-    console.log(deckId)
 
     let editValuesDefined
     if (
@@ -44,7 +43,7 @@ function CreateCardForm({
         editValuesDefined = {
             question: cardToEdit?.question,
             correctAnswer: cardToEdit?.correctAnswer,
-            answers: cardToEdit?.answers,
+            answers: cardToEdit?.answers.slice(0, numAnswers),
         }
 
     const { isCreating, createCard } = useCreateDeck()
