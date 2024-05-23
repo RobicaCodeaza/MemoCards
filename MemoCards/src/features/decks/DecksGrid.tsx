@@ -7,14 +7,20 @@ import { Tables } from '@/types/database.types'
 import Pagination from '@/ui/Pagination'
 import { useDecksPaginated } from './useDecksPaginated'
 import { useDecks } from './useDecks'
+import { PAGE_SIZE_DECKS } from '@/utils/constants'
 
 function DecksGrid() {
     const [searchParams, _] = useSearchParams()
-    const { isLoading, decks } = useDecks()
+    const { isLoading, decks, count } = useDecksPaginated()
 
     if (isLoading) return <Spinner></Spinner>
 
-    if (!decks?.length || decks === undefined)
+    if (
+        !decks?.length ||
+        decks === undefined ||
+        count === undefined ||
+        count === null
+    )
         return <Empty resource="decks"></Empty>
 
     // 1.Filter
@@ -77,7 +83,7 @@ function DecksGrid() {
                 ))}
             </Menus>
 
-            <Pagination></Pagination>
+            <Pagination count={count} PAGE_SIZE={PAGE_SIZE_DECKS}></Pagination>
         </div>
     )
 }

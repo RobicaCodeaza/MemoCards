@@ -15,19 +15,11 @@ export async function getDecks(userId: string) {
     return data
 }
 
-export async function getDecksPaginated(
-    userId: string,
-
-    page: number
-) {
+export async function getDecksPaginated(userId: string, page: number) {
     let query = supabase
         .from('Decks')
         .select('*', { count: 'exact' })
         .eq('user_id', userId)
-
-    const { data: decks, error, count } = await query
-
-    if (error) throw new Error('Could not fetch the decks.')
 
     if (page) {
         const from = (page - 1) * PAGE_SIZE_DECKS
@@ -35,6 +27,10 @@ export async function getDecksPaginated(
         // console.log(from, to);
         query = query.range(from, to - 1)
     }
+
+    const { data: decks, error, count } = await query
+
+    if (error) throw new Error('Could not fetch the decks.')
 
     return { decks, count }
 }
