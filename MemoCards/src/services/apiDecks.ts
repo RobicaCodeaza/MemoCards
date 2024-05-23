@@ -83,14 +83,14 @@ export async function getDeckIdForCard(
     return data?.[0].id
 }
 
-export async function getDeckByDetails(id: number) {
-    const { data, error } = await supabase
-        .from('Decks')
-        .select('chapter,subchapter,lesson')
-        .eq('id', id)
+// export async function getDeckByDetails(id: number) {
+//     const { data, error } = await supabase
+//         .from('Decks')
+//         .select('chapter,subchapter,lesson')
+//         .eq('id', id)
 
-    if (error) {
-        throw new Error("Couldn't find a deck with the data provided.")
-    }
-    return data[0]
-}
+//     if (error) {
+//         throw new Error("Couldn't find a deck with the data provided.")
+//     }
+//     return data[0]
+// }

@@ -32,7 +32,10 @@ function CardRow({ card, index }: CardProps) {
 
                 <div className="flex items-center gap-2">
                     <FormTriggerFlashcards cardToEdit={card} width="full">
-                        <ButtonIcon otherClasses="h-9 w-9 text-picton-blue-700">
+                        <ButtonIcon
+                            as="div"
+                            otherClasses="h-9 w-9 text-picton-blue-700"
+                        >
                             <CiEdit></CiEdit>
                         </ButtonIcon>
                     </FormTriggerFlashcards>
