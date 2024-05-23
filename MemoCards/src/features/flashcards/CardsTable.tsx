@@ -9,8 +9,6 @@ import Pagination from '@/ui/Pagination'
 function CardsTable() {
     const { isLoading, cards, count } = useCardsPaginated()
 
-    console.log(count)
-
     if (isLoading) return <Spinner></Spinner>
 
     if (

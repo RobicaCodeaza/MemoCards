@@ -1,11 +1,13 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 import { getCardsPaginated } from '@/services/apiCards'
 import { UserType } from '@/ui/ProtectedRoute'
-import { useQuery } from '@tanstack/react-query'
+import { PAGE_SIZE_CARDS } from '@/utils/constants'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { useSearchParams } from 'react-router-dom'
 
 export function useCardsPaginated() {
+    const queryClient = useQueryClient()
     const [user, __] = useLocalStorageState<UserType>(
         {
             user_id: '',
@@ -61,6 +63,57 @@ export function useCardsPaginated() {
             ),
         onError: (err: Error) => toast.error(err.message),
     })
+
+    // PRE-FETCHING
+    if (!count || count !== null) {
+        const pageCount = Math.ceil(count! / PAGE_SIZE_CARDS)
+        if (pagination < pageCount)
+            void queryClient.prefetchQuery({
+                queryKey: [
+                    'cards',
+                    filterChapter,
+                    filterSubChapter,
+                    filterLesson,
+                    pagination + 1,
+                ],
+                queryFn: () => {
+                    return getCardsPaginated(
+                        user.user_id,
+                        {
+                            chapter: filterChapter,
+                            subchapter: filterSubChapter,
+                            lesson: filterLesson,
+                        },
+                        pagination + 1
+                    )
+                },
+                retry: false,
+            })
+
+        if (pagination > 1)
+            void queryClient.prefetchQuery({
+                queryKey: [
+                    'cards',
+                    filterChapter,
+                    filterSubChapter,
+                    filterLesson,
+                    pagination - 1,
+                ],
+                queryFn: () => {
+                    console.log('pre-fetch')
+                    return getCardsPaginated(
+                        user.user_id,
+                        {
+                            chapter: filterChapter,
+                            subchapter: filterSubChapter,
+                            lesson: filterLesson,
+                        },
+                        pagination + 1
+                    )
+                },
+                retry: false,
+            })
+    }
 
     return { isLoading, cards, count }
 }

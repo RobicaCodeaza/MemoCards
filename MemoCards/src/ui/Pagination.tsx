@@ -16,7 +16,6 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
         : 1
 
     const pageCount = Math.ceil(count / PAGE_SIZE)
-    console.log(pageCount)
 
     function handlePrevPage() {
         const page = currentPage === 1 ? currentPage : currentPage - 1
