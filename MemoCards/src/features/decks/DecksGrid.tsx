@@ -2,17 +2,25 @@ import DeckCard from './DeckCard'
 import Menus from '@/ui/Menus'
 import Spinner from '@/ui/Spinner'
 import Empty from '@/ui/Empty'
-import { useDecks } from './useDecks'
 import { useSearchParams } from 'react-router-dom'
 import { Tables } from '@/types/database.types'
+import Pagination from '@/ui/Pagination'
+import { useDecksPaginated } from './useDecksPaginated'
+import { useDecks } from './useDecks'
+import { PAGE_SIZE_DECKS } from '@/utils/constants'
 
 function DecksGrid() {
     const [searchParams, _] = useSearchParams()
-    const { isLoading, decks } = useDecks()
+    const { isLoading, decks, count } = useDecksPaginated()
 
     if (isLoading) return <Spinner></Spinner>
 
-    if (!decks?.length || decks === undefined)
+    if (
+        !decks?.length ||
+        decks === undefined ||
+        count === undefined ||
+        count === null
+    )
         return <Empty resource="decks"></Empty>
 
     // 1.Filter
@@ -68,13 +76,16 @@ function DecksGrid() {
     })
 
     return (
-        <div className="grid w-full grid-cols-[minmax(32.5rem,45rem)]  grid-rows-decks justify-center  gap-16 phone:grid-cols-decks">
-            <Menus>
-                {sortedDecks?.map((deck) => (
-                    <DeckCard deck={deck} key={deck.id}></DeckCard>
-                ))}
-            </Menus>
-        </div>
+        <>
+            <div className="grid w-full grid-cols-[minmax(32.5rem,45rem)]  grid-rows-decks justify-center  gap-16 phone:grid-cols-decks">
+                <Menus>
+                    {sortedDecks?.map((deck) => (
+                        <DeckCard deck={deck} key={deck.id}></DeckCard>
+                    ))}
+                </Menus>
+            </div>
+            <Pagination count={count} PAGE_SIZE={PAGE_SIZE_DECKS}></Pagination>
+        </>
     )
 }
 

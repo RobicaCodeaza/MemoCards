@@ -31,7 +31,7 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
     if (pageCount <= 1) return null
 
     return (
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full items-center justify-between px-10 phone:px-14">
             <p className="ml-3 text-[1.4rem]">
                 Showing <span className="font-semibold">Page</span> to{' '}
                 <span className="font-semibold">X</span> of{' '}

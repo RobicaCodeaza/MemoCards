@@ -1,5 +1,4 @@
-import Menus from '@/ui/Menus'
-import { useCards } from './useCards'
+import { useCardsPaginated } from './useCardsPaginated'
 import Table from './TableFlashcards'
 import Empty from '@/ui/Empty'
 import Spinner from '@/ui/Spinner'
@@ -8,7 +7,7 @@ import { PAGE_SIZE_CARDS } from '@/utils/constants'
 import Pagination from '@/ui/Pagination'
 
 function CardsTable() {
-    const { isLoading, cards, count } = useCards()
+    const { isLoading, cards, count } = useCardsPaginated()
 
     console.log(count)
 
