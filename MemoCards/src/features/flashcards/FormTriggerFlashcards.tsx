@@ -37,12 +37,11 @@ function FormTriggerFlashcards({
     function resetNumAnswers() {
         setNumAnswers(0)
     }
-    console.log('FormTrigger', deckId)
     return (
         <Drawer>
             <DrawerTrigger className={`w-${width}`}>
                 {cloneElement(children as ReactElement, {
-                    handleClick: resetNumAnswers,
+                    onClick: resetNumAnswers,
                 })}
             </DrawerTrigger>
             <DrawerContent className="tab-port:px-30 mx-auto flex flex-col   justify-items-center bg-picton-blue-50   px-10 py-5  phone:px-24  phone:py-16 tab-port:py-12  tab-land:px-36 tab-land:py-16 particular-small-laptop:w-2/3 particular-small-laptop:px-44 particular-small-laptop:py-20">

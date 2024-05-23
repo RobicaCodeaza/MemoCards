@@ -18,8 +18,6 @@ function DeckCard({ deck }: DeckCardProps) {
     const { isDeleting, deleteDeck } = useDeleteDeck()
     const navigate = useNavigate()
 
-    console.log(deck)
-
     function handleEditFlashcards() {
         navigate(
             `/flashcards?chapter=${deck.chapter}&subchapter=${deck.subchapter}&lesson=${deck.lesson}`
