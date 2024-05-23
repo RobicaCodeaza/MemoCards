@@ -51,7 +51,10 @@ export default {
             },
             'picton-blue': {
                 50: '#f0f9ff',
+                75: '#e8f6fc',
+                90: '#e5f6fd',
                 100: '#e1f2fd',
+                150: '#d3effc',
                 200: '#bce5fb',
                 300: '#81d1f8',
                 400: '#50c0f3',
@@ -67,7 +70,9 @@ export default {
             'mako-grey': {
                 50: '#f5f6f6',
                 100: '#e5e7e8',
+                150: '#d9dadb',
                 200: '#cdd0d4',
+                250: '#c7c8c9',
                 300: '#aab0b6',
                 400: '#808890',
                 500: '#656d75',

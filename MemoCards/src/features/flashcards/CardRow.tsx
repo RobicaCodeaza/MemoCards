@@ -5,14 +5,12 @@ import CorrectAnswer from './CorrectAnswer'
 import NumberAnswer from './NumberAnswer'
 import Answer from './Answer'
 import NumberQuestion from '@/pages/NumberCard'
-import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteCard } from './useDeleteCard'
 import FormTriggerFlashcards from './FormTriggerFlashcards'
 import { CiEdit } from 'react-icons/ci'
-import Button from '@/ui/Button'
 import ButtonIcon from '@/ui/ButtonIcon'
 
 type CardProps = {
@@ -65,7 +63,6 @@ function CardRow({ card, index }: CardProps) {
                     >
                         {answer}
                     </Answer>
-                    <div></div>
                 </Table.Row>
             ))}
         </>
