@@ -1,5 +1,6 @@
 import { Tables } from '@/types/database.types'
 import supabase from './supabase'
+import { PAGE_SIZE_CARDS } from '@/utils/constants'
 
 export async function getCards(
     userId: string,
@@ -7,7 +8,8 @@ export async function getCards(
         chapter: { value: string; field: string } | null
         subchapter: { value: string; field: string } | null
         lesson: { value: string; field: string } | null
-    }
+    },
+    page: number
 ) {
     let query = supabase.from('Decks').select('id').eq('user_id', userId)
 
@@ -28,12 +30,19 @@ export async function getCards(
 
     if (decks.length === 0)
         throw new Error('Could not find cards for this combination.')
+
     let queryCards = supabase.from('Card').select('*', { count: 'exact' })
 
     if (decks.length === 1) queryCards = queryCards.eq('deckId', decks[0].id)
     if (decks.length > 1) {
         const ids = decks.map((deck) => deck.id)
-        query = query.in('deckId', ids)
+        queryCards = queryCards.in('deckId', ids)
+    }
+    if (page) {
+        const from = (page - 1) * PAGE_SIZE_CARDS
+        const to = page * PAGE_SIZE_CARDS
+        // console.log(from, to);
+        queryCards = queryCards.range(from, to - 1)
     }
 
     const { data: cards, error: errorGettingCard, count } = await queryCards

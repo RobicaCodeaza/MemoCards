@@ -33,7 +33,7 @@ function Header({ children }: HeaderProps) {
     const { columns } = useContext(TableContext)!
     return (
         <div
-            className={`bg-picton-blue-150 border-mako-grey-250 flex flex-col items-center gap-4 border-b px-10 py-7 font-semibold uppercase  tracking-wider text-mako-grey-600 transition-none phone:grid phone:flex-row phone:gap-10`}
+            className={`flex flex-col items-center gap-4 border-b border-mako-grey-250 bg-picton-blue-150 px-10 py-7 font-semibold uppercase  tracking-wider text-mako-grey-600 transition-none phone:grid phone:flex-row phone:gap-10`}
             style={{ gridTemplateColumns: columns }}
         >
             {children}
@@ -65,8 +65,8 @@ function Row({ children, index, type }: RowProps) {
         return (
             <div
                 role="row"
-                className={` bg-picton-blue-90  
-                flex flex-col items-center  gap-5 px-10  py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left
+                className={` flex  
+                flex-col items-center gap-5  bg-picton-blue-90 px-10  py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left
                 `}
                 style={{
                     gridTemplateColumns: columns,
@@ -91,7 +91,7 @@ function Body({ data, render }: BodyProps) {
 function Footer({ children }: PropsWithChildren) {
     return (
         <div
-            className={`flex justify-center border border-mako-grey-50 p-5 ${children ? '' : 'hidden'}`}
+            className={`flex justify-center border border-mako-grey-200 p-5 ${children ? '' : 'hidden'}`}
         >
             {children}
         </div>
