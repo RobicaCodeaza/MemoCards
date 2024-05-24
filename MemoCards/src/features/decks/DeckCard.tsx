@@ -80,7 +80,7 @@ function DeckCard({ deck }: DeckCardProps) {
                             </Modal.Open>
                         </Menus.List>
                     </Menus.Menu>
-                    <Modal.Window windowTitle="Delete a deck" name="deleteDeck">
+                    <Modal.Window name="deleteDeck">
                         <ConfirmDelete
                             resourceName="Deck"
                             disabled={isDeleting}
