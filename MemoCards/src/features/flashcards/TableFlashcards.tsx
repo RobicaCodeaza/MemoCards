@@ -7,6 +7,7 @@ import {
     createContext,
     ReactElement,
 } from 'react'
+import { motion } from 'framer-motion'
 
 type TableContextType = {
     columns: string
@@ -50,7 +51,11 @@ function Row({ children, index, type }: RowProps) {
     const { columns } = useContext(TableContext)!
     if (type === 'question')
         return (
-            <div
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
                 role="row"
                 className={`flex w-full flex-col  items-center gap-5  px-10 py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left`}
                 style={{
@@ -59,11 +64,15 @@ function Row({ children, index, type }: RowProps) {
                 }}
             >
                 {children}
-            </div>
+            </motion.div>
         )
     else
         return (
-            <div
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
                 role="row"
                 className={` flex  
                 flex-col items-center gap-5  bg-picton-blue-90 px-10  py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left
@@ -74,7 +83,7 @@ function Row({ children, index, type }: RowProps) {
                 }}
             >
                 {children}
-            </div>
+            </motion.div>
         )
 }
 
