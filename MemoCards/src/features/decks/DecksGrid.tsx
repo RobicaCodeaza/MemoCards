@@ -6,8 +6,8 @@ import { useSearchParams } from 'react-router-dom'
 import { Tables } from '@/types/database.types'
 import Pagination from '@/ui/Pagination'
 import { useDecksPaginated } from './useDecksPaginated'
-import { useDecks } from './useDecks'
 import { PAGE_SIZE_DECKS } from '@/utils/constants'
+import { AnimatePresence } from 'framer-motion'
 
 function DecksGrid() {
     const [searchParams, _] = useSearchParams()
@@ -79,9 +79,14 @@ function DecksGrid() {
         <>
             <div className="grid w-full grid-cols-[minmax(32.5rem,45rem)]  grid-rows-decks justify-center  gap-16 phone:grid-cols-decks">
                 <Menus>
-                    {sortedDecks?.map((deck) => (
-                        <DeckCard deck={deck} key={deck.id}></DeckCard>
-                    ))}
+                    <AnimatePresence>
+                        {sortedDecks?.map((deck) => {
+                            console.log(sortedDecks)
+                            return (
+                                <DeckCard deck={deck} key={deck.id}></DeckCard>
+                            )
+                        })}
+                    </AnimatePresence>
                 </Menus>
             </div>
             <Pagination count={count} PAGE_SIZE={PAGE_SIZE_DECKS}></Pagination>
