@@ -1,5 +1,5 @@
 import { IoCloseOutline } from 'react-icons/io5'
-
+import { motion } from 'framer-motion'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import {
     type Dispatch,
@@ -84,9 +84,25 @@ function Window({ children, name, windowTitle }: WindowProps) {
     if (openName !== name) return
 
     return createPortal(
-        <div className="fixed left-0 top-0 h-screen w-full bg-backdrop-color-50  backdrop-blur-sm transition-all duration-500">
-            <div
+        <motion.div
+            className="fixed left-0 top-0 h-screen w-full bg-backdrop-color-50  backdrop-blur-sm "
+            key="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0 }}
+        >
+            <motion.div
                 className="tab-land:px-18 tab-land:py-18 fixed left-1/2 top-1/2 flex  translate-x-[-50%] translate-y-[-50%]  flex-col gap-4 rounded-2xl bg-picton-blue-50  px-8 py-8 shadow-lg phone:px-10 phone:py-10 tab-port:px-14 tab-land:py-14"
+                initial={{ scale: 0.8, opacity: 0, y: 0 }}
+                animate={{
+                    scale: 1,
+                    opacity: 1,
+                    translateX: '-50%',
+                    translateY: '-50%',
+                }}
+                exit={{ scale: 0.8, opacity: 0, y: -50 }}
+                transition={{ duration: 0.3, type: 'spring', stiffness: 250 }}
                 ref={ref}
             >
                 <div className="flex items-center justify-between">
@@ -106,8 +122,8 @@ function Window({ children, name, windowTitle }: WindowProps) {
                         onCloseModal: close,
                     })}
                 </div>
-            </div>
-        </div>,
+            </motion.div>
+        </motion.div>,
         document.body
     )
 }
