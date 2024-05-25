@@ -1,2 +1,2 @@
 export const PAGE_SIZE_CARDS = 5
-export const PAGE_SIZE_DECKS = 6
+export const PAGE_SIZE_DECKS = 3

@@ -10,7 +10,7 @@ function Flashcards() {
     return (
         <>
             <Row type="horizontal">
-                <Heading as="h1">Your Cards 🃏</Heading>
+                <Heading as="h1">Your Cards 🎴</Heading>
             </Row>
             <Row type="horizontal">
                 <CardsModifiers></CardsModifiers>
