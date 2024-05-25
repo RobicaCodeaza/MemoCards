@@ -12,6 +12,7 @@ import {
     ElementType,
     ComponentPropsWithoutRef,
 } from 'react'
+import { motion } from 'framer-motion'
 import { createContext } from 'react'
 import { createPortal } from 'react-dom'
 import { RiMore2Line } from 'react-icons/ri'
@@ -111,13 +112,17 @@ function List({ id, children }: ListProps) {
     if (openId !== id) return
 
     return createPortal(
-        <ul
+        <motion.ul
+            initial={{ opacity: 0, y: '-10%', scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: '-30%', scale: 0.8 }}
+            transition={{ duration: 0.1, type: 'spring', stiffness: 100 }}
             className={`fixed rounded-md border border-picton-blue-300 bg-picton-blue-75  shadow-sm`}
             style={{ top: `${position.y}px`, right: `${position.x}px` }}
             ref={ref}
         >
             {children}
-        </ul>,
+        </motion.ul>,
         document.body
     )
 }
