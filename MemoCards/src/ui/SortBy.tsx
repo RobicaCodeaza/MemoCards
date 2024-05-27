@@ -13,6 +13,7 @@ function SortBy({ options }: SortByProps) {
 
     function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
         searchParams.set('sortBy', e.target.value)
+        if (searchParams.get('page')) searchParams.set('page', '1')
         setSearchParams(searchParams)
     }
 
