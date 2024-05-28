@@ -68,7 +68,7 @@ function FormTriggerFlashcards({
                         deckId={deckId}
                         numAnswers={numAnswers}
                         cardToEdit={cardToEdit}
-                        setNumAnswers={setNumAnswers}
+                        resetNumAnswers={resetNumAnswers}
                     ></CreateCardForm>
                 )}
             </DrawerContent>
