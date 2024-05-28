@@ -16,6 +16,7 @@ import {
 import { useDecks } from '../decks/useDecks'
 import { useGetDeckIdForCard } from '../decks/useGetDeckIdForCard'
 import { createSelectOptions } from './FlashcardsTableOperations'
+import Empty from '@/ui/Empty'
 
 type FieldValuesType = {
     numAnswers: number
@@ -63,6 +64,9 @@ function ConfirmFormType({
     //Taking into account if there is no existing deck but deck.length === 0 still allows the component to render
     //This is the behavior we want for the app
     if (!decks) return
+    if (decks.length === 0) {
+        return <Empty resource="decks"></Empty>
+    }
 
     const defaultChapter = decks.find(
         (deck) => deck.id === deckIdFromEditing
