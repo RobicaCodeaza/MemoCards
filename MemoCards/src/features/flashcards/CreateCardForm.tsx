@@ -21,11 +21,11 @@ type CreateCardFormProps = {
     cardToEdit?: Tables<'Card'>
     numAnswers: number
     deckId: number
-    setNumAnswers: Dispatch<SetStateAction<number>>
+    resetNumAnswers: () => void
 }
 
 function CreateCardForm({
-    setNumAnswers,
+    resetNumAnswers,
     numAnswers,
     deckId,
     cardToEdit,
@@ -75,7 +75,7 @@ function CreateCardForm({
                 {
                     onSuccess: () => {
                         reset()
-                        setNumAnswers(0)
+                        resetNumAnswers()
                     },
                 }
             )
@@ -84,7 +84,7 @@ function CreateCardForm({
             createCard(newData, {
                 onSuccess: () => {
                     reset()
-                    setNumAnswers(0)
+                    resetNumAnswers()
                 },
             })
         }

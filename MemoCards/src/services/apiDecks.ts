@@ -88,7 +88,6 @@ export async function getDeckIdForCard(
     subChapter: string,
     lesson: string
 ) {
-    console.log(chapter, subChapter, lesson)
     const { data, error } = await supabase
         .from('Decks')
         .select('id')
