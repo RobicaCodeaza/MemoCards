@@ -37,7 +37,7 @@ function QuizCard() {
                                         <CiEdit className="h-8 w-8 text-picton-blue-600"></CiEdit>
                                     }
                                 >
-                                    Edit Test
+                                    Edit Quiz
                                 </Menus.Button>
                             </Modal.Open>
 
@@ -47,7 +47,7 @@ function QuizCard() {
                                         <RiDeleteBin7Line className="h-7 w-8 text-danger-500"></RiDeleteBin7Line>
                                     }
                                 >
-                                    Delete Test
+                                    Delete Quiz
                                 </Menus.Button>
                             </Modal.Open>
                         </Menus.List>
