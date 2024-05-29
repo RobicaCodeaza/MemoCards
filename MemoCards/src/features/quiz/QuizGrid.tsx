@@ -4,7 +4,7 @@ import QuizCard from './QuizCard'
 function QuizGrid() {
     return (
         <>
-            <div className="mt-[-3rem] flex justify-start  border-b border-t border-mako-grey-200 bg-picton-blue-50">
+            <div className="mt-[-3rem] grid w-full grid-cols-[minmax(32.5rem,40rem)] grid-rows-decks  justify-center gap-16  border-b  border-mako-grey-200 bg-picton-blue-50 px-5 py-10 phone:grid-cols-decks">
                 <QuizCard></QuizCard>
                 <QuizCard></QuizCard>
                 <QuizCard></QuizCard>
