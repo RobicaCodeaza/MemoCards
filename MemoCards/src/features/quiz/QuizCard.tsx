@@ -3,7 +3,7 @@ import Button from '@/ui/Button'
 
 function QuizCard() {
     return (
-        <div className="flex h-[25rem] flex-col border-l border-r border-mako-grey-200 px-6 py-6 phone:px-8 phone:py-8 tab-port:px-8 tab-port:py-8 tab-land:w-1/5 tab-land:px-10 tab-land:py-10 particular-small-laptop:px-12 particular-small-laptop:py-12">
+        <div className="flex h-[25rem] w-full flex-col rounded-lg border border-chateau-green-200   px-6 py-6 shadow-lg   phone:px-8 phone:py-8 tab-port:px-8 tab-port:py-8 tab-land:px-10  tab-land:py-10 particular-small-laptop:px-12 particular-small-laptop:py-12">
             <p className="text-[1.5rem] font-medium uppercase">Medical</p>
             <p className="text-[1.4rem] text-mako-grey-500">
                 Short description of what the test should be

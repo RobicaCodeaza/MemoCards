@@ -1,6 +1,6 @@
 function QuizSummary() {
     return (
-        <div className="flex flex-col gap-8 border-t border-mako-grey-200 bg-picton-blue-100 px-12 py-6 phone:px-16 phone:py-8  tab-land:px-20 tab-land:py-10 particular-small-laptop:px-24 particular-small-laptop:py-12">
+        <div className="flex flex-col  gap-8 border-b border-t  border-mako-grey-200 bg-picton-blue-100 px-12 py-6 phone:px-16  phone:py-10 tab-land:px-20 tab-land:py-14 particular-small-laptop:px-24 particular-small-laptop:py-16">
             <p className="text-center text-[2rem] font-semibold tracking-wide">
                 Tests Summary
             </p>
