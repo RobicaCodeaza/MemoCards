@@ -1,9 +1,9 @@
 import { GoHome } from 'react-icons/go'
 import {
     PiCardsThreeLight,
-    PiExamLight,
     PiUserCircleGearLight,
     PiBookLight,
+    PiNoteThin,
 } from 'react-icons/pi'
 
 import { CiSettings } from 'react-icons/ci'
@@ -61,7 +61,7 @@ function MainNav() {
                     className=" justify-left flex items-center gap-5 rounded px-10 py-4 text-[1.6rem] font-medium text-mako-grey-700 transition-[all] duration-300 ease-in-out hover:bg-picton-blue-100 hover:text-mako-grey-900
                     "
                 >
-                    <PiExamLight className="text-inherit block h-10 w-10"></PiExamLight>
+                    <PiNoteThin className="text-inherit block h-10 w-10"></PiNoteThin>
                     <span className=" tab-port:block">Quiz</span>
                 </NavLink>
             </li>
