@@ -74,6 +74,42 @@ export type Database = {
         }
         Relationships: []
       }
+      Quizes: {
+        Row: {
+          completionTime: number | null
+          decksId: number[]
+          id: number
+          lastTested: string | null
+          perfectionScore: number | null
+          questionTime: number | null
+          quizName: string
+          quizTime: number | null
+          userId: string
+        }
+        Insert: {
+          completionTime?: number | null
+          decksId: number[]
+          id?: number
+          lastTested?: string | null
+          perfectionScore?: number | null
+          questionTime?: number | null
+          quizName: string
+          quizTime?: number | null
+          userId: string
+        }
+        Update: {
+          completionTime?: number | null
+          decksId?: number[]
+          id?: number
+          lastTested?: string | null
+          perfectionScore?: number | null
+          questionTime?: number | null
+          quizName?: string
+          quizTime?: number | null
+          userId?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

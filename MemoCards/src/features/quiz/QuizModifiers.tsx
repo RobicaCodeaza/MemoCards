@@ -2,6 +2,7 @@ import Button from '@/ui/Button'
 import ButtonIcon from '@/ui/ButtonIcon'
 import Modal from '@/ui/Modal'
 import { PiExamLight } from 'react-icons/pi'
+import CreateQuizForm from './CreateQuizForm'
 
 function QuizModifiers() {
     return (
@@ -17,7 +18,9 @@ function QuizModifiers() {
                     New Quiz
                 </Button>
             </Modal.Open>
-            <Modal.Window name="newQuiz"></Modal.Window>
+            <Modal.Window type="quiz" name="newQuiz">
+                <CreateQuizForm></CreateQuizForm>
+            </Modal.Window>
         </Modal>
     )
 }
