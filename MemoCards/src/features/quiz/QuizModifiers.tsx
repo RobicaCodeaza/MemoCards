@@ -1,20 +1,23 @@
 import Button from '@/ui/Button'
 import ButtonIcon from '@/ui/ButtonIcon'
 import Modal from '@/ui/Modal'
-import { PiPlusThin } from 'react-icons/pi'
+import { PiExamLight } from 'react-icons/pi'
 
 function QuizModifiers() {
     return (
         <Modal>
-            <Button as="div" variation="simpleTertiary" size="tiny">
-                <ButtonIcon
-                    otherClasses="w-9 h-9 text-chateau-green-500"
-                    hoverNone="true"
-                >
-                    <PiPlusThin></PiPlusThin>
-                </ButtonIcon>
-                New Deck
-            </Button>
+            <Modal.Open opens="newQuiz">
+                <Button as="div" variation="subtleWhite" size="tiny">
+                    <ButtonIcon
+                        otherClasses="w-9 h-9 text-picton-blue-950"
+                        hoverNone="true"
+                    >
+                        <PiExamLight></PiExamLight>
+                    </ButtonIcon>
+                    New Quiz
+                </Button>
+            </Modal.Open>
+            <Modal.Window name="newQuiz"></Modal.Window>
         </Modal>
     )
 }
