@@ -1,3 +1,5 @@
+import QuizGrid from '@/features/quiz/QuizGrid'
+import QuizMain from '@/features/quiz/QuizMain'
 import QuizModifiers from '@/features/quiz/QuizModifiers'
 import QuizSummary from '@/features/quiz/QuizSummary'
 import QuizTableOperation from '@/features/quiz/QuizTableOperation'
@@ -14,10 +16,7 @@ function Quiz() {
                 <QuizModifiers></QuizModifiers>
                 <QuizTableOperation></QuizTableOperation>
             </Row>
-            <QuizSummary></QuizSummary>
-            <div className="flex items-center ">
-                {/* <CardsTable></CardsTable> */}
-            </div>
+            <QuizMain></QuizMain>
         </>
     )
 }
