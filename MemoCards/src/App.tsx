@@ -77,7 +77,6 @@ function App() {
                                 path="auth"
                                 element={<Authentication></Authentication>}
                             ></Route>
-
                             <Route
                                 path="*"
                                 element={<PageNotFound></PageNotFound>}
