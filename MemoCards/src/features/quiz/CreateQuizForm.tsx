@@ -4,19 +4,19 @@ import Button from '@/ui/Button'
 import Form from '@/ui/Form'
 import FormRow from '@/ui/FormRow'
 import Input from '@/ui/Input'
-import { UserType } from '@/ui/ProtectedRoute'
-import React from 'react'
+import { type UserType } from '@/ui/ProtectedRoute'
 import {
-    FieldErrors,
-    FormProvider,
-    SubmitErrorHandler,
-    SubmitHandler,
+    type FieldErrors,
+    type SubmitErrorHandler,
+    type SubmitHandler,
     useForm,
 } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useDecks } from '../decks/useDecks'
 import Spinner from '@/ui/Spinner'
 import { capitalizeHeader } from '@/utils/formatHeaders'
+import { useCreateQuiz } from './useCreateQuiz'
+import { useEditQuiz } from './useEditQuiz'
 
 type CreateQuizFormProps = {
     quizToEdit: Tables<'Quizes'> | undefined
@@ -31,9 +31,9 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
     const isEditingSession = Boolean(editId)
 
     //Handling Create || Edit Deck
-    // const { isCreating, createDeck } = useCreateDeck()
-    // const { isUpdating, updateDeck } = useEditDeck()
-    // const isWorking = isCreating ?? isUpdating
+    const { isCreating, createQuiz } = useCreateQuiz()
+    const { isUpdating, updateQuiz } = useEditQuiz()
+    const isWorking = isCreating ?? isUpdating
 
     //Getting User_id for the form creation of an object
     const [user, _] = useLocalStorageState<UserType>(
@@ -45,10 +45,11 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
     )
 
     //Handling Form
-    const { handleSubmit, register, reset, watch, control, formState } =
-        useForm<Tables<'Quizes'>>({
-            defaultValues: isEditingSession ? editValues : undefined,
-        })
+    const { handleSubmit, register, reset, watch, formState } = useForm<
+        Tables<'Quizes'>
+    >({
+        defaultValues: isEditingSession ? editValues : undefined,
+    })
     const { errors } = formState
     const watchQuestionTime = watch('questionTime')
     const watchQuizTime = watch('quizTime')
@@ -67,26 +68,35 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
     })
 
     const onSubmit: SubmitHandler<Tables<'Quizes'>> = (data) => {
-        console.log(data)
-        // if (isEditingSession)
-        //     updateDeck(
-        //         { newData: data, id: editId! },
-        //         {
-        //             onSuccess: () => {
-        //                 reset()
-        //                 onCloseModal?.()
-        //             },
-        //         }
-        //     )
-        // else {
-        //     const newData = { ...data, user_id: user.user_id }
-        //     createDeck(newData, {
-        //         onSuccess: () => {
-        //             reset()
-        //             onCloseModal?.()
-        //         },
-        //     })
-        // }
+        let decksId
+        decksId = data.decksId.filter((el) => Number(el) > 0)
+        decksId = decksId.map((el) => Number(el))
+        let newData = {
+            ...data,
+            quizTime: data.quizTime ? data.quizTime : null,
+            questionTime: data.questionTime ? data.questionTime : null,
+            decksId,
+        }
+
+        if (isEditingSession)
+            updateQuiz(
+                { newData, id: editId! },
+                {
+                    onSuccess: () => {
+                        reset()
+                        onCloseModal?.()
+                    },
+                }
+            )
+        else {
+            newData = { ...newData, user_id: user.user_id }
+            createQuiz(newData, {
+                onSuccess: () => {
+                    reset()
+                    onCloseModal?.()
+                },
+            })
+        }
     }
 
     const onError: SubmitErrorHandler<FieldErrors> = () => {
