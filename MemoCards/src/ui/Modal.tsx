@@ -99,7 +99,7 @@ function Window({
             exit={{ opacity: 0 }}
         >
             <motion.div
-                className={`tab-land:px-18 tab-land:py-18 fixed left-1/2 top-1/2 flex  translate-x-[-50%] translate-y-[-50%]  flex-col gap-4 rounded-2xl bg-picton-blue-50  px-8 py-8 shadow-lg phone:px-10 phone:py-10 tab-port:px-14 tab-land:py-14 ${type === 'regular' ? '' : 'bg-gradient-to-tl from-picton-blue-50 to-chateau-green-300'}`}
+                className={`tab-land:px-18 tab-land:py-18 fixed left-1/2 top-1/2 flex  translate-x-[-50%] translate-y-[-50%]  flex-col gap-4 rounded-2xl bg-picton-blue-50  px-4 py-4 shadow-lg phone:px-8 phone:py-8 tab-port:px-12 tab-port:py-12 ${type === 'regular' ? '' : 'bg-gradient-to-tl from-picton-blue-50 to-chateau-green-300'}`}
                 initial={{ scale: 0.8, opacity: 0, y: 0 }}
                 animate={{
                     scale: 1,

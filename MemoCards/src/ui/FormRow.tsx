@@ -32,7 +32,7 @@ function FormRow({ children, label, error, className }: FormRowProps) {
                         <>
                             {label && (
                                 <label
-                                    className=" text-[1.4rem]  uppercase tracking-wide text-mako-grey-700"
+                                    className=" text-[1.4rem]   tracking-wide text-mako-grey-700"
                                     htmlFor={child.props.id}
                                 >
                                     {label}
