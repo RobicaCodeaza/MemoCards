@@ -84,7 +84,7 @@ export type Database = {
           questionTime: number | null
           quizName: string
           quizTime: number | null
-          userId: string
+          user_id: string
         }
         Insert: {
           completionTime?: number | null
@@ -95,7 +95,7 @@ export type Database = {
           questionTime?: number | null
           quizName: string
           quizTime?: number | null
-          userId: string
+          user_id: string
         }
         Update: {
           completionTime?: number | null
@@ -106,7 +106,7 @@ export type Database = {
           questionTime?: number | null
           quizName?: string
           quizTime?: number | null
-          userId?: string
+          user_id?: string
         }
         Relationships: []
       }
