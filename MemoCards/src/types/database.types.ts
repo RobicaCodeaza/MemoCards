@@ -78,6 +78,7 @@ export type Database = {
         Row: {
           completionTime: number | null
           decksId: number[]
+          description: string | null
           id: number
           lastTested: string | null
           perfectionScore: number | null
@@ -89,6 +90,7 @@ export type Database = {
         Insert: {
           completionTime?: number | null
           decksId: number[]
+          description?: string | null
           id?: number
           lastTested?: string | null
           perfectionScore?: number | null
@@ -100,6 +102,7 @@ export type Database = {
         Update: {
           completionTime?: number | null
           decksId?: number[]
+          description?: string | null
           id?: number
           lastTested?: string | null
           perfectionScore?: number | null
