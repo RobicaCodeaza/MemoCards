@@ -1,4 +1,5 @@
 import { Progress } from '@/components/ui/progress'
+import { Tables } from '@/types/database.types'
 import Button from '@/ui/Button'
 import ConfirmDelete from '@/ui/ConfirmDelete'
 import Menus from '@/ui/Menus'
@@ -6,13 +7,17 @@ import Modal from '@/ui/Modal'
 import { CiEdit } from 'react-icons/ci'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 
-function QuizCard() {
+type QuizCardProps = {
+    quiz: Tables<'Quizes'>
+}
+
+function QuizCard({ quiz }: QuizCardProps) {
     return (
         <div className=" flex h-[25rem] w-full flex-col gap-6  rounded-lg border border-chateau-green-200   px-6 py-6 shadow-lg   phone:px-8 phone:py-8 tab-port:px-8 tab-port:py-8 tab-land:px-10  tab-land:py-10 particular-small-laptop:px-12 particular-small-laptop:py-12">
             <div className="flex items-start justify-between">
                 <div className="flex flex-col ">
                     <p className="text-[1.5rem] font-medium uppercase">
-                        Medical
+                        {quiz.quizName}
                     </p>
                     <p className="text-[1.4rem] text-mako-grey-500">
                         Short description of what the test should be
@@ -67,11 +72,14 @@ function QuizCard() {
                     htmlFor="progress"
                     className="text-center text-neon-carrot-900"
                 >
-                    Perfection Score: <strong>48/100</strong>
+                    Perfection Score:{' '}
+                    <strong>
+                        {quiz.perfectionScore ? quiz.perfectionScore : 0}
+                    </strong>
                 </label>
                 <div className="">
                     <Progress
-                        value={44}
+                        value={quiz.perfectionScore}
                         className="mx-16 w-[auto] border border-neon-carrot-500 bg-neon-carrot-300  "
                     />
                 </div>
