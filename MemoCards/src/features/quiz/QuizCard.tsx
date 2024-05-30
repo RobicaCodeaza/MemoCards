@@ -20,7 +20,7 @@ function QuizCard({ quiz }: QuizCardProps) {
                         {quiz.quizName}
                     </p>
                     <p className="text-[1.4rem] text-mako-grey-500">
-                        Short description of what the test should be
+                        {quiz.description}
                     </p>
                     {/* <p className="text-[1.4rem] text-mako-grey-500">
                         Time per Question

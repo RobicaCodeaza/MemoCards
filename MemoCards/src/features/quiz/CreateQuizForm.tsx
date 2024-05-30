@@ -119,6 +119,22 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                     })}
                 ></Input>
             </FormRow>
+
+            <FormRow
+                label="Short Description"
+                error={errors?.description?.message}
+            >
+                <Input
+                    disabled={isWorking}
+                    id="description"
+                    type="text"
+                    placeholder="The quiz intends to..."
+                    {...register('description', {
+                        required: 'This Field is Required',
+                    })}
+                ></Input>
+            </FormRow>
+
             {!watchQuizTime && (
                 <FormRow
                     label="Question Time(optional) - sec"
