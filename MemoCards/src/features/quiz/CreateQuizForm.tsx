@@ -110,7 +110,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
         <Form onSubmit={handleSubmit(onSubmit, onError)} variation="modal">
             <FormRow label="Quiz Name" error={errors?.quizName?.message}>
                 <Input
-                    disabled={false}
+                    disabled={isWorking}
                     id="quizName"
                     type="text"
                     placeholder="Quiz num 1"
@@ -125,7 +125,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                     error={errors?.questionTime?.message}
                 >
                     <Input
-                        disabled={false}
+                        disabled={isWorking}
                         id="questionTime"
                         type="number"
                         placeholder="60"
@@ -145,7 +145,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                     error={errors?.quizTime?.message}
                 >
                     <Input
-                        disabled={false}
+                        disabled={isWorking}
                         id="quizTime"
                         placeholder="5"
                         type="number"
@@ -178,10 +178,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                             type="checkbox"
                             id={String(deck.id)}
                             value={deck.id}
-                            disabled={false}
-                            // defaultValue={
-                            //     isEditingSession ? cardToEdit?.answers?.[index] : ''
-                            // }
+                            disabled={isWorking}
                             {...register(`decksId.${index}`, {})}
                         ></Input>
                     </FormRow>
@@ -194,7 +191,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                     variation="subtleWhite"
                     size="small"
                     type="reset"
-                    disabled={false}
+                    disabled={isWorking}
                 >
                     Reset
                 </Button>
@@ -202,7 +199,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                     as="button"
                     variation="simplePrimary"
                     size="small"
-                    disabled={false}
+                    disabled={isWorking}
                 >
                     {isEditingSession ? 'Edit' : 'Add'}
                 </Button>
