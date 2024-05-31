@@ -15,9 +15,18 @@ function QuizMain() {
                 <Empty resource="quiz"></Empty>
             </>
         )
+
+    const quizesNum = quizes.length
+    const quizesWithTime = quizes.filter((quiz) => quiz.completionTime !== null)
+    const averageTime = quizesWithTime.reduce((acc, curr) => {
+        return (acc + curr.completionTime!) / quizesWithTime.length
+    }, 0)
     return (
         <>
-            <QuizSummary></QuizSummary>
+            <QuizSummary
+                quizesNum={quizesNum}
+                averageTime={averageTime}
+            ></QuizSummary>
             <QuizGrid count={count} quizes={quizes}></QuizGrid>
         </>
     )
