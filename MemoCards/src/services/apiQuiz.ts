@@ -57,3 +57,13 @@ export async function getQuizesPaginated(userId: string, page: number) {
 
     return { quizes, count }
 }
+
+export async function deleteQuiz(id: number, userId: string) {
+    const { error } = await supabase
+        .from('Quizes')
+        .delete()
+        .eq('id', id)
+        .eq('user_id', userId)
+
+    if (error) throw new Error('Could not delete the Quiz.')
+}

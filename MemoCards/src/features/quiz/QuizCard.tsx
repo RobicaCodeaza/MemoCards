@@ -7,12 +7,16 @@ import Modal from '@/ui/Modal'
 import { CiEdit } from 'react-icons/ci'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 import { motion } from 'framer-motion'
+import { useDeleteQuiz } from './useDeleteQuiz'
+import Spinner from '@/ui/Spinner'
 
 type QuizCardProps = {
     quiz: Tables<'Quizes'>
 }
 
 function QuizCard({ quiz }: QuizCardProps) {
+    const { deleteQuiz, isDeleting } = useDeleteQuiz()
+
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
@@ -65,11 +69,15 @@ function QuizCard({ quiz }: QuizCardProps) {
                             </Menus.List>
                         </Menus.Menu>
                         <Modal.Window name="deleteQuiz">
-                            <ConfirmDelete
-                                resourceName="Deck"
-                                disabled={false}
-                                // onConfirm={() => deleteDeck(deck.id)}
-                            ></ConfirmDelete>
+                            {isDeleting ? (
+                                <Spinner></Spinner>
+                            ) : (
+                                <ConfirmDelete
+                                    resourceName="Quiz"
+                                    disabled={isDeleting}
+                                    onConfirm={() => deleteQuiz(quiz.id)}
+                                ></ConfirmDelete>
+                            )}
                         </Modal.Window>
                     </Modal>
                 </div>
