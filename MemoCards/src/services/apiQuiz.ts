@@ -67,3 +67,11 @@ export async function deleteQuiz(id: number, userId: string) {
 
     if (error) throw new Error('Could not delete the Quiz.')
 }
+export async function deleteAllQuizes(userId: string) {
+    const { error } = await supabase
+        .from('Quizes')
+        .delete()
+        .eq('user_id', userId)
+
+    if (error) throw new Error(error.message)
+}

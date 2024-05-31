@@ -19,7 +19,7 @@ import { useCreateQuiz } from './useCreateQuiz'
 import { useEditQuiz } from './useEditQuiz'
 
 type CreateQuizFormProps = {
-    quizToEdit: Tables<'Quizes'> | undefined
+    quizToEdit?: Tables<'Quizes'>
     onCloseModal?: () => void
 }
 
