@@ -8,14 +8,13 @@ function QuizMain() {
     const { quizes, count, isLoading } = useQuizesPaginated()
     if (isLoading) return <Spinner></Spinner>
 
-    if (
-        !quizes?.length ||
-        quizes === undefined ||
-        count === undefined ||
-        count === null
-    )
-        return <Empty resource="Quizes"></Empty>
-
+    if (!quizes?.length || !count)
+        return (
+            <>
+                <QuizSummary></QuizSummary>
+                <Empty resource="quiz"></Empty>
+            </>
+        )
     return (
         <>
             <QuizSummary></QuizSummary>
