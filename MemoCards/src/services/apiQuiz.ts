@@ -6,7 +6,6 @@ export async function createEditQuiz(
     newQuiz: Tables<'Quizes'>,
     id: number | null
 ) {
-    console.log(newQuiz)
     let query
 
     if (!id) {
@@ -21,7 +20,6 @@ export async function createEditQuiz(
         }
         // Check if data already exists
         if (existingData && existingData.length > 0) {
-            console.log('error')
             throw new Error('Quiz with the same name already exists.')
         }
 
@@ -29,7 +27,6 @@ export async function createEditQuiz(
     } else query = supabase.from('Quizes').update(newQuiz).eq('id', id)
 
     const { data, error } = await query.select().single()
-    console.log(data)
 
     if (error) {
         throw new Error('Quiz could not be created.')
@@ -52,9 +49,9 @@ export async function getQuizesPaginated(userId: string, page: number) {
     }
 
     const { data: quizes, error, count } = await query
+    console.log(quizes, error?.message)
 
     if (error) throw new Error('Could not fetch the decks.')
-
     return { quizes, count }
 }
 
