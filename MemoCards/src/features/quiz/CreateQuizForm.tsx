@@ -27,8 +27,16 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
     //Defining if we deal with an edit or a create
 
     const { id: editId, ...editValues } = quizToEdit ?? {}
-
     const isEditingSession = Boolean(editId)
+
+    let editValuesCheckedDecks
+    if ('decksId' in editValues)
+        editValuesCheckedDecks = {
+            ...editValues,
+            decksId: editValues.decksId.map((el) =>
+                el !== 'false' ? el : 'false'
+            ),
+        }
 
     //Handling Create || Edit Deck
     const { isCreating, createQuiz } = useCreateQuiz()
@@ -48,7 +56,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
     const { handleSubmit, register, reset, watch, formState } = useForm<
         Tables<'Quizes'>
     >({
-        defaultValues: isEditingSession ? editValues : undefined,
+        defaultValues: isEditingSession ? editValuesCheckedDecks : undefined,
     })
     const { errors } = formState
     const watchQuestionTime = watch('questionTime')
@@ -71,6 +79,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
         let decksId
         decksId = data.decksId.filter((el) => Number(el) > 0)
         decksId = decksId.map((el) => Number(el))
+
         let newData = {
             ...data,
             quizTime: data.quizTime ? data.quizTime : null,
@@ -194,6 +203,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                             type="checkbox"
                             id={String(deck.id)}
                             value={deck.id}
+                            // checked={true}
                             disabled={isWorking}
                             {...register(`decksId.${index}`, {})}
                         ></Input>
