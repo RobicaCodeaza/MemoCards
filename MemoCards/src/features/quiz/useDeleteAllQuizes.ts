@@ -18,13 +18,13 @@ export function useDeleteAllQuizes() {
 
     const { isLoading: isDeletingAll, mutate: deleteAllQuizes } = useMutation({
         mutationFn: () => deleteAllQuizesApi(user.user_id),
-        onSuccess: () => {
+        onSuccess: async () => {
             toast.success('All Quizes successfully deleted.')
             searchParams.delete('page')
             setSearchParams(searchParams)
-            // await queryClient.invalidateQueries({
-            //     queryKey: ['quizes'],
-            // })
+            await queryClient.invalidateQueries({
+                queryKey: ['quizes'],
+            })
         },
         onError: (err: Error) => toast.error(err.message),
     })

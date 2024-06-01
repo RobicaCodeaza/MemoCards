@@ -28,14 +28,13 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
 
     const { id: editId, ...editValues } = quizToEdit ?? {}
     const isEditingSession = Boolean(editId)
-
-    let editValuesCheckedDecks
-    if ('decksId' in editValues)
+    console.log(editValues)
+    let editValuesCheckedDecks: Tables<'Quizes'>
+    if ('decksId' in editValues && typeof editId === 'number')
         editValuesCheckedDecks = {
             ...editValues,
-            decksId: editValues.decksId.map((el) =>
-                el !== 'false' ? el : 'false'
-            ),
+            id: editId,
+            // decksId: editValues.decksId.map((el) => (typeof el ? el : 'false')),
         }
 
     //Handling Create || Edit Deck
@@ -75,16 +74,23 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
         }
     })
 
-    const onSubmit: SubmitHandler<Tables<'Quizes'>> = (data) => {
-        let decksId
-        decksId = data.decksId.filter((el) => Number(el) > 0)
-        decksId = decksId.map((el) => Number(el))
+    function handleDeckChange(e: React.ChangeEvent<HTMLInputElement>) {
+        console.log(e.target.checked)
+    }
 
+    const onSubmit: SubmitHandler<Tables<'Quizes'>> = (data) => {
+        let decksId: number[]
+        console.log(data.decksId)
+        data.decksContained.forEach((el, index) => {
+            if (el === true && decks !== null && decks !== undefined)
+                decksId.push(decks.at(index).id)
+        })
         let newData = {
             ...data,
             quizTime: data.quizTime ? data.quizTime : null,
             questionTime: data.questionTime ? data.questionTime : null,
             decksId,
+            quizName: data.quizName.toLowerCase(),
         }
 
         if (isEditingSession)
@@ -202,10 +208,8 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                         <Input
                             type="checkbox"
                             id={String(deck.id)}
-                            value={deck.id}
-                            // checked={true}
                             disabled={isWorking}
-                            {...register(`decksId.${index}`, {})}
+                            {...register(`decksContained.${index}`, {})}
                         ></Input>
                     </FormRow>
                 ))}

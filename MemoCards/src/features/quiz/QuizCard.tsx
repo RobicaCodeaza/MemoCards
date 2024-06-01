@@ -10,6 +10,7 @@ import { motion } from 'framer-motion'
 import { useDeleteQuiz } from './useDeleteQuiz'
 import Spinner from '@/ui/Spinner'
 import CreateQuizForm from './CreateQuizForm'
+import { capitalizeHeader } from '@/utils/formatHeaders'
 
 type QuizCardProps = {
     quiz: Tables<'Quizes'>
@@ -23,7 +24,7 @@ function QuizCard({ quiz }: QuizCardProps) {
             <div className="flex items-start justify-between">
                 <div className="flex flex-col ">
                     <p className="text-[1.5rem] font-medium uppercase">
-                        {quiz.quizName}
+                        {capitalizeHeader(quiz.quizName)}
                     </p>
                     <p className="text-[1.4rem] text-mako-grey-500">
                         {quiz.description}
