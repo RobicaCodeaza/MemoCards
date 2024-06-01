@@ -27,7 +27,7 @@ export function useQuizesPaginated() {
     const { isLoading, data: { quizes, count } = {} } = useQuery({
         queryKey: ['quizes', pagination],
         queryFn: () => {
-            console.log('useQuery', pagination)
+            // console.log('useQuery', pagination)
             return getQuizesPaginated(user.user_id, pagination)
         },
         onError: (err: Error) => toast.error(err.message),
@@ -40,7 +40,7 @@ export function useQuizesPaginated() {
             void queryClient.prefetchQuery({
                 queryKey: ['quizes', pagination + 1],
                 queryFn: () => {
-                    console.log('pre-fetch forw')
+                    // console.log('pre-fetch forw')
                     return getQuizesPaginated(user.user_id, pagination + 1)
                 },
                 retry: false,
@@ -50,7 +50,7 @@ export function useQuizesPaginated() {
             void queryClient.prefetchQuery({
                 queryKey: ['quizes', pagination - 1],
                 queryFn: () => {
-                    console.log('pre-fetch back')
+                    // console.log('pre-fetch back')
                     return getQuizesPaginated(user.user_id, pagination - 1)
                 },
                 retry: false,

@@ -49,7 +49,6 @@ export async function getQuizesPaginated(userId: string, page: number) {
     }
 
     const { data: quizes, error, count } = await query
-    console.log(quizes, error?.message)
 
     if (error) throw new Error('Could not fetch the decks.')
     return { quizes, count }
