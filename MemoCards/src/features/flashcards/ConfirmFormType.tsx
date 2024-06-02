@@ -99,6 +99,11 @@ function ConfirmFormType({
                     placeholder="ex: 1"
                     {...register('numAnswers', {
                         required: 'This field is required',
+                        min: {
+                            value: 1,
+                            message:
+                                'Please provide a pozitive value bigger than 1(answer per question).',
+                        },
                     })}
                 ></Input>
             </FormRow>
