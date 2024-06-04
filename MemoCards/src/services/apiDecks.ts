@@ -80,6 +80,11 @@ export async function deleteAllDecks(userId: string) {
         .delete()
         .eq('user_id', userId)
 
+    //Deleting All Quizes Coresponding to those decks
+    // const { error } = await supabase
+    //     .from('Quizes')
+    //     .delete()
+    //     .eq('user_id', userId)
     if (error) throw new Error(error.message)
 }
 
