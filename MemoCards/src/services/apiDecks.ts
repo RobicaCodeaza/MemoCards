@@ -70,8 +70,30 @@ export async function createEditDeck(
 
 export async function deleteDeck(id: number) {
     const { error } = await supabase.from('Decks').delete().eq('id', id)
-
     if (error) throw new Error('Could not delete the deck.')
+
+    const { data, error: errorGettingQuizes } = await supabase
+        .from('Quizes')
+        .select('*')
+        .contains('decksId', [id])
+    if (errorGettingQuizes)
+        throw new Error('Could not find decks that contain that data.')
+
+    if (!data) return
+
+    const updates = data.map((data) => {
+        return {
+            ...data,
+            decksId: data.decksId.filter((deckId) => deckId !== id),
+        }
+    })
+    const { data: updatedData, error: errorUpdatingData } = await supabase
+        .from('Quizes')
+        .upsert(updates)
+        .select('*')
+
+    if (errorUpdatingData)
+        throw new Error('Error updating quizes that had decks deleted.')
 }
 
 export async function deleteAllDecks(userId: string) {

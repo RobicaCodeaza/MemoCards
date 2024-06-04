@@ -81,7 +81,6 @@ function DecksGrid() {
                 <Menus>
                     <AnimatePresence>
                         {sortedDecks?.map((deck) => {
-                            console.log(sortedDecks)
                             return (
                                 <DeckCard deck={deck} key={deck.id}></DeckCard>
                             )
