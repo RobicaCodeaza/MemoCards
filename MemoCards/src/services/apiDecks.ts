@@ -87,7 +87,7 @@ export async function deleteDeck(id: number) {
             decksId: data.decksId.filter((deckId) => deckId !== id),
         }
     })
-    const { data: updatedData, error: errorUpdatingData } = await supabase
+    const { error: errorUpdatingData } = await supabase
         .from('Quizes')
         .upsert(updates)
         .select('*')
@@ -101,13 +101,14 @@ export async function deleteAllDecks(userId: string) {
         .from('Decks')
         .delete()
         .eq('user_id', userId)
+    if (error) throw new Error(error.message)
 
     //Deleting All Quizes Coresponding to those decks
-    // const { error } = await supabase
-    //     .from('Quizes')
-    //     .delete()
-    //     .eq('user_id', userId)
-    if (error) throw new Error(error.message)
+    const { error: errorDeletingQuizes } = await supabase
+        .from('Quizes')
+        .delete()
+        .eq('user_id', userId)
+    if (errorDeletingQuizes) throw new Error(errorDeletingQuizes.message)
 }
 
 export async function getDeckIdForCard(
@@ -126,18 +127,5 @@ export async function getDeckIdForCard(
         throw new Error("Couldn't find a deck with the data provided.")
     }
 
-    console.log(data?.[0].id)
     return data?.[0].id
 }
-
-// export async function getDeckByDetails(id: number) {
-//     const { data, error } = await supabase
-//         .from('Decks')
-//         .select('chapter,subchapter,lesson')
-//         .eq('id', id)
-
-//     if (error) {
-//         throw new Error("Couldn't find a deck with the data provided.")
-//     }
-//     return data[0]
-// }
