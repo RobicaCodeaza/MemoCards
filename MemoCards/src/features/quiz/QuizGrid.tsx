@@ -14,7 +14,7 @@ function QuizGrid({ quizes, count }: QuizGridProps) {
     return (
         <>
             <Menus>
-                <div className="mt-[-3rem] grid w-full grid-cols-[minmax(32.5rem,40rem)] grid-rows-decks  justify-center gap-16  border-b  border-mako-grey-200 bg-picton-blue-50 px-5 py-10 phone:grid-cols-decks">
+                <div className="mt-[-3rem] grid  grid-cols-[minmax(32.5rem,40rem)] grid-rows-decks  justify-center gap-16  border-b  border-mako-grey-200 bg-picton-blue-50 px-5 py-10 phone:grid-cols-decks">
                     {quizes.map((quiz, index) => (
                         <QuizCard key={index} quiz={quiz}></QuizCard>
                     ))}

@@ -56,8 +56,8 @@ function DecksGrid() {
                 bValue.every((item) => typeof item === 'string')
             ) {
                 // Handle date strings
-                const aDate = new Date(aValue[aValue.length - 1] as string)
-                const bDate = new Date(bValue[aValue.length - 1] as string)
+                const aDate = new Date(aValue[aValue.length - 1])
+                const bDate = new Date(bValue[aValue.length - 1])
                 return modifier * (aDate.getTime() - bDate.getTime())
             } else {
                 const aNumber = aValue[aValue.length - 1] as number
