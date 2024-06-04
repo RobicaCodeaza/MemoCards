@@ -23,19 +23,29 @@ type CreateQuizFormProps = {
     onCloseModal?: () => void
 }
 
+type QuizFormTypes = Tables<'Quizes'> & { deckSelection: boolean[] }
+
 function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
     //Defining if we deal with an edit or a create
-
     const { id: editId, ...editValues } = quizToEdit ?? {}
     const isEditingSession = Boolean(editId)
-    console.log(editValues)
-    let editValuesCheckedDecks: Tables<'Quizes'>
-    if ('decksId' in editValues && typeof editId === 'number')
+
+    let editValuesCheckedDecks: QuizFormTypes
+    if (
+        'decksId' in editValues &&
+        isEditingSession &&
+        typeof editId === 'number'
+    ) {
+        const deckSelection = editValues.decksId.map((el) =>
+            el !== -1 ? true : false
+        )
         editValuesCheckedDecks = {
             ...editValues,
             id: editId,
-            // decksId: editValues.decksId.map((el) => (typeof el ? el : 'false')),
+            deckSelection,
+            quizName: capitalizeHeader(editValues.quizName),
         }
+    }
 
     //Handling Create || Edit Deck
     const { isCreating, createQuiz } = useCreateQuiz()
@@ -52,17 +62,17 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
     )
 
     //Handling Form
-    const { handleSubmit, register, reset, watch, formState } = useForm<
-        Tables<'Quizes'>
-    >({
-        defaultValues: isEditingSession ? editValuesCheckedDecks : undefined,
-    })
+    const { handleSubmit, register, reset, watch, formState } =
+        useForm<QuizFormTypes>({
+            defaultValues: isEditingSession
+                ? editValuesCheckedDecks!
+                : undefined,
+        })
     const { errors } = formState
     const watchQuestionTime = watch('questionTime')
     const watchQuizTime = watch('quizTime')
 
     const { decks, isLoading } = useDecks()
-
     const deckCompleteNaming = decks?.map((deck) => {
         return {
             naming: [
@@ -74,25 +84,25 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
         }
     })
 
-    function handleDeckChange(e: React.ChangeEvent<HTMLInputElement>) {
-        console.log(e.target.checked)
-    }
+    const onSubmit: SubmitHandler<QuizFormTypes> = (data) => {
+        const decksId = Array.from(
+            { length: data.deckSelection.length },
+            (_, index) => {
+                if (data.deckSelection[index] === true) return decks?.[index].id
+                else return -1
+            }
+        ) as Tables<'Quizes'>['decksId']
 
-    const onSubmit: SubmitHandler<Tables<'Quizes'>> = (data) => {
-        let decksId: number[]
-        console.log(data.decksId)
-        data.decksContained.forEach((el, index) => {
-            if (el === true && decks !== null && decks !== undefined)
-                decksId.push(decks.at(index).id)
-        })
-        let newData = {
-            ...data,
-            quizTime: data.quizTime ? data.quizTime : null,
-            questionTime: data.questionTime ? data.questionTime : null,
-            decksId,
+        const { deckSelection, ...dataForm } = data
+        let newData
+        newData = {
+            ...dataForm,
             quizName: data.quizName.toLowerCase(),
+            quizTime: data.quizTime ? Number(data.quizTime) : null,
+            questionTime: data.questionTime ? Number(data.questionTime) : null,
+            decksId,
         }
-
+        console.log(newData)
         if (isEditingSession)
             updateQuiz(
                 { newData, id: editId! },
@@ -199,7 +209,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
             <div className="h-[12.5rem] overflow-y-scroll rounded-md border border-mako-grey-400 p-2 phone:h-[15rem] particular-small-laptop:h-[10rem]">
                 {deckCompleteNaming?.map((deck, index) => (
                     <FormRow
-                        error={errors?.decksId?.[index]?.message}
+                        error={errors?.deckSelection?.[index]?.message}
                         key={index}
                     >
                         <span className="text-center text-[1.3rem] tracking-wide text-picton-blue-900 particular-small-laptop:w-[37.5rem]">
@@ -208,8 +218,9 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
                         <Input
                             type="checkbox"
                             id={String(deck.id)}
+                            // value={`${Boolean(deck.id)}`}
                             disabled={isWorking}
-                            {...register(`decksContained.${index}`, {})}
+                            {...register(`deckSelection.${index}`, {})}
                         ></Input>
                     </FormRow>
                 ))}

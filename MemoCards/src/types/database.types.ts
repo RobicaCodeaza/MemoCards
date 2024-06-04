@@ -77,7 +77,6 @@ export type Database = {
       Quizes: {
         Row: {
           completionTime: number | null
-          decksContained: boolean[]
           decksId: number[]
           description: string | null
           id: number
@@ -90,7 +89,6 @@ export type Database = {
         }
         Insert: {
           completionTime?: number | null
-          decksContained: boolean[]
           decksId: number[]
           description?: string | null
           id?: number
@@ -103,7 +101,6 @@ export type Database = {
         }
         Update: {
           completionTime?: number | null
-          decksContained?: boolean[]
           decksId?: number[]
           description?: string | null
           id?: number
