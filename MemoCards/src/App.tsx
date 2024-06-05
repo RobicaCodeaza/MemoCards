@@ -49,6 +49,7 @@ function App() {
                                     }
                                 ></Route>
                                 <Route
+                                    index
                                     path="dashboard"
                                     element={<Dashboard></Dashboard>}
                                 ></Route>
