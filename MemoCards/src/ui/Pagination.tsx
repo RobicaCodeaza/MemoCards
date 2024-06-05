@@ -30,7 +30,7 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
     if (pageCount <= 1) return null
 
     return (
-        <div className="flex w-full items-center justify-between px-10 phone:px-14">
+        <div className="flex w-full items-center justify-between px-2 phone:px-14">
             <p className="ml-3 text-[1.4rem]">
                 Showing{' '}
                 <span className="font-semibold">
@@ -45,25 +45,25 @@ function Pagination({ count, PAGE_SIZE }: PaginationProps) {
                 </span>{' '}
                 of <span className="font-semibold">{count}</span> results
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-2 phone:gap-3 tab-port:gap-4 ">
                 <button
-                    className="text-inherit  flex items-center justify-center gap-2 rounded border-none bg-mako-grey-400 px-5 py-2 text-[1.4rem] font-medium text-mako-grey-50 transition-all duration-300 hover:bg-picton-blue-600
-                active:bg-picton-blue-600 active:text-picton-blue-100
+                    className="text-inherit  flex items-center justify-center gap-2 rounded border-none bg-mako-grey-400 px-2 py-2 text-[1.4rem] font-medium text-mako-grey-50 transition-all duration-300 hover:bg-picton-blue-600 active:bg-picton-blue-600
+                active:text-picton-blue-100 phone:px-5
                 "
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
                 >
-                    <HiChevronDoubleLeft className="h-7 w-7"></HiChevronDoubleLeft>{' '}
-                    <span className="pl-2">Previous</span>
+                    <HiChevronDoubleLeft className="h-6 w-6 phone:h-7 phone:w-7"></HiChevronDoubleLeft>{' '}
+                    <span className="block phone:pl-2">Previous</span>
                 </button>
                 <button
-                    className="text-inherit  flex items-center justify-center gap-2 rounded border-none bg-mako-grey-400 px-5 py-2 text-[1.4rem] font-medium text-mako-grey-50 transition-all duration-300 hover:bg-picton-blue-600
-                    active:bg-picton-blue-600 active:text-picton-blue-100"
+                    className="text-inherit  flex items-center justify-center gap-2 rounded border-none bg-mako-grey-400 px-2 py-2 text-[1.4rem] font-medium text-mako-grey-50 transition-all duration-300 hover:bg-picton-blue-600 active:bg-picton-blue-600
+                    active:text-picton-blue-100 phone:px-5"
                     onClick={handleNextPage}
                     disabled={currentPage === pageCount}
                 >
-                    <span className="pr-2">Next</span>
-                    <HiChevronDoubleRight className="h-7 w-7"></HiChevronDoubleRight>
+                    <span className="block phone:pr-2">Next</span>
+                    <HiChevronDoubleRight className="h-6 w-6 phone:h-7 phone:w-7"></HiChevronDoubleRight>
                 </button>
             </div>
         </div>
