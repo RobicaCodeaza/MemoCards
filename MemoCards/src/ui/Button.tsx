@@ -40,11 +40,11 @@ function Button<C extends ElementType>({
             fancyPrimary: '',
             fancySecondary: '',
             accentPrimary:
-                'rounded bg-picton-blue-500 hover:bg-picton-blue-600 text-mako-grey-200 hover:text-mako-grey-50 active:bg-picton-blue-700  active:text-mako-grey-100',
+                'rounded bg-picton-blue-500 hover:bg-picton-blue-600 text-mako-grey-50 hover:text-mako-grey-50 active:bg-picton-blue-700  active:text-mako-grey-100',
             accentSecondary:
-                'rounded bg-neon-carrot-500 hover:bg-neon-carrot-600 text-mako-grey-200 hover:text-mako-grey-50 active:bg-neon-carrot-700  active:text-mako-grey-100',
+                'rounded bg-neon-carrot-500 hover:bg-neon-carrot-600 text-mako-grey-50 hover:text-mako-grey-50 active:bg-neon-carrot-700  active:text-mako-grey-100',
             accentTertiary:
-                'rounded bg-chateau-green-500 hover:bg-chateau-green-600 text-mako-grey-200 hover:text-mako-grey-50 active:bg-chateau-green-700  active:text-mako-grey-100',
+                'rounded bg-chateau-green-500 hover:bg-chateau-green-600 text-mako-grey-50 hover:text-mako-grey-50 active:bg-chateau-green-700  active:text-mako-grey-100',
             simplePrimary: `border rounded border-picton-blue-500 hover:border-picton-blue-600 text-picton-blue-500 hover:text-picton-blue-600 active:border-picton-blue-700  active:text-picton-blue-700`,
             simpleTertiary: `border rounded border-chateau-green-500 hover:border-chateau-green-600 text-chateau-green-500 hover:text-chateau-green-600 active:border-chateau-green-700  active:text-chateau-green-700`,
             simpleSecondary: `border rounded border-neon-carrot-500 hover:border-neon-carrot-600 text-neon-carrot-500 hover:text-neon-carrot-600 active:border-neon-carrot-700  active:text-neon-carrot-700`,
