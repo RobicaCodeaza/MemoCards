@@ -7,16 +7,28 @@ import Heading from '@/ui/Heading'
 import Row from '@/ui/Row'
 
 function Quiz() {
+    const isTakingQuiz = true
+
     return (
         <>
-            <Row type="horizontal">
-                <Heading as="h1">Quiz 💯</Heading>
-            </Row>
-            <Row type="horizontal">
-                <QuizModifiers></QuizModifiers>
-                <QuizTableOperation></QuizTableOperation>
-            </Row>
-            <QuizMain></QuizMain>
+            {!isTakingQuiz ? (
+                <>
+                    <Row type="horizontal">
+                        <Heading as="h1">Quiz 💯</Heading>
+                    </Row>
+                    <Row type="horizontal">
+                        <QuizModifiers></QuizModifiers>
+                        <QuizTableOperation></QuizTableOperation>
+                    </Row>
+                    <QuizMain></QuizMain>
+                </>
+            ) : (
+                <>
+                    <Row type="horizontal">
+                        <Heading as="h1">Taking Quiz ⌛</Heading>
+                    </Row>
+                </>
+            )}
         </>
     )
 }
