@@ -29,6 +29,22 @@
     @apply scale-95 transform opacity-0 transition-all duration-500;
 }
 
+.perspective {
+    perspective: 1000px;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+.rotate-negative-y-180 {
+    transform: rotateY(-180deg);
+}
+
+.backface-hidden {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
 *,
 *::before,
 *::after {
