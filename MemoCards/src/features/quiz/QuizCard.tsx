@@ -23,17 +23,22 @@ import Modal from '@/ui/Modal'
 import Spinner from '@/ui/Spinner'
 import ButtonIcon from '@/ui/ButtonIcon'
 import CreateQuizForm from './CreateQuizForm'
+import { useNavigate } from 'react-router-dom'
 
 type QuizCardProps = {
     quiz: Tables<'Quizes'>
 }
 
 function QuizCard({ quiz }: QuizCardProps) {
+    const navigate = useNavigate()
     const { deleteQuiz, isDeleting } = useDeleteQuiz()
 
     const [isOtherDetails, setIsOtherDetails] = useState<boolean>()
     function handleIsOtherDetails() {
         setIsOtherDetails((isOtherDetails) => !isOtherDetails)
+    }
+    function handleTakeTest() {
+        navigate(`${quiz.id}`)
     }
 
     return (
@@ -145,7 +150,11 @@ function QuizCard({ quiz }: QuizCardProps) {
                             </div>
                         </div>
 
-                        <Button variation="accentTertiary" size="small">
+                        <Button
+                            variation="accentTertiary"
+                            size="small"
+                            onClick={handleTakeTest}
+                        >
                             Take Test
                         </Button>
                     </div>
