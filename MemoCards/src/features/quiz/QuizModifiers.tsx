@@ -31,7 +31,7 @@ function QuizModifiers() {
                         >
                             <RiDeleteBin7Line></RiDeleteBin7Line>
                         </ButtonIcon>
-                        Delete All Quizes
+                        Delete All
                     </Button>
                 </Modal.Open>
                 <Modal.Window type="quiz" name="newQuiz">
