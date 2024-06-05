@@ -74,8 +74,8 @@ function Row({ children, index, type }: RowProps) {
                 exit={{ opacity: 0, scale: 0.2, y: -50 }}
                 transition={{ duration: 0.3 }}
                 role="row"
-                className={` flex  
-                flex-col items-center gap-5  bg-picton-blue-90 px-10  py-5 text-center transition-none phone:grid phone:gap-10 phone:text-left
+                className={`flex w-full  flex-col 
+                   gap-5 bg-picton-blue-90 px-10  py-5  transition-none phone:grid phone:gap-10 phone:text-left
                 `}
                 style={{
                     gridTemplateColumns: columns,
