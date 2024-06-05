@@ -13,6 +13,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Decks from './pages/Decks'
 import { Toaster } from 'react-hot-toast'
+import QuizLayout from './features/quiz/QuizLayout'
+import Testing from './pages/Testing'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -63,8 +65,17 @@ function App() {
                                 ></Route>
                                 <Route
                                     path="quiz"
-                                    element={<Quiz></Quiz>}
-                                ></Route>
+                                    element={<QuizLayout></QuizLayout>}
+                                >
+                                    <Route
+                                        index
+                                        element={<Quiz></Quiz>}
+                                    ></Route>
+                                    <Route
+                                        path=":quizId"
+                                        element={<Testing></Testing>}
+                                    ></Route>
+                                </Route>
                                 <Route
                                     path="settings"
                                     element={<Settings></Settings>}

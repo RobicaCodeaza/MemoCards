@@ -14,9 +14,6 @@ function Quiz() {
             {!isTakingQuiz ? (
                 <>
                     <Row type="horizontal">
-                        <Heading as="h1">Quiz 💯</Heading>
-                    </Row>
-                    <Row type="horizontal">
                         <QuizModifiers></QuizModifiers>
                         <QuizTableOperation></QuizTableOperation>
                     </Row>
