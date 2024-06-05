@@ -50,7 +50,7 @@ function CardsModifiers() {
                         >
                             <RiDeleteBin7Line></RiDeleteBin7Line>
                         </ButtonIcon>
-                        Delete All Cards
+                        Delete All
                     </Button>
                 </Modal.Open>
 
