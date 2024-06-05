@@ -52,7 +52,7 @@ function DecksModifiers() {
                         >
                             <RiDeleteBin7Line></RiDeleteBin7Line>
                         </ButtonIcon>
-                        Delete All Decks
+                        Delete All
                     </Button>
                 </Modal.Open>
 
