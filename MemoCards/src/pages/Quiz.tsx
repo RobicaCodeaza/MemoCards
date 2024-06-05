@@ -7,7 +7,7 @@ import Heading from '@/ui/Heading'
 import Row from '@/ui/Row'
 
 function Quiz() {
-    const isTakingQuiz = true
+    const isTakingQuiz = false
 
     return (
         <>
