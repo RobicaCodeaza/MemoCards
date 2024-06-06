@@ -104,7 +104,7 @@ function DeckCard({ deck }: DeckCardProps) {
                 <div className="mt-14 flex flex-col gap-6  px-8 text-[1.35rem] uppercase tracking-wide">
                     <label
                         htmlFor="progress"
-                        className="text-center text-neon-carrot-900"
+                        className="text-center text-neon-carrot-800"
                     >
                         Perfection Score:{' '}
                         <strong>
@@ -124,7 +124,7 @@ function DeckCard({ deck }: DeckCardProps) {
                                   ]
                                 : 0
                         }
-                        className="border border-neon-carrot-500 bg-neon-carrot-300"
+                        className="h-3 border border-neon-carrot-500 bg-neon-carrot-200"
                     />
                 </div>
                 <p className="mt-8 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
