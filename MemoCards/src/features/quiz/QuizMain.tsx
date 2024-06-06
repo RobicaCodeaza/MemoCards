@@ -45,7 +45,6 @@ function QuizMain() {
             const bDate = new Date(bValue)
             return modifier * (aDate.getTime() - bDate.getTime())
         } else if (typeof aValue === 'string' && typeof bValue === 'string') {
-            console.log('locale', aValue.localeCompare(bValue))
             return modifier * aValue.localeCompare(bValue)
         } else {
             const aNumber = aValue as number
@@ -53,7 +52,6 @@ function QuizMain() {
             return modifier * (aNumber - bNumber)
         }
     })
-    console.log(sortedQuizes)
 
     const quizesNum = sortedQuizes.length
     const quizesWithTime = sortedQuizes.filter(
