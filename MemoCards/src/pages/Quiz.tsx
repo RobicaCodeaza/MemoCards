@@ -1,7 +1,5 @@
-import QuizGrid from '@/features/quiz/QuizGrid'
 import QuizMain from '@/features/quiz/QuizMain'
 import QuizModifiers from '@/features/quiz/QuizModifiers'
-import QuizSummary from '@/features/quiz/QuizSummary'
 import QuizTableOperation from '@/features/quiz/QuizTableOperation'
 import Heading from '@/ui/Heading'
 import Row from '@/ui/Row'
