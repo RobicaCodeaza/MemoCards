@@ -80,8 +80,8 @@ export type Database = {
           decksId: number[]
           description: string | null
           id: number
-          lastTested: string | null
-          perfectionScore: number | null
+          lastTested: string[] | null
+          perfectionScore: number[] | null
           questionTime: number | null
           quizName: string
           quizTime: number | null
@@ -92,8 +92,8 @@ export type Database = {
           decksId: number[]
           description?: string | null
           id?: number
-          lastTested?: string | null
-          perfectionScore?: number | null
+          lastTested?: string[] | null
+          perfectionScore?: number[] | null
           questionTime?: number | null
           quizName: string
           quizTime?: number | null
@@ -104,8 +104,8 @@ export type Database = {
           decksId?: number[]
           description?: string | null
           id?: number
-          lastTested?: string | null
-          perfectionScore?: number | null
+          lastTested?: string[] | null
+          perfectionScore?: number[] | null
           questionTime?: number | null
           quizName?: string
           quizTime?: number | null

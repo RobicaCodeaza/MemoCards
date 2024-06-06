@@ -21,7 +21,6 @@ import ConfirmDelete from '@/ui/ConfirmDelete'
 import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import Spinner from '@/ui/Spinner'
-import ButtonIcon from '@/ui/ButtonIcon'
 import CreateQuizForm from './CreateQuizForm'
 import { useNavigate } from 'react-router-dom'
 
@@ -129,7 +128,7 @@ function QuizCard({ quiz }: QuizCardProps) {
                         <div className=" mb-auto mt-auto flex  flex-col gap-6 text-[1.35rem] uppercase tracking-wide">
                             <label
                                 htmlFor="progress"
-                                className="text-center text-neon-carrot-900"
+                                className="text-center text-neon-carrot-800"
                             >
                                 Perfection Score:{' '}
                                 <strong>
@@ -141,11 +140,17 @@ function QuizCard({ quiz }: QuizCardProps) {
                             <div className="">
                                 <Progress
                                     value={
-                                        typeof quiz.perfectionScore === 'number'
-                                            ? quiz.perfectionScore
+                                        quiz.perfectionScore !== null &&
+                                        typeof quiz.perfectionScore?.at(
+                                            quiz.perfectionScore?.length - 1
+                                        ) === 'number'
+                                            ? quiz.perfectionScore[
+                                                  quiz.perfectionScore?.length -
+                                                      1
+                                              ]
                                             : 0
                                     }
-                                    className="mx-16 w-[auto] border border-neon-carrot-500 bg-neon-carrot-300  "
+                                    className="mx-16 h-3 w-[auto] border border-neon-carrot-500 bg-neon-carrot-200  "
                                 />
                             </div>
                         </div>
