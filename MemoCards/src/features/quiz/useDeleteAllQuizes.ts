@@ -26,7 +26,7 @@ export function useDeleteAllQuizes() {
                 queryKey: ['quizes'],
             })
         },
-        onError: (err: Error) => toast.error(err.message),
+        onError: (error: Error) => toast.error(error.message),
     })
 
     return { isDeletingAll, deleteAllQuizes }

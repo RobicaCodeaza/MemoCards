@@ -1,6 +1,6 @@
 import { Progress } from '@/components/ui/progress'
 import { RiDeleteBin7Line } from 'react-icons/ri'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { CiEdit } from 'react-icons/ci'
 import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
@@ -10,7 +10,6 @@ import ConfirmDelete from '@/ui/ConfirmDelete'
 import { useDeleteDeck } from './useDeleteDeck'
 import { capitalizeHeader } from '@/utils/formatHeaders'
 import { useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
 
 type DeckCardProps = {
     deck: Tables<'Decks'>
