@@ -1,7 +1,7 @@
 import Empty from '@/ui/Empty'
 import QuizGrid from './QuizGrid'
 import QuizSummary from './QuizSummary'
-import { useQuizesPaginated } from './useQuizesPaginated'
+import { useQuizesPaginated } from '../useQuizesPaginated'
 import Spinner from '@/ui/Spinner'
 import { useSearchParams } from 'react-router-dom'
 import { Tables } from '@/types/database.types'

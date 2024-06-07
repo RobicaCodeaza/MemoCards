@@ -12,11 +12,11 @@ import {
     useForm,
 } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { useDecks } from '../decks/useDecks'
 import Spinner from '@/ui/Spinner'
 import { capitalizeHeader } from '@/utils/formatHeaders'
-import { useCreateQuiz } from './useCreateQuiz'
-import { useEditQuiz } from './useEditQuiz'
+import { useCreateQuiz } from '../useCreateQuiz'
+import { useEditQuiz } from '../useEditQuiz'
+import { useDecks } from '@/features/decks/useDecks'
 
 type CreateQuizFormProps = {
     quizToEdit?: Tables<'Quizes'>

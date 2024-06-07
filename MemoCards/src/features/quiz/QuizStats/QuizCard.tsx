@@ -12,7 +12,7 @@ import { motion } from 'framer-motion'
 
 import { Tables } from '@/types/database.types'
 import { useState } from 'react'
-import { useDeleteQuiz } from './useDeleteQuiz'
+import { useDeleteQuiz } from '../useDeleteQuiz'
 import { capitalizeHeader } from '@/utils/formatHeaders'
 
 import { Progress } from '@/components/ui/progress'
@@ -21,8 +21,8 @@ import ConfirmDelete from '@/ui/ConfirmDelete'
 import Menus from '@/ui/Menus'
 import Modal from '@/ui/Modal'
 import Spinner from '@/ui/Spinner'
-import CreateQuizForm from './CreateQuizForm'
 import { useNavigate } from 'react-router-dom'
+import CreateQuizForm from './CreateQuizForm'
 
 type QuizCardProps = {
     quiz: Tables<'Quizes'>
