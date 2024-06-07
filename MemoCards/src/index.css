@@ -45,6 +45,15 @@
     backface-visibility: hidden;
 }
 
+.gradient-text {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    @apply bg-gradient-to-tr
+    from-chateau-green-500 to-picton-blue-500;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 *,
 *::before,
 *::after {
