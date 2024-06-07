@@ -1,8 +1,9 @@
 import { Tables } from '@/types/database.types'
 import { createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
-import { RootState, store } from '@/services/store'
+import { AppStore, RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
+import { Root } from 'react-dom/client'
 
 type quizStateType = {
     questions: Tables<'Card'>[]
@@ -125,5 +126,13 @@ export function dataReceived(quizId: string) {
 }
 
 export const getQuiz = (store: RootState) => store.quiz
+export const getQuizStatus = (store: RootState) => store.quiz.status
+export const getQuizQuestions = (store: RootState) => store.quiz.questions
+export const getQuizNumQuestions = (store: RootState) =>
+    store.quiz.questions.length
+export const getQuizIndex = (store: RootState) => store.quiz.index
+export const getQuizAnswer = (store: RootState) => store.quiz.answer
+export const getQuizPerfectionScore = (store: RootState) =>
+    store.quiz.perfectionScore
 
 export default quizSlice.reducer
