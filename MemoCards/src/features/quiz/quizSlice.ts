@@ -1,7 +1,7 @@
 import { Tables } from '@/types/database.types'
 import { createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
-import { AppDispatch, AppStore, RootState, store } from '@/services/store'
+import { RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
 
 type quizStateType = {
@@ -35,7 +35,7 @@ const quizSlice = createSlice({
             state.status = 'ready'
             state.questions = action.payload as Tables<'Card'>[]
         },
-        dataFailed(state, action) {
+        dataFailed(state) {
             state.status = 'error'
         },
         start(state, action) {
@@ -66,7 +66,13 @@ const quizSlice = createSlice({
         },
         reset(state) {
             console.log('reset')
-            state = initialStateQuiz
+            state.status = 'notTesting'
+            state.questions = []
+            state.index = 0
+            state.answer = null
+            state.perfectionScore = 0
+            state.decksData = []
+            state.secondsRemaining = null
         },
     },
 })
@@ -104,13 +110,16 @@ export function dataReceived(quizId: string) {
                     .in('deckId', data[0].decksId)
 
             if (errorGettingQuestions ?? questions === null)
-                throw new Error('Error in finding coresponding questions.')
+                throw new Error(
+                    'Cannot find coresponding data. Make sure you selected decks with cards.'
+                )
             return dispatch({ type: 'quiz/dataReceived', payload: questions })
         } catch (error) {
             let message
             if (error instanceof Error) message = error.message
             else message = String(error)
             toast.error(message)
+            dispatch(dataFailed())
         }
     }
 }

@@ -37,7 +37,7 @@ function QuizCard({ quiz }: QuizCardProps) {
         setIsOtherDetails((isOtherDetails) => !isOtherDetails)
     }
     function handleTakeTest() {
-        navigate(`${quiz.id}`)
+        navigate(`${quiz.id}?name=${quiz.quizName}`)
     }
 
     return (
