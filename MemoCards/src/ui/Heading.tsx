@@ -20,7 +20,8 @@ function Heading<T extends ElementType>({
     if (as === 'h1') className = 'text-[2.5rem] font-semibold leading-5 '
     if (as === 'h2') className = 'text-[2rem] font-semibold '
     if (as === 'h3') className = 'text-[2rem] font-medium'
-    if (as === 'h4') className = 'text-[3rem] font-semibold text-center'
+    if (as === 'h4')
+        className = 'text-[1.7rem] font-medium tracking-wide text-center'
 
     const Component: ElementType = as
 
