@@ -1,9 +1,8 @@
 import Pagination from '@/ui/Pagination'
-import QuizCard from './QuizCard'
 import Menus from '@/ui/Menus'
 import { Tables } from '@/types/database.types'
 import { PAGE_SIZE_QUIZES } from '@/utils/constants'
-import Empty from '@/ui/Empty'
+import QuizCard from './QuizCard'
 
 type QuizGridProps = {
     quizes: Tables<'Quizes'>[]

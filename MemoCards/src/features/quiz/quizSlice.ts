@@ -1,23 +1,23 @@
 import { Tables } from '@/types/database.types'
 import { createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
-import { store } from '@/services/store'
+import { AppDispatch, AppStore, RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
 
 type quizStateType = {
     questions: Tables<'Card'>[]
     index: number
-    status: 'loading' | 'ready' | 'error' | 'finished' | 'active'
+    status: 'loading' | 'ready' | 'error' | 'finished' | 'active' | 'notTesting'
     answer: number | null
     perfectionScore: number
     decksData: { deckId: number; perfectionScore: number }[]
     secondsRemaining: number | null
 }
 
-const quizState: quizStateType = {
+const initialStateQuiz: quizStateType = {
     questions: [],
     index: 0,
-    status: 'loading',
+    status: 'notTesting',
     answer: null,
     perfectionScore: 0,
     decksData: [],
@@ -26,8 +26,11 @@ const quizState: quizStateType = {
 
 const quizSlice = createSlice({
     name: 'quiz',
-    initialState: quizState,
+    initialState: initialStateQuiz,
     reducers: {
+        gettingData(state, action) {
+            state.status = 'loading'
+        },
         dataReceived(state, action) {
             state.status = 'ready'
             state.questions = action.payload as Tables<'Card'>[]
@@ -61,8 +64,23 @@ const quizSlice = createSlice({
             state.status = 'ready'
             state.secondsRemaining = null
         },
+        reset(state) {
+            console.log('reset')
+            state = initialStateQuiz
+        },
     },
 })
+
+export const {
+    gettingData,
+    dataFailed,
+    start,
+    newAnswer,
+    nextQuestion,
+    finish,
+    restart,
+    reset,
+} = quizSlice.actions
 
 export function dataReceived(quizId: string) {
     return async function (
@@ -70,6 +88,7 @@ export function dataReceived(quizId: string) {
         getState: typeof store.getState
     ) {
         try {
+            dispatch({ type: 'quiz/gettingData' })
             const { data, error: errorGettingDecks } = await supabase
                 .from('Quizes')
                 .select('decksId')
@@ -86,9 +105,7 @@ export function dataReceived(quizId: string) {
 
             if (errorGettingQuestions ?? questions === null)
                 throw new Error('Error in finding coresponding questions.')
-            console.log(questions)
-
-            return dispatch({ type: 'dataReceived', payload: questions })
+            return dispatch({ type: 'quiz/dataReceived', payload: questions })
         } catch (error) {
             let message
             if (error instanceof Error) message = error.message
@@ -97,5 +114,7 @@ export function dataReceived(quizId: string) {
         }
     }
 }
+
+export const getQuiz = (store: RootState) => store.quiz
 
 export default quizSlice.reducer

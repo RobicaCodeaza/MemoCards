@@ -2,10 +2,10 @@ import Button from '@/ui/Button'
 import ButtonIcon from '@/ui/ButtonIcon'
 import Modal from '@/ui/Modal'
 import { PiExamLight } from 'react-icons/pi'
-import CreateQuizForm from './CreateQuizForm'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 import ConfirmDelete from '@/ui/ConfirmDelete'
-import { useDeleteAllQuizes } from './useDeleteAllQuizes'
+import { useDeleteAllQuizes } from '../useDeleteAllQuizes'
+import CreateQuizForm from './CreateQuizForm'
 
 function QuizModifiers() {
     const { isDeletingAll, deleteAllQuizes } = useDeleteAllQuizes()
