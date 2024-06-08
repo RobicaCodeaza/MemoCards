@@ -49,6 +49,7 @@ const quizSlice = createSlice({
                 questionTime: number | null
             }>
         ) {
+            console.log(action.payload.quizTime)
             state.status = 'ready'
             state.questions = action.payload.questions
             state.secondsRemainingQuestion = action.payload.questionTime
