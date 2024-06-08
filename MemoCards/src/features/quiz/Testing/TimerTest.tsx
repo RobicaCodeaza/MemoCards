@@ -12,6 +12,7 @@ function TimerTest() {
     const timerQuiz = quiz.secondsRemainingQuiz!
     const timerQuestion = quiz.secondsRemainingQuestion!
     const intervalIdRef = useRef<NodeJS.Timeout | null>(null)
+    console.log('timerQuiz', timerQuiz)
 
     const minQuiz = Math.floor(timerQuiz / 60)
     const secondsQuiz = timerQuiz % 60
@@ -47,7 +48,7 @@ function TimerTest() {
     useEffect(
         function () {
             let id: NodeJS.Timeout | undefined
-            if (secondsQuiz)
+            if (timerQuiz)
                 id = setInterval(function () {
                     dispatch(tick('secondsRemainingQuiz'))
                 }, 1000)
@@ -58,25 +59,35 @@ function TimerTest() {
                 if (id) return clearInterval(id)
             }
         },
-        [dispatch, secondsQuiz]
+        [dispatch, timerQuiz]
     )
     useEffect(
         function () {
-            if (quiz.answer === null && secondsQuestion) startInterval()
+            if (quiz.answer === null && timerQuestion) startInterval()
             else clearExistingInterval()
             return () => clearExistingInterval()
         },
-        [quiz.answer, startInterval, clearExistingInterval, secondsQuestion]
+        [quiz.answer, startInterval, clearExistingInterval, timerQuestion]
     )
 
     return (
         <div className="flex justify-between">
-            <div className=" rounded-md border-2 border-mako-grey-100 px-6 py-3 text-[1.4rem] text-mako-grey-300">
+            <div
+                className={`rounded-md border-2  px-6 py-3 text-[1.4rem]  ${timerQuestion ? 'border-mako-grey-200 text-mako-grey-400' : 'border-mako-grey-100 text-mako-grey-300'} flex items-center gap-1`}
+            >
+                <span className="text-[1.2rem] uppercase tracking-wider text-mako-grey-500">
+                    Question Time:{' '}
+                </span>
                 {minQuestion < 10 && '0'}
                 {minQuestion}:{secondsQuestion < 10 && '0'}
                 {secondsQuestion}
             </div>
-            <div className=" rounded-md border-2 border-mako-grey-200 px-6 py-3 text-[1.4rem] text-mako-grey-400">
+            <div
+                className={`rounded-md border-2  px-6 py-3 text-[1.4rem] ${timerQuiz ? 'border-mako-grey-200 text-mako-grey-400' : 'border-mako-grey-100 text-mako-grey-300'} flex items-center gap-1`}
+            >
+                <span className="text-[1.2rem] uppercase tracking-wider text-mako-grey-500">
+                    Quiz Time:{' '}
+                </span>
                 {minQuiz < 10 && '0'}
                 {minQuiz}:{secondsQuiz < 10 && '0'}
                 {secondsQuiz}
