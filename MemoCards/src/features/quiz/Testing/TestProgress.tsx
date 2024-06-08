@@ -16,7 +16,7 @@ function TestProgress() {
     return (
         <div className="mb-10 grid  grid-cols-[auto_auto] justify-between gap-5 text-[1.6rem] text-mako-grey-500">
             <Progress
-                className="grid-col col-start-1 col-end-[-1] h-6 w-full  rounded-xl border border-neon-carrot-300 bg-neon-carrot-50"
+                className="grid-col col-start-1 col-end-[-1] h-6 w-full  rounded-xl border border-neon-carrot-300 bg-mako-grey-100"
                 max={questionsNum}
                 value={((index + Number(answer !== null)) / questionsNum) * 100}
             ></Progress>
