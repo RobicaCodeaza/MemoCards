@@ -15,7 +15,7 @@ function StartScreen() {
             <Button
                 variation="simpleTertiary"
                 size="tiny"
-                onClick={() => dispatch(start(30))}
+                onClick={() => dispatch(start())}
             >
                 Let&apos;s start
             </Button>

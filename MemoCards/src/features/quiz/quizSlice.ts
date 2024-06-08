@@ -1,5 +1,5 @@
 import { Tables } from '@/types/database.types'
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
 import { AppStore, RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
@@ -10,9 +10,14 @@ type quizStateType = {
     index: number
     status: 'loading' | 'ready' | 'error' | 'finished' | 'active' | 'notTesting'
     answer: number | null
+    answerTimeFinished: boolean
+
+    revealAnswer: boolean
     perfectionScore: number
     decksData: { deckId: number; perfectionScore: number }[]
-    secondsRemaining: number | null
+    secondsRemainingQuestion: number | null
+    secondsRemainingQuiz: number | null
+    totalTime: number
 }
 
 const initialStateQuiz: quizStateType = {
@@ -20,9 +25,13 @@ const initialStateQuiz: quizStateType = {
     index: 0,
     status: 'notTesting',
     answer: null,
+    secondsRemainingQuiz: null,
+    revealAnswer: false,
     perfectionScore: 0,
     decksData: [],
-    secondsRemaining: null,
+    secondsRemainingQuestion: null,
+    answerTimeFinished: false,
+    totalTime: 0,
 }
 
 const quizSlice = createSlice({
@@ -32,16 +41,28 @@ const quizSlice = createSlice({
         gettingData(state, action) {
             state.status = 'loading'
         },
-        dataReceived(state, action) {
+        dataReceived(
+            state,
+            action: PayloadAction<{
+                questions: Tables<'Card'>[]
+                quizTime: number | null
+                questionTime: number | null
+            }>
+        ) {
             state.status = 'ready'
-            state.questions = action.payload as Tables<'Card'>[]
+            state.questions = action.payload.questions
+            state.secondsRemainingQuestion = action.payload.questionTime
+            state.secondsRemainingQuiz = action.payload.quizTime
+            state.totalTime = state.secondsRemainingQuiz
+                ? state.secondsRemainingQuiz
+                : state.questions.length * state.secondsRemainingQuestion!
         },
+
         dataFailed(state) {
             state.status = 'error'
         },
-        start(state, action) {
+        start(state) {
             state.status = 'active'
-            state.secondsRemaining = action.payload as number
         },
         newAnswer(state, action) {
             const question = state.questions.at(state.index) as Tables<'Card'>
@@ -55,6 +76,7 @@ const quizSlice = createSlice({
         nextQuestion(state, action) {
             state.index = state.index + 1
             state.answer = null
+            state.answerTimeFinished = false
         },
         finish(state, action) {
             state.status = 'finished'
@@ -63,17 +85,38 @@ const quizSlice = createSlice({
             state.index = 0
             state.answer = null
             state.status = 'ready'
-            state.secondsRemaining = null
+            state.secondsRemainingQuestion = null
+            state.secondsRemainingQuiz = null
         },
         reset(state) {
-            console.log('reset')
             state.status = 'notTesting'
             state.questions = []
             state.index = 0
             state.answer = null
             state.perfectionScore = 0
             state.decksData = []
-            state.secondsRemaining = null
+            state.secondsRemainingQuestion = null
+            state.secondsRemainingQuiz = null
+        },
+
+        tick(
+            state,
+            action: PayloadAction<
+                'secondsRemainingQuestion' | 'secondsRemainingQuiz'
+            >
+        ) {
+            console.log(action.payload)
+            state[action.payload] = state[action.payload]! - 1
+            if (action.payload === 'secondsRemainingQuiz') {
+                state.status =
+                    state[action.payload] === 0 ? 'finished' : state.status
+                state.totalTime = state.totalTime - state[action.payload]!
+            } else
+                state.answerTimeFinished =
+                    state[action.payload] === 0
+                        ? true
+                        : state.answerTimeFinished
+            state.totalTime = state.totalTime - state[action.payload]!
         },
     },
 })
@@ -81,12 +124,13 @@ const quizSlice = createSlice({
 export const {
     gettingData,
     dataFailed,
-    start,
     newAnswer,
+    start,
     nextQuestion,
     finish,
     restart,
     reset,
+    tick,
 } = quizSlice.actions
 
 export function dataReceived(quizId: string) {
@@ -98,7 +142,7 @@ export function dataReceived(quizId: string) {
             dispatch({ type: 'quiz/gettingData' })
             const { data, error: errorGettingDecks } = await supabase
                 .from('Quizes')
-                .select('decksId')
+                .select('decksId,questionTime,quizTime')
                 .eq('id', quizId)
 
             if (errorGettingDecks ?? data === null)
@@ -114,7 +158,16 @@ export function dataReceived(quizId: string) {
                 throw new Error(
                     'Cannot find coresponding data. Make sure you selected decks with cards.'
                 )
-            return dispatch({ type: 'quiz/dataReceived', payload: questions })
+
+            const payload = {
+                questions,
+                questionTime: data[0].questionTime,
+                quizTime: data[0].quizTime,
+            }
+            return dispatch({
+                type: 'quiz/dataReceived',
+                payload,
+            })
         } catch (error) {
             let message
             if (error instanceof Error) message = error.message
@@ -134,5 +187,11 @@ export const getQuizIndex = (store: RootState) => store.quiz.index
 export const getQuizAnswer = (store: RootState) => store.quiz.answer
 export const getQuizPerfectionScore = (store: RootState) =>
     store.quiz.perfectionScore
+export const getQuizRemainingQuestionTime = (store: RootState) =>
+    store.quiz.secondsRemainingQuestion
+export const getQuizRemainingQuizTime = (store: RootState) =>
+    store.quiz.secondsRemainingQuiz
+export const getQuizQuestion = (questionIndex: number) => (store: RootState) =>
+    store.quiz.questions[questionIndex]
 
 export default quizSlice.reducer
