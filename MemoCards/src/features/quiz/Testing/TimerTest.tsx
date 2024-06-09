@@ -77,12 +77,18 @@ function TimerTest() {
     )
     useEffect(
         function () {
-            if (answer === null && !answerTimeFinished) {
+            if (answer === null && !answerTimeFinished && timerQuestion) {
                 startInterval()
             } else clearExistingInterval()
             return () => clearExistingInterval()
         },
-        [answer, startInterval, clearExistingInterval, answerTimeFinished]
+        [
+            answer,
+            startInterval,
+            clearExistingInterval,
+            answerTimeFinished,
+            timerQuestion,
+        ]
     )
 
     return (
