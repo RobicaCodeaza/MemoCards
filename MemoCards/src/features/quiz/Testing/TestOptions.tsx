@@ -1,6 +1,5 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
 import {
-    getQuiz,
     getQuizAnswer,
     getQuizIndex,
     getQuizQuestion,

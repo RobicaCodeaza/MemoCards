@@ -11,6 +11,7 @@
         "generate:types": " supabase gen types typescript --project-id bicvqgmxkyigtsiltrns  --schema public > src/types/database.types.ts"
     },
     "dependencies": {
+        "@lottiefiles/dotlottie-react": "^0.6.3",
         "@radix-ui/react-dialog": "^1.0.5",
         "@radix-ui/react-progress": "^1.0.3",
         "@radix-ui/react-slot": "^1.0.2",
@@ -23,6 +24,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
         "cmdk": "^1.0.0",
+        "embla-carousel-react": "^8.1.3",
         "eslint-plugin-react": "^7.34.1",
         "framer-motion": "^11.2.6",
         "react": "^18.2.0",

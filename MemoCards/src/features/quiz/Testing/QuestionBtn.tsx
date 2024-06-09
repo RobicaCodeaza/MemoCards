@@ -1,6 +1,7 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import Button from '@/ui/Button'
 import { newAnswer, nextQuestion } from '../quizSlice'
+import { CarouselNext } from '@/components/ui/carousel'
 
 function QuestionBtn() {
     const dispatch = useAppDispatch()
@@ -18,6 +19,7 @@ function QuestionBtn() {
                 onClick={handleNextQuestion}
                 variation="accentSecondary"
                 size="medium"
+                as="div"
             >
                 Next Question
             </Button>
