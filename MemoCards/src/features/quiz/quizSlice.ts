@@ -53,7 +53,6 @@ const quizSlice = createSlice({
                 questionTime: number | null
             }>
         ) {
-            console.log(action.payload.quizTime)
             state.status = 'ready'
             state.questions = action.payload.questions
             state.questionTime = action.payload.questionTime
@@ -83,10 +82,11 @@ const quizSlice = createSlice({
         nextQuestion(state) {
             state.index = state.index + 1
             state.answer = null
+            console.log('next-question', state.answer)
             state.answerTimeFinished = false
             state.secondsRemainingQuestion = state.questionTime
         },
-        finish(state, action) {
+        finish(state) {
             state.status = 'finished'
         },
         restart(state, action) {
@@ -113,7 +113,6 @@ const quizSlice = createSlice({
                 'secondsRemainingQuestion' | 'secondsRemainingQuiz'
             >
         ) {
-            console.log(action.payload)
             state[action.payload] = state[action.payload]! - 1
             if (action.payload === 'secondsRemainingQuiz') {
                 state.status =

@@ -1,17 +1,30 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getQuiz } from '../quizSlice'
+import { getQuizIndex, getQuizQuestions } from '../quizSlice'
 import Heading from '@/ui/Heading'
 import TestOptions from './TestOptions'
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+} from '@/components/ui/carousel'
 
 function Question() {
-    const quiz = useAppSelector(getQuiz)
-    const question = quiz.questions[quiz.index]
+    const questions = useAppSelector(getQuizQuestions)
+    const index = useAppSelector(getQuizIndex)
+    // const question = questions[index]
 
     return (
-        <div className="flex h-2/3 flex-col gap-10 rounded-lg border border-chateau-green-300 px-16 py-10 shadow-md">
-            <Heading as="h4">{question.question}</Heading>
-            <TestOptions></TestOptions>
-        </div>
+        <>
+            {questions.map((question, index) => (
+                <CarouselItem
+                    key={index}
+                    className="ml-2 mr-2 flex h-[32.5rem] flex-col justify-center gap-6 rounded-lg border border-chateau-green-300 px-16 py-10 shadow-md"
+                >
+                    <Heading as="h4">{question.question}</Heading>
+                    <TestOptions indexQuestion={index}></TestOptions>
+                </CarouselItem>
+            ))}
+        </>
     )
 }
 

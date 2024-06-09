@@ -1,6 +1,5 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
 import {
-    getQuiz,
     getQuizAnswer,
     getQuizIndex,
     getQuizQuestion,
@@ -8,11 +7,16 @@ import {
 } from '../quizSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 
-function TestOptions() {
+type TestOptionsProps = {
+    indexQuestion: number
+}
+
+function TestOptions({ indexQuestion }: TestOptionsProps) {
+    console.log(indexQuestion)
     const dispatch = useAppDispatch()
     const answerQuiz = useAppSelector(getQuizAnswer)
     const quizIndex = useAppSelector(getQuizIndex)
-    const question = useAppSelector(getQuizQuestion(quizIndex))
+    const question = useAppSelector(getQuizQuestion(indexQuestion))
     const hasAnswered = answerQuiz ? true : false
 
     return (

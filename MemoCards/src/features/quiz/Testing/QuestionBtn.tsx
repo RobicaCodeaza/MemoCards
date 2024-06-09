@@ -1,9 +1,21 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import Button from '@/ui/Button'
-import { newAnswer, nextQuestion } from '../quizSlice'
+import {
+    finish,
+    getQuizAnswer,
+    getQuizIndex,
+    getQuizNumQuestions,
+    nextQuestion,
+} from '../quizSlice'
+import { CarouselNext } from '@/components/ui/carousel'
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 function QuestionBtn() {
     const dispatch = useAppDispatch()
+    const answerQuiz = useAppSelector(getQuizAnswer)
+    const indexQuiz = useAppSelector(getQuizIndex)
+    const numQuestions = useAppSelector(getQuizNumQuestions)
+    console.log(Boolean(answerQuiz))
 
     function handleNextQuestion() {
         dispatch(nextQuestion())
@@ -14,13 +26,25 @@ function QuestionBtn() {
             <Button variation="accentTertiary" size="medium">
                 Reveal Answer
             </Button>
-            <Button
-                onClick={handleNextQuestion}
-                variation="accentSecondary"
-                size="medium"
-            >
-                Next Question
-            </Button>
+            {answerQuiz === null ? null : indexQuiz < numQuestions - 1 ? (
+                <CarouselNext>
+                    <Button
+                        variation="accentSecondary"
+                        size="medium"
+                        onClick={() => dispatch(nextQuestion())}
+                    >
+                        Next Question
+                    </Button>
+                </CarouselNext>
+            ) : (
+                <Button
+                    variation="accentSecondary"
+                    size="medium"
+                    onClick={() => dispatch(finish())}
+                >
+                    Finish
+                </Button>
+            )}
         </div>
     )
 }

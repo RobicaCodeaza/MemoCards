@@ -8,12 +8,13 @@ import {
 } from '../quizSlice'
 import Empty from '@/ui/Empty'
 import Spinner from '@/ui/Spinner'
-import { Progress } from '@/components/ui/progress'
 import Question from './Question'
 import StartScreen from './StartScreen'
 import TestProgress from './TestProgress'
 import TimerTest from './TimerTest'
 import QuestionBtn from './QuestionBtn'
+import { Carousel, CarouselContent } from '@/components/ui/carousel'
+import { motion } from 'framer-motion'
 
 function TestingGrid() {
     const status = useAppSelector(getQuizStatus)
@@ -23,16 +24,29 @@ function TestingGrid() {
         return <Empty resource="Decks/Cards for the coresponding Quiz"></Empty>
 
     return (
-        <main className="ml-auto mr-auto  flex h-[72.5rem] min-w-[100rem]   max-w-[120rem] flex-col gap-6 rounded-xl border-2 border-mako-grey-100 bg-picton-blue-50 px-20 py-20">
+        <main className="ml-auto mr-auto  flex h-[72.5rem] w-[100rem]   max-w-[120rem] flex-col gap-8 rounded-xl border-2 border-mako-grey-100 bg-picton-blue-50 px-20 py-20">
             {status === 'loading' && <Spinner></Spinner>}
             {/* {status === 'error' && <Error></Error>} */}
             {status === 'ready' && <StartScreen></StartScreen>}
             {status === 'active' && (
                 <>
-                    <TestProgress></TestProgress>
-                    <Question></Question>
                     <TimerTest></TimerTest>
-                    <QuestionBtn></QuestionBtn>
+                    <TestProgress></TestProgress>
+
+                    <Carousel className="flex h-full flex-col ">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                            transition={{ duration: 0.3 }}
+                            className="h-full"
+                        >
+                            <CarouselContent className=" p-2">
+                                <Question></Question>
+                            </CarouselContent>
+                        </motion.div>
+                        <QuestionBtn></QuestionBtn>
+                    </Carousel>
                 </>
             )}
             {/* {status === 'finished' && <FinishedTest></FinishedTest>} */}

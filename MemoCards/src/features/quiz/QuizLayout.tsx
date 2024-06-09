@@ -7,7 +7,8 @@ import { getQuiz } from './quizSlice'
 function QuizLayout() {
     const [searchParams, _] = useSearchParams()
     const quiz = useAppSelector(getQuiz)
-    const isTakingQuiz = quiz.status !== 'loading' ? true : false
+    const isTakingQuiz =
+        quiz.status !== 'loading' && quiz.status !== 'notTesting' ? true : false
 
     return (
         <>
