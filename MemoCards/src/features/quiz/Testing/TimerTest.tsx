@@ -1,24 +1,39 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getQuiz, tick } from '../quizSlice'
+import {
+    getAnswerTimeFinished,
+    getQuestionTime,
+    getQuiz,
+    getQuizAnswer,
+    getQuizRemainingQuestionTime,
+    getQuizRemainingQuizTime,
+    getQuizTime,
+    tick,
+} from '../quizSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useCallback, useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/services/store'
 
 function TimerTest() {
-    const quiz = useAppSelector(getQuiz)
     const dispatch = useAppDispatch()
+    const quizTime = useAppSelector(getQuizTime)
+    const questionTime = useAppSelector(getQuestionTime)
+    const answer = useAppSelector(getQuizAnswer)
+    const quizRemaining = useAppSelector(getQuizRemainingQuizTime)
+    const questionRemaining = useAppSelector(getQuizRemainingQuestionTime)
+    const answerTimeFinished = useAppSelector(getAnswerTimeFinished)
 
-    const timerQuiz = quiz.secondsRemainingQuiz!
-    const timerQuestion = quiz.secondsRemainingQuestion!
+    const timerQuiz = quizTime
+    const timerQuestion = questionTime
     const intervalIdRef = useRef<NodeJS.Timeout | null>(null)
     console.log('timerQuiz', timerQuiz)
 
-    const minQuiz = Math.floor(timerQuiz / 60)
-    const secondsQuiz = timerQuiz % 60
+    const minQuiz = quizRemaining ? Math.floor(quizRemaining / 60) : 0
+    const secondsQuiz = quizRemaining ? quizRemaining % 60 : 0
 
-    const minQuestion = Math.floor(timerQuestion / 60)
-    const secondsQuestion = timerQuestion % 60
+    const minQuestion = questionRemaining
+        ? Math.floor(questionRemaining / 60)
+        : 0
+    const secondsQuestion = questionRemaining ? questionRemaining % 60 : 0
 
     const startInterval = useCallback(() => {
         intervalIdRef.current = setInterval(() => {
@@ -63,11 +78,14 @@ function TimerTest() {
     )
     useEffect(
         function () {
-            if (quiz.answer === null && timerQuestion) startInterval()
-            else clearExistingInterval()
+            if (answer === null && !answerTimeFinished) {
+                startInterval()
+
+                console.log('run')
+            } else clearExistingInterval()
             return () => clearExistingInterval()
         },
-        [quiz.answer, startInterval, clearExistingInterval, timerQuestion]
+        [answer, startInterval, clearExistingInterval, answerTimeFinished]
     )
 
     return (
