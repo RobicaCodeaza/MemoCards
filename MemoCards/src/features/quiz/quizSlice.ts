@@ -16,7 +16,9 @@ type quizStateType = {
     perfectionScore: number
     decksData: { deckId: number; perfectionScore: number }[]
     secondsRemainingQuestion: number | null
+    questionTime: number | null
     secondsRemainingQuiz: number | null
+    quizTime: number | null
     totalTime: number
 }
 
@@ -25,11 +27,13 @@ const initialStateQuiz: quizStateType = {
     index: 0,
     status: 'notTesting',
     answer: null,
-    secondsRemainingQuiz: null,
     revealAnswer: false,
     perfectionScore: 0,
     decksData: [],
     secondsRemainingQuestion: null,
+    questionTime: null,
+    secondsRemainingQuiz: null,
+    quizTime: null,
     answerTimeFinished: false,
     totalTime: 0,
 }
@@ -52,11 +56,11 @@ const quizSlice = createSlice({
             console.log(action.payload.quizTime)
             state.status = 'ready'
             state.questions = action.payload.questions
-            state.secondsRemainingQuestion = action.payload.questionTime
-            state.secondsRemainingQuiz = action.payload.quizTime
-            state.totalTime = state.secondsRemainingQuiz
-                ? state.secondsRemainingQuiz
-                : state.questions.length * state.secondsRemainingQuestion!
+            state.questionTime = action.payload.questionTime
+            state.quizTime = action.payload.quizTime
+            state.totalTime = state.quizTime
+                ? state.quizTime
+                : state.questions.length * state.questionTime!
         },
 
         dataFailed(state) {
@@ -64,6 +68,8 @@ const quizSlice = createSlice({
         },
         start(state) {
             state.status = 'active'
+            state.secondsRemainingQuestion = state.questionTime
+            state.secondsRemainingQuiz = state.quizTime
         },
         newAnswer(state, action) {
             const question = state.questions.at(state.index) as Tables<'Card'>
@@ -74,10 +80,11 @@ const quizSlice = createSlice({
                     ? state.perfectionScore + 1
                     : state.perfectionScore
         },
-        nextQuestion(state, action) {
+        nextQuestion(state) {
             state.index = state.index + 1
             state.answer = null
             state.answerTimeFinished = false
+            state.secondsRemainingQuestion = state.questionTime
         },
         finish(state, action) {
             state.status = 'finished'
@@ -194,5 +201,9 @@ export const getQuizRemainingQuizTime = (store: RootState) =>
     store.quiz.secondsRemainingQuiz
 export const getQuizQuestion = (questionIndex: number) => (store: RootState) =>
     store.quiz.questions[questionIndex]
+export const getQuizTime = (store: RootState) => store.quiz.quizTime
+export const getQuestionTime = (store: RootState) => store.quiz.questionTime
+export const getAnswerTimeFinished = (store: RootState) =>
+    store.quiz.answerTimeFinished
 
 export default quizSlice.reducer

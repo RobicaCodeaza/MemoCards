@@ -21,7 +21,7 @@ function TestOptions() {
                 return (
                     <button
                         key={index}
-                        className={`block w-full cursor-pointer rounded-full border-2  px-10 py-5 text-left font-sans text-[1.6rem] transition-all duration-300 hover:translate-x-5 hover:border-picton-blue-300 hover:bg-picton-blue-150 disabled:hover:cursor-not-allowed ${index + 1 === answerQuiz ? 'translate-x-10' : ''} ${hasAnswered ? (index + 1 === question.correctAnswer ? 'border border-chateau-green-300 bg-chateau-green-200 text-chateau-green-700' : 'border-danger-300 bg-danger-200 text-danger-700') : 'border-picton-blue-150 bg-picton-blue-75'} `}
+                        className={`block w-full cursor-pointer text-wrap break-words  rounded-full border-2 px-10 py-5 text-left font-sans text-[1.6rem] transition-all duration-300 hover:translate-x-5 hover:border-picton-blue-300 hover:bg-picton-blue-150 disabled:hover:cursor-not-allowed ${index + 1 === answerQuiz ? 'translate-x-10' : ''} ${hasAnswered ? (index + 1 === question.correctAnswer ? 'border border-chateau-green-300 bg-chateau-green-200 text-chateau-green-700' : 'border-danger-300 bg-danger-200 text-danger-700') : 'border-picton-blue-150 bg-picton-blue-75'} `}
                         onClick={() => dispatch(newAnswer(index + 1))}
                     >
                         {answer}
