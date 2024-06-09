@@ -21,7 +21,7 @@ function Question() {
                     className="ml-2 mr-2 flex h-[32.5rem] flex-col justify-center gap-6 rounded-lg border border-chateau-green-300 px-16 py-10 shadow-md"
                 >
                     <Heading as="h4">{question.question}</Heading>
-                    <TestOptions></TestOptions>
+                    <TestOptions indexQuestion={index}></TestOptions>
                 </CarouselItem>
             ))}
         </>

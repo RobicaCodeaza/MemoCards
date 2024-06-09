@@ -25,7 +25,6 @@ function TimerTest() {
     const timerQuiz = quizTime
     const timerQuestion = questionTime
     const intervalIdRef = useRef<NodeJS.Timeout | null>(null)
-    console.log('timerQuiz', timerQuiz)
 
     const minQuiz = quizRemaining ? Math.floor(quizRemaining / 60) : 0
     const secondsQuiz = quizRemaining ? quizRemaining % 60 : 0
@@ -80,8 +79,6 @@ function TimerTest() {
         function () {
             if (answer === null && !answerTimeFinished) {
                 startInterval()
-
-                console.log('run')
             } else clearExistingInterval()
             return () => clearExistingInterval()
         },

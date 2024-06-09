@@ -8,13 +8,13 @@ import {
 } from '../quizSlice'
 import Empty from '@/ui/Empty'
 import Spinner from '@/ui/Spinner'
-import { Progress } from '@/components/ui/progress'
 import Question from './Question'
 import StartScreen from './StartScreen'
 import TestProgress from './TestProgress'
 import TimerTest from './TimerTest'
 import QuestionBtn from './QuestionBtn'
 import { Carousel, CarouselContent } from '@/components/ui/carousel'
+import { motion } from 'framer-motion'
 
 function TestingGrid() {
     const status = useAppSelector(getQuizStatus)
@@ -32,10 +32,19 @@ function TestingGrid() {
                 <>
                     <TimerTest></TimerTest>
                     <TestProgress></TestProgress>
+
                     <Carousel className="flex h-full flex-col ">
-                        <CarouselContent className=" p-2">
-                            <Question></Question>
-                        </CarouselContent>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                            transition={{ duration: 0.3 }}
+                            className="h-full"
+                        >
+                            <CarouselContent className=" p-2">
+                                <Question></Question>
+                            </CarouselContent>
+                        </motion.div>
                         <QuestionBtn></QuestionBtn>
                     </Carousel>
                 </>
