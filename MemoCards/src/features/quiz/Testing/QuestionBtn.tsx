@@ -5,6 +5,7 @@ import {
     getQuizAnswer,
     getQuizIndex,
     getQuizNumQuestions,
+    getQuizQuestion,
     nextQuestion,
 } from '../quizSlice'
 import { CarouselNext } from '@/components/ui/carousel'
@@ -15,7 +16,8 @@ function QuestionBtn() {
     const answerQuiz = useAppSelector(getQuizAnswer)
     const indexQuiz = useAppSelector(getQuizIndex)
     const numQuestions = useAppSelector(getQuizNumQuestions)
-    console.log(Boolean(answerQuiz))
+    const question = useAppSelector(getQuizQuestion(indexQuiz))
+    console.log(question)
 
     function handleNextQuestion() {
         dispatch(nextQuestion())
@@ -23,9 +25,11 @@ function QuestionBtn() {
 
     return (
         <div className="mt-auto flex justify-between">
-            <Button variation="accentTertiary" size="medium">
-                Reveal Answer
-            </Button>
+            {question.answers.length < 2 ? (
+                <Button variation="accentTertiary" size="medium">
+                    Reveal Answer
+                </Button>
+            ) : null}
             {answerQuiz === null ? null : indexQuiz < numQuestions - 1 ? (
                 <CarouselNext>
                     <Button
