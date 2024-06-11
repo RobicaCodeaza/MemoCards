@@ -2,6 +2,7 @@ import { useAppDispatch } from '@/hooks/useAppDispatch'
 import Button from '@/ui/Button'
 import {
     finish,
+    getAnswerTimeFinished,
     getQuizAnswer,
     getQuizIndex,
     getQuizNumQuestions,
@@ -17,6 +18,8 @@ function QuestionBtn() {
     const indexQuiz = useAppSelector(getQuizIndex)
     const numQuestions = useAppSelector(getQuizNumQuestions)
     const question = useAppSelector(getQuizQuestion(indexQuiz))
+    const hasFinishedQuestionTime = useAppSelector(getAnswerTimeFinished)
+
     console.log(question)
 
     function handleNextQuestion() {
@@ -30,28 +33,30 @@ function QuestionBtn() {
                     Reveal Answer
                 </Button>
             ) : null}
-            {answerQuiz === null ? null : indexQuiz < numQuestions - 1 ? (
-                <CarouselNext className="ml-auto">
-                    <Button
-                        variation="accentSecondary"
-                        size="medium"
-                        onClick={() => dispatch(nextQuestion())}
-                    >
-                        Next Question
-                    </Button>
-                </CarouselNext>
-            ) : (
-                <>
-                    <span></span>
-                    <Button
-                        variation="accentSecondary"
-                        size="medium"
-                        onClick={() => dispatch(finish())}
-                    >
-                        Finish
-                    </Button>
-                </>
-            )}
+            {answerQuiz !== null || hasFinishedQuestionTime ? (
+                indexQuiz < numQuestions - 1 ? (
+                    <CarouselNext className="ml-auto">
+                        <Button
+                            variation="accentSecondary"
+                            size="medium"
+                            onClick={() => dispatch(nextQuestion())}
+                        >
+                            Next Question
+                        </Button>
+                    </CarouselNext>
+                ) : (
+                    <>
+                        <span></span>
+                        <Button
+                            variation="accentSecondary"
+                            size="medium"
+                            onClick={() => dispatch(finish())}
+                        >
+                            Finish
+                        </Button>
+                    </>
+                )
+            ) : null}
         </div>
     )
 }
