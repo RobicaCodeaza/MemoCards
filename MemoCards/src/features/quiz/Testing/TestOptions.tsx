@@ -12,7 +12,6 @@ type TestOptionsProps = {
 }
 
 function TestOptions({ indexQuestion }: TestOptionsProps) {
-    console.log(indexQuestion)
     const dispatch = useAppDispatch()
     const answerQuiz = useAppSelector(getQuizAnswer)
     const quizIndex = useAppSelector(getQuizIndex)

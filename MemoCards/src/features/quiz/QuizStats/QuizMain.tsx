@@ -55,7 +55,7 @@ function QuizMain() {
         }
     })
 
-    const quizesNum = countSummary
+    const quizesNum = countSummary ? countSummary : 0
     const quizesWithTime = quizesSummary?.filter(
         (quiz) => quiz.completionTime !== null
     )
@@ -65,7 +65,7 @@ function QuizMain() {
     return (
         <>
             <QuizSummary
-                quizesNum={quizesNum ? quizesNum : 0}
+                quizesNum={quizesNum}
                 averageTime={averageTime ? averageTime : 0}
             ></QuizSummary>
             <QuizGrid count={count} quizes={sortedQuizes}></QuizGrid>

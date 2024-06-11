@@ -31,7 +31,7 @@ function QuestionBtn() {
                 </Button>
             ) : null}
             {answerQuiz === null ? null : indexQuiz < numQuestions - 1 ? (
-                <CarouselNext>
+                <CarouselNext className="ml-auto">
                     <Button
                         variation="accentSecondary"
                         size="medium"
@@ -41,13 +41,16 @@ function QuestionBtn() {
                     </Button>
                 </CarouselNext>
             ) : (
-                <Button
-                    variation="accentSecondary"
-                    size="medium"
-                    onClick={() => dispatch(finish())}
-                >
-                    Finish
-                </Button>
+                <>
+                    <span></span>
+                    <Button
+                        variation="accentSecondary"
+                        size="medium"
+                        onClick={() => dispatch(finish())}
+                    >
+                        Finish
+                    </Button>
+                </>
             )}
         </div>
     )
