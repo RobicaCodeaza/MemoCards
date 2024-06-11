@@ -232,7 +232,7 @@ const CarouselNext = React.forwardRef<HTMLDivElement, CarouselNextType>(
         const { orientation, scrollNext, canScrollNext } = useCarousel()
 
         return (
-            <div ref={ref} onClick={scrollNext}>
+            <div ref={ref} onClick={scrollNext} className={className}>
                 {React.cloneElement(children as React.ReactElement)}
             </div>
         )
