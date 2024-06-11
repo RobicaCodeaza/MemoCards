@@ -66,7 +66,7 @@ function QuizMain() {
         <>
             <QuizSummary
                 quizesNum={quizesNum ? quizesNum : 0}
-                averageTime={averageTime}
+                averageTime={averageTime ? averageTime : 0}
             ></QuizSummary>
             <QuizGrid count={count} quizes={sortedQuizes}></QuizGrid>
         </>
