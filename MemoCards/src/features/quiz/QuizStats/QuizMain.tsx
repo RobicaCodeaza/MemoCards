@@ -5,8 +5,10 @@ import { useQuizesPaginated } from '../useQuizesPaginated'
 import Spinner from '@/ui/Spinner'
 import { useSearchParams } from 'react-router-dom'
 import { Tables } from '@/types/database.types'
+import { useQuizesSummary } from '../useQuizesSummary'
 
 function QuizMain() {
+    const { data: quizesSummary, count: countSummary } = useQuizesSummary()
     const { quizes, count, isLoading } = useQuizesPaginated()
     const [searchParams, setSearchParams] = useSearchParams()
     if (isLoading) return <Spinner></Spinner>
@@ -53,18 +55,18 @@ function QuizMain() {
         }
     })
 
-    const quizesNum = sortedQuizes.length
-    const quizesWithTime = sortedQuizes.filter(
+    const quizesNum = countSummary
+    const quizesWithTime = quizesSummary?.filter(
         (quiz) => quiz.completionTime !== null
     )
-    const averageTime = quizesWithTime.reduce((acc, curr) => {
-        return (acc + curr.completionTime!) / quizesWithTime.length
+    const averageTime = quizesWithTime?.reduce((acc, curr) => {
+        return (acc + curr.completionTime!) / quizesNum
     }, 0)
     return (
         <>
             <QuizSummary
-                quizesNum={quizesNum}
-                averageTime={averageTime}
+                quizesNum={quizesNum ? quizesNum : 0}
+                averageTime={averageTime ? averageTime : 0}
             ></QuizSummary>
             <QuizGrid count={count} quizes={sortedQuizes}></QuizGrid>
         </>
