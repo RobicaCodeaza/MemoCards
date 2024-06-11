@@ -20,12 +20,13 @@ function TestingGrid() {
     const status = useAppSelector(getQuizStatus)
     const questionNum = useAppSelector(getQuizNumQuestions)
 
+    if (status === 'loading') return <Spinner></Spinner>
+
     if (questionNum === 0)
         return <Empty resource="Decks/Cards for the coresponding Quiz"></Empty>
 
     return (
         <main className="ml-auto mr-auto  flex h-[72.5rem] w-[100rem]   max-w-[120rem] flex-col gap-8 rounded-xl border-2 border-mako-grey-100 bg-picton-blue-50 px-20 py-20">
-            {status === 'loading' && <Spinner></Spinner>}
             {/* {status === 'error' && <Error></Error>} */}
             {status === 'ready' && <StartScreen></StartScreen>}
             {status === 'active' && (
