@@ -8,6 +8,7 @@ import {
     getQuizNumQuestions,
     getQuizQuestion,
     nextQuestion,
+    revealAnswer,
 } from '../quizSlice'
 import { CarouselNext } from '@/components/ui/carousel'
 import { useAppSelector } from '@/hooks/useAppSelector'
@@ -29,7 +30,11 @@ function QuestionBtn() {
     return (
         <div className="mt-auto flex justify-between">
             {question.answers.length < 2 ? (
-                <Button variation="accentTertiary" size="medium">
+                <Button
+                    variation="accentTertiary"
+                    size="medium"
+                    onClick={() => dispatch(revealAnswer())}
+                >
                     Reveal Answer
                 </Button>
             ) : null}
