@@ -7,6 +7,7 @@ import {
     getQuizIndex,
     getQuizNumQuestions,
     getQuizQuestion,
+    getRevealAnswerStatus,
     nextQuestion,
     revealAnswer,
 } from '../quizSlice'
@@ -20,6 +21,7 @@ function QuestionBtn() {
     const numQuestions = useAppSelector(getQuizNumQuestions)
     const question = useAppSelector(getQuizQuestion(indexQuiz))
     const hasFinishedQuestionTime = useAppSelector(getAnswerTimeFinished)
+    const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
 
     console.log(question)
 
@@ -35,7 +37,9 @@ function QuestionBtn() {
                     size="medium"
                     onClick={() => dispatch(revealAnswer())}
                 >
-                    Reveal Answer
+                    {revealAnswerStatus || hasFinishedQuestionTime
+                        ? 'See Question'
+                        : 'Reveal Answer'}
                 </Button>
             ) : null}
             {answerQuiz !== null || hasFinishedQuestionTime ? (

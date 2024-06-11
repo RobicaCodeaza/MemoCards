@@ -7,6 +7,7 @@ import {
     getQuizRemainingQuestionTime,
     getQuizRemainingQuizTime,
     getQuizTime,
+    getRevealAnswerStatus,
     tick,
 } from '../quizSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
@@ -21,6 +22,7 @@ function TimerTest() {
     const quizRemaining = useAppSelector(getQuizRemainingQuizTime)
     const questionRemaining = useAppSelector(getQuizRemainingQuestionTime)
     const answerTimeFinished = useAppSelector(getAnswerTimeFinished)
+    const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
 
     const timerQuiz = quizTime
     const timerQuestion = questionTime
@@ -77,7 +79,12 @@ function TimerTest() {
     )
     useEffect(
         function () {
-            if (answer === null && !answerTimeFinished && timerQuestion) {
+            if (
+                answer === null &&
+                !answerTimeFinished &&
+                timerQuestion &&
+                !revealAnswerStatus
+            ) {
                 startInterval()
             } else clearExistingInterval()
             return () => clearExistingInterval()
@@ -88,6 +95,7 @@ function TimerTest() {
             clearExistingInterval,
             answerTimeFinished,
             timerQuestion,
+            revealAnswerStatus,
         ]
     )
 
