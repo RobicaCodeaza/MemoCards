@@ -15,6 +15,7 @@ import TimerTest from './TimerTest'
 import QuestionBtn from './QuestionBtn'
 import { Carousel, CarouselContent } from '@/components/ui/carousel'
 import { motion } from 'framer-motion'
+import FinishScreen from './FinishScreen'
 
 function TestingGrid() {
     const status = useAppSelector(getQuizStatus)
@@ -50,7 +51,8 @@ function TestingGrid() {
                     </Carousel>
                 </>
             )}
-            {/* {status === 'finished' && <FinishedTest></FinishedTest>} */}
+
+            {status === 'finished' && <FinishScreen></FinishScreen>}
         </main>
     )
 }

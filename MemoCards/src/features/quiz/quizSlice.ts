@@ -83,7 +83,8 @@ const quizSlice = createSlice({
             state.answer = action.payload as number
             state.perfectionScore =
                 action.payload === question.correctAnswer
-                    ? state.perfectionScore + 1
+                    ? ((state.perfectionScore + 1) / state.questions.length) *
+                      100
                     : state.perfectionScore
         },
         nextQuestion(state) {
@@ -101,9 +102,8 @@ const quizSlice = createSlice({
         finish(state) {
             state.status = 'finished'
         },
-        restart(state, action) {
-            state.index = 0
-            state.answer = null
+        restart(state) {
+            console.log(restart)
             state.status = 'ready'
             state.secondsRemainingQuestion = null
             state.secondsRemainingQuiz = null
