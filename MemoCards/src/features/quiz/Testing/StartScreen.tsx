@@ -19,7 +19,7 @@ function StartScreen() {
             </div>
             <DotLottieReact
                 autoplay
-                src="/examAnimation.lottie"
+                src="/startExamAnim.lottie"
                 loop
             ></DotLottieReact>
             <Button
