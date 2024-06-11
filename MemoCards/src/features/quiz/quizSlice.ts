@@ -11,7 +11,7 @@ type quizStateType = {
     status: 'loading' | 'ready' | 'error' | 'finished' | 'active' | 'notTesting'
     answer: number | null
     answerTimeFinished: boolean
-
+    isFlippingCard: boolean
     revealAnswer: boolean
     perfectionScore: number
     decksData: { deckId: number; perfectionScore: number }[]
@@ -24,6 +24,7 @@ type quizStateType = {
 
 const initialStateQuiz: quizStateType = {
     questions: [],
+    isFlippingCard: false,
     index: 0,
     status: 'notTesting',
     answer: null,
@@ -69,6 +70,12 @@ const quizSlice = createSlice({
             state.status = 'active'
             state.secondsRemainingQuestion = state.questionTime
             state.secondsRemainingQuiz = state.quizTime
+            state.answer = null
+            state.revealAnswer = false
+            state.isFlippingCard = false
+            state.index = 0
+            state.answerTimeFinished = false
+            state.perfectionScore = 0
         },
         newAnswer(state, action) {
             const question = state.questions.at(state.index) as Tables<'Card'>
@@ -82,9 +89,14 @@ const quizSlice = createSlice({
         nextQuestion(state) {
             state.index = state.index + 1
             state.answer = null
-            console.log('next-question', state.answer)
             state.answerTimeFinished = false
             state.secondsRemainingQuestion = state.questionTime
+            state.isFlippingCard =
+                state.questions[state.index].answers.length > 1 ? false : true
+            state.revealAnswer = false
+        },
+        revealAnswer(state) {
+            state.revealAnswer = !state.revealAnswer
         },
         finish(state) {
             state.status = 'finished'
@@ -138,6 +150,7 @@ export const {
     restart,
     reset,
     tick,
+    revealAnswer,
 } = quizSlice.actions
 
 export function dataReceived(quizId: string) {
@@ -204,5 +217,8 @@ export const getQuizTime = (store: RootState) => store.quiz.quizTime
 export const getQuestionTime = (store: RootState) => store.quiz.questionTime
 export const getAnswerTimeFinished = (store: RootState) =>
     store.quiz.answerTimeFinished
+export const getisFlippingCard = (store: RootState) => store.quiz.isFlippingCard
+export const getRevealAnswerStatus = (store: RootState) =>
+    store.quiz.revealAnswer
 
 export default quizSlice.reducer

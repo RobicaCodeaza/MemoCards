@@ -28,9 +28,17 @@
 .fade-exit-active {
     @apply scale-95 transform opacity-0 transition-all duration-500;
 }
-
+.perspective--small {
+    perspective: 500px;
+}
 .perspective {
     perspective: 1000px;
+}
+.perspective--big {
+    perspective: 3000px;
+}
+.perspective--huge {
+    perspective: 5000px;
 }
 
 .rotate-y-180 {

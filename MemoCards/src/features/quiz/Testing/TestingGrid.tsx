@@ -42,7 +42,7 @@ function TestingGrid() {
                             transition={{ duration: 0.3 }}
                             className="h-full"
                         >
-                            <CarouselContent className=" p-2">
+                            <CarouselContent className="perspective--big p-2">
                                 <Question></Question>
                             </CarouselContent>
                         </motion.div>

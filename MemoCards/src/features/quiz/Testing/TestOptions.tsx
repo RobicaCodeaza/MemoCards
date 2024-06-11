@@ -4,25 +4,34 @@ import {
     getQuizAnswer,
     getQuizIndex,
     getQuizQuestion,
+    getRevealAnswerStatus,
+    getisFlippingCard,
     newAnswer,
 } from '../quizSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { ComponentPropsWithoutRef } from 'react'
 
 type TestOptionsProps = {
     indexQuestion: number
-}
+} & ComponentPropsWithoutRef<'div'>
 
-function TestOptions({ indexQuestion }: TestOptionsProps) {
+function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
     const dispatch = useAppDispatch()
     const answerQuiz = useAppSelector(getQuizAnswer)
     const quizIndex = useAppSelector(getQuizIndex)
     const question = useAppSelector(getQuizQuestion(indexQuestion))
     const hasFinishedQuestionTime = useAppSelector(getAnswerTimeFinished)
-    console.log(hasFinishedQuestionTime, 'hasfinished')
+    const isFlippingCard = useAppSelector(getisFlippingCard)
+    const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
     const hasAnswered = answerQuiz ? true : false
 
+    console.log(hasFinishedQuestionTime, 'hasfinished')
+
     return (
-        <div className="mb-10 flex flex-col gap-5">
+        <div
+            className={`mb-10 flex flex-col gap-5 ${isFlippingCard ? ' transition-all duration-300' : ''}  ${isFlippingCard ? (revealAnswerStatus ? 'rotate-negative-y-180' : 'hidden') : ''}`}
+            {...props}
+        >
             {question.answers.map((answer, index) => {
                 return (
                     <button
