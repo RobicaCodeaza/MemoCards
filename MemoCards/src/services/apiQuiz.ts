@@ -54,6 +54,17 @@ export async function getQuizesPaginated(userId: string, page: number) {
     return { quizes, count }
 }
 
+export async function getQuizesSummary(userId: string) {
+    const { data, count, error } = await supabase
+        .from('Quizes')
+        .select('completionTime', { count: 'exact' })
+        .eq('user_id', userId)
+
+    if (error) throw new Error('Could not fetch the quizes summary stats.')
+
+    return { data, count }
+}
+
 export async function deleteQuiz(id: number, userId: string) {
     const { error } = await supabase
         .from('Quizes')
