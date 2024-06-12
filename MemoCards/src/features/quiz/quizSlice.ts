@@ -58,9 +58,6 @@ const quizSlice = createSlice({
             state.questions = action.payload.questions
             state.questionTime = action.payload.questionTime
             state.quizTime = action.payload.quizTime
-            state.totalTime = state.quizTime
-                ? state.quizTime
-                : state.questions.length * state.questionTime!
         },
 
         dataFailed(state) {
@@ -76,6 +73,7 @@ const quizSlice = createSlice({
             state.index = 0
             state.answerTimeFinished = false
             state.perfectionScore = 0
+            state.totalTime = state.quizTime ? state.quizTime : 0
         },
         newAnswer(state, action) {
             const question = state.questions.at(state.index) as Tables<'Card'>
@@ -90,9 +88,7 @@ const quizSlice = createSlice({
             state.index = state.index + 1
             state.answer = null
             state.answerTimeFinished = false
-            state.totalTime = state.quizTime
-                ? state.secondsRemainingQuiz!
-                : state.totalTime - state.secondsRemainingQuestion!
+
             state.secondsRemainingQuestion = state.questionTime
             state.isFlippingCard =
                 state.questions[state.index].answers.length > 1 ? false : true
@@ -131,12 +127,14 @@ const quizSlice = createSlice({
             if (action.payload === 'secondsRemainingQuiz') {
                 state.status =
                     state[action.payload] === 0 ? 'finished' : state.status
-                state.totalTime = state.totalTime - state[action.payload]!
-            } else
+                state.totalTime = state.secondsRemainingQuiz!
+            } else {
                 state.answerTimeFinished =
                     state[action.payload] === 0
                         ? true
                         : state.answerTimeFinished
+                state.totalTime = state.totalTime + 1
+            }
         },
     },
 })
