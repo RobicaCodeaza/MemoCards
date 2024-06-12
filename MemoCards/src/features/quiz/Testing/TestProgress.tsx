@@ -24,7 +24,7 @@ function TestProgress() {
                 Question <strong>{index + 1}</strong>/{questionsNum}
             </div>
             <p>
-                Points <strong>{perfectionScore}</strong>/ {questionsNum}
+                Points <strong>{perfectionScore}</strong>/ 100
             </p>
         </div>
     )
