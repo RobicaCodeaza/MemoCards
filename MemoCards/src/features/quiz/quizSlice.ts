@@ -83,14 +83,16 @@ const quizSlice = createSlice({
             state.answer = action.payload as number
             state.perfectionScore =
                 action.payload === question.correctAnswer
-                    ? ((state.perfectionScore + 1) / state.questions.length) *
-                      100
+                    ? state.perfectionScore + (1 / state.questions.length) * 100
                     : state.perfectionScore
         },
         nextQuestion(state) {
             state.index = state.index + 1
             state.answer = null
             state.answerTimeFinished = false
+            state.totalTime = state.quizTime
+                ? state.secondsRemainingQuiz!
+                : state.totalTime - state.secondsRemainingQuestion!
             state.secondsRemainingQuestion = state.questionTime
             state.isFlippingCard =
                 state.questions[state.index].answers.length > 1 ? false : true
@@ -135,7 +137,6 @@ const quizSlice = createSlice({
                     state[action.payload] === 0
                         ? true
                         : state.answerTimeFinished
-            state.totalTime = state.totalTime - state[action.payload]!
         },
     },
 })
@@ -220,5 +221,6 @@ export const getAnswerTimeFinished = (store: RootState) =>
 export const getisFlippingCard = (store: RootState) => store.quiz.isFlippingCard
 export const getRevealAnswerStatus = (store: RootState) =>
     store.quiz.revealAnswer
+export const getTotalTime = (store: RootState) => store.quiz.totalTime
 
 export default quizSlice.reducer
