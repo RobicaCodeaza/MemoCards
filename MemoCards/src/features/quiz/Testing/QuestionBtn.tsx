@@ -42,7 +42,9 @@ function QuestionBtn() {
                         : 'Reveal Answer'}
                 </Button>
             ) : null}
-            {answerQuiz !== null || hasFinishedQuestionTime ? (
+            {answerQuiz !== null ||
+            hasFinishedQuestionTime ||
+            revealAnswerStatus ? (
                 indexQuiz < numQuestions - 1 ? (
                     <CarouselNext className="ml-auto">
                         <Button
