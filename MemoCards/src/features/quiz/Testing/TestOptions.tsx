@@ -9,13 +9,15 @@ import {
     newAnswer,
 } from '../quizSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useState } from 'react'
+import StarRating from '@/ui/StarRating'
 
 type TestOptionsProps = {
     indexQuestion: number
 } & ComponentPropsWithoutRef<'div'>
 
 function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
+    const [ratingFlippedCard, setRatingFlippedCard] = useState<number>(3)
     const dispatch = useAppDispatch()
     const answerQuiz = useAppSelector(getQuizAnswer)
     const quizIndex = useAppSelector(getQuizIndex)
@@ -29,15 +31,30 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
 
     return (
         <div
-            className={`mb-10 flex flex-col gap-5 ${isFlippingCard ? ' transition-all duration-300' : ''}  ${isFlippingCard ? (revealAnswerStatus || hasFinishedQuestionTime ? 'rotate-negative-y-180' : 'hidden') : ''}`}
+            className={`mb-10 flex h-full flex-col gap-5 ${isFlippingCard ? ' transition-all duration-300' : ''}  ${isFlippingCard ? (revealAnswerStatus || hasFinishedQuestionTime ? 'rotate-negative-y-180' : 'hidden') : ''}`}
             {...props}
         >
             {question.answers.map((answer, index) => {
                 return (
                     <>
                         {isFlippingCard ? (
-                            <div className="block w-full text-wrap break-words rounded-full bg-chateau-green-200 px-10 py-5">
-                                {answer}
+                            <div className="flex h-full flex-col justify-between">
+                                <div className="mt-auto block w-full text-wrap break-words rounded-full bg-chateau-green-200 px-10 py-5">
+                                    {answer}
+                                </div>
+                                <div className="mt-auto flex flex-col items-center gap-4 self-center">
+                                    <p className="text-[1.4rem] font-medium uppercase tracking-wide text-neon-carrot-700/75">
+                                        Understanding of this Question
+                                    </p>
+                                    <StarRating
+                                        onClick={() => dispatch(newAnswer({}))}
+                                        maxRating={5}
+                                        color="#fe902d"
+                                        defaultRating={ratingFlippedCard}
+                                        size={24}
+                                        onSetRating={setRatingFlippedCard}
+                                    ></StarRating>
+                                </div>
                             </div>
                         ) : (
                             <button
