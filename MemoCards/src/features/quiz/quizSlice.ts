@@ -97,7 +97,7 @@ const quizSlice = createSlice({
             if (action.payload.type === 'flippingCard') {
                 state.questionPoints =
                     action.payload.value * (1 / state.questions.length) * 100
-                console.log(action.payload.value, state.questionPoints)
+                // console.log(action.payload.value, state.questionPoints)
             }
         },
         nextQuestion(state) {
@@ -118,7 +118,7 @@ const quizSlice = createSlice({
             state.status = 'finished'
         },
         restart(state) {
-            console.log(restart)
+            // console.log(restart)
             state.status = 'ready'
             state.secondsRemainingQuestion = null
             state.secondsRemainingQuiz = null

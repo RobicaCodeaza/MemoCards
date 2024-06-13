@@ -26,17 +26,15 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
     const isFlippingCard = useAppSelector(getisFlippingCard)
     const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
     const hasAnswered = answerQuiz ? true : false
-    console.log(ratingFlippedCard)
 
     function handleRatingFlippingCard(rating: number) {
         setRatingFlippedCard(rating)
-        if (ratingFlippedCard !== -1)
-            dispatch(
-                newAnswer({
-                    type: 'flippingCard',
-                    value: ratingFlippedCard / 10,
-                })
-            )
+        dispatch(
+            newAnswer({
+                type: 'flippingCard',
+                value: rating / 10,
+            })
+        )
     }
 
     return (
