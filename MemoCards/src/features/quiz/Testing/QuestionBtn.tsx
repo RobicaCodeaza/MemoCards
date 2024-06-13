@@ -23,8 +23,6 @@ function QuestionBtn() {
     const hasFinishedQuestionTime = useAppSelector(getAnswerTimeFinished)
     const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
 
-    console.log(question)
-
     function handleNextQuestion() {
         dispatch(nextQuestion())
     }

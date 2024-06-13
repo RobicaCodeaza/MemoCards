@@ -10,9 +10,10 @@ type quizStateType = {
     index: number
     status: 'loading' | 'ready' | 'error' | 'finished' | 'active' | 'notTesting'
     answer: number | null
-    answerTimeFinished: boolean
     isFlippingCard: boolean
     revealAnswer: boolean
+    answerTimeFinished: boolean
+    questionPoints: number
     perfectionScore: number
     decksData: { deckId: number; perfectionScore: number }[]
     secondsRemainingQuestion: number | null
@@ -24,18 +25,19 @@ type quizStateType = {
 
 const initialStateQuiz: quizStateType = {
     questions: [],
-    isFlippingCard: false,
     index: 0,
     status: 'notTesting',
     answer: null,
+    isFlippingCard: false,
     revealAnswer: false,
+    answerTimeFinished: false,
+    questionPoints: 0,
     perfectionScore: 0,
     decksData: [],
     secondsRemainingQuestion: null,
     questionTime: null,
     secondsRemainingQuiz: null,
     quizTime: null,
-    answerTimeFinished: false,
     totalTime: 0,
 }
 
@@ -75,14 +77,28 @@ const quizSlice = createSlice({
             state.perfectionScore = 0
             state.totalTime = state.quizTime ? state.quizTime : 0
         },
-        newAnswer(state, action) {
+        newAnswer(
+            state,
+            action: PayloadAction<{
+                type: 'flippingCard' | 'normalQuestion'
+                value: number
+            }>
+        ) {
             const question = state.questions.at(state.index) as Tables<'Card'>
+            console.log('newAnswer', action.payload)
 
-            state.answer = action.payload as number
-            state.perfectionScore =
-                action.payload === question.correctAnswer
-                    ? state.perfectionScore + (1 / state.questions.length) * 100
-                    : state.perfectionScore
+            if (action.payload.type === 'normalQuestion') {
+                state.answer = action.payload.value
+                state.questionPoints =
+                    action.payload.value === question.correctAnswer
+                        ? (1 / state.questions.length) * 100
+                        : 0
+            }
+            if (action.payload.type === 'flippingCard') {
+                state.questionPoints =
+                    action.payload.value * (1 / state.questions.length) * 100
+                console.log(action.payload.value, state.questionPoints)
+            }
         },
         nextQuestion(state) {
             state.index = state.index + 1
@@ -92,6 +108,8 @@ const quizSlice = createSlice({
             state.isFlippingCard =
                 state.questions[state.index].answers.length > 1 ? false : true
             state.revealAnswer = false
+            state.perfectionScore = state.perfectionScore + state.questionPoints
+            state.questionPoints = 0
         },
         revealAnswer(state) {
             state.revealAnswer = !state.revealAnswer

@@ -17,7 +17,7 @@ type TestOptionsProps = {
 } & ComponentPropsWithoutRef<'div'>
 
 function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
-    const [ratingFlippedCard, setRatingFlippedCard] = useState<number>(3)
+    const [ratingFlippedCard, setRatingFlippedCard] = useState<number>(-1)
     const dispatch = useAppDispatch()
     const answerQuiz = useAppSelector(getQuizAnswer)
     const quizIndex = useAppSelector(getQuizIndex)
@@ -26,8 +26,18 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
     const isFlippingCard = useAppSelector(getisFlippingCard)
     const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
     const hasAnswered = answerQuiz ? true : false
+    console.log(ratingFlippedCard)
 
-    console.log(hasFinishedQuestionTime, 'hasfinished')
+    function handleRatingFlippingCard(rating: number) {
+        setRatingFlippedCard(rating)
+        if (ratingFlippedCard !== -1)
+            dispatch(
+                newAnswer({
+                    type: 'flippingCard',
+                    value: ratingFlippedCard / 10,
+                })
+            )
+    }
 
     return (
         <div
@@ -38,7 +48,10 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
                 return (
                     <>
                         {isFlippingCard ? (
-                            <div className="flex h-full flex-col justify-between">
+                            <div
+                                key={index}
+                                className="flex h-full flex-col justify-between"
+                            >
                                 <div className="mt-auto block w-full text-wrap break-words rounded-full bg-chateau-green-200 px-10 py-5">
                                     {answer}
                                 </div>
@@ -47,12 +60,25 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
                                         Understanding of this Question
                                     </p>
                                     <StarRating
-                                        onClick={() => dispatch(newAnswer({}))}
-                                        maxRating={5}
+                                        // onClick={handleRatingFlippingCard}
+                                        maxRating={10}
                                         color="#fe902d"
                                         defaultRating={ratingFlippedCard}
                                         size={24}
-                                        onSetRating={setRatingFlippedCard}
+                                        onSetRating={handleRatingFlippingCard}
+                                        messages={[
+                                            '0%',
+                                            '10%',
+                                            '20%',
+                                            '30%',
+                                            '40%',
+                                            '50%',
+                                            '60%',
+                                            '70%',
+                                            '80%',
+                                            '90%',
+                                            '100%',
+                                        ]}
                                     ></StarRating>
                                 </div>
                             </div>
@@ -60,7 +86,14 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
                             <button
                                 key={index}
                                 className={`block w-full cursor-pointer text-wrap break-words  rounded-full border-2 px-10 py-5 text-left font-sans text-[1.6rem] transition-all duration-300 hover:translate-x-5 hover:border-picton-blue-300 hover:bg-picton-blue-150 disabled:hover:cursor-not-allowed ${index + 1 === answerQuiz ? 'translate-x-10' : ''} ${hasAnswered || hasFinishedQuestionTime ? (index + 1 === question.correctAnswer ? 'border border-chateau-green-300 bg-chateau-green-200 text-chateau-green-700' : 'border-danger-300 bg-danger-200 text-danger-700') : 'border-picton-blue-150 bg-picton-blue-75'} `}
-                                onClick={() => dispatch(newAnswer(index + 1))}
+                                onClick={() =>
+                                    dispatch(
+                                        newAnswer({
+                                            type: 'normalQuestion',
+                                            value: index + 1,
+                                        })
+                                    )
+                                }
                             >
                                 {answer}
                             </button>
