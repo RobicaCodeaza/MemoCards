@@ -88,7 +88,6 @@ const quizSlice = createSlice({
             state.index = state.index + 1
             state.answer = null
             state.answerTimeFinished = false
-
             state.secondsRemainingQuestion = state.questionTime
             state.isFlippingCard =
                 state.questions[state.index].answers.length > 1 ? false : true
