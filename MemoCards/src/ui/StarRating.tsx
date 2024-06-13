@@ -26,7 +26,8 @@ type StarRatingTypes = {
     size: number
     messages?: string[]
     className?: string
-    onSetRating: Dispatch<SetStateAction<number>>
+    onSetRating: (rating: number) => void
+    rated?: boolean
 } & ComponentPropsWithoutRef<'div'>
 
 function StarRating({
@@ -37,9 +38,11 @@ function StarRating({
     messages = [],
     defaultRating = 0,
     onSetRating,
+    rated = false,
     ...props
 }: StarRatingTypes) {
-    const [rating, setRating] = useState<number>(defaultRating)
+    const defaultRatingStars = defaultRating === -1 ? 0 : defaultRating
+    const [rating, setRating] = useState<number>(defaultRatingStars)
     const [tempRating, setTempRating] = useState<number>(0)
     function handleRating(rating: number) {
         setRating(rating)
@@ -71,9 +74,9 @@ function StarRating({
                 ))}
             </div>
             <p style={textStyle}>
-                {messages.length === maxRating
-                    ? messages[tempRating ? tempRating - 1 : rating - 1]
-                    : tempRating || rating || ''}
+                {messages.length === maxRating + 1
+                    ? messages[tempRating ? tempRating : rating]
+                    : tempRating || rating || '0'}
             </p>
         </div>
     )
