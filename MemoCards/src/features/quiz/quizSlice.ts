@@ -286,7 +286,8 @@ export function finish() {
                 'append_perfectionscore_quiz',
                 {
                     row_id: quiz.quizId,
-                    new_element: quiz.perfectionScore,
+                    new_element:
+                        (quiz.perfectionScore * 100) / quiz.questions.length,
                 }
             )
 
