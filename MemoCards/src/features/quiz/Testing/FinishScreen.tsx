@@ -28,7 +28,6 @@ function FinishScreen() {
     const completionTime = useAppSelector(getTotalTime)
     const questionsNum = useAppSelector(getQuizNumQuestions)
     const decksData = useAppSelector(getDecksData)
-    console.log(decksData)
 
     return (
         <div className="flex h-full flex-col gap-24">
