@@ -14,13 +14,22 @@ import {
 import Button from '@/ui/Button'
 import Heading from '@/ui/Heading'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { getQuizPerfectionScore, getTotalTime, restart } from '../quizSlice'
+import {
+    getDecksData,
+    getQuizNumQuestions,
+    getQuizPerfectionScore,
+    getTotalTime,
+    restart,
+} from '../quizSlice'
 import { useAppSelector } from '@/hooks/useAppSelector'
 
 function FinishScreen() {
     const dispatch = useAppDispatch()
     const quizPerfectionScore = useAppSelector(getQuizPerfectionScore)
     const completionTime = useAppSelector(getTotalTime)
+    const questionsNum = useAppSelector(getQuizNumQuestions)
+    const decksData = useAppSelector(getDecksData)
+    console.log(decksData)
 
     return (
         <div className="flex h-full flex-col gap-24">
@@ -88,7 +97,9 @@ function FinishScreen() {
                         <span className="tracking-wide text-picton-blue-800">
                             Perfection Score:{' '}
                         </span>
-                        <span>{quizPerfectionScore}/100</span>
+                        <span>
+                            {(quizPerfectionScore * 100) / questionsNum}/100
+                        </span>
                         <span className="text-[1.6rem]font-semibold text-picton-blue-600"></span>
                     </p>
                     <p className="flex items-center gap-3 text-[1.7rem] font-medium ">
