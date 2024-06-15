@@ -20,7 +20,7 @@ type quizStateType = {
     questionTime: number | null
     secondsRemainingQuiz: number | null
     quizTime: number | null
-    totalTime: number
+    completionTime: number
 }
 
 const initialStateQuiz: quizStateType = {
@@ -38,7 +38,7 @@ const initialStateQuiz: quizStateType = {
     questionTime: null,
     secondsRemainingQuiz: null,
     quizTime: null,
-    totalTime: 0,
+    completionTime: 0,
 }
 
 const quizSlice = createSlice({
@@ -54,12 +54,14 @@ const quizSlice = createSlice({
                 questions: Tables<'Card'>[]
                 quizTime: number | null
                 questionTime: number | null
+                decksData: { deckId: number; perfectionScore: number }[]
             }>
         ) {
             state.status = 'ready'
             state.questions = action.payload.questions
             state.questionTime = action.payload.questionTime
             state.quizTime = action.payload.quizTime
+            state.decksData = action.payload.decksData
         },
 
         dataFailed(state) {
@@ -75,7 +77,7 @@ const quizSlice = createSlice({
             state.index = 0
             state.answerTimeFinished = false
             state.perfectionScore = 0
-            state.totalTime = state.quizTime ? state.quizTime : 0
+            state.completionTime = state.quizTime ? state.quizTime : 0
         },
         newAnswer(
             state,
@@ -88,15 +90,32 @@ const quizSlice = createSlice({
             console.log('newAnswer', action.payload)
 
             if (action.payload.type === 'normalQuestion') {
+                const pointsToBeAdded =
+                    action.payload.value === question.correctAnswer ? 1 : 0
                 state.answer = action.payload.value
-                state.questionPoints =
-                    action.payload.value === question.correctAnswer
-                        ? (1 / state.questions.length) * 100
-                        : 0
+                state.questionPoints = pointsToBeAdded
+                state.decksData = state.decksData.map((deckData) =>
+                    deckData.deckId === question.deckId
+                        ? {
+                              ...deckData,
+                              perfectionScore:
+                                  deckData.perfectionScore + pointsToBeAdded,
+                          }
+                        : deckData
+                )
             }
             if (action.payload.type === 'flippingCard') {
-                state.questionPoints =
-                    action.payload.value * (1 / state.questions.length) * 100
+                state.questionPoints = action.payload.value * 1
+                state.decksData = state.decksData.map((deckData) =>
+                    deckData.deckId === question.deckId
+                        ? {
+                              ...deckData,
+                              perfectionScore:
+                                  deckData.perfectionScore +
+                                  action.payload.value * 1,
+                          }
+                        : deckData
+                )
                 // console.log(action.payload.value, state.questionPoints)
             }
         },
@@ -144,13 +163,13 @@ const quizSlice = createSlice({
             if (action.payload === 'secondsRemainingQuiz') {
                 state.status =
                     state[action.payload] === 0 ? 'finished' : state.status
-                state.totalTime = state.secondsRemainingQuiz!
+                state.completionTime = state.secondsRemainingQuiz!
             } else {
                 state.answerTimeFinished =
                     state[action.payload] === 0
                         ? true
                         : state.answerTimeFinished
-                state.totalTime = state.totalTime + 1
+                state.completionTime = state.completionTime + 1
             }
         },
     },
@@ -195,10 +214,33 @@ export function dataReceived(quizId: string) {
                     'Cannot find coresponding data. Make sure you selected decks with cards.'
                 )
 
+            //We need this data in order to update those decks progression later
+            const decksInQuestions = questions.map((el) => {
+                return {
+                    deckId: el.deckId,
+                    perfectionScore: 0,
+                }
+            })
+
+            const arrayDecksWithoutDuplicates = Array.from(
+                new Map(
+                    decksInQuestions.map((el) => [
+                        el.deckId,
+                        el.perfectionScore,
+                    ])
+                )
+            )
+            const decksWithoutDuplicates = arrayDecksWithoutDuplicates.map(
+                (el) => {
+                    return { deckId: el[0], perfectionScore: el[1] }
+                }
+            )
+
             const payload = {
                 questions,
                 questionTime: data[0].questionTime,
                 quizTime: data[0].quizTime,
+                decksData: decksWithoutDuplicates,
             }
             return dispatch({
                 type: 'quiz/dataReceived',
@@ -236,6 +278,7 @@ export const getAnswerTimeFinished = (store: RootState) =>
 export const getisFlippingCard = (store: RootState) => store.quiz.isFlippingCard
 export const getRevealAnswerStatus = (store: RootState) =>
     store.quiz.revealAnswer
-export const getTotalTime = (store: RootState) => store.quiz.totalTime
+export const getTotalTime = (store: RootState) => store.quiz.completionTime
+export const getDecksData = (store: RootState) => store.quiz.decksData
 
 export default quizSlice.reducer
