@@ -1,5 +1,4 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
-import { GrScorecard } from 'react-icons/gr'
 import { PiHourglassSimpleLowDuotone } from 'react-icons/pi'
 import {
     RiProgress1Line,
@@ -102,7 +101,7 @@ function FinishScreen() {
                         </span>
                         <span className="text-[1.6rem]font-semibold text-picton-blue-600"></span>
                     </div>
-                    <p className="flex items-center gap-3 text-[1.7rem] font-medium ">
+                    <div className="flex items-center gap-3 text-[1.7rem] font-medium ">
                         <span>
                             <PiHourglassSimpleLowDuotone className="h-9 w-9 text-picton-blue-500"></PiHourglassSimpleLowDuotone>
                         </span>
@@ -125,7 +124,7 @@ function FinishScreen() {
                                 </>
                             )}
                         </span>
-                    </p>
+                    </div>
                 </div>
                 <Button
                     variation="accentSecondary"
