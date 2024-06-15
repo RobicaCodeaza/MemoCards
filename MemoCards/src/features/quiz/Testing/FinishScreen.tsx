@@ -49,7 +49,7 @@ function FinishScreen() {
                     Congratulations! You finished your Quiz.
                 </Heading>
                 <div className="mb-2 mt-2 flex flex-col gap-4 rounded-md border border-mako-grey-100 bg-picton-blue-75 px-16 py-8">
-                    <p className="flex items-center gap-3 text-[1.7rem] font-medium ">
+                    <div className="flex items-center gap-3 text-[1.7rem] font-medium ">
                         {quizPerfectionScore < 25 && (
                             <div className="flex items-center gap-2">
                                 <RiProgress1Line className="h-9 w-9 text-danger-600"></RiProgress1Line>
@@ -101,7 +101,7 @@ function FinishScreen() {
                             {(quizPerfectionScore * 100) / questionsNum}/100
                         </span>
                         <span className="text-[1.6rem]font-semibold text-picton-blue-600"></span>
-                    </p>
+                    </div>
                     <p className="flex items-center gap-3 text-[1.7rem] font-medium ">
                         <span>
                             <PiHourglassSimpleLowDuotone className="h-9 w-9 text-picton-blue-500"></PiHourglassSimpleLowDuotone>
