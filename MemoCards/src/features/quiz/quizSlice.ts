@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 import { Root } from 'react-dom/client'
 
 type quizStateType = {
+    quizId: number
     questions: Tables<'Card'>[]
     index: number
     status: 'loading' | 'ready' | 'error' | 'finished' | 'active' | 'notTesting'
@@ -24,6 +25,7 @@ type quizStateType = {
 }
 
 const initialStateQuiz: quizStateType = {
+    quizId: -1,
     questions: [],
     index: 0,
     status: 'notTesting',
@@ -55,6 +57,7 @@ const quizSlice = createSlice({
                 quizTime: number | null
                 questionTime: number | null
                 decksData: { deckId: number; perfectionScore: number }[]
+                quizId: number
             }>
         ) {
             state.status = 'ready'
@@ -62,6 +65,7 @@ const quizSlice = createSlice({
             state.questionTime = action.payload.questionTime
             state.quizTime = action.payload.quizTime
             state.decksData = action.payload.decksData
+            state.quizId = action.payload.quizId
         },
 
         dataFailed(state) {
@@ -181,7 +185,6 @@ export const {
     newAnswer,
     start,
     nextQuestion,
-    finish,
     restart,
     reset,
     tick,
@@ -197,7 +200,7 @@ export function dataReceived(quizId: string) {
             dispatch({ type: 'quiz/gettingData' })
             const { data, error: errorGettingDecks } = await supabase
                 .from('Quizes')
-                .select('decksId,questionTime,quizTime')
+                .select('decksId,questionTime,quizTime,id')
                 .eq('id', quizId)
 
             if (errorGettingDecks ?? data === null)
@@ -241,11 +244,58 @@ export function dataReceived(quizId: string) {
                 questionTime: data[0].questionTime,
                 quizTime: data[0].quizTime,
                 decksData: decksWithoutDuplicates,
+                quizId: data[0].id,
             }
             return dispatch({
                 type: 'quiz/dataReceived',
                 payload,
             })
+        } catch (error) {
+            let message
+            if (error instanceof Error) message = error.message
+            else message = String(error)
+            toast.error(message)
+            dispatch(dataFailed())
+        }
+    }
+}
+
+export function finish() {
+    return async function (
+        dispatch: typeof store.dispatch,
+        getState: typeof store.getState
+    ) {
+        try {
+            const { quiz } = getState()
+            const newQuizCompletionTime = {
+                completionTime: quiz.completionTime,
+            }
+
+            const { error: errorUpdatingCompletionTime } = await supabase
+                .from('Quizes')
+                .update(newQuizCompletionTime)
+                .eq('id', quiz.quizId)
+                .select()
+                .single()
+
+            if (errorUpdatingCompletionTime) {
+                throw new Error('Error updating completion time of the quiz.')
+            }
+
+            const { error: errorUpdatingPerfectionScore } = await supabase.rpc(
+                'append_perfectionscore_quiz',
+                {
+                    row_id: quiz.quizId,
+                    new_element:
+                        (quiz.perfectionScore * 100) / quiz.questions.length,
+                }
+            )
+
+            if (errorUpdatingPerfectionScore) {
+                throw new Error('Error updating Perfection Score of the quiz.')
+            }
+
+            return dispatch({ type: 'quiz/finish' })
         } catch (error) {
             let message
             if (error instanceof Error) message = error.message

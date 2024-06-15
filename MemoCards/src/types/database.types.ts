@@ -118,7 +118,35 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      append_perfectionscore_quiz: {
+        Args: {
+          row_id: number
+          new_element: number
+        }
+        Returns: undefined
+      }
+      append_to_array:
+        | {
+            Args: {
+              row_id: number
+              new_element: number
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              row_id: string
+              new_element: number
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              row_id: string
+              new_element: string
+            }
+            Returns: undefined
+          }
     }
     Enums: {
       [_ in never]: never
