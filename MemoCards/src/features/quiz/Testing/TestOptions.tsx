@@ -39,7 +39,7 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
 
     return (
         <div
-            className={`mb-10 flex h-full flex-col gap-5 ${isFlippingCard ? ' transition-all duration-300' : ''}  ${isFlippingCard ? (revealAnswerStatus || hasFinishedQuestionTime ? 'rotate-negative-y-180' : 'hidden') : ''}`}
+            className={`mb-10 flex h-full flex-col justify-center gap-5 ${isFlippingCard ? ' transition-all duration-300' : ''}  ${isFlippingCard ? (revealAnswerStatus || hasFinishedQuestionTime ? 'rotate-negative-y-180' : 'hidden') : ''}`}
             {...props}
         >
             {question.answers.map((answer, index) => {
@@ -63,6 +63,7 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
                                         color="#fe902d"
                                         defaultRating={ratingFlippedCard}
                                         size={24}
+                                        className="flex flex-col gap-1 phone:flex-row phone:gap-4 "
                                         onSetRating={handleRatingFlippingCard}
                                         messages={[
                                             '0%',
