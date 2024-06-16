@@ -27,7 +27,7 @@ function TestingGrid() {
         return <Empty resource="Decks/Cards for the coresponding Quiz"></Empty>
 
     return (
-        <main className="ml-auto mr-auto  flex h-[72.5rem] w-[100rem]   max-w-[120rem] flex-col gap-8 rounded-xl border-2 border-mako-grey-100 bg-picton-blue-50 px-20 py-20">
+        <main className="ml-auto  mr-auto flex h-[70rem]   w-full max-w-[120rem] flex-col gap-8 rounded-xl border-2 border-mako-grey-100 bg-picton-blue-50 px-4 py-10 phone:h-[65rem] phone:w-[65rem] tab-port:h-[65rem] tab-port:w-[75rem]   tab-land:h-[65rem] tab-land:w-[90rem] particular-small-laptop:h-[72.5rem] particular-small-laptop:w-[100rem]">
             {/* {status === 'error' && <Error></Error>} */}
             {status === 'ready' && <StartScreen></StartScreen>}
             {status === 'active' && (
