@@ -52,7 +52,7 @@ function QuizCard({ quiz }: QuizCardProps) {
             className="perspective"
         >
             <div
-                className={` ${isOtherDetails ? 'rotate-y-180' : ''}  relative h-[25rem] overflow-hidden rounded-lg border border-chateau-green-200 shadow-lg  transition-transform duration-300`}
+                className={` ${isOtherDetails ? 'rotate-y-180' : ''}  relative h-full overflow-hidden rounded-lg border border-chateau-green-200 shadow-lg  transition-transform duration-300`}
             >
                 {!isOtherDetails && (
                     <div className="absolute left-0 top-0 flex h-full w-full  flex-col gap-6 px-6 py-6 phone:px-8 phone:py-8 tab-port:px-8  tab-port:py-8 tab-land:px-10 tab-land:py-10 particular-small-laptop:px-12 particular-small-laptop:py-12">
