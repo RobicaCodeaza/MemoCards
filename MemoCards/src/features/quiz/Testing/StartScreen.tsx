@@ -10,8 +10,8 @@ function StartScreen() {
     const numQuestions = useAppSelector(getQuizNumQuestions)
 
     return (
-        <div className="flex flex-col items-center gap-14 p-12">
-            <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-14 p-12">
+            <div className="mb-auto flex flex-col items-center justify-center gap-2 text-center">
                 <Heading as="h2">Welcome to your quiz.</Heading>
                 <Heading as="h3">
                     {numQuestions} questions to master your lessons.
@@ -25,6 +25,7 @@ function StartScreen() {
             <Button
                 variation="simpleSecondary"
                 size="medium"
+                otherClasses="mt-auto"
                 onClick={() => dispatch(start())}
             >
                 Let&apos;s start
