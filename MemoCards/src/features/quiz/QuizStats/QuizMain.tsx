@@ -59,8 +59,9 @@ function QuizMain() {
     const quizesWithTime = quizesSummary?.filter(
         (quiz) => quiz.completionTime !== null
     )
+    console.log(quizesWithTime)
     const averageTime = quizesWithTime?.reduce((acc, curr) => {
-        return (acc + curr.completionTime!) / quizesNum
+        return (acc + curr.completionTime!) / quizesWithTime.length
     }, 0)
     return (
         <>
