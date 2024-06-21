@@ -60,6 +60,7 @@ const quizSlice = createSlice({
                 quizId: number
             }>
         ) {
+            console.log(action.payload.decksData)
             state.status = 'ready'
             state.questions = action.payload.questions
             state.questionTime = action.payload.questionTime
@@ -155,6 +156,12 @@ const quizSlice = createSlice({
             state.status = 'ready'
             state.secondsRemainingQuestion = null
             state.secondsRemainingQuiz = null
+            let decksData = state.decksData
+            decksData = decksData.map((el) => {
+                return { ...el, perfectionScore: [...el.perfectionScore, 0] }
+            })
+            console.log('deckReset', decksData)
+            state.decksData = decksData
         },
         reset(state) {
             state.status = 'notTesting'
@@ -251,6 +258,7 @@ export function dataReceived(quizId: string) {
                     perfectionScore,
                 }
             })
+            console.log(decksInQuestions, 'decksinQuestions')
 
             const payload = {
                 questions,
@@ -299,12 +307,12 @@ export function finish() {
 
             //Updating Quiz Perfection Score
             const { error: errorUpdatingPerfectionScore } = await supabase.rpc(
-                'append_perfectionscore_quiz',
+                'append_completiondata_quiz',
                 {
                     row_id: quiz.quizId,
                     new_perfection_score:
                         (quiz.perfectionScore * 100) / quiz.questions.length,
-                    new_last_completed: new Date().toISOString(),
+                    new_last_tested: new Date().toISOString(),
                 }
             )
 
@@ -318,7 +326,7 @@ export function finish() {
                 .from('Decks')
                 .select('*')
                 .in('id', decksEdited)
-
+            console.log('data', quiz.decksData)
             if (errorGettingDecksTested) {
                 throw new Error('Error getting data of the decks.')
             }
@@ -327,21 +335,29 @@ export function finish() {
                 const deckToAdd = quiz.decksData.filter(
                     (deckData) => deckData.deckId === el.id
                 )
+                const perfectionScore = el.perfectionScore
+                    ? [
+                          ...el.perfectionScore,
+                          deckToAdd[0].perfectionScore.at(-1),
+                      ]
+                    : [deckToAdd[0].perfectionScore.at(-1)]
+
                 const dateToAdd = new Date().toISOString()
                 const lastTested = el.lastTested
-                    ? [...el.lastTested, new Date().toISOString()]
+                    ? [...el.lastTested, dateToAdd]
                     : [dateToAdd]
                 return {
                     ...el,
-                    perfectionScore: deckToAdd[0].perfectionScore,
-                    lastTested: lastTested,
+                    lastTested,
+                    perfectionScore,
                 }
             })
+            console.log('updates', updates)
 
             const { error: errorUpdatingDecks } = await supabase
                 .from('Decks')
                 .upsert(updates)
-                .select('*')
+
             if (errorUpdatingDecks) {
                 throw new Error(
                     'Error updating Perfection Score of the Decks contained by Quiz.'
