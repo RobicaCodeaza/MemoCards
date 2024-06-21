@@ -16,7 +16,7 @@ type quizStateType = {
     answerTimeFinished: boolean
     questionPoints: number
     perfectionScore: number
-    decksData: { deckId: number; perfectionScore: number }[]
+    decksData: { deckId: number; perfectionScore: number[] }[]
     secondsRemainingQuestion: number | null
     questionTime: number | null
     secondsRemainingQuiz: number | null
@@ -56,7 +56,7 @@ const quizSlice = createSlice({
                 questions: Tables<'Card'>[]
                 quizTime: number | null
                 questionTime: number | null
-                decksData: { deckId: number; perfectionScore: number }[]
+                decksData: { deckId: number; perfectionScore: number[] }[]
                 quizId: number
             }>
         ) {
@@ -98,28 +98,38 @@ const quizSlice = createSlice({
                     action.payload.value === question.correctAnswer ? 1 : 0
                 state.answer = action.payload.value
                 state.questionPoints = pointsToBeAdded
-                state.decksData = state.decksData.map((deckData) =>
-                    deckData.deckId === question.deckId
-                        ? {
-                              ...deckData,
-                              perfectionScore:
-                                  deckData.perfectionScore + pointsToBeAdded,
-                          }
-                        : deckData
-                )
+                state.decksData = state.decksData.map((deckData) => {
+                    if (deckData.deckId === question.deckId) {
+                        const deckPerfectionScore =
+                            deckData.perfectionScore.slice()
+                        deckPerfectionScore[deckPerfectionScore.length - 1] =
+                            deckPerfectionScore[
+                                deckPerfectionScore.length - 1
+                            ] + pointsToBeAdded
+                        return {
+                            ...deckData,
+                            perfectionScore: deckPerfectionScore,
+                        }
+                    } else return deckData
+                })
             }
             if (action.payload.type === 'flippingCard') {
                 state.questionPoints = action.payload.value * 1
-                state.decksData = state.decksData.map((deckData) =>
-                    deckData.deckId === question.deckId
-                        ? {
-                              ...deckData,
-                              perfectionScore:
-                                  deckData.perfectionScore +
-                                  action.payload.value * 1,
-                          }
-                        : deckData
-                )
+                state.decksData = state.decksData.map((deckData) => {
+                    if (deckData.deckId === question.deckId) {
+                        const deckPerfectionScore =
+                            deckData.perfectionScore.slice()
+                        deckPerfectionScore[deckPerfectionScore.length - 1] =
+                            deckPerfectionScore[
+                                deckPerfectionScore.length - 1
+                            ] +
+                            action.payload.value * 1
+                        return {
+                            ...deckData,
+                            perfectionScore: deckPerfectionScore,
+                        }
+                    } else return deckData
+                })
                 // console.log(action.payload.value, state.questionPoints)
             }
         },
@@ -218,32 +228,35 @@ export function dataReceived(quizId: string) {
                 )
 
             //We need this data in order to update those decks progression later
-            const decksInQuestions = questions.map((el) => {
+            const {
+                data: decksPerfectionScore,
+                error: errorGettingDecksPerfection,
+            } = await supabase
+                .from('Decks')
+                .select('perfectionScore,id')
+                .in('id', data[0].decksId)
+
+            if (errorGettingDecksPerfection ?? decksPerfectionScore === null)
+                throw new Error(
+                    'Cannot find coresponding data. Make sure you selected decks with cards.'
+                )
+
+            const decksInQuestions = decksPerfectionScore.map((el) => {
+                const perfectionScore = el.perfectionScore
+                    ? el.perfectionScore
+                    : []
+                perfectionScore?.push(0)
                 return {
-                    deckId: el.deckId,
-                    perfectionScore: 0,
+                    deckId: el.id,
+                    perfectionScore,
                 }
             })
-
-            const arrayDecksWithoutDuplicates = Array.from(
-                new Map(
-                    decksInQuestions.map((el) => [
-                        el.deckId,
-                        el.perfectionScore,
-                    ])
-                )
-            )
-            const decksWithoutDuplicates = arrayDecksWithoutDuplicates.map(
-                (el) => {
-                    return { deckId: el[0], perfectionScore: el[1] }
-                }
-            )
 
             const payload = {
                 questions,
                 questionTime: data[0].questionTime,
                 quizTime: data[0].quizTime,
-                decksData: decksWithoutDuplicates,
+                decksData: decksInQuestions,
                 quizId: data[0].id,
             }
             return dispatch({
@@ -267,10 +280,12 @@ export function finish() {
     ) {
         try {
             const { quiz } = getState()
+            console.log(quiz.decksData)
             const newQuizCompletionTime = {
                 completionTime: quiz.completionTime,
             }
 
+            //Updating Quiz Completion Time
             const { error: errorUpdatingCompletionTime } = await supabase
                 .from('Quizes')
                 .update(newQuizCompletionTime)
@@ -282,17 +297,55 @@ export function finish() {
                 throw new Error('Error updating completion time of the quiz.')
             }
 
+            //Updating Quiz Perfection Score
             const { error: errorUpdatingPerfectionScore } = await supabase.rpc(
                 'append_perfectionscore_quiz',
                 {
                     row_id: quiz.quizId,
-                    new_element:
+                    new_perfection_score:
                         (quiz.perfectionScore * 100) / quiz.questions.length,
+                    new_last_completed: new Date().toISOString(),
                 }
             )
 
             if (errorUpdatingPerfectionScore) {
                 throw new Error('Error updating Perfection Score of the quiz.')
+            }
+
+            //Updating Decks Perfection Score
+            const decksEdited = quiz.decksData.map((el) => el.deckId)
+            const { data, error: errorGettingDecksTested } = await supabase
+                .from('Decks')
+                .select('*')
+                .in('id', decksEdited)
+
+            if (errorGettingDecksTested) {
+                throw new Error('Error getting data of the decks.')
+            }
+
+            const updates = data.map((el) => {
+                const deckToAdd = quiz.decksData.filter(
+                    (deckData) => deckData.deckId === el.id
+                )
+                const dateToAdd = new Date().toISOString()
+                const lastTested = el.lastTested
+                    ? [...el.lastTested, new Date().toISOString()]
+                    : [dateToAdd]
+                return {
+                    ...el,
+                    perfectionScore: deckToAdd[0].perfectionScore,
+                    lastTested: lastTested,
+                }
+            })
+
+            const { error: errorUpdatingDecks } = await supabase
+                .from('Decks')
+                .upsert(updates)
+                .select('*')
+            if (errorUpdatingDecks) {
+                throw new Error(
+                    'Error updating Perfection Score of the Decks contained by Quiz.'
+                )
             }
 
             return dispatch({ type: 'quiz/finish' })
