@@ -11,10 +11,6 @@ function Settings() {
                 <Heading as="h3">Update Recap Plan</Heading>
                 <UpdateRecap></UpdateRecap>
             </Row>
-
-            <Row type="vertical">
-                <Heading as="h3">Update password </Heading>
-            </Row>
         </>
     )
 }
