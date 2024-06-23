@@ -1,11 +1,5 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
-import {
-    getQuizAnswer,
-    getQuizIndex,
-    getQuizNumQuestions,
-    getQuizQuestions,
-    getQuizStatus,
-} from '../quizSlice'
+import { getQuizNumQuestions, getQuizStatus } from '../quizSlice'
 import Empty from '@/ui/Empty'
 import Spinner from '@/ui/Spinner'
 import Question from './Question'
