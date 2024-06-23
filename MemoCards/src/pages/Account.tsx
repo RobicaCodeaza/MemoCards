@@ -14,7 +14,7 @@ function Account() {
 
     return (
         <>
-            <Heading as="h1">Update your account</Heading>
+            <Heading as="h1">Update your account 🔒</Heading>
 
             <Row type="vertical">
                 <Heading as="h3">Update user data</Heading>
