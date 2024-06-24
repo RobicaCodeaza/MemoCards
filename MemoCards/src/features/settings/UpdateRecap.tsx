@@ -9,8 +9,9 @@ import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 // import Spinner from '@/ui/Spinner'
 import { useGetRecapSettings } from './useGetRecapSettings'
 import Spinner from '@/ui/Spinner'
+import { useUpdateRecapSettings } from './useUpdateRecapSettings'
 
-type FieldValuesType = {
+export type FieldValuesType = {
     recap_weekstime_p25: number | null
     recap_weekstime_p50: number | null
     recap_weekstime_p75: number | null
@@ -19,36 +20,64 @@ type FieldValuesType = {
     target_perfection_score: number | null
 }
 
+export type SettingsType = {
+    recap_weekstime_p25?: number | null
+    recap_weekstime_p50?: number | null
+    recap_weekstime_p75?: number | null
+    recap_weekstime_p100?: number | null
+    future_exam_in_days?: number | null
+    target_perfection_score?: number | null
+    user_id: string
+}
+
 function UpdateRecap() {
     const { settingsRecapUser, isGettingSettings } = useGetRecapSettings()
-    // const { isUpdatingUser, updateUser } = useUpdateUser()
+    const { isUpdatingRecapSettings, updateRecapSettings } =
+        useUpdateRecapSettings()
 
     const [user, _] = useLocalStorageState<UserType>(
         { user_id: '', user_provider: '' },
         'user'
     )
-    const isNotEmailProvider = user.user_provider !== 'email'
 
-    const { handleSubmit, register, getValues, formState } =
+    const { handleSubmit, register, formState, reset } =
         useForm<FieldValuesType>()
     const { errors } = formState
 
     const onSubmit: SubmitHandler<FieldValuesType> = (data) => {
-        console.log(data)
-        // const updateData = { password: data.passwordConfirm }
-        // updateUser(updateData, {
-        //     onSuccess: () => {
-        //         reset()
-        //     },
-        // })
+        const updates = {
+            ...(data.recap_weekstime_p25 && {
+                recap_weekstime_p25: data.recap_weekstime_p25,
+            }),
+            ...(data.recap_weekstime_p50 && {
+                recap_weekstime_p50: data.recap_weekstime_p50,
+            }),
+            ...(data.recap_weekstime_p75 && {
+                recap_weekstime_p75: data.recap_weekstime_p75,
+            }),
+            ...(data.recap_weekstime_p100 && {
+                recap_weekstime_p100: data.recap_weekstime_p100,
+            }),
+            ...(data.future_exam_in_days && {
+                future_exam_in_days: data.future_exam_in_days,
+            }),
+            ...(data.target_perfection_score && {
+                target_perfection_score: data.target_perfection_score,
+            }),
+            user_id: user.user_id,
+        }
+
+        updateRecapSettings(updates, {
+            onSuccess: () => {
+                reset()
+            },
+        })
     }
-    // const onError: SubmitErrorHandler<FieldErrors> = (error) => {
-    //     console.log(error)
-    // }
 
-    // if (isUpdatingUser) return <Spinner></Spinner>
+    const isWorking = isGettingSettings || isUpdatingRecapSettings
 
-    if (isGettingSettings) return <Spinner></Spinner>
+    if (isWorking) return <Spinner></Spinner>
+
     return (
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         <Form onSubmit={handleSubmit(onSubmit)} variation="regular">
@@ -58,6 +87,7 @@ function UpdateRecap() {
             >
                 <Input
                     type="number"
+                    disabled={isWorking}
                     id="recap_weekstime_p25"
                     placeholder={
                         settingsRecapUser?.recap_weekstime_p25
@@ -65,12 +95,14 @@ function UpdateRecap() {
                             : 'Enter a recap time for tests with score <= 25'
                     }
                     {...register('recap_weekstime_p25', {
-                        required: 'This field is required',
-                        validate: (value) =>
-                            (getValues().recap_weekstime_p25 !== null &&
-                                getValues().recap_weekstime_p25! >= 0 &&
-                                getValues().recap_weekstime_p25! <= 100) ||
-                            'Passwords need to match',
+                        min: {
+                            value: 0,
+                            message: 'Select a number between 0-3',
+                        },
+                        max: {
+                            value: 3,
+                            message: 'Select a number between 0-3',
+                        },
                     })}
                 />
             </FormRow>
@@ -80,6 +112,7 @@ function UpdateRecap() {
             >
                 <Input
                     type="number"
+                    disabled={isWorking}
                     id="recap_weekstime_p50"
                     placeholder={
                         settingsRecapUser?.recap_weekstime_p50
@@ -87,12 +120,14 @@ function UpdateRecap() {
                             : 'Enter a recap time for tests with score <= 50'
                     }
                     {...register('recap_weekstime_p50', {
-                        required: 'This field is required',
-                        validate: (value) =>
-                            (getValues().recap_weekstime_p50 !== null &&
-                                getValues().recap_weekstime_p50! >= 0 &&
-                                getValues().recap_weekstime_p50! <= 100) ||
-                            'Passwords need to match',
+                        min: {
+                            value: 0,
+                            message: 'Select a number between 0-4',
+                        },
+                        max: {
+                            value: 4,
+                            message: 'Select a number between 0-4',
+                        },
                     })}
                 />
             </FormRow>
@@ -102,6 +137,7 @@ function UpdateRecap() {
             >
                 <Input
                     type="number"
+                    disabled={isWorking}
                     id="recap_weekstime_p75"
                     placeholder={
                         settingsRecapUser?.recap_weekstime_p75
@@ -109,12 +145,14 @@ function UpdateRecap() {
                             : 'Enter a recap time for tests with score <= 75'
                     }
                     {...register('recap_weekstime_p75', {
-                        required: 'This field is required',
-                        validate: (value) =>
-                            (getValues().recap_weekstime_p75 !== null &&
-                                getValues().recap_weekstime_p75! >= 0 &&
-                                getValues().recap_weekstime_p75! <= 100) ||
-                            'Passwords need to match',
+                        min: {
+                            value: 0,
+                            message: 'Select a number between 0-5',
+                        },
+                        max: {
+                            value: 5,
+                            message: 'Select a number between 0-5',
+                        },
                     })}
                 />
             </FormRow>
@@ -124,6 +162,7 @@ function UpdateRecap() {
             >
                 <Input
                     type="number"
+                    disabled={isWorking}
                     id="recap_weekstime_p100"
                     placeholder={
                         settingsRecapUser?.recap_weekstime_p100
@@ -131,12 +170,14 @@ function UpdateRecap() {
                             : 'Enter a recap time for tests with score <= 100'
                     }
                     {...register('recap_weekstime_p100', {
-                        required: 'This field is required',
-                        validate: (value) =>
-                            (getValues().recap_weekstime_p100 !== null &&
-                                getValues().recap_weekstime_p100! >= 0 &&
-                                getValues().recap_weekstime_p100! <= 100) ||
-                            'Passwords need to match',
+                        min: {
+                            value: 0,
+                            message: 'Select a number between 0-6',
+                        },
+                        max: {
+                            value: 6,
+                            message: 'Select a number between 0-6',
+                        },
                     })}
                 />
             </FormRow>
@@ -147,19 +188,18 @@ function UpdateRecap() {
             >
                 <Input
                     type="number"
+                    disabled={isWorking}
                     id="future_exam_in_days"
                     placeholder={
-                        settingsRecapUser?.recap_weekstime_p100
-                            ? String(settingsRecapUser?.recap_weekstime_p100)
+                        settingsRecapUser?.future_exam_in_days
+                            ? String(settingsRecapUser?.future_exam_in_days)
                             : 'Enter future exam days remaining.'
                     }
                     {...register('future_exam_in_days', {
-                        required: 'This field is required',
-                        validate: (value) =>
-                            (getValues().future_exam_in_days !== null &&
-                                getValues().future_exam_in_days! >= 0 &&
-                                getValues().future_exam_in_days! <= 100) ||
-                            'Passwords need to match',
+                        min: {
+                            value: 1,
+                            message: 'Select a number > 0',
+                        },
                     })}
                 />
             </FormRow>
@@ -171,14 +211,14 @@ function UpdateRecap() {
                     type="range"
                     min="0"
                     max="100"
+                    defaultValue={
+                        settingsRecapUser?.target_perfection_score ?? 50
+                    }
+                    disabled={isWorking}
                     id="target_perfection_score"
                     {...register('target_perfection_score', {
-                        required: 'This field is required',
-                        validate: (value) =>
-                            (getValues().target_perfection_score !== null &&
-                                getValues().target_perfection_score! >= 0 &&
-                                getValues().target_perfection_score! <= 100) ||
-                            'Passwords need to match',
+                        min: 0,
+                        max: 100,
                     })}
                 />
             </FormRow>
@@ -186,7 +226,7 @@ function UpdateRecap() {
                 <Button
                     type="reset"
                     variation="subtleWhite"
-                    disabled={isGettingSettings}
+                    disabled={isWorking}
                     size="small"
                 >
                     Cancel
@@ -194,7 +234,7 @@ function UpdateRecap() {
                 <Button
                     type="submit"
                     variation="simplePrimary"
-                    disabled={isGettingSettings}
+                    disabled={isWorking}
                     size="small"
                 >
                     Update Recap

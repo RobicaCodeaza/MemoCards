@@ -122,7 +122,7 @@ export type Database = {
           recap_weekstime_p50: number | null
           recap_weekstime_p75: number | null
           target_perfection_score: number | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           future_exam_in_days?: number | null
@@ -132,7 +132,7 @@ export type Database = {
           recap_weekstime_p50?: number | null
           recap_weekstime_p75?: number | null
           target_perfection_score?: number | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           future_exam_in_days?: number | null
@@ -142,7 +142,7 @@ export type Database = {
           recap_weekstime_p50?: number | null
           recap_weekstime_p75?: number | null
           target_perfection_score?: number | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
