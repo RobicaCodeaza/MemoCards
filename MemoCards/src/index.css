@@ -2,6 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+.active:link,
+.active:visited {
+    @apply bg-picton-blue-500 text-mako-grey-100;
+
+    svg {
+        @apply text-mako-grey-100;
+    }
+    &:hover {
+        svg {
+            @apply text-mako-grey-800;
+        }
+    }
+}
+
+.fade-enter {
+    @apply scale-95 transform opacity-0;
+}
+.fade-enter-active {
+    @apply scale-100 transform opacity-100  transition-all duration-500;
+}
+.fade-exit {
+    @apply scale-100 transform opacity-100;
+}
+.fade-exit-active {
+    @apply scale-95 transform opacity-0 transition-all duration-500;
+}
+.perspective--small {
+    perspective: 500px;
+}
+.perspective {
+    perspective: 1000px;
+}
+.perspective--big {
+    perspective: 3000px;
+}
+.perspective--huge {
+    perspective: 5000px;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+.rotate-negative-y-180 {
+    transform: rotateY(-180deg);
+}
+
+.backface-hidden {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.gradient-text {
+    -webkit-background-clip: text;
+    @apply bg-gradient-to-tr
+    from-chateau-green-500 to-picton-blue-500;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 *,
 *::before,
 *::after {
@@ -9,10 +68,9 @@
     padding: 0;
     margin: 0;
 
-    /* Creating animations for dark mode */
-    transition:
+    /* transition:
         background-color 0.3s,
-        border 0.3s;
+        border 0.3s; */
 }
 
 html {
@@ -26,8 +84,9 @@ html {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
+    font-family: 'K2D', sans-serif;
+    color: #242528;
+    /* min-height: 100vh; */
     line-height: 1.5;
     font-size: 1.6rem;
 }
@@ -41,6 +100,7 @@ select {
 }
 
 button {
+    transition: all 0.3s border 0s;
     cursor: pointer;
 }
 
@@ -50,16 +110,17 @@ button {
 
 select:disabled,
 input:disabled {
-    /* background-color: var(--color-grey-200); */
-    /* color: var(--color-grey-500); */
+    background-color: #cdd0d4;
+    color: #656d75;
 }
 
 input:focus,
 button:focus,
 textarea:focus,
 select:focus {
-    /* outline: 2px solid var(--color-brand-600); */
-    /* outline-offset: -1px; */
+    /* border-radius: 0.5rem; */
+    outline: 2px solid #15a1e2;
+    outline-offset: -1px;
 }
 
 /* Parent selector, finally 😃 */

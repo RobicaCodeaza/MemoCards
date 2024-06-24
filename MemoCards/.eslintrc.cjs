@@ -1,6 +1,12 @@
 module.exports = {
     root: true,
     env: { browser: true, es2020: true },
+
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
     extends: [
         'eslint:recommended',
         `plugin:@typescript-eslint/recommended-type-checked`,
@@ -9,7 +15,7 @@ module.exports = {
         `plugin:react/recommended`,
         `plugin:react/jsx-runtime`,
     ],
-    ignorePatterns: ['dist', '.eslintrc.cjs'],
+    ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.js'],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 'latest',
@@ -25,9 +31,8 @@ module.exports = {
         ],
         'no-unused-vars': 'off',
         'react/prop-types': 'off',
-        '@typescript-eslint/consistent-type-definitions': {
-            defaultOptions: 'type',
-        },
+        '@typescript-eslint/no-misused-promises': 'off',
+        '@typescript-eslint/consistent-type-definitions': 0,
         '@typescript-eslint/no-unused-vars': 'off',
     },
 }
