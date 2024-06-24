@@ -1,5 +1,6 @@
 import { Tables } from '@/types/database.types'
 import supabase from './supabase'
+import { FieldValuesType, SettingsType } from '@/features/settings/UpdateRecap'
 
 export async function getRecapSettings(userId: string) {
     const { data: settings, error: errorGettingRecapSettings } = await supabase
@@ -13,16 +14,14 @@ export async function getRecapSettings(userId: string) {
     return settings
 }
 
-export async function updateRecapSettings(
-    userId: string,
-    updates: Tables<'Settings'>
-) {
-    const { error: errorUpdatingSettings } = await supabase
+export async function updateRecapSettings(updates: SettingsType) {
+    const { data, error: errorUpdatingSettings } = await supabase
         .from('Settings')
         .upsert(updates)
-        .eq('user_id', userId)
         .select('*')
 
     if (errorUpdatingSettings)
         throw new Error('Could not update settings for your account.')
+
+    return data
 }
