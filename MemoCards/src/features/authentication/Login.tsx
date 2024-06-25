@@ -94,7 +94,7 @@ function Login() {
 
     return (
         <Auth
-            providers={['google']}
+            providers={[]}
             supabaseClient={supabase}
             appearance={{
                 theme: ThemeSupa,
