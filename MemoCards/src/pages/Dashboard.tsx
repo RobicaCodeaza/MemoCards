@@ -1,5 +1,5 @@
 function Dashboard() {
-    return <div>Dashboard</div>
+    return <div>Feature in development...🛠️</div>
 }
 
 export default Dashboard
