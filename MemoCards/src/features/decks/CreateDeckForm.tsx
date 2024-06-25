@@ -97,7 +97,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
     return (
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         <Form onSubmit={handleSubmit(onSubmit, onError)} variation="modal">
-            <FormRow label="chapter" error={errors?.chapter?.message}>
+            <FormRow label="Chapter" error={errors?.chapter?.message}>
                 <Input
                     disabled={isWorking}
                     id="chapter"
@@ -108,7 +108,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                     })}
                 ></Input>
             </FormRow>
-            <FormRow label="subchapter" error={errors?.subchapter?.message}>
+            <FormRow label="Subchapter" error={errors?.subchapter?.message}>
                 <Input
                     disabled={isWorking}
                     id="subchapter"
@@ -119,7 +119,7 @@ function CreateDeckForm({ deckToEdit, onCloseModal }: CreateDeckFormProps) {
                     })}
                 ></Input>
             </FormRow>
-            <FormRow label="lesson" error={errors?.lesson?.message}>
+            <FormRow label="Lesson" error={errors?.lesson?.message}>
                 <Input
                     disabled={isWorking}
                     id="lesson"
