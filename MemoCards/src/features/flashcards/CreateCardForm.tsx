@@ -15,7 +15,6 @@ import { type UserType } from '@/ui/ProtectedRoute'
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
 import { Tables } from '@/types/database.types'
 import Spinner from '@/ui/Spinner'
-import { type Dispatch, type SetStateAction } from 'react'
 
 type CreateCardFormProps = {
     cardToEdit?: Tables<'Card'>

@@ -14,7 +14,6 @@ import Button from '@/ui/Button'
 import Heading from '@/ui/Heading'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import {
-    getDecksData,
     getQuizNumQuestions,
     getQuizPerfectionScore,
     getTotalTime,
@@ -27,7 +26,6 @@ function FinishScreen() {
     const quizPerfectionScore = useAppSelector(getQuizPerfectionScore)
     const completionTime = useAppSelector(getTotalTime)
     const questionsNum = useAppSelector(getQuizNumQuestions)
-    const decksData = useAppSelector(getDecksData)
 
     return (
         <div className="flex h-full flex-col gap-24">

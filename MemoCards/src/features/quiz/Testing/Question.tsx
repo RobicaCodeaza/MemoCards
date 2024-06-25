@@ -1,22 +1,16 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
 import {
     getAnswerTimeFinished,
-    getQuizIndex,
     getQuizQuestions,
     getRevealAnswerStatus,
     getisFlippingCard,
 } from '../quizSlice'
 import Heading from '@/ui/Heading'
 import TestOptions from './TestOptions'
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-} from '@/components/ui/carousel'
+import { CarouselItem } from '@/components/ui/carousel'
 
 function Question() {
     const questions = useAppSelector(getQuizQuestions)
-    const index = useAppSelector(getQuizIndex)
     const isFlippingCard = useAppSelector(getisFlippingCard)
     const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
     const hasFinishedQuestionTime = useAppSelector(getAnswerTimeFinished)

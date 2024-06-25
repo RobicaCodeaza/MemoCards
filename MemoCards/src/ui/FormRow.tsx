@@ -27,7 +27,10 @@ function FormRow({ children, label, error, className }: FormRowProps) {
             style={{}}
         >
             {React.Children.map(children, (child) => {
-                if (isReactElementWithId(child)) {
+                if (
+                    React.isValidElement(child) &&
+                    isReactElementWithId(child)
+                ) {
                     return (
                         <>
                             {label && (

@@ -1,13 +1,10 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
-import { getQuizesPaginated, getQuizesSummary } from '@/services/apiQuiz'
+import { getQuizesSummary } from '@/services/apiQuiz'
 import { UserType } from '@/ui/ProtectedRoute'
-import { PAGE_SIZE_QUIZES } from '@/utils/constants'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
-import { useSearchParams } from 'react-router-dom'
 
 export function useQuizesSummary() {
-    const queryClient = useQueryClient()
     const [user, __] = useLocalStorageState<UserType>(
         {
             user_id: '',

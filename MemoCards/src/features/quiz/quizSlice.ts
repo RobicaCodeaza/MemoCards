@@ -1,9 +1,8 @@
 import { Tables } from '@/types/database.types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
-import { AppStore, RootState, store } from '@/services/store'
+import { RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
-import { Root } from 'react-dom/client'
 
 type quizStateType = {
     quizId: number
@@ -47,7 +46,7 @@ const quizSlice = createSlice({
     name: 'quiz',
     initialState: initialStateQuiz,
     reducers: {
-        gettingData(state, action) {
+        gettingData(state) {
             state.status = 'loading'
         },
         dataReceived(
@@ -209,10 +208,7 @@ export const {
 } = quizSlice.actions
 
 export function dataReceived(quizId: string) {
-    return async function (
-        dispatch: typeof store.dispatch,
-        getState: typeof store.getState
-    ) {
+    return async function (dispatch: typeof store.dispatch) {
         try {
             dispatch({ type: 'quiz/gettingData' })
             const { data, error: errorGettingDecks } = await supabase
@@ -336,11 +332,11 @@ export function finish() {
                     (deckData) => deckData.deckId === el.id
                 )
                 const perfectionScore = el.perfectionScore
-                    ? [
+                    ? ([
                           ...el.perfectionScore,
                           deckToAdd[0].perfectionScore.at(-1),
-                      ]
-                    : [deckToAdd[0].perfectionScore.at(-1)]
+                      ] as number[])
+                    : ([deckToAdd[0].perfectionScore.at(-1)] as number[])
 
                 const dateToAdd = new Date().toISOString()
                 const lastTested = el.lastTested

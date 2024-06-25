@@ -2,7 +2,6 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import {
     getAnswerTimeFinished,
     getQuizAnswer,
-    getQuizIndex,
     getQuizQuestion,
     getRevealAnswerStatus,
     getisFlippingCard,
@@ -20,7 +19,6 @@ function TestOptions({ indexQuestion, ...props }: TestOptionsProps) {
     const [ratingFlippedCard, setRatingFlippedCard] = useState<number>(-1)
     const dispatch = useAppDispatch()
     const answerQuiz = useAppSelector(getQuizAnswer)
-    const quizIndex = useAppSelector(getQuizIndex)
     const question = useAppSelector(getQuizQuestion(indexQuestion))
     const hasFinishedQuestionTime = useAppSelector(getAnswerTimeFinished)
     const isFlippingCard = useAppSelector(getisFlippingCard)

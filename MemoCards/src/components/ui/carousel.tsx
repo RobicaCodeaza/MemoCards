@@ -225,11 +225,8 @@ type CarouselNextType = React.ComponentProps<typeof Button> &
     React.PropsWithChildren
 
 const CarouselNext = React.forwardRef<HTMLDivElement, CarouselNextType>(
-    (
-        { children, className, variant = 'outline', size = 'icon', ...props },
-        ref
-    ) => {
-        const { orientation, scrollNext, canScrollNext } = useCarousel()
+    ({ children, className }, ref) => {
+        const { scrollNext } = useCarousel()
 
         return (
             <div ref={ref} onClick={scrollNext} className={className}>

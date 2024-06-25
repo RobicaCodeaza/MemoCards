@@ -1,5 +1,5 @@
 import { ExtendedUser } from '@/features/authentication/UpdateUserDataForm'
-import supabase, { supabaseKey, supabaseUrl } from './supabase'
+import supabase, { supabaseUrl } from './supabase'
 
 export async function getCurrentUser() {
     const { data: session } = await supabase.auth.getSession()
