@@ -85,7 +85,7 @@ function Login() {
             supabase.auth.onAuthStateChange((event, session) => {
                 if (event === 'SIGNED_IN') {
                     queryClient.setQueryData(['user'], session?.user)
-                    // navigate('/dashboard', { replace: true })
+                    navigate('/dashboard', { replace: true })
                 } else return
             })
         },
