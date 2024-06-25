@@ -40,11 +40,11 @@ function FinishScreen() {
                     autoResizeCanvas
                 ></DotLottieReact>
             </div>
-            <div className="flex flex-col items-center gap-6">
+            <div className=" flex h-full flex-col items-center gap-6">
                 <Heading as="h2">
                     Congratulations! You finished your Quiz.
                 </Heading>
-                <div className="mb-2 mt-2 flex flex-col gap-4 rounded-md border border-mako-grey-100 bg-picton-blue-75 px-16 py-8">
+                <div className="mb-auto mt-2 flex flex-col gap-4 rounded-md border border-mako-grey-100 bg-picton-blue-75 px-16 py-8">
                     <div className="flex items-center gap-3 text-[1.7rem] font-medium ">
                         {quizPerfectionScore < 25 && (
                             <div className="flex items-center gap-2">
@@ -98,7 +98,7 @@ function FinishScreen() {
                         </span>
                         <span className="text-[1.6rem]font-semibold text-picton-blue-600"></span>
                     </div>
-                    <div className="flex items-center gap-3 text-[1.7rem] font-medium ">
+                    <div className="mb-auto flex items-center gap-3 text-[1.7rem] font-medium ">
                         <span>
                             <PiHourglassSimpleLowDuotone className="h-9 w-9 text-picton-blue-500"></PiHourglassSimpleLowDuotone>
                         </span>
