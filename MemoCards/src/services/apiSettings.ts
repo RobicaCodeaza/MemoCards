@@ -1,6 +1,5 @@
-import { Tables } from '@/types/database.types'
 import supabase from './supabase'
-import { FieldValuesType, SettingsType } from '@/features/settings/UpdateRecap'
+import { SettingsType } from '@/features/settings/UpdateRecap'
 
 export async function getRecapSettings(userId: string) {
     const { data: settings, error: errorGettingRecapSettings } = await supabase

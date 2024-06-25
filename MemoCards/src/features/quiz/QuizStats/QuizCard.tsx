@@ -23,8 +23,6 @@ import Modal from '@/ui/Modal'
 import Spinner from '@/ui/Spinner'
 import { useNavigate } from 'react-router-dom'
 import CreateQuizForm from './CreateQuizForm'
-import { useAppSelector } from '@/hooks/useAppSelector'
-import { getQuizNumQuestions } from '../quizSlice'
 
 type QuizCardProps = {
     quiz: Tables<'Quizes'>
@@ -33,7 +31,6 @@ type QuizCardProps = {
 function QuizCard({ quiz }: QuizCardProps) {
     const navigate = useNavigate()
     const { deleteQuiz, isDeleting } = useDeleteQuiz()
-    const numQuestions = useAppSelector(getQuizNumQuestions)
 
     const [isOtherDetails, setIsOtherDetails] = useState<boolean>()
     function handleIsOtherDetails() {

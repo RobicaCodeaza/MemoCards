@@ -10,13 +10,13 @@ import { useQuizesSummary } from '../useQuizesSummary'
 function QuizMain() {
     const { data: quizesSummary, count: countSummary } = useQuizesSummary()
     const { quizes, count, isLoading } = useQuizesPaginated()
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     if (isLoading) return <Spinner></Spinner>
 
     if (!quizes?.length || !count)
         return (
             <>
-                <QuizSummary></QuizSummary>
+                <QuizSummary averageTime={0} quizesNum={0}></QuizSummary>
                 <Empty resource="quiz"></Empty>
             </>
         )

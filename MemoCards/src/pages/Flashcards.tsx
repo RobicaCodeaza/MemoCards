@@ -1,5 +1,3 @@
-import DecksModifiers from '@/features/decks/DecksModifiers'
-import DecksTableOperations from '@/features/decks/DecksTableOperations'
 import CardsModifiers from '@/features/flashcards/CardsModifiers'
 import CardsTable from '@/features/flashcards/CardsTable'
 import FlaschardsTableOperation from '@/features/flashcards/FlashcardsTableOperations'

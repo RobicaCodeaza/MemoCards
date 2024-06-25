@@ -2,7 +2,6 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import {
     getAnswerTimeFinished,
     getQuestionTime,
-    getQuiz,
     getQuizAnswer,
     getQuizRemainingQuestionTime,
     getQuizRemainingQuizTime,
@@ -12,7 +11,6 @@ import {
 } from '../quizSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useCallback, useEffect, useRef } from 'react'
-import { AppDispatch } from '@/services/store'
 
 function TimerTest() {
     const dispatch = useAppDispatch()

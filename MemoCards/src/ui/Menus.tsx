@@ -29,7 +29,10 @@ const MenusContext = createContext<MenusContextType | null>(null)
 
 function Menus({ children }: PropsWithChildren) {
     const [openId, setIsOpenId] = useState<number>(0)
-    const [position, setPosition] = useState<{ x: number; y: number }>({})
+    const [position, setPosition] = useState<{ x: number; y: number }>({
+        x: 0,
+        y: 0,
+    })
     const open = setIsOpenId
     function close() {
         setIsOpenId(0)
@@ -138,7 +141,6 @@ function Button<T extends ElementType>({
     onClick,
     icon,
     as,
-    ...otherProps
 }: ButtonProps<T>) {
     const { close } = useContext(MenusContext)!
 

@@ -23,10 +23,6 @@ function QuestionBtn() {
     const hasFinishedQuestionTime = useAppSelector(getAnswerTimeFinished)
     const revealAnswerStatus = useAppSelector(getRevealAnswerStatus)
 
-    function handleNextQuestion() {
-        dispatch(nextQuestion())
-    }
-
     return (
         <div className="mt-auto flex justify-between">
             {question.answers.length < 2 ? (
