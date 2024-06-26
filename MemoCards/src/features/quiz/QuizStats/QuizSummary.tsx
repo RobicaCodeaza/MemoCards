@@ -1,9 +1,14 @@
 type QuizSummaryProps = {
     averageTime: number
     quizesNum: number
+    future_exam_in_days: number | null
 }
 
-function QuizSummary({ averageTime, quizesNum }: QuizSummaryProps) {
+function QuizSummary({
+    averageTime,
+    quizesNum,
+    future_exam_in_days,
+}: QuizSummaryProps) {
     const minQuiz = averageTime ? Math.floor(averageTime / 60) : 0
     const secondsQuiz = averageTime ? averageTime % 60 : 0
 
@@ -18,7 +23,7 @@ function QuizSummary({ averageTime, quizesNum }: QuizSummaryProps) {
                         <p className="text-[1.8rem] font-semibold">
                             {minQuiz < 10 && '0'}
                             {minQuiz}:{secondsQuiz < 10 && '0'}
-                            {secondsQuiz} min
+                            {Math.ceil(secondsQuiz)} min
                         </p>
                     )}
                     {!averageTime && (
@@ -31,7 +36,9 @@ function QuizSummary({ averageTime, quizesNum }: QuizSummaryProps) {
                     <p className="text-mako-grey-400">Quizes</p>
                 </div>
                 <div className="flex w-full flex-col gap-4 rounded-md bg-picton-blue-50 px-6 py-6 text-center phone:px-8 phone:py-8 tab-port:px-10 tab-port:py-10 tab-land:px-12 tab-land:py-12">
-                    <p className="text-[1.8rem] font-semibold">53</p>
+                    <p className="text-[1.8rem] font-semibold">
+                        {future_exam_in_days ?? 0}
+                    </p>
                     <p className="text-mako-grey-400">Days until Exam</p>
                 </div>
             </div>

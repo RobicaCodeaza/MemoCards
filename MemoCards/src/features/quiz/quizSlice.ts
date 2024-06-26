@@ -15,7 +15,11 @@ type quizStateType = {
     answerTimeFinished: boolean
     questionPoints: number
     perfectionScore: number
-    decksData: { deckId: number; perfectionScore: number[] }[]
+    decksData: {
+        deckId: number
+        perfectionScore: number[]
+        numQuestions: number
+    }[]
     secondsRemainingQuestion: number | null
     questionTime: number | null
     secondsRemainingQuiz: number | null
@@ -55,7 +59,11 @@ const quizSlice = createSlice({
                 questions: Tables<'Card'>[]
                 quizTime: number | null
                 questionTime: number | null
-                decksData: { deckId: number; perfectionScore: number[] }[]
+                decksData: {
+                    deckId: number
+                    perfectionScore: number[]
+                    numQuestions: number
+                }[]
                 quizId: number
             }>
         ) {
@@ -132,6 +140,12 @@ const quizSlice = createSlice({
                 })
                 // console.log(action.payload.value, state.questionPoints)
             }
+
+            state.decksData = state.decksData.map((el) =>
+                el.deckId === question.deckId
+                    ? { ...el, numQuestions: el.numQuestions + 1 }
+                    : el
+            )
         },
         nextQuestion(state) {
             state.index = state.index + 1
@@ -148,6 +162,7 @@ const quizSlice = createSlice({
             state.revealAnswer = !state.revealAnswer
         },
         finish(state) {
+            state.perfectionScore = state.perfectionScore + state.questionPoints
             state.status = 'finished'
         },
         restart(state) {
@@ -157,7 +172,11 @@ const quizSlice = createSlice({
             state.secondsRemainingQuiz = null
             let decksData = state.decksData
             decksData = decksData.map((el) => {
-                return { ...el, perfectionScore: [...el.perfectionScore, 0] }
+                return {
+                    ...el,
+                    perfectionScore: [...el.perfectionScore, 0],
+                    numQuestions: 0,
+                }
             })
             console.log('deckReset', decksData)
             state.decksData = decksData
@@ -252,9 +271,10 @@ export function dataReceived(quizId: string) {
                 return {
                     deckId: el.id,
                     perfectionScore,
+                    numQuestions: 0,
                 }
             })
-            console.log(decksInQuestions, 'decksinQuestions')
+            // console.log(decksInQuestions, 'decksinQuestions')
 
             const payload = {
                 questions,
@@ -300,14 +320,15 @@ export function finish() {
             if (errorUpdatingCompletionTime) {
                 throw new Error('Error updating completion time of the quiz.')
             }
-
+            const perfectionScoreTotal =
+                quiz.perfectionScore + quiz.questionPoints
             //Updating Quiz Perfection Score
             const { error: errorUpdatingPerfectionScore } = await supabase.rpc(
                 'append_completiondata_quiz',
                 {
                     row_id: quiz.quizId,
                     new_perfection_score:
-                        (quiz.perfectionScore * 100) / quiz.questions.length,
+                        (perfectionScoreTotal * 100) / quiz.questions.length,
                     new_last_tested: new Date().toISOString(),
                 }
             )
@@ -331,12 +352,16 @@ export function finish() {
                 const deckToAdd = quiz.decksData.filter(
                     (deckData) => deckData.deckId === el.id
                 )
+                const perfectionScoreToAdd =
+                    (deckToAdd[0].perfectionScore.at(-1)! * 100) /
+                    deckToAdd[0].numQuestions
+
                 const perfectionScore = el.perfectionScore
                     ? ([
                           ...el.perfectionScore,
-                          deckToAdd[0].perfectionScore.at(-1),
+                          perfectionScoreToAdd,
                       ] as number[])
-                    : ([deckToAdd[0].perfectionScore.at(-1)] as number[])
+                    : ([perfectionScoreToAdd] as number[])
 
                 const dateToAdd = new Date().toISOString()
                 const lastTested = el.lastTested
