@@ -127,10 +127,20 @@ function DeckCard({ deck }: DeckCardProps) {
                     />
                 </div>
                 <p className="mt-8 text-center text-[1.4rem] tracking-wide text-picton-blue-500">
-                    Last tested:
+                    Last tested:{' '}
                     <strong>
                         {deck.lastTested
-                            ? deck.lastTested[deck.lastTested.length - 1]
+                            ? new Intl.DateTimeFormat(navigator.language, {
+                                  day: 'numeric',
+                                  month: 'numeric',
+                                  year: 'numeric',
+                              }).format(
+                                  new Date(
+                                      deck.lastTested[
+                                          deck.lastTested.length - 1
+                                      ]
+                                  )
+                              )
                             : 'Not tested'}
                     </strong>
                 </p>
