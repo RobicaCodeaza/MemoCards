@@ -8,15 +8,25 @@ import { Tables } from '@/types/database.types'
 import { useQuizesSummary } from '../useQuizesSummary'
 
 function QuizMain() {
-    const { data: quizesSummary, count: countSummary } = useQuizesSummary()
+    const {
+        dataQuiz: quizesSummary,
+        count: countSummary,
+        dataExam: examIn,
+    } = useQuizesSummary()
     const { quizes, count, isLoading } = useQuizesPaginated()
     const [searchParams] = useSearchParams()
     if (isLoading) return <Spinner></Spinner>
 
+    console.log('exam', examIn)
+
     if (!quizes?.length || !count)
         return (
             <>
-                <QuizSummary averageTime={0} quizesNum={0}></QuizSummary>
+                <QuizSummary
+                    averageTime={0}
+                    quizesNum={0}
+                    future_exam_in_days={examIn?.future_exam_in_days ?? 0}
+                ></QuizSummary>
                 <Empty resource="quiz"></Empty>
             </>
         )
@@ -68,6 +78,7 @@ function QuizMain() {
             <QuizSummary
                 quizesNum={quizesNum}
                 averageTime={averageTime ? averageTime : 0}
+                future_exam_in_days={examIn?.future_exam_in_days ?? 0}
             ></QuizSummary>
             <QuizGrid count={count} quizes={sortedQuizes}></QuizGrid>
         </>

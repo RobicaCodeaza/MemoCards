@@ -55,14 +55,27 @@ export async function getQuizesPaginated(userId: string, page: number) {
 }
 
 export async function getQuizesSummary(userId: string) {
-    const { data, count, error } = await supabase
+    const {
+        data: dataQuiz,
+        count,
+        error,
+    } = await supabase
         .from('Quizes')
         .select('completionTime', { count: 'exact' })
         .eq('user_id', userId)
 
     if (error) throw new Error('Could not fetch the quizes summary stats.')
 
-    return { data, count }
+    const { data, error: errorGettingExamDate } = await supabase
+        .from('Settings')
+        .select('future_exam_in_days')
+        .eq('user_id', userId)
+
+    if (errorGettingExamDate) throw new Error('Could not fetch the exam date.')
+    const dataExam = data[0]
+    console.log(dataExam)
+
+    return { dataQuiz, dataExam, count }
 }
 
 export async function deleteQuiz(id: number, userId: string) {
