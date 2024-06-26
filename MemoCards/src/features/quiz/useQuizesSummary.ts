@@ -15,7 +15,7 @@ export function useQuizesSummary() {
 
     //Getting the filter value for chapter
 
-    const { isLoading, data: { data, count } = {} } = useQuery({
+    const { isLoading, data: { dataQuiz, dataExam, count } = {} } = useQuery({
         queryKey: ['quizes'],
         queryFn: () => {
             return getQuizesSummary(user.user_id)
@@ -23,5 +23,5 @@ export function useQuizesSummary() {
         onError: (err: Error) => toast.error(err.message),
     })
 
-    return { isLoading, data, count }
+    return { isLoading, dataQuiz, dataExam, count }
 }
