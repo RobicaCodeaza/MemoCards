@@ -50,7 +50,22 @@ export async function getQuizesPaginated(userId: string, page: number) {
 
     const { data: quizes, error, count } = await query
 
-    if (error) throw new Error('Could not fetch the decks.')
+    if (error) throw new Error('Could not fetch the Quizes.')
+    return { quizes, count }
+}
+
+export async function getQuizesAll(userId: string) {
+    const {
+        data: quizes,
+        error,
+        count,
+    } = await supabase
+        .from('Quizes')
+        .select('*', { count: 'exact' })
+        .eq('user_id', userId)
+
+    if (error) throw new Error('Could not fetch the Quizes.')
+
     return { quizes, count }
 }
 
