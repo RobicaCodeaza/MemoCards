@@ -112,10 +112,6 @@ export default {
                     '0 0 20px 0 rgba(67, 185, 105, 0.8), 0 0 40px 0 rgba(67, 185, 105, 0.6), 0 0 60px 0 rgba(67, 185, 105, 0.4), 0 0 80px 0 rgba(67, 185, 105, 0.2)',
                 'glow-1': '0 0 15px 5px rgba(251, 110, 119, 0.6)',
                 'inset-glow-1': 'inset 0 0 15px 5px rgba(251, 110, 119, 0.6)',
-                'glowing-border-p25': '0 0 1px 1px rgba(224, 34, 46, 0.75)',
-                'glowing-border-p50': '0 0 1px 1px rgba(251, 110, 119, 0.75)',
-                'glowing-border-p75': '0 0 1px 1px rgba(152, 221, 173, 0.75)',
-                'glowing-border-p100': '0 0 1px 1px rgba(69, 187, 106, 0.75)',
             },
 
             screens: {
