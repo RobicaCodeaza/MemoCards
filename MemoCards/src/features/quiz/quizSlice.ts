@@ -4,6 +4,9 @@ import supabase from '../../services/supabase'
 import { RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
 import { fromToday } from '@/utils/helpers'
+import { getRecapSettings } from '@/services/apiSettings'
+import { UserType } from '@/ui/ProtectedRoute'
+import { updateQuizesRecapPlan } from '@/services/apiQuiz'
 
 type quizStateType = {
     quizId: number
@@ -305,16 +308,18 @@ export function finish() {
     ) {
         try {
             const { quiz } = getState()
-            console.log(quiz.decksData)
 
             // Getting Settings For To Be Tested Time
+            // const user = JSON.parse(localStorage.getItem('user')!) as UserType
+            // console.log(user)
+            // const settings = await getRecapSettings(user.user_id)
+            // await updateQuizesRecapPlan(settings, user.user_id)
 
-            //Updating Quiz Completion Time
-
+            //The Perfection Score of the quiz
             const perfectionScoreTotal =
                 quiz.perfectionScore + quiz.questionPoints
 
-            //Updating Quiz Perfection Score
+            //Updating Quiz
             const { error: errorUpdatingQuiz } = await supabase.rpc(
                 'append_completiondata_quiz',
                 {
@@ -322,7 +327,7 @@ export function finish() {
                     new_perfection_score:
                         (perfectionScoreTotal * 100) / quiz.questions.length,
                     new_last_tested: fromToday(0, 'yes'),
-                    // new_to_be_tested: fromToday(2),
+                    new_to_be_tested: fromToday(2),
                     new_completion_time: quiz.completionTime,
                 }
             )
