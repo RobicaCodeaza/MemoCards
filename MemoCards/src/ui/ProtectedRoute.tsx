@@ -18,7 +18,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
         { user_id: '', user_provider: '' },
         'user'
     )
-
+    console.log('protected')
     const { isLoading, isAuthenticated, user } = useUser()
     useEffect(
         function () {

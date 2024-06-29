@@ -1,4 +1,5 @@
 import Button from '@/ui/Button'
+import { formatDistanceFromNow, fromToday } from '@/utils/helpers'
 
 type RecapPlanCardProps = {
     quizName: string
@@ -11,9 +12,12 @@ function RecapPlanCard({
     perfectionScore,
     lastTested,
 }: RecapPlanCardProps) {
+    // console.log(formatDistanceFromNow(lastTested))
+    // console.log('From', fromToday(2))
+
     return (
         <div
-            className=" shadow-glowing-border-p50 relative flex  h-[12rem] w-[14rem]  flex-shrink-0 flex-col justify-center gap-3   rounded-md  border border-danger-300 bg-picton-blue-50 px-2 py-2 text-mako-grey-500 transition-shadow duration-300 hover:shadow-inner phone:px-4 phone:py-4 tab-port:px-6 tab-port:py-6"
+            className=" relative flex h-[12rem]  w-[14rem] flex-shrink-0  flex-col justify-center gap-3 rounded-md   border  border-danger-300 bg-picton-blue-50 px-2 py-2 text-mako-grey-500 shadow-glowing-border-p50 transition-shadow duration-300 hover:shadow-inner phone:px-4 phone:py-4 tab-port:px-6 tab-port:py-6"
             // style={{ background: 'linear-gradient(135deg,#fb6e77,#fea3a9)' }}
         >
             <p className="border-b border-mako-grey-100 py-1 text-[1.3rem] font-semibold tracking-wide">

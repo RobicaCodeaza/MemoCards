@@ -151,14 +151,25 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      append_completiondata_quiz: {
-        Args: {
-          row_id: number
-          new_perfection_score: number
-          new_last_tested: string
-        }
-        Returns: undefined
-      }
+      append_completiondata_quiz:
+        | {
+            Args: {
+              row_id: number
+              new_perfection_score: number
+              new_last_tested: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              row_id: number
+              new_perfection_score: number
+              new_last_tested: string
+              new_completion_time: number
+              new_to_be_tested: string
+            }
+            Returns: undefined
+          }
       append_perfectionscore_quiz: {
         Args: {
           row_id: number
