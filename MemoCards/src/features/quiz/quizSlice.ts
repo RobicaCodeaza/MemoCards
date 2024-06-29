@@ -310,57 +310,48 @@ export function finish() {
 
             // Getting Settings For To Be Tested Time
             const user = JSON.parse(localStorage.getItem('user')!) as UserType
-            // console.log(user)
             const settings = await getRecapSettings(user.user_id)
-            // const quizTested = await getQuizById(user.user_id, quiz.quizId)
 
             //The Perfection Score of the quiz
             const perfectionScoreTotal =
                 quiz.perfectionScore + quiz.questionPoints
+            const perfectionScoreQuiz = Number(
+                ((perfectionScoreTotal * 100) / quiz.questions.length).toFixed(
+                    1
+                )
+            )
 
+            //Getting Actual Score Interval for the Recap Interval
             const score =
-                (perfectionScoreTotal * 100) / quiz.questions.length <= 25
+                perfectionScoreQuiz <= 25
                     ? '25'
-                    : (perfectionScoreTotal * 100) / quiz.questions.length >
-                            25 &&
-                        (perfectionScoreTotal * 100) / quiz.questions.length <=
-                            50
+                    : perfectionScoreQuiz > 25 && perfectionScoreQuiz <= 50
                       ? '50'
-                      : (perfectionScoreTotal * 100) / quiz.questions.length >
-                              50 &&
-                          (perfectionScoreTotal * 100) /
-                              quiz.questions.length <=
-                              75
+                      : perfectionScoreQuiz > 50 && perfectionScoreQuiz <= 75
                         ? '75'
-                        : (perfectionScoreTotal * 100) / quiz.questions.length >
-                                75 &&
-                            (perfectionScoreTotal * 100) /
-                                quiz.questions.length <=
-                                100
+                        : perfectionScoreQuiz > 75 && perfectionScoreQuiz <= 100
                           ? '100'
                           : '0'
 
             const typeOfRecap =
                 `recap_weekstime_p${score}` as keyof Tables<'Settings'>
-            console.log(typeOfRecap)
             const daysToBeTested = (settings?.[typeOfRecap] as number) * 7
-            console.log(daysToBeTested)
+
+            //Setting The ToBeTested time based on perfectionScore
             const toBeTested = fromThisDay(
                 daysToBeTested,
                 fromToday(0, 'yes'),
                 'endOfDay'
             )
-            console.log(new Date(toBeTested))
 
             //Updating Quiz
             const { error: errorUpdatingQuiz } = await supabase.rpc(
-                'append_completiondata_quiz',
+                'append_updateddata_quiz',
                 {
                     row_id: quiz.quizId,
-                    new_perfection_score:
-                        (perfectionScoreTotal * 100) / quiz.questions.length,
+                    new_perfection_score: perfectionScoreQuiz,
                     new_last_tested: fromToday(0, 'yes'),
-                    // new_to_be_tested: fromToday(2),
+                    new_to_be_tested: toBeTested,
                     new_completion_time: quiz.completionTime,
                 }
             )
@@ -368,20 +359,6 @@ export function finish() {
             if (errorUpdatingQuiz) {
                 throw new Error('Error updating Quiz Data.')
             }
-
-            // const newQuizCompletionTime = {
-            //     completionTime: quiz.completionTime,
-            // }
-            // const { error: errorUpdatingCompletionTime } = await supabase
-            //     .from('Quizes')
-            //     .update(newQuizCompletionTime)
-            //     .eq('id', quiz.quizId)
-            //     .select()
-            //     .single()
-
-            // if (errorUpdatingCompletionTime) {
-            //     throw new Error('Error updating completion time of the quiz.')
-            // }
 
             //Updating Decks Perfection Score
             const decksEdited = quiz.decksData.map((el) => el.deckId)
