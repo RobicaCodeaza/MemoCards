@@ -61,7 +61,7 @@ function RecapPlanCard({
                 <Button
                     size="tiny"
                     variation="simpleTertiary"
-                    onClick={() => navigate(`/quiz/${quizId}`)}
+                    onClick={() => navigate(`/quiz/${quizId}?name=${quizName}`)}
                 >
                     Take Quiz
                 </Button>
