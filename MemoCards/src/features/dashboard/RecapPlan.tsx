@@ -33,6 +33,7 @@ function RecapPlan({ quizesTested, settings }: RecapPlanProps) {
                                     perfectionScore={
                                         el.perfectionScore?.at(-1) ?? 0
                                     }
+                                    quizId={el.id}
                                     toBeTested={el.toBeTested}
                                 ></RecapPlanCard>
                             )
