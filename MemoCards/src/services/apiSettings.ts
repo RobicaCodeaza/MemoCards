@@ -23,19 +23,26 @@ export async function updateRecapSettings(
         .from('Settings')
         .upsert(updates)
         .select('*')
-    const settings = data?.[0]
 
-    const {
-        data: quizes,
-        error: errorGettingQuizes,
-        count,
-    } = await supabase
+    if (errorUpdatingSettings)
+        throw new Error('Could not update settings for your account.')
+
+    if (!data) return
+
+    const settings = data[0]
+
+    const { data: quizes, error: errorGettingQuizes } = await supabase
         .from('Quizes')
         .select('*', { count: 'exact' })
         .eq('user_id', userId)
         .not('lastTested', 'is', null)
 
-    const quizesUpdated = quizes?.map((el) => {
+    if (errorGettingQuizes)
+        throw new Error('Could not get data for your quizes.')
+
+    if (!quizes || quizes.length === 0) return
+
+    const quizesUpdated = quizes.map((el) => {
         // if (!el.perfectionScore) return
         const score =
             el.perfectionScore!.at(-1)! <= 25
@@ -64,17 +71,15 @@ export async function updateRecapSettings(
         )
         return { ...el, toBeTested }
     })
+    if (!quizesUpdated || quizesUpdated.length === 0) return
 
-    console.log(quizesUpdated)
+    const { data: dataUpdated, error: errorUpdatingCompletionTime } =
+        await supabase.from('Quizes').upsert(quizesUpdated).select('*')
 
-    // const { error: errorUpdatingCompletionTime } = await supabase
-    //     .from('Quizes')
-    //     .update(quizes)
-    //     .select()
-    //     .single()
-
-    if (errorUpdatingSettings)
-        throw new Error('Could not update settings for your account.')
+    if (errorUpdatingCompletionTime)
+        throw new Error(
+            'Could not update your quizes according to new settings.'
+        )
 
     return data
 }

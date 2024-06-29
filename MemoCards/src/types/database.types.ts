@@ -85,6 +85,7 @@ export type Database = {
           questionTime: number | null
           quizName: string
           quizTime: number | null
+          toBeTested: string | null
           user_id: string
         }
         Insert: {
@@ -97,6 +98,7 @@ export type Database = {
           questionTime?: number | null
           quizName: string
           quizTime?: number | null
+          toBeTested?: string | null
           user_id: string
         }
         Update: {
@@ -109,6 +111,7 @@ export type Database = {
           questionTime?: number | null
           quizName?: string
           quizTime?: number | null
+          toBeTested?: string | null
           user_id?: string
         }
         Relationships: []
@@ -157,6 +160,15 @@ export type Database = {
               row_id: number
               new_perfection_score: number
               new_last_tested: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              row_id: number
+              new_perfection_score: number
+              new_last_tested: string
+              new_completion_time: number
             }
             Returns: undefined
           }
