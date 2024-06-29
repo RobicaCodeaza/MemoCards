@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
 import { RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
+import { fromToday } from '@/utils/helpers'
 
 type quizStateType = {
     quizId: number
@@ -305,37 +306,44 @@ export function finish() {
         try {
             const { quiz } = getState()
             console.log(quiz.decksData)
-            const newQuizCompletionTime = {
-                completionTime: quiz.completionTime,
-            }
+
+            // Getting Settings For To Be Tested Time
 
             //Updating Quiz Completion Time
-            const { error: errorUpdatingCompletionTime } = await supabase
-                .from('Quizes')
-                .update(newQuizCompletionTime)
-                .eq('id', quiz.quizId)
-                .select()
-                .single()
 
-            if (errorUpdatingCompletionTime) {
-                throw new Error('Error updating completion time of the quiz.')
-            }
             const perfectionScoreTotal =
                 quiz.perfectionScore + quiz.questionPoints
+
             //Updating Quiz Perfection Score
-            const { error: errorUpdatingPerfectionScore } = await supabase.rpc(
+            const { error: errorUpdatingQuiz } = await supabase.rpc(
                 'append_completiondata_quiz',
                 {
                     row_id: quiz.quizId,
                     new_perfection_score:
                         (perfectionScoreTotal * 100) / quiz.questions.length,
-                    new_last_tested: new Date().toISOString(),
+                    new_last_tested: fromToday(0, 'yes'),
+                    // new_to_be_tested: fromToday(2),
+                    new_completion_time: quiz.completionTime,
                 }
             )
 
-            if (errorUpdatingPerfectionScore) {
-                throw new Error('Error updating Perfection Score of the quiz.')
+            if (errorUpdatingQuiz) {
+                throw new Error('Error updating Quiz Data.')
             }
+
+            // const newQuizCompletionTime = {
+            //     completionTime: quiz.completionTime,
+            // }
+            // const { error: errorUpdatingCompletionTime } = await supabase
+            //     .from('Quizes')
+            //     .update(newQuizCompletionTime)
+            //     .eq('id', quiz.quizId)
+            //     .select()
+            //     .single()
+
+            // if (errorUpdatingCompletionTime) {
+            //     throw new Error('Error updating completion time of the quiz.')
+            // }
 
             //Updating Decks Perfection Score
             const decksEdited = quiz.decksData.map((el) => el.deckId)
@@ -363,7 +371,7 @@ export function finish() {
                       ] as number[])
                     : ([perfectionScoreToAdd] as number[])
 
-                const dateToAdd = new Date().toISOString()
+                const dateToAdd = fromToday(0, 'yes')
                 const lastTested = el.lastTested
                     ? [...el.lastTested, dateToAdd]
                     : [dateToAdd]

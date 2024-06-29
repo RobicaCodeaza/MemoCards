@@ -14,7 +14,7 @@ export function useQuizesAll() {
     )
 
     const { isLoading, data: { quizes, count } = {} } = useQuery({
-        queryKey: ['quizes'],
+        queryKey: ['quizesAll'],
         queryFn: () => {
             return getQuizesAll(user.user_id)
         },

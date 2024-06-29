@@ -88,7 +88,6 @@ export async function getQuizesSummary(userId: string) {
 
     if (errorGettingExamDate) throw new Error('Could not fetch the exam date.')
     const dataExam = data[0]
-    console.log(dataExam)
 
     return { dataQuiz, dataExam, count }
 }
