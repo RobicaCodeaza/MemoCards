@@ -34,7 +34,7 @@ function UpdateRecap() {
     const { settingsRecapUser, isGettingSettings } = useGetRecapSettings()
     const { isUpdatingRecapSettings, updateRecapSettings } =
         useUpdateRecapSettings()
-
+    console.log('recap', settingsRecapUser)
     const [user, _] = useLocalStorageState<UserType>(
         { user_id: '', user_provider: '' },
         'user'

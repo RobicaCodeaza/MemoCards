@@ -19,7 +19,7 @@ export function useUpdateRecapSettings() {
             mutationFn: (updates: SettingsType) =>
                 updateRecapSettingsApi(updates, user.user_id),
             onSuccess: (settings) => {
-                queryClient.setQueryData(['settings'], settings)
+                queryClient.setQueryData(['settings'], settings?.[0])
                 toast.success("Settings's data has been updated successfully.")
             },
             onError: (error: Error) => {

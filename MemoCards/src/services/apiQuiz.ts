@@ -111,3 +111,79 @@ export async function deleteAllQuizes(userId: string) {
 
     if (error) throw new Error(error.message)
 }
+export async function getQuizById(userId: string, quizId: number) {
+    const { data: quiz, error: errorGettingQuiz } = await supabase
+        .from('Quizes')
+        .select('*')
+        .eq('id', quizId)
+        .eq('user_id', userId)
+
+    if (errorGettingQuiz) throw new Error('Could not get the quiz by quizId.')
+
+    return quiz[0]
+}
+
+// export async function updateQuizesRecapPlan(
+//     settings: Tables<'Settings'>,
+//     userId: string,
+//     quizId: number
+// ) {
+
+//     if(quizId)
+//         const { data: quizes, error: errorGettingQuizes } = await supabase
+//     .from('Quizes')
+//     .select('*', { count: 'exact' })
+//     .eq('user_id', userId)
+//     .not('lastTested', 'is', null)
+
+//     const { data: quizes, error: errorGettingQuizes } = await supabase
+//         .from('Quizes')
+//         .select('*', { count: 'exact' })
+//         .eq('user_id', userId)
+//         .not('lastTested', 'is', null)
+
+//     if (errorGettingQuizes)
+//         throw new Error('Could not get data for your quizes.')
+
+//     if (!quizes || quizes.length === 0) return
+
+//     const quizesUpdated = quizes.map((el) => {
+//         // if (!el.perfectionScore) return
+//         const score =
+//             el.perfectionScore!.at(-1)! <= 25
+//                 ? '25'
+//                 : el.perfectionScore!.at(-1)! > 25 &&
+//                     el.perfectionScore!.at(-1)! <= 50
+//                   ? '50'
+//                   : el.perfectionScore!.at(-1)! > 50 &&
+//                       el.perfectionScore!.at(-1)! <= 75
+//                     ? '75'
+//                     : el.perfectionScore!.at(-1)! > 75 &&
+//                         el.perfectionScore!.at(-1)! <= 100
+//                       ? '100'
+//                       : ''
+
+//         //   const      toBeTestedInDays = data
+
+//         const typeOfRecap =
+//             `recap_weekstime_p${score}` as keyof Tables<'Settings'>
+
+//         const daysToBeTested = (settings?.[typeOfRecap] as number) * 7
+//         const toBeTested = fromThisDay(
+//             daysToBeTested,
+//             el.lastTested!.at(-1)!,
+//             'endOfDay'
+//         )
+//         return { ...el, toBeTested }
+//     })
+//     if (!quizesUpdated || quizesUpdated.length === 0) return
+
+//     const { data: dataUpdated, error: errorUpdatingCompletionTime } =
+//         await supabase.from('Quizes').upsert(quizesUpdated).select('*')
+
+//     if (errorUpdatingCompletionTime)
+//         throw new Error(
+//             'Could not update your quizes according to new settings.'
+//         )
+//     return dataUpdated
+// }
