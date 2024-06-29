@@ -3,10 +3,10 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
 import { RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
-import { fromToday } from '@/utils/helpers'
+import { fromThisDay, fromToday } from '@/utils/helpers'
 import { getRecapSettings } from '@/services/apiSettings'
 import { UserType } from '@/ui/ProtectedRoute'
-import { updateQuizesRecapPlan } from '@/services/apiQuiz'
+import { getQuizById, updateQuizesRecapPlan } from '@/services/apiQuiz'
 
 type quizStateType = {
     quizId: number
@@ -71,7 +71,6 @@ const quizSlice = createSlice({
                 quizId: number
             }>
         ) {
-            console.log(action.payload.decksData)
             state.status = 'ready'
             state.questions = action.payload.questions
             state.questionTime = action.payload.questionTime
@@ -310,14 +309,48 @@ export function finish() {
             const { quiz } = getState()
 
             // Getting Settings For To Be Tested Time
-            // const user = JSON.parse(localStorage.getItem('user')!) as UserType
+            const user = JSON.parse(localStorage.getItem('user')!) as UserType
             // console.log(user)
-            // const settings = await getRecapSettings(user.user_id)
-            // await updateQuizesRecapPlan(settings, user.user_id)
+            const settings = await getRecapSettings(user.user_id)
+            // const quizTested = await getQuizById(user.user_id, quiz.quizId)
 
             //The Perfection Score of the quiz
             const perfectionScoreTotal =
                 quiz.perfectionScore + quiz.questionPoints
+
+            const score =
+                (perfectionScoreTotal * 100) / quiz.questions.length <= 25
+                    ? '25'
+                    : (perfectionScoreTotal * 100) / quiz.questions.length >
+                            25 &&
+                        (perfectionScoreTotal * 100) / quiz.questions.length <=
+                            50
+                      ? '50'
+                      : (perfectionScoreTotal * 100) / quiz.questions.length >
+                              50 &&
+                          (perfectionScoreTotal * 100) /
+                              quiz.questions.length <=
+                              75
+                        ? '75'
+                        : (perfectionScoreTotal * 100) / quiz.questions.length >
+                                75 &&
+                            (perfectionScoreTotal * 100) /
+                                quiz.questions.length <=
+                                100
+                          ? '100'
+                          : '0'
+
+            const typeOfRecap =
+                `recap_weekstime_p${score}` as keyof Tables<'Settings'>
+            console.log(typeOfRecap)
+            const daysToBeTested = (settings?.[typeOfRecap] as number) * 7
+            console.log(daysToBeTested)
+            const toBeTested = fromThisDay(
+                daysToBeTested,
+                fromToday(0, 'yes'),
+                'endOfDay'
+            )
+            console.log(new Date(toBeTested))
 
             //Updating Quiz
             const { error: errorUpdatingQuiz } = await supabase.rpc(
@@ -327,7 +360,7 @@ export function finish() {
                     new_perfection_score:
                         (perfectionScoreTotal * 100) / quiz.questions.length,
                     new_last_tested: fromToday(0, 'yes'),
-                    new_to_be_tested: fromToday(2),
+                    // new_to_be_tested: fromToday(2),
                     new_completion_time: quiz.completionTime,
                 }
             )

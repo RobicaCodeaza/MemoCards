@@ -12,7 +12,7 @@ export async function getRecapSettings(userId: string) {
     if (errorGettingRecapSettings)
         throw new Error('Could not get settings for your account.')
 
-    return settings
+    return settings[0]
 }
 
 export async function updateRecapSettings(

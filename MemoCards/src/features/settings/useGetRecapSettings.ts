@@ -25,7 +25,7 @@ export function useGetRecapSettings() {
                 `${err.message}.Error getting the settings for your recap planning.`
             ),
     })
-    const settingsRecapUser = settings?.[0]
+    const settingsRecapUser = settings
 
     return {
         settingsRecapUser,
