@@ -2,9 +2,9 @@ import { Tables } from '@/types/database.types'
 import RecapPlanCard from './RecapPlan/RecapPlanCard'
 import Heading from '@/ui/Heading'
 
-type RecapPlanProps = {
-    quizesTested: Tables<'Quizes'>[] | undefined
-}
+// Define the quizesTested type
+
+type RecapPlanProps = { quizesTested: Tables<'Quizes'>[] }
 
 function RecapPlan({ quizesTested }: RecapPlanProps) {
     quizesTested?.sort((a, b) => {

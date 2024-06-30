@@ -2,7 +2,7 @@ import { Tables } from '@/types/database.types'
 
 type OverallStatsProps = {
     decksTested: Tables<'Decks'>[] | undefined
-    quizesTested: Tables<'Quizes'>[] | undefined
+    quizesTested: Tables<'Quizes'>[]
 }
 
 function OverallStats({ decksTested, quizesTested }: OverallStatsProps) {

@@ -1,5 +1,4 @@
 import Spinner from '@/ui/Spinner'
-import { useQuizesAll } from '../quiz/useQuizesAll'
 import DecksContribution from './DecksContribution'
 import OverallStats from './OverallStats'
 import RecapPlan from './RecapPlan'
@@ -8,10 +7,11 @@ import { useGetRecapSettings } from '../settings/useGetRecapSettings'
 import { useRecentDecks } from '../decks/useRecentDecks'
 import Button from '@/ui/Button'
 import { useNavigate } from 'react-router-dom'
+import { useRecentQuizes } from '../quiz/useRecentQuizes'
 
 function DasboardLayout() {
     const navigate = useNavigate()
-    const { quizes, count, isLoading: isLoadingQuizes } = useQuizesAll()
+    const { recentQuizes, isLoading: isLoadingRecentQuizes } = useRecentQuizes()
 
     const { recentDecksAndCards, isLoading: isLoadingRecentDecks } =
         useRecentDecks()
@@ -23,9 +23,10 @@ function DasboardLayout() {
         settingsRecapUser?.recap_weekstime_p75 &&
         settingsRecapUser?.recap_weekstime_p100
 
-    if (isLoadingRecentDecks) return <Spinner></Spinner>
+    if (isLoadingRecentDecks || isLoadingRecentQuizes)
+        return <Spinner></Spinner>
 
-    if (!quizes && (!settingsRecapUser || !areRecapWeeksDefined))
+    if (!recentQuizes && (!settingsRecapUser || !areRecapWeeksDefined))
         return (
             <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
                 <Empty resource="Tested Quizes && Settings"></Empty>
@@ -46,7 +47,7 @@ function DasboardLayout() {
             </div>
         )
 
-    if (!quizes)
+    if (!recentQuizes)
         return (
             <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
                 <Empty resource="Tested Quizes"></Empty>
@@ -74,17 +75,16 @@ function DasboardLayout() {
             </div>
         )
 
-    const quizesTested = quizes?.filter((quiz) => quiz.lastTested !== null)
+    const quizesTested = recentQuizes?.filter(
+        (quiz) => quiz.lastTested !== null
+    )
     const decksTested = recentDecksAndCards?.filter(
         (deck) => deck.lastTested !== null
     )
 
     return (
         <div className="grid w-full grid-cols-[1fr_1fr] grid-rows-[min-content_auto] gap-20">
-            <RecapPlan
-                quizesTested={quizesTested}
-                settings={settingsRecapUser}
-            ></RecapPlan>
+            <RecapPlan quizesTested={quizesTested}></RecapPlan>
             <OverallStats
                 decksTested={decksTested}
                 quizesTested={quizesTested}
