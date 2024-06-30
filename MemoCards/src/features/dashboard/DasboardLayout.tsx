@@ -6,9 +6,12 @@ import RecapPlan from './RecapPlan'
 import Empty from '@/ui/Empty'
 import { useGetRecapSettings } from '../settings/useGetRecapSettings'
 import { useDecks } from '../decks/useDecks'
+import { useRecentDecks } from '../decks/useRecentDecks'
 
 function DasboardLayout() {
     const { quizes, count, isLoading: isLoadingQuizes } = useQuizesAll()
+    const { decks: recentDecks, isLoading: isLoadingRecentDecks } =
+        useRecentDecks()
     const { decks, isLoading: isLoadingDecks } = useDecks()
     const { settingsRecapUser } = useGetRecapSettings()
 
