@@ -1,4 +1,5 @@
 import DasboardLayout from '@/features/dashboard/DasboardLayout'
+import DashboardTableOperations from '@/features/dashboard/DashboardTableOperations'
 import Heading from '@/ui/Heading'
 import Row from '@/ui/Row'
 
@@ -11,7 +12,8 @@ function Dashboard() {
             <Row type="horizontal">
                 {/* <DecksModifiers></DecksModifiers>
                 <DecksTableOperations></DecksTableOperations> */}
-                Dashboard Modifiers
+                <div></div>
+                <DashboardTableOperations></DashboardTableOperations>
             </Row>
             <div className="flex flex-col items-center justify-center gap-12">
                 <DasboardLayout></DasboardLayout>

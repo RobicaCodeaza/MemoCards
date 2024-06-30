@@ -19,6 +19,10 @@ function RecapPlan({ quizesTested, settings }: RecapPlanProps) {
         settings?.recap_weekstime_p100
     console.log(quizesTested)
 
+    quizesTested.sort((a, b) => {
+        return a.perfectionScore!.at(-1)! - b.perfectionScore!.at(-1)!
+    })
+
     return (
         <div className="col-span-full flex flex-col gap-7">
             <Heading as="h4">Recap Plan</Heading>

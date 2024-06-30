@@ -1,6 +1,7 @@
 import supabase from './supabase'
 import { Tables } from '../types/database.types'
 import { PAGE_SIZE_DECKS } from '@/utils/constants'
+import { getToday } from '@/utils/helpers'
 
 export async function getDecks(userId: string) {
     const { data, error } = await supabase
@@ -128,4 +129,21 @@ export async function getDeckIdForCard(
     }
 
     return data?.[0].id
+}
+
+export async function getRecentDecks(userId: string, date: string) {
+    const { data, error } = await supabase
+        .from('Decks')
+        .select('*,Card(*)')
+        .eq('user_id', userId)
+        .gte('created_at', date)
+        .lte('created_at', getToday({ end: true }))
+
+    if (error) {
+        // console.error(error)
+        throw new Error('Decks could not get loaded.')
+    }
+
+    console.log(data)
+    return data
 }
