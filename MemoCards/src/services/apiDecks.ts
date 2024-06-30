@@ -131,19 +131,25 @@ export async function getDeckIdForCard(
     return data?.[0].id
 }
 
-export async function getRecentDecks(userId: string, date: string) {
-    const { data, error } = await supabase
-        .from('Decks')
-        .select('*,Card(*)')
-        .eq('user_id', userId)
-        .gte('created_at', date)
-        .lte('created_at', getToday({ end: true }))
+export async function getRecentDecks(userId: string, date: string | null) {
+    let query
+    if (!date)
+        query = supabase.from('Decks').select('*,Card(*)').eq('user_id', userId)
+    else
+        query = supabase
+            .from('Decks')
+            .select('*,Card(*)')
+            .eq('user_id', userId)
+            .gte('created_at', date)
+            .lte('created_at', getToday({ end: true }))
+
+    const { data, error } = await query
 
     if (error) {
         // console.error(error)
         throw new Error('Decks could not get loaded.')
     }
 
-    console.log(data)
+    console.log('recent data', data)
     return data
 }
