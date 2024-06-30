@@ -1,7 +1,7 @@
 import { Tables } from '@/types/database.types'
 import supabase from './supabase'
 import { PAGE_SIZE_QUIZES } from '@/utils/constants'
-import { fromThisDay } from '@/utils/helpers'
+import { fromThisDay, getToday } from '@/utils/helpers'
 import toast from 'react-hot-toast'
 
 export async function createEditQuiz(
@@ -123,67 +123,23 @@ export async function getQuizById(userId: string, quizId: number) {
     return quiz[0]
 }
 
-// export async function updateQuizesRecapPlan(
-//     settings: Tables<'Settings'>,
-//     userId: string,
-//     quizId: number
-// ) {
+export async function getRecentQuizes(userId: string, date: string | null) {
+    let query
+    if (!date) query = supabase.from('Quizes').select('*').eq('user_id', userId)
+    else
+        query = supabase.rpc('filter_quizes_by_last_tested', {
+            user_id: userId,
+            start_date: date,
+            end_date: getToday({ end: true }),
+        })
 
-//     if(quizId)
-//         const { data: quizes, error: errorGettingQuizes } = await supabase
-//     .from('Quizes')
-//     .select('*', { count: 'exact' })
-//     .eq('user_id', userId)
-//     .not('lastTested', 'is', null)
+    const { data, error } = await query
 
-//     const { data: quizes, error: errorGettingQuizes } = await supabase
-//         .from('Quizes')
-//         .select('*', { count: 'exact' })
-//         .eq('user_id', userId)
-//         .not('lastTested', 'is', null)
+    if (error) {
+        // console.error(error)
+        throw new Error('Recent Quizes could not get loaded.')
+    }
 
-//     if (errorGettingQuizes)
-//         throw new Error('Could not get data for your quizes.')
-
-//     if (!quizes || quizes.length === 0) return
-
-//     const quizesUpdated = quizes.map((el) => {
-//         // if (!el.perfectionScore) return
-//         const score =
-//             el.perfectionScore!.at(-1)! <= 25
-//                 ? '25'
-//                 : el.perfectionScore!.at(-1)! > 25 &&
-//                     el.perfectionScore!.at(-1)! <= 50
-//                   ? '50'
-//                   : el.perfectionScore!.at(-1)! > 50 &&
-//                       el.perfectionScore!.at(-1)! <= 75
-//                     ? '75'
-//                     : el.perfectionScore!.at(-1)! > 75 &&
-//                         el.perfectionScore!.at(-1)! <= 100
-//                       ? '100'
-//                       : ''
-
-//         //   const      toBeTestedInDays = data
-
-//         const typeOfRecap =
-//             `recap_weekstime_p${score}` as keyof Tables<'Settings'>
-
-//         const daysToBeTested = (settings?.[typeOfRecap] as number) * 7
-//         const toBeTested = fromThisDay(
-//             daysToBeTested,
-//             el.lastTested!.at(-1)!,
-//             'endOfDay'
-//         )
-//         return { ...el, toBeTested }
-//     })
-//     if (!quizesUpdated || quizesUpdated.length === 0) return
-
-//     const { data: dataUpdated, error: errorUpdatingCompletionTime } =
-//         await supabase.from('Quizes').upsert(quizesUpdated).select('*')
-
-//     if (errorUpdatingCompletionTime)
-//         throw new Error(
-//             'Could not update your quizes according to new settings.'
-//         )
-//     return dataUpdated
-// }
+    console.log('recent data quizes', data)
+    return data
+}

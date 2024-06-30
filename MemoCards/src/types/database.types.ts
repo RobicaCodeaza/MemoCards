@@ -231,6 +231,83 @@ export type Database = {
         }
         Returns: undefined
       }
+      filter_decks_by_last_tested: {
+        Args: {
+          user_id: string
+          start_date: string
+          end_date: string
+        }
+        Returns: {
+          chapter: string
+          id: number
+          lastTested: string[] | null
+          lesson: string
+          perfectionScore: number[] | null
+          subchapter: string
+          user_id: string
+        }[]
+      }
+      filter_quizes_by_last_tested: {
+        Args: {
+          user_id: string
+          start_date: string
+          end_date: string
+        }
+        Returns: {
+          completionTime: number | null
+          decksId: number[]
+          description: string | null
+          id: number
+          lastTested: string[] | null
+          perfectionScore: number[] | null
+          questionTime: number | null
+          quizName: string
+          quizTime: number | null
+          toBeTested: string | null
+          user_id: string
+        }[]
+      }
+      filter_quizzes_by_last_tested:
+        | {
+            Args: {
+              user_id: string
+              start_date: string
+              end_date: string
+            }
+            Returns: {
+              completionTime: number | null
+              decksId: number[]
+              description: string | null
+              id: number
+              lastTested: string[] | null
+              perfectionScore: number[] | null
+              questionTime: number | null
+              quizName: string
+              quizTime: number | null
+              toBeTested: string | null
+              user_id: string
+            }[]
+          }
+        | {
+            Args: {
+              user_id: string
+              start_date: string
+              end_date: string
+            }
+            Returns: {
+              completionTime: number | null
+              decksId: number[]
+              description: string | null
+              id: number
+              lastTested: string[] | null
+              perfectionScore: number[] | null
+              questionTime: number | null
+              quizName: string
+              quizTime: number | null
+              toBeTested: string | null
+              user_id: string
+            }[]
+          }
     }
     Enums: {
       [_ in never]: never
