@@ -26,7 +26,7 @@ export function useRecentDecks() {
 
     const {
         isLoading,
-        data: decks,
+        data: recentDecksAndCards,
         error,
     } = useQuery({
         queryKey: ['decks', `last-${numDays}`],
@@ -34,5 +34,5 @@ export function useRecentDecks() {
         enabled: !!user.user_id, // Only run the query if user_id exists
     })
 
-    return { isLoading, error, decks }
+    return { isLoading, error, recentDecksAndCards }
 }
