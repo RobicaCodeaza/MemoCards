@@ -4,15 +4,17 @@ type OverallStatsProps = {
     recentDecksAndCardsTested:
         | (Tables<'Decks'> & { cards: Tables<'Card'>[] })[]
         | undefined
-
-    quizesTested: Tables<'Quizes'>[]
+    recentQuizesAndCardsTested:
+        | (Tables<'Quizes'> & { cards: Tables<'Card'>[] })[]
+        | undefined
 }
 
 function OverallStats({
     recentDecksAndCardsTested,
-    quizesTested,
+    recentQuizesAndCardsTested,
 }: OverallStatsProps) {
-    console.log(recentDecksAndCardsTested)
+    //----------------------------------------
+    //Stats For Decks
     const totalDecks = recentDecksAndCardsTested?.length
     const averagePointsDecks = recentDecksAndCardsTested
         ?.reduce((acc, el) => {
@@ -28,8 +30,29 @@ function OverallStats({
     const totalCardsDecks = recentDecksAndCardsTested
         ?.reduce((acc, el) => acc + el.cards.length, 0)
         .toFixed(2)
-    const totalPointsPerQuestion = (
+    const totalPointsPerQuestionDecks = (
         Number(totalPointsDecks) / Number(totalCardsDecks)
+    ).toFixed(2)
+
+    //----------------------------------------
+    //Stats For Quizes
+    const totalQuizes = recentQuizesAndCardsTested?.length
+    const averagePointsQuizes = recentQuizesAndCardsTested
+        ?.reduce((acc, el) => {
+            return acc + el.perfectionScore!.at(-1)! / totalQuizes!
+        }, 0)
+        .toFixed(2)
+    const averageQuestionsQuizes = recentQuizesAndCardsTested
+        ?.reduce((acc, el) => acc + el.cards.length / totalQuizes!, 0)
+        .toFixed(2)
+    const totalPointsQuizes = recentQuizesAndCardsTested
+        ?.reduce((acc, el) => acc + el.perfectionScore!.at(-1)!, 0)
+        .toFixed(2)
+    const totalCardsQuizes = recentQuizesAndCardsTested
+        ?.reduce((acc, el) => acc + el.cards.length, 0)
+        .toFixed(2)
+    const totalPointsPerQuestionQuizes = (
+        Number(totalPointsQuizes) / Number(totalCardsQuizes)
     ).toFixed(2)
 
     console.log(totalPointsDecks, totalCardsDecks)
@@ -56,7 +79,7 @@ function OverallStats({
                         <td className="border-r-2 border-mako-grey-100 px-6 py-3 text-center">
                             {totalDecks}
                         </td>
-                        <td></td>
+                        <td className="px-6 py-3 text-center">{totalQuizes}</td>
                     </tr>
                     <tr className="bg-picton-blue-200">
                         <th className="border-r-2 border-mako-grey-100 px-6  py-3   text-[1.4rem] text-mako-grey-700">
@@ -68,7 +91,12 @@ function OverallStats({
                         >
                             {averagePointsDecks}/100
                         </td>
-                        <td></td>
+                        <td
+                            className="px-6
+                            py-3 text-center"
+                        >
+                            {averagePointsQuizes}/100
+                        </td>
                     </tr>
                     <tr className="bg-picton-blue-150">
                         <th className="border-r-2 border-mako-grey-100 px-6 py-3  text-[1.4rem] text-mako-grey-700">
@@ -80,7 +108,12 @@ function OverallStats({
                         >
                             {averageQuestionsDecks}
                         </td>
-                        <td></td>
+                        <td
+                            className="px-6
+                            py-3 text-center"
+                        >
+                            {averageQuestionsQuizes}
+                        </td>
                     </tr>
                     <tr className="bg-picton-blue-200">
                         <th className="border-r-2 border-mako-grey-100 px-6  py-3   text-[1.4rem] text-mako-grey-700">
@@ -90,9 +123,14 @@ function OverallStats({
                             className="border-r-2 border-mako-grey-100   px-6
                             py-3 text-center"
                         >
-                            {totalPointsPerQuestion}
+                            {totalPointsPerQuestionDecks}
                         </td>
-                        <td></td>
+                        <td
+                            className="px-6
+                            py-3 text-center"
+                        >
+                            {totalPointsPerQuestionQuizes}
+                        </td>
                     </tr>
                 </tbody>
             </table>
