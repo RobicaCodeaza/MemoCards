@@ -140,6 +140,6 @@ export async function getRecentQuizes(userId: string, date: string | null) {
         throw new Error('Recent Quizes could not get loaded.')
     }
 
-    console.log('recent data quizes', data)
+    // console.log('recent data quizes', data)
     return data
 }

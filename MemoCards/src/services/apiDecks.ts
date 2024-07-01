@@ -131,7 +131,10 @@ export async function getDeckIdForCard(
     return data?.[0].id
 }
 
-export async function getRecentDecks(userId: string, date: string | null) {
+export async function getRecentDecksAndCards(
+    userId: string,
+    date: string | null
+) {
     let query
     if (!date) query = supabase.from('Decks').select('*').eq('user_id', userId)
     else
@@ -141,13 +144,32 @@ export async function getRecentDecks(userId: string, date: string | null) {
             end_date: getToday({ end: true }),
         })
 
-    const { data, error } = await query
+    const { data: decks, error } = await query
 
     if (error) {
         // console.error(error)
         throw new Error('Decks could not get loaded.')
     }
+    const decksId = decks?.map((el) => el.id)
 
-    console.log('recent data decks', data)
+    const { data: cards, error: errorGettingCards } = await supabase
+        .from('Card')
+        .select()
+        .in('deckId', decksId)
+
+    if (errorGettingCards ?? cards === null)
+        throw new Error(
+            'Cannot find coresponding data. Make sure you selected decks with cards.'
+        )
+
+    const data = decks.map((deck) => {
+        const cardsContainedByDeck = cards.filter(
+            (card) => card.deckId === deck.id
+        )
+
+        return { ...deck, cards: cardsContainedByDeck }
+    })
+
+    // console.log('recent data decks', data)
     return data
 }
