@@ -28,7 +28,7 @@ function RecapPlanCard({
                   ? '100'
                   : '0'
 
-    console.log(score)
+    // console.log(score)
 
     const glowingShadow = {
         0: '0 0 4px 2px rgba(224, 34, 46, 0.75)',

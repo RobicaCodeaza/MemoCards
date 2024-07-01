@@ -1,11 +1,11 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState'
-import { getRecentDecks } from '@/services/apiDecks'
+import { getRecentDecksAndCards } from '@/services/apiDecks'
 import { UserType } from '@/ui/ProtectedRoute'
 import { useQuery } from '@tanstack/react-query'
 import { subDays } from 'date-fns'
 import { useSearchParams } from 'react-router-dom'
 
-export function useRecentDecks() {
+export function useRecentDecksAndCards() {
     const [searchParams] = useSearchParams()
     const [user, _] = useLocalStorageState<UserType>(
         {
@@ -30,7 +30,7 @@ export function useRecentDecks() {
         error,
     } = useQuery({
         queryKey: ['decks', `last-${numDays}`],
-        queryFn: () => getRecentDecks(user.user_id, date),
+        queryFn: () => getRecentDecksAndCards(user.user_id, date),
         enabled: !!user.user_id, // Only run the query if user_id exists
     })
 

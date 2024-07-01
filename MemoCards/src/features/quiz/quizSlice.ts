@@ -376,8 +376,10 @@ export function finish() {
                     (deckData) => deckData.deckId === el.id
                 )
                 const perfectionScoreToAdd =
-                    (deckToAdd[0].perfectionScore.at(-1)! * 100) /
-                    deckToAdd[0].numQuestions
+                    deckToAdd[0].perfectionScore.at(-1) !== 0
+                        ? (deckToAdd[0].perfectionScore.at(-1)! * 100) /
+                          deckToAdd[0].numQuestions
+                        : 0
 
                 const perfectionScore = el.perfectionScore
                     ? ([
