@@ -1,4 +1,9 @@
 import { CarouselItem } from '@/components/ui/carousel'
+import useMediaQueryResize, {
+    phone,
+    tabLand,
+    tabPort,
+} from '@/hooks/useMediaQuery'
 import {
     Cell,
     Legend,
@@ -20,16 +25,21 @@ type DeckContributionCardProps = {
 }
 
 function DecksContributionCard({ data }: DeckContributionCardProps) {
+    const mediaPhone = useMediaQueryResize(phone)
+    const mediaTabLand = useMediaQueryResize(tabLand)
+    const legendLayout = mediaTabLand ? 'horizontal' : 'vertical'
+    console.log(mediaTabLand)
+
     return (
-        <CarouselItem className=" flex h-[30rem]  flex-col gap-6  rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:h-[25rem] phone:px-6 phone:py-6 tab-land:h-[22.5rem] tab-land:w-full tab-land:px-8 tab-land:py-8">
-            <div className="h-full">
+        <CarouselItem className=" flex h-[30rem]    flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:h-[25rem] phone:px-6 phone:py-6 tab-land:h-[22.5rem] tab-land:px-8 tab-land:py-8">
+            <div className="h-full w-full">
                 <p className="text-[1.4rem] text-mako-grey-500">
                     Decks Contribution:{' '}
                     <span className="text-[1.4rem] font-medium uppercase tracking-wide text-picton-blue-700">
                         {data.quizName}
                     </span>
                 </p>
-                <ResponsiveContainer>
+                <ResponsiveContainer width={'100%'}>
                     <PieChart
                         margin={{
                             top: 100,
@@ -69,7 +79,7 @@ function DecksContributionCard({ data }: DeckContributionCardProps) {
                                 bottom: 15,
                                 // width: '100%',
                             }}
-                            layout="vertical"
+                            layout={legendLayout}
                             iconSize={15}
                             iconType="circle"
                         ></Legend>

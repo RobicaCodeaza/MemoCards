@@ -58,17 +58,19 @@ function OverallStats({
     console.log(totalPointsDecks, totalCardsDecks)
 
     return (
-        <div className="col-start-1 col-end-3 overflow-hidden  rounded-lg  tab-port:col-start-1 tab-port:col-end-2 ">
-            <table className="h-[25rem]  w-full border-collapse  tab-land:h-full  ">
+        <div className="col-start-1 col-end-3 tab-land:col-start-1 tab-land:col-end-2 ">
+            <table className="h-[25rem] w-full  min-w-max border-collapse   tab-land:h-full ">
                 <thead>
                     <tr className="bg-chateau-green-400 text-[1.5rem] text-mako-grey-50">
-                        <th className=" w-[33.33%] border-r-2 px-6 py-3 ">
+                        <th className=" w-[33.33%] border-r-2 px-2 py-2 phone:px-6 phone:py-3 ">
                             Stats
                         </th>
-                        <th className=" w-[33.33%] border-r-2 px-6 py-3">
+                        <th className=" w-[33.33%] border-r-2 px-2 py-2 phone:px-6 phone:py-3">
                             Decks
                         </th>
-                        <th className="w-[33.34%] px-6 py-3 ">Quizes</th>
+                        <th className="w-[33.34%] px-2 py-2 phone:px-6 phone:py-3 ">
+                            Quizes
+                        </th>
                     </tr>
                 </thead>
                 <tbody className="">
@@ -76,10 +78,12 @@ function OverallStats({
                         <th className="border-r-2 border-mako-grey-100 px-6  py-3  text-[1.4rem] text-mako-grey-700 ">
                             Total
                         </th>
-                        <td className="border-r-2 border-mako-grey-100 px-6 py-3 text-center">
+                        <td className="border-r-2 border-mako-grey-100 px-2 py-2 text-center phone:px-6 phone:py-3">
                             {totalDecks}
                         </td>
-                        <td className="px-6 py-3 text-center">{totalQuizes}</td>
+                        <td className="px-2 py-2 text-center phone:px-6 phone:py-3">
+                            {totalQuizes}
+                        </td>
                     </tr>
                     <tr className="bg-picton-blue-200">
                         <th className="border-r-2 border-mako-grey-100 px-6  py-3   text-[1.4rem] text-mako-grey-700">
@@ -99,7 +103,7 @@ function OverallStats({
                         </td>
                     </tr>
                     <tr className="bg-picton-blue-150">
-                        <th className="border-r-2 border-mako-grey-100 px-6 py-3  text-[1.4rem] text-mako-grey-700">
+                        <th className="border-r-2 border-mako-grey-100 px-2 py-2  text-[1.4rem] text-mako-grey-700 phone:px-6 phone:py-3">
                             Avg Questions/Deck
                         </th>
                         <td

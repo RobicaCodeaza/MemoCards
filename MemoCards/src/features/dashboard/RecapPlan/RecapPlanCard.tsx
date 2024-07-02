@@ -1,5 +1,5 @@
 import Button from '@/ui/Button'
-import { formatDistanceFromNow, fromToday } from '@/utils/helpers'
+import { formatDistanceFromNow } from '@/utils/helpers'
 import { useNavigate } from 'react-router-dom'
 
 type RecapPlanCardProps = {
