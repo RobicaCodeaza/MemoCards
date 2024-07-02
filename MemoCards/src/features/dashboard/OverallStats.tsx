@@ -58,8 +58,8 @@ function OverallStats({
     console.log(totalPointsDecks, totalCardsDecks)
 
     return (
-        <div className="col-start-1 col-end-3  flex items-center  justify-center gap-12 overflow-x-scroll rounded-lg border border-mako-grey-150 bg-picton-blue-50 tab-land:col-start-1 tab-land:col-end-2 ">
-            <table className=" h-[25rem] w-full  border-collapse tab-land:h-[25rem]">
+        <div className="col-start-1 col-end-3 overflow-hidden  rounded-lg  tab-land:col-start-1 tab-land:col-end-2 ">
+            <table className="h-[25rem]  w-full border-collapse  tab-land:h-full  ">
                 <thead>
                     <tr className="bg-chateau-green-400 text-[1.5rem] text-mako-grey-50">
                         <th className=" w-[33.33%] border-r-2 px-6 py-3 ">

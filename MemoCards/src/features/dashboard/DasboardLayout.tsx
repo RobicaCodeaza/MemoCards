@@ -94,7 +94,10 @@ function DasboardLayout() {
                 recentDecksAndCardsTested={recentDecksAndCardsTested}
                 recentQuizesAndCardsTested={recentQuizesAndCardsTested}
             ></OverallStats>
-            <DecksContribution></DecksContribution>
+            <DecksContribution
+                recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                recentDecksAndCardsTested={recentDecksAndCardsTested}
+            ></DecksContribution>
         </div>
     )
 }
