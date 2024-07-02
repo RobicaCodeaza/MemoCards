@@ -15,6 +15,7 @@ import {
     ResponsiveContainer,
     Tooltip,
 } from 'recharts'
+import DecksContributionCard from './DecksContribution/DecksContributionCard'
 
 type DecksContributionProps = {
     recentQuizesAndCardsTested:
@@ -96,66 +97,14 @@ function DecksContribution({
 
     return (
         <div className="col-start-1 col-end-2 px-4 py-4 tab-land:col-start-2 tab-land:col-end-3">
-            <Carousel className="h-full">
-                <div className="h-[20.5rem]">
-                    <CarouselContent className="perspective--big h-full  p-2">
+            <Carousel className="flex h-[20rem] items-center">
+                <div>
+                    <CarouselContent className="perspective--big  p-2">
                         {decksContribution.map((data) => (
-                            <CarouselItem
-                                key={Math.random() * 1000}
-                                className="ml-2 mr-2 flex h-[20rem] flex-col  gap-6 rounded-lg border border-chateau-green-300 bg-picton-blue-50 px-12 py-10 shadow-md transition-all duration-300"
-                            >
-                                <div className="h-full">
-                                    <p className="text-[1.4rem] text-mako-grey-500">
-                                        Decks Contribution:{' '}
-                                        <span className="text-medium text-[1.4rem] uppercase tracking-wide text-picton-blue-700">
-                                            {data.quizName}
-                                        </span>
-                                    </p>
-                                    <ResponsiveContainer>
-                                        <PieChart
-                                            margin={{
-                                                top: 100,
-                                                right: 5,
-                                                bottom: 10,
-                                                left: 5,
-                                            }}
-                                        >
-                                            <Pie
-                                                data={data.deckContribution}
-                                                nameKey="name"
-                                                dataKey="value"
-                                                innerRadius={85}
-                                                outerRadius={110}
-                                                startAngle={180}
-                                                endAngle={0}
-                                                height={100}
-                                                cx="50%"
-                                                cy="50%"
-                                                paddingAngle={3}
-                                            >
-                                                {data.deckContribution.map(
-                                                    (entry) => (
-                                                        <Cell
-                                                            fill={entry.color}
-                                                            stroke={entry.color}
-                                                            key={entry.value}
-                                                        ></Cell>
-                                                    )
-                                                )}
-                                            </Pie>
-                                            <Tooltip></Tooltip>
-                                            <Legend
-                                                verticalAlign="bottom"
-                                                align="left"
-                                                // width={100}
-                                                layout="vertical"
-                                                iconSize={15}
-                                                iconType="circle"
-                                            ></Legend>
-                                        </PieChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </CarouselItem>
+                            <DecksContributionCard
+                                key={data.quizName}
+                                data={data}
+                            ></DecksContributionCard>
                         ))}
                     </CarouselContent>
                     <CarouselPrevious className="text-center">
