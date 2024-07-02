@@ -1,20 +1,12 @@
 import {
     Carousel,
     CarouselContent,
-    CarouselItem,
     CarouselNext,
     CarouselPrevious,
 } from '@/components/ui/carousel'
 import { Tables } from '@/types/database.types'
 import Button from '@/ui/Button'
-import {
-    Cell,
-    Legend,
-    Pie,
-    PieChart,
-    ResponsiveContainer,
-    Tooltip,
-} from 'recharts'
+
 import DecksContributionCard from './DecksContribution/DecksContributionCard'
 
 type DecksContributionProps = {
@@ -96,7 +88,7 @@ function DecksContribution({
     })
 
     return (
-        <div className="col-start-1 col-end-3  px-10 phone:block phone:px-12  phone:py-2 tab-port:col-start-2 tab-port:col-end-3 tab-land:px-6 tab-land:py-2">
+        <div className="col-start-1 col-end-3  px-10 phone:block phone:px-12  phone:py-2 tab-land:col-start-2 tab-land:col-end-3 tab-land:px-6 ">
             <Carousel className="w-full">
                 <CarouselContent className="perspective--big p-2">
                     {decksContribution.map((data) => (
