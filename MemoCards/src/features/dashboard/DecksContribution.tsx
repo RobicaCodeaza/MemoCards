@@ -96,28 +96,26 @@ function DecksContribution({
     })
 
     return (
-        <div className="col-start-1 col-end-2 px-4 py-4 tab-land:col-start-2 tab-land:col-end-3">
-            <Carousel className="flex h-[20rem] items-center">
-                <div>
-                    <CarouselContent className="perspective--big  p-2">
-                        {decksContribution.map((data) => (
-                            <DecksContributionCard
-                                key={data.quizName}
-                                data={data}
-                            ></DecksContributionCard>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="text-center">
-                        <Button as="div" variation="accentPrimary" size="tiny">
-                            Next
-                        </Button>
-                    </CarouselPrevious>
-                    <CarouselNext className="text-center" elementType="button">
-                        <Button as="div" variation="accentPrimary" size="tiny">
-                            Next
-                        </Button>
-                    </CarouselNext>
-                </div>
+        <div className="col-start-1 col-end-3  px-10 phone:block phone:px-12  phone:py-2 tab-port:col-start-2 tab-port:col-end-3 tab-land:px-6 tab-land:py-2">
+            <Carousel className="w-full">
+                <CarouselContent className="perspective--big p-2">
+                    {decksContribution.map((data) => (
+                        <DecksContributionCard
+                            key={data.quizName}
+                            data={data}
+                        ></DecksContributionCard>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious className="text-center">
+                    <Button as="div" variation="accentPrimary" size="tiny">
+                        Next
+                    </Button>
+                </CarouselPrevious>
+                <CarouselNext className="text-center" elementType="button">
+                    <Button as="div" variation="accentPrimary" size="tiny">
+                        Next
+                    </Button>
+                </CarouselNext>
             </Carousel>
         </div>
     )

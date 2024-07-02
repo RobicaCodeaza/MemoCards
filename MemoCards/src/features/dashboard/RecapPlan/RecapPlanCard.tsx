@@ -44,7 +44,10 @@ function RecapPlanCard({
             style={{ boxShadow: glowingShadow[`${score}`] }}
         >
             <p className="border-b border-mako-grey-100 py-1 text-[1.3rem] font-semibold tracking-wide">
-                🧾: <strong>{quizName.toUpperCase()}</strong>
+                🧾:{' '}
+                <span className="font-medium text-picton-blue-700">
+                    {quizName.toUpperCase()}
+                </span>
             </p>
             <p className=" border-b border-mako-grey-100 py-1 text-[1.3rem] font-medium tracking-wide">
                 ⭐: <strong>{perfectionScore}</strong>p
