@@ -78,7 +78,7 @@ function DasboardLayout() {
             </div>
         )
 
-    const quizesTested = recentQuizes?.filter(
+    const recentQuizesAndCardsTested = recentQuizes?.filter(
         (quiz) => quiz.lastTested !== null
     )
     const recentDecksAndCardsTested = recentDecksAndCards?.filter(
@@ -87,12 +87,17 @@ function DasboardLayout() {
 
     return (
         <div className="grid w-full grid-cols-[1fr_1fr] grid-rows-[min-content_auto] gap-20">
-            <RecapPlan quizesTested={quizesTested}></RecapPlan>
+            <RecapPlan
+                recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+            ></RecapPlan>
             <OverallStats
                 recentDecksAndCardsTested={recentDecksAndCardsTested}
-                quizesTested={quizesTested}
+                recentQuizesAndCardsTested={recentQuizesAndCardsTested}
             ></OverallStats>
-            <DecksContribution></DecksContribution>
+            <DecksContribution
+                recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                recentDecksAndCardsTested={recentDecksAndCardsTested}
+            ></DecksContribution>
         </div>
     )
 }

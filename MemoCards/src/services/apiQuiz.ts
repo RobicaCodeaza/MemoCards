@@ -133,12 +133,34 @@ export async function getRecentQuizes(userId: string, date: string | null) {
             end_date: getToday({ end: true }),
         })
 
-    const { data, error } = await query
+    const { data: quizes, error } = await query
 
     if (error) {
         // console.error(error)
         throw new Error('Recent Quizes could not get loaded.')
     }
+
+    const decksIdForEveryQuiz = quizes?.map((el) => el.decksId)
+    let decksId = decksIdForEveryQuiz.flat()
+    decksId = decksId.filter((el) => el !== -1)
+
+    const { data: cards, error: errorGettingCards } = await supabase
+        .from('Card')
+        .select()
+        .in('deckId', decksId)
+
+    if (errorGettingCards ?? cards === null)
+        throw new Error(
+            'Cannot find coresponding data. Make sure you have in your quiz some decks with cards.'
+        )
+
+    const data = quizes.map((quiz) => {
+        const cardsContainedByQuizes = cards.filter((card) =>
+            quiz.decksId.includes(card.deckId)
+        )
+
+        return { ...quiz, cards: cardsContainedByQuizes }
+    })
 
     // console.log('recent data quizes', data)
     return data
