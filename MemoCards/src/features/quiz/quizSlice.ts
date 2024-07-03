@@ -73,6 +73,7 @@ const quizSlice = createSlice({
         ) {
             state.status = 'ready'
             state.questions = action.payload.questions
+            state.isFlippingCard = false
             state.questionTime = action.payload.questionTime
             state.quizTime = action.payload.quizTime
             state.decksData = action.payload.decksData
@@ -88,7 +89,8 @@ const quizSlice = createSlice({
             state.secondsRemainingQuiz = state.quizTime
             state.answer = null
             state.revealAnswer = false
-            state.isFlippingCard = false
+            state.isFlippingCard =
+                state.questions[state.index].answers.length > 1 ? false : true
             state.index = 0
             state.answerTimeFinished = false
             state.perfectionScore = 0
