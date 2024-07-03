@@ -8,6 +8,8 @@ import Button from '@/ui/Button'
 import { useNavigate } from 'react-router-dom'
 import { useRecentQuizes } from '../quiz/useRecentQuizes'
 import { useRecentDecksAndCards } from '../decks/useRecentDecksAndCards'
+import Heading from '@/ui/Heading'
+import DecksQuizesQuestions from './DecksQuizesQuestions'
 
 function DasboardLayout() {
     const navigate = useNavigate()
@@ -86,18 +88,48 @@ function DasboardLayout() {
     )
 
     return (
-        <div className="grid w-full grid-cols-[1fr_1fr] grid-rows-[min-content_auto] gap-20">
-            <RecapPlan
-                recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-            ></RecapPlan>
-            <OverallStats
-                recentDecksAndCardsTested={recentDecksAndCardsTested}
-                recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-            ></OverallStats>
-            <DecksContribution
-                recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                recentDecksAndCardsTested={recentDecksAndCardsTested}
-            ></DecksContribution>
+        // <div className="grid w-full grid-cols-[1fr_1fr] grid-rows-[min-content_auto] gap-20">
+        <div className="flex w-full  flex-col gap-24">
+            <div className="flex flex-col gap-14">
+                <Heading as="h4">Recap Plan & Overall Stats</Heading>
+                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                    <RecapPlan
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                    ></RecapPlan>
+                    <OverallStats
+                        recentDecksAndCardsTested={recentDecksAndCardsTested}
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                    ></OverallStats>
+                </div>
+            </div>
+
+            <div className="flex flex-col gap-14">
+                <Heading as="h4">Decks & Quizes - Combined Data</Heading>
+                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                    <DecksQuizesQuestions
+                        recentDecksAndCardsTested={recentDecksAndCardsTested}
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                    ></DecksQuizesQuestions>
+                    <DecksContribution
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                        recentDecksAndCardsTested={recentDecksAndCardsTested}
+                    ></DecksContribution>
+                </div>
+            </div>
+
+            <div className="flex flex-col gap-14">
+                <Heading as="h4">Overall Stats</Heading>
+                <div className="flex flex-col gap-20 tab-land:flex-row">
+                    <DecksContribution
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                        recentDecksAndCardsTested={recentDecksAndCardsTested}
+                    ></DecksContribution>
+                    <DecksContribution
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                        recentDecksAndCardsTested={recentDecksAndCardsTested}
+                    ></DecksContribution>
+                </div>
+            </div>
         </div>
     )
 }

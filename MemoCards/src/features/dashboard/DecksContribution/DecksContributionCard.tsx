@@ -1,9 +1,5 @@
 import { CarouselItem } from '@/components/ui/carousel'
-import useMediaQueryResize, {
-    phone,
-    tabLand,
-    tabPort,
-} from '@/hooks/useMediaQuery'
+import useMediaQueryResize, { tabLand } from '@/hooks/useMediaQuery'
 import {
     Cell,
     Legend,
@@ -25,13 +21,12 @@ type DeckContributionCardProps = {
 }
 
 function DecksContributionCard({ data }: DeckContributionCardProps) {
-    const mediaPhone = useMediaQueryResize(phone)
     const mediaTabLand = useMediaQueryResize(tabLand)
     const legendLayout = mediaTabLand ? 'horizontal' : 'vertical'
     console.log(mediaTabLand)
 
     return (
-        <CarouselItem className=" flex h-[30rem]    flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:h-[25rem] phone:px-6 phone:py-6 tab-land:h-[22.5rem] tab-land:px-8 tab-land:py-8">
+        <CarouselItem className=" flex h-[30rem] flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:h-[25rem] phone:px-6 phone:py-6 tab-land:h-[30rem] tab-land:px-8 tab-land:py-8">
             <div className="h-full w-full">
                 <p className="text-[1.4rem] text-mako-grey-500">
                     Decks Contribution:{' '}

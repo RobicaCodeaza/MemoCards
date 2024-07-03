@@ -58,7 +58,7 @@ function OverallStats({
     console.log(totalPointsDecks, totalCardsDecks)
 
     return (
-        <div className="col-start-1 col-end-3 tab-land:col-start-1 tab-land:col-end-2 ">
+        <div className="flex-shrink flex-grow  basis-1/2">
             <table className="h-[25rem] w-full  min-w-max border-collapse   tab-land:h-full ">
                 <thead>
                     <tr className="bg-chateau-green-400 text-[1.5rem] text-mako-grey-50">
