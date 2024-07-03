@@ -30,15 +30,15 @@ function DecksQuizesQuestions({
     const fontSizeLabel = mediaPhone ? '1.4rem' : '1.5rem'
     const fontSizeLegend = mediaPhone ? '1.5rem' : '1.6rem'
     const decksData = recentDecksAndCardsTested?.map((recent) => {
-        return { x: recent.perfectionScore.at(-1), y: recent.cards.length }
+        return { x: recent.perfectionScore!.at(-1), y: recent.cards.length }
     })
     const quizesData = recentQuizesAndCardsTested?.map((recent) => {
-        return { x: recent.perfectionScore.at(-1), y: recent.cards.length }
+        return { x: recent.perfectionScore!.at(-1), y: recent.cards.length }
     })
     console.log(decksData, quizesData)
 
     return (
-        <div className="flex h-[30.5rem] flex-grow  flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 p-6 tab-land:basis-1/2 tab-land:p-8">
+        <div className="flex h-[30.5rem] flex-shrink flex-grow  flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 p-6 tab-land:basis-1/2 tab-land:p-8">
             <p className="text-[1.4rem] text-mako-grey-500">
                 Num Questions in Perfection Score:{' '}
                 <span className="text-[1.4rem] font-medium uppercase tracking-wide text-picton-blue-700">
@@ -71,7 +71,7 @@ function DecksQuizesQuestions({
                         }}
                         padding={{ left: 0, right: 0 }}
                         minTickGap={2}
-                        stroke="#45bb6a"
+                        tickLine={{ stroke: '#45bb6a' }}
                     >
                         <Label
                             value={'Perfection Score'}
@@ -111,7 +111,17 @@ function DecksQuizesQuestions({
                     <Tooltip
                         cursor={{ strokeDasharray: '4 4' }}
                         itemStyle={{
-                            backgroundColor: '#0881c1',
+                            padding: '5px',
+                            color: '#e1f2fd',
+                        }}
+                        wrapperStyle={{
+                            padding: '2px',
+                            borderRadius: '14px',
+                            backgroundColor: '#08679c',
+                        }}
+                        contentStyle={{
+                            borderRadius: '12px',
+                            backgroundColor: '#08679c',
                         }}
                     />
                     <Legend
@@ -134,11 +144,11 @@ function DecksQuizesQuestions({
                         // activeShape={10}
                     />
                     <Scatter
-                        line
                         name="Quizes"
                         data={quizesData}
                         fill="#fd7812"
                         shape="star"
+                        line
                     />
                 </ScatterChart>
             </ResponsiveContainer>

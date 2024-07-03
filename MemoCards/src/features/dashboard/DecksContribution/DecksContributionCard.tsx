@@ -23,7 +23,6 @@ type DeckContributionCardProps = {
 function DecksContributionCard({ data }: DeckContributionCardProps) {
     const mediaTabLand = useMediaQueryResize(tabLand)
     const legendLayout = mediaTabLand ? 'horizontal' : 'vertical'
-    console.log(mediaTabLand)
 
     return (
         <CarouselItem className=" flex h-[30rem] flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:h-[25rem] phone:px-6 phone:py-6 tab-land:h-[30rem] tab-land:px-8 tab-land:py-8">
@@ -65,7 +64,23 @@ function DecksContributionCard({ data }: DeckContributionCardProps) {
                                 ></Cell>
                             ))}
                         </Pie>
-                        <Tooltip></Tooltip>
+                        <Tooltip
+                            cursor={{ strokeDasharray: '4 4' }}
+                            itemStyle={{
+                                padding: '5px',
+                                color: '#e1f2fd',
+                            }}
+                            wrapperStyle={{
+                                padding: '2px',
+                                borderRadius: '14px',
+                                backgroundColor: '#08679c',
+                            }}
+                            contentStyle={{
+                                // padding: '10px',
+                                borderRadius: '12px',
+                                backgroundColor: '#08679c',
+                            }}
+                        />
                         <Legend
                             verticalAlign="bottom"
                             align="left"

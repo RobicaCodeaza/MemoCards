@@ -10,6 +10,7 @@ import { useRecentQuizes } from '../quiz/useRecentQuizes'
 import { useRecentDecksAndCards } from '../decks/useRecentDecksAndCards'
 import Heading from '@/ui/Heading'
 import DecksQuizesQuestions from './DecksQuizesQuestions'
+import DecksPerfectionEvolution from './DecksPerfectionEvolution'
 
 function DasboardLayout() {
     const navigate = useNavigate()
@@ -118,12 +119,11 @@ function DasboardLayout() {
             </div>
 
             <div className="flex flex-col gap-14">
-                <Heading as="h4">Overall Stats</Heading>
+                <Heading as="h4">Decks & Quizes - Individual Evolution</Heading>
                 <div className="flex flex-col gap-20 tab-land:flex-row">
-                    <DecksContribution
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                    <DecksPerfectionEvolution
                         recentDecksAndCardsTested={recentDecksAndCardsTested}
-                    ></DecksContribution>
+                    ></DecksPerfectionEvolution>
                     <DecksContribution
                         recentQuizesAndCardsTested={recentQuizesAndCardsTested}
                         recentDecksAndCardsTested={recentDecksAndCardsTested}
