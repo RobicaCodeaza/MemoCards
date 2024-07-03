@@ -38,7 +38,7 @@ function DecksQuizesQuestions({
     console.log(decksData, quizesData)
 
     return (
-        <div className="flex h-[30.5rem] flex-shrink flex-grow  flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 p-6 tab-land:basis-1/2 tab-land:p-8">
+        <div className="flex h-[30.5rem] flex-shrink flex-grow  flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 p-6 tab-land:w-1/2 tab-land:p-8">
             <p className="text-[1.4rem] text-mako-grey-500">
                 Num Questions in Perfection Score:{' '}
                 <span className="text-[1.4rem] font-medium uppercase tracking-wide text-picton-blue-700">
@@ -76,7 +76,7 @@ function DecksQuizesQuestions({
                         <Label
                             value={'Perfection Score'}
                             position="insideBottomRight"
-                            offset={-10}
+                            offset={-15}
                             fontFamily="K2D"
                             fontSize={fontSizeLabel}
                             color="#656d75"
@@ -100,7 +100,7 @@ function DecksQuizesQuestions({
                         <Label
                             value={'Num Questions'}
                             position="insideBottomLeft"
-                            offset={30}
+                            offset={10}
                             angle={-90}
                             fontFamily="K2D"
                             fontSize={fontSizeLabel}
