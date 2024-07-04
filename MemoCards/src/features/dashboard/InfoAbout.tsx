@@ -36,15 +36,15 @@ function InfoAbout() {
                                 <span className="underline">First part</span>{' '}
                                 structure:
                             </p>
-                            <p className="mt-2 flex gap-4">
-                                <BiRevision className="h-10 w-10  text-danger-500"></BiRevision>
-                                <span>
+                            <p className="mt-2 gap-4">
+                                <BiRevision className="inline-block h-10  w-10 text-danger-500"></BiRevision>
+                                <span className="ml-2">
                                     A revision Recap Plan in order to manage
                                     upcoming quizes based on the last
                                     performances.
                                 </span>
                             </p>
-                            <p className="mt-2 flex gap-4">
+                            <p className="mt-2 gap-4">
                                 <IoStatsChartOutline className="h-10 w-10  text-chateau-green-400"></IoStatsChartOutline>
                                 <span>A general overview of our progress</span>
                             </p>
