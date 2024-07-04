@@ -81,5 +81,5 @@ export async function loginDemo() {
     })
     if (error) throw new Error('Could not login with the demo account')
 
-    return data
+    return data.user
 }
