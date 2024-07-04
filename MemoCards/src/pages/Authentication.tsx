@@ -2,9 +2,15 @@ import Logo from '@/ui/Logo'
 import Login from '@/features/authentication/Login'
 import Button from '@/ui/Button'
 import { useLoginDemoAcc } from '@/features/authentication/useLoginDemoAcc'
+import { useNavigate } from 'react-router-dom'
 
 function Authentication() {
     const { loginDemoAcc } = useLoginDemoAcc()
+    const navigate = useNavigate()
+    function loginDemo() {
+        loginDemoAcc()
+        navigate('/dashboard')
+    }
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-picton-blue-100 py-6">
@@ -16,7 +22,7 @@ function Authentication() {
                 <Button
                     variation="accentPrimary"
                     size="medium"
-                    onClick={() => loginDemoAcc()}
+                    onClick={() => loginDemo()}
                 >
                     Login With Demo Account
                 </Button>
