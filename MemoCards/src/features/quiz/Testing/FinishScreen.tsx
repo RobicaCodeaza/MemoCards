@@ -97,7 +97,7 @@ function FinishScreen() {
                             {(
                                 (quizPerfectionScore * 100) /
                                 questionsNum
-                            ).toFixed()}
+                            ).toFixed(1)}
                             /100
                         </span>
                         <span className="text-[1.6rem]font-semibold text-picton-blue-600"></span>
