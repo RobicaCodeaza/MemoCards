@@ -35,7 +35,6 @@ function DecksQuizesQuestions({
     const quizesData = recentQuizesAndCardsTested?.map((recent) => {
         return { x: recent.perfectionScore!.at(-1), y: recent.cards.length }
     })
-    console.log(decksData, quizesData)
 
     return (
         <div className="flex h-[30.5rem] flex-shrink flex-grow  flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 p-6 tab-land:w-1/2 tab-land:p-8">
