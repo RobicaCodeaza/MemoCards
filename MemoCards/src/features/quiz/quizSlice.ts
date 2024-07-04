@@ -368,7 +368,7 @@ export function finish() {
                 .from('Decks')
                 .select('*')
                 .in('id', decksEdited)
-            console.log('data', quiz.decksData)
+            // console.log('data', quiz.decksData)
             if (errorGettingDecksTested) {
                 throw new Error('Error getting data of the decks.')
             }
@@ -386,7 +386,7 @@ export function finish() {
                 const perfectionScore = el.perfectionScore
                     ? ([
                           ...el.perfectionScore,
-                          perfectionScoreToAdd,
+                          Number(perfectionScoreToAdd.toFixed(1)),
                       ] as number[])
                     : ([perfectionScoreToAdd] as number[])
 
