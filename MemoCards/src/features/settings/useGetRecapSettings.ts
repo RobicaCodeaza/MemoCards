@@ -22,7 +22,7 @@ export function useGetRecapSettings() {
         queryKey: ['settings'],
         onError: (err: Error) =>
             toast.error(
-                `${err.message}.Error getting the settings for your recap planning.`
+                `${err.message}.Make sure you set the Settings for your Recap Planning.`
             ),
     })
     const settingsRecapUser = settings
