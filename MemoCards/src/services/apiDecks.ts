@@ -1,6 +1,7 @@
 import supabase from './supabase'
 import { Tables } from '../types/database.types'
 import { PAGE_SIZE_DECKS } from '@/utils/constants'
+import { getToday } from '@/utils/helpers'
 
 export async function getDecks(userId: string) {
     const { data, error } = await supabase
@@ -128,4 +129,48 @@ export async function getDeckIdForCard(
     }
 
     return data?.[0].id
+}
+
+export async function getRecentDecksAndCards(
+    userId: string,
+    date: string | null
+) {
+    console.log('getting recent')
+    let query
+    if (!date) query = supabase.from('Decks').select('*').eq('user_id', userId)
+    else
+        query = supabase.rpc('filter_decks_by_last_tested', {
+            user_id: userId,
+            start_date: date,
+            end_date: getToday({ end: true }),
+        })
+
+    const { data: decks, error } = await query
+
+    if (error) {
+        // console.error(error)
+        throw new Error('Decks could not get loaded.')
+    }
+    const decksId = decks?.map((el) => el.id)
+
+    const { data: cards, error: errorGettingCards } = await supabase
+        .from('Card')
+        .select()
+        .in('deckId', decksId)
+
+    if (errorGettingCards ?? cards === null)
+        throw new Error(
+            'Cannot find coresponding data. Make sure you selected decks with cards.'
+        )
+
+    const data = decks.map((deck) => {
+        const cardsContainedByDeck = cards.filter(
+            (card) => card.deckId === deck.id
+        )
+
+        return { ...deck, cards: cardsContainedByDeck }
+    })
+
+    // console.log('recent data decks', data)
+    return data
 }

@@ -94,7 +94,11 @@ function FinishScreen() {
                             Perfection Score:{' '}
                         </span>
                         <span>
-                            {(quizPerfectionScore * 100) / questionsNum}/100
+                            {(
+                                (quizPerfectionScore * 100) /
+                                questionsNum
+                            ).toFixed(1)}
+                            /100
                         </span>
                         <span className="text-[1.6rem]font-semibold text-picton-blue-600"></span>
                     </div>

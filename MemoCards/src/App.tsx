@@ -51,7 +51,7 @@ function App() {
                                     }
                                 ></Route>
                                 <Route
-                                    index
+                                    // index
                                     path="dashboard"
                                     element={<Dashboard></Dashboard>}
                                 ></Route>
@@ -85,6 +85,7 @@ function App() {
                                     element={<Account></Account>}
                                 ></Route>
                             </Route>
+
                             <Route
                                 path="auth"
                                 element={<Authentication></Authentication>}

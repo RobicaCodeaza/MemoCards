@@ -17,8 +17,6 @@ function QuizMain() {
     const [searchParams] = useSearchParams()
     if (isLoading) return <Spinner></Spinner>
 
-    console.log('exam', examIn)
-
     if (!quizes?.length || !count)
         return (
             <>
@@ -69,7 +67,6 @@ function QuizMain() {
     const quizesWithTime = quizesSummary?.filter(
         (quiz) => quiz.completionTime !== null
     )
-    console.log(quizesWithTime)
     const averageTime = quizesWithTime?.reduce((acc, curr) => {
         return (acc + curr.completionTime!) / quizesWithTime.length
     }, 0)

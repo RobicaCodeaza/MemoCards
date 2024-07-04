@@ -85,6 +85,7 @@ export type Database = {
           questionTime: number | null
           quizName: string
           quizTime: number | null
+          toBeTested: string | null
           user_id: string
         }
         Insert: {
@@ -97,6 +98,7 @@ export type Database = {
           questionTime?: number | null
           quizName: string
           quizTime?: number | null
+          toBeTested?: string | null
           user_id: string
         }
         Update: {
@@ -109,6 +111,7 @@ export type Database = {
           questionTime?: number | null
           quizName?: string
           quizTime?: number | null
+          toBeTested?: string | null
           user_id?: string
         }
         Relationships: []
@@ -151,14 +154,44 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      append_completiondata_quiz: {
-        Args: {
-          row_id: number
-          new_perfection_score: number
-          new_last_tested: string
-        }
-        Returns: undefined
-      }
+      append_completiondata_quiz:
+        | {
+            Args: {
+              row_id: number
+              new_perfection_score: number
+              new_last_tested: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              row_id: number
+              new_perfection_score: number
+              new_last_tested: string
+              new_completion_time: number
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              row_id: number
+              new_perfection_score: number
+              new_last_tested: string
+              new_completion_time: number
+              new_to_be_tested: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              row_id: number
+              new_perfection_score: number
+              new_last_tested: string
+              new_completion_time: number
+              new_to_be_tested: string
+            }
+            Returns: undefined
+          }
       append_perfectionscore_quiz: {
         Args: {
           row_id: number
@@ -187,6 +220,93 @@ export type Database = {
               new_element: string
             }
             Returns: undefined
+          }
+      append_updateddata_quiz: {
+        Args: {
+          row_id: number
+          new_perfection_score: number
+          new_last_tested: string
+          new_completion_time: number
+          new_to_be_tested: string
+        }
+        Returns: undefined
+      }
+      filter_decks_by_last_tested: {
+        Args: {
+          user_id: string
+          start_date: string
+          end_date: string
+        }
+        Returns: {
+          chapter: string
+          id: number
+          lastTested: string[] | null
+          lesson: string
+          perfectionScore: number[] | null
+          subchapter: string
+          user_id: string
+        }[]
+      }
+      filter_quizes_by_last_tested: {
+        Args: {
+          user_id: string
+          start_date: string
+          end_date: string
+        }
+        Returns: {
+          completionTime: number | null
+          decksId: number[]
+          description: string | null
+          id: number
+          lastTested: string[] | null
+          perfectionScore: number[] | null
+          questionTime: number | null
+          quizName: string
+          quizTime: number | null
+          toBeTested: string | null
+          user_id: string
+        }[]
+      }
+      filter_quizzes_by_last_tested:
+        | {
+            Args: {
+              user_id: string
+              start_date: string
+              end_date: string
+            }
+            Returns: {
+              completionTime: number | null
+              decksId: number[]
+              description: string | null
+              id: number
+              lastTested: string[] | null
+              perfectionScore: number[] | null
+              questionTime: number | null
+              quizName: string
+              quizTime: number | null
+              toBeTested: string | null
+              user_id: string
+            }[]
+          }
+        | {
+            Args: {
+              user_id: string
+              start_date: string
+              end_date: string
+            }
+            Returns: {
+              completionTime: number | null
+              decksId: number[]
+              description: string | null
+              id: number
+              lastTested: string[] | null
+              perfectionScore: number[] | null
+              questionTime: number | null
+              quizName: string
+              quizTime: number | null
+              toBeTested: string | null
+              user_id: string
+            }[]
           }
     }
     Enums: {

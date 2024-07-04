@@ -101,6 +101,22 @@ export default {
         },
 
         extend: {
+            backgroundImage: {
+                'recap-gradient': 'linear-gradient(135deg, #ffe1e3, #ffc9cc)',
+            },
+            boxShadow: {
+                'custom-inset': 'inset 0 2px 4px 0 rgba(31, 38, 135, 0.37)',
+                'interior-glow':
+                    'inset 0 0 10px 5px rgba(255, 255, 255, 0.3), inset 0 0 20px 10px rgba(255, 255, 255, 0.2), inset 0 0 30px 15px rgba(255, 255, 255, 0.1)',
+                'colored-glow':
+                    '0 0 20px 0 rgba(67, 185, 105, 0.8), 0 0 40px 0 rgba(67, 185, 105, 0.6), 0 0 60px 0 rgba(67, 185, 105, 0.4), 0 0 80px 0 rgba(67, 185, 105, 0.2)',
+                'glow-1': '0 0 15px 5px rgba(251, 110, 119, 0.6)',
+                'inset-glow-1': 'inset 0 0 15px 5px rgba(251, 110, 119, 0.6)',
+            },
+            spacing: {
+                'half-minus-arrows': 'calc(50% - 20rem)',
+            },
+
             screens: {
                 phone: '37.5em',
                 'tab-port': '56.25em',

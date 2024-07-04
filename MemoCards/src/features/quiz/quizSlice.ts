@@ -3,6 +3,9 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import supabase from '../../services/supabase'
 import { RootState, store } from '@/services/store'
 import toast from 'react-hot-toast'
+import { fromThisDay, fromToday } from '@/utils/helpers'
+import { getRecapSettings } from '@/services/apiSettings'
+import { UserType } from '@/ui/ProtectedRoute'
 
 type quizStateType = {
     quizId: number
@@ -67,9 +70,9 @@ const quizSlice = createSlice({
                 quizId: number
             }>
         ) {
-            console.log(action.payload.decksData)
             state.status = 'ready'
             state.questions = action.payload.questions
+            state.isFlippingCard = false
             state.questionTime = action.payload.questionTime
             state.quizTime = action.payload.quizTime
             state.decksData = action.payload.decksData
@@ -85,7 +88,8 @@ const quizSlice = createSlice({
             state.secondsRemainingQuiz = state.quizTime
             state.answer = null
             state.revealAnswer = false
-            state.isFlippingCard = false
+            state.isFlippingCard =
+                state.questions[state.index].answers.length > 1 ? false : true
             state.index = 0
             state.answerTimeFinished = false
             state.perfectionScore = 0
@@ -304,37 +308,59 @@ export function finish() {
     ) {
         try {
             const { quiz } = getState()
-            console.log(quiz.decksData)
-            const newQuizCompletionTime = {
-                completionTime: quiz.completionTime,
-            }
 
-            //Updating Quiz Completion Time
-            const { error: errorUpdatingCompletionTime } = await supabase
-                .from('Quizes')
-                .update(newQuizCompletionTime)
-                .eq('id', quiz.quizId)
-                .select()
-                .single()
+            // Getting Settings For To Be Tested Time
+            const user = JSON.parse(localStorage.getItem('user')!) as UserType
+            const settings = await getRecapSettings(user.user_id)
 
-            if (errorUpdatingCompletionTime) {
-                throw new Error('Error updating completion time of the quiz.')
-            }
+            //The Perfection Score of the quiz
             const perfectionScoreTotal =
                 quiz.perfectionScore + quiz.questionPoints
-            //Updating Quiz Perfection Score
-            const { error: errorUpdatingPerfectionScore } = await supabase.rpc(
-                'append_completiondata_quiz',
+            const perfectionScoreQuiz = Number(
+                ((perfectionScoreTotal * 100) / quiz.questions.length).toFixed(
+                    1
+                )
+            )
+
+            //Getting Actual Score Interval for the Recap Interval
+            const score =
+                perfectionScoreQuiz <= 25
+                    ? '25'
+                    : perfectionScoreQuiz > 25 && perfectionScoreQuiz <= 50
+                      ? '50'
+                      : perfectionScoreQuiz > 50 && perfectionScoreQuiz <= 75
+                        ? '75'
+                        : perfectionScoreQuiz > 75 && perfectionScoreQuiz <= 100
+                          ? '100'
+                          : '0'
+
+            const typeOfRecap =
+                `recap_weekstime_p${score}` as keyof Tables<'Settings'>
+            const daysToBeTested = !Array.isArray(settings)
+                ? (settings?.[typeOfRecap] as number) * 7
+                : 7
+
+            //Setting The ToBeTested time based on perfectionScore
+            const toBeTested = fromThisDay(
+                daysToBeTested,
+                fromToday(0, 'yes'),
+                'endOfDay'
+            )
+
+            //Updating Quiz
+            const { error: errorUpdatingQuiz } = await supabase.rpc(
+                'append_updateddata_quiz',
                 {
                     row_id: quiz.quizId,
-                    new_perfection_score:
-                        (perfectionScoreTotal * 100) / quiz.questions.length,
-                    new_last_tested: new Date().toISOString(),
+                    new_perfection_score: perfectionScoreQuiz,
+                    new_last_tested: fromToday(0, 'yes'),
+                    new_to_be_tested: toBeTested,
+                    new_completion_time: quiz.completionTime,
                 }
             )
 
-            if (errorUpdatingPerfectionScore) {
-                throw new Error('Error updating Perfection Score of the quiz.')
+            if (errorUpdatingQuiz) {
+                throw new Error('Error updating Quiz Data.')
             }
 
             //Updating Decks Perfection Score
@@ -343,7 +369,7 @@ export function finish() {
                 .from('Decks')
                 .select('*')
                 .in('id', decksEdited)
-            console.log('data', quiz.decksData)
+            // console.log('data', quiz.decksData)
             if (errorGettingDecksTested) {
                 throw new Error('Error getting data of the decks.')
             }
@@ -353,17 +379,19 @@ export function finish() {
                     (deckData) => deckData.deckId === el.id
                 )
                 const perfectionScoreToAdd =
-                    (deckToAdd[0].perfectionScore.at(-1)! * 100) /
-                    deckToAdd[0].numQuestions
+                    deckToAdd[0].perfectionScore.at(-1) !== 0
+                        ? (deckToAdd[0].perfectionScore.at(-1)! * 100) /
+                          deckToAdd[0].numQuestions
+                        : 0
 
                 const perfectionScore = el.perfectionScore
                     ? ([
                           ...el.perfectionScore,
-                          perfectionScoreToAdd,
+                          Number(perfectionScoreToAdd.toFixed(1)),
                       ] as number[])
                     : ([perfectionScoreToAdd] as number[])
 
-                const dateToAdd = new Date().toISOString()
+                const dateToAdd = fromToday(0, 'yes')
                 const lastTested = el.lastTested
                     ? [...el.lastTested, dateToAdd]
                     : [dateToAdd]

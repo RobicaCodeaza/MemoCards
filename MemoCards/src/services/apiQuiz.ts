@@ -1,6 +1,7 @@
 import { Tables } from '@/types/database.types'
 import supabase from './supabase'
 import { PAGE_SIZE_QUIZES } from '@/utils/constants'
+import { getToday } from '@/utils/helpers'
 
 export async function createEditQuiz(
     newQuiz: Tables<'Quizes'>,
@@ -50,7 +51,22 @@ export async function getQuizesPaginated(userId: string, page: number) {
 
     const { data: quizes, error, count } = await query
 
-    if (error) throw new Error('Could not fetch the decks.')
+    if (error) throw new Error('Could not fetch the Quizes.')
+    return { quizes, count }
+}
+
+export async function getQuizesAll(userId: string) {
+    const {
+        data: quizes,
+        error,
+        count,
+    } = await supabase
+        .from('Quizes')
+        .select('*', { count: 'exact' })
+        .eq('user_id', userId)
+
+    if (error) throw new Error('Could not fetch the Quizes.')
+
     return { quizes, count }
 }
 
@@ -73,7 +89,6 @@ export async function getQuizesSummary(userId: string) {
 
     if (errorGettingExamDate) throw new Error('Could not fetch the exam date.')
     const dataExam = data[0]
-    console.log(dataExam)
 
     return { dataQuiz, dataExam, count }
 }
@@ -94,4 +109,58 @@ export async function deleteAllQuizes(userId: string) {
         .eq('user_id', userId)
 
     if (error) throw new Error(error.message)
+}
+export async function getQuizById(userId: string, quizId: number) {
+    const { data: quiz, error: errorGettingQuiz } = await supabase
+        .from('Quizes')
+        .select('*')
+        .eq('id', quizId)
+        .eq('user_id', userId)
+
+    if (errorGettingQuiz) throw new Error('Could not get the quiz by quizId.')
+
+    return quiz[0]
+}
+
+export async function getRecentQuizes(userId: string, date: string | null) {
+    let query
+    if (!date) query = supabase.from('Quizes').select('*').eq('user_id', userId)
+    else
+        query = supabase.rpc('filter_quizes_by_last_tested', {
+            user_id: userId,
+            start_date: date,
+            end_date: getToday({ end: true }),
+        })
+
+    const { data: quizes, error } = await query
+
+    if (error) {
+        // console.error(error)
+        throw new Error('Recent Quizes could not get loaded.')
+    }
+
+    const decksIdForEveryQuiz = quizes?.map((el) => el.decksId)
+    let decksId = decksIdForEveryQuiz.flat()
+    decksId = decksId.filter((el) => el !== -1)
+
+    const { data: cards, error: errorGettingCards } = await supabase
+        .from('Card')
+        .select()
+        .in('deckId', decksId)
+
+    if (errorGettingCards ?? cards === null)
+        throw new Error(
+            'Cannot find coresponding data. Make sure you have in your quiz some decks with cards.'
+        )
+
+    const data = quizes.map((quiz) => {
+        const cardsContainedByQuizes = cards.filter((card) =>
+            quiz.decksId.includes(card.deckId)
+        )
+
+        return { ...quiz, cards: cardsContainedByQuizes }
+    })
+
+    // console.log('recent data quizes', data)
+    return data
 }

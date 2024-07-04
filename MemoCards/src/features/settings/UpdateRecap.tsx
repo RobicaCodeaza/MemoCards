@@ -34,7 +34,7 @@ function UpdateRecap() {
     const { settingsRecapUser, isGettingSettings } = useGetRecapSettings()
     const { isUpdatingRecapSettings, updateRecapSettings } =
         useUpdateRecapSettings()
-
+    console.log('recap', settingsRecapUser)
     const [user, _] = useLocalStorageState<UserType>(
         { user_id: '', user_provider: '' },
         'user'
@@ -90,6 +90,7 @@ function UpdateRecap() {
                     disabled={isWorking}
                     id="recap_weekstime_p25"
                     placeholder={
+                        !Array.isArray(settingsRecapUser) &&
                         settingsRecapUser?.recap_weekstime_p25
                             ? String(settingsRecapUser?.recap_weekstime_p25)
                             : 'Enter a recap time for tests with score <= 25'
@@ -115,6 +116,7 @@ function UpdateRecap() {
                     disabled={isWorking}
                     id="recap_weekstime_p50"
                     placeholder={
+                        !Array.isArray(settingsRecapUser) &&
                         settingsRecapUser?.recap_weekstime_p50
                             ? String(settingsRecapUser?.recap_weekstime_p50)
                             : 'Enter a recap time for tests with score <= 50'
@@ -140,6 +142,7 @@ function UpdateRecap() {
                     disabled={isWorking}
                     id="recap_weekstime_p75"
                     placeholder={
+                        !Array.isArray(settingsRecapUser) &&
                         settingsRecapUser?.recap_weekstime_p75
                             ? String(settingsRecapUser?.recap_weekstime_p75)
                             : 'Enter a recap time for tests with score <= 75'
@@ -165,6 +168,7 @@ function UpdateRecap() {
                     disabled={isWorking}
                     id="recap_weekstime_p100"
                     placeholder={
+                        !Array.isArray(settingsRecapUser) &&
                         settingsRecapUser?.recap_weekstime_p100
                             ? String(settingsRecapUser?.recap_weekstime_p100)
                             : 'Enter a recap time for tests with score <= 100'
@@ -191,6 +195,7 @@ function UpdateRecap() {
                     disabled={isWorking}
                     id="future_exam_in_days"
                     placeholder={
+                        !Array.isArray(settingsRecapUser) &&
                         settingsRecapUser?.future_exam_in_days
                             ? String(settingsRecapUser?.future_exam_in_days)
                             : 'Enter future exam days remaining.'
@@ -212,7 +217,10 @@ function UpdateRecap() {
                     min="0"
                     max="100"
                     defaultValue={
-                        settingsRecapUser?.target_perfection_score ?? 50
+                        !Array.isArray(settingsRecapUser) &&
+                        settingsRecapUser?.target_perfection_score
+                            ? settingsRecapUser?.target_perfection_score
+                            : 50
                     }
                     disabled={isWorking}
                     id="target_perfection_score"
