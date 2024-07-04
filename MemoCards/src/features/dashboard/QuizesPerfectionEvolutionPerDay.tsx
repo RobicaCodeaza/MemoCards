@@ -6,18 +6,18 @@ import {
 } from '@/components/ui/carousel'
 import { Tables } from '@/types/database.types'
 import Button from '@/ui/Button'
-import DecksPerfectionEvolutionCard from './DecksPerfectionEvolutionCard'
-type DecksPerfectionEvolutionProps = {
-    recentDecksAndCardsTested:
-        | (Tables<'Decks'> & { cards: Tables<'Card'>[] })[]
+import QuizesPerfectionEvolutionCard from './QuizesPerfectionEvolution/QuizesPerfectionEvolutionCard'
+export type QuizesPerfectionEvolutionProps = {
+    recentQuizesAndCardsTested:
+        | (Tables<'Quizes'> & { cards: Tables<'Card'>[] })[]
         | undefined
 }
 
-function DecksPerfectionEvolution({
-    recentDecksAndCardsTested,
-}: DecksPerfectionEvolutionProps) {
-    const decksPerfectionEvolution = recentDecksAndCardsTested?.map((el) => {
-        const deckEvolution = el.lastTested!.map((lastTestedDate, index) => {
+function QuizesPerfectionEvolutionPerDay({
+    recentQuizesAndCardsTested,
+}: QuizesPerfectionEvolutionProps) {
+    const quizPerfectionEvolution = recentQuizesAndCardsTested?.map((el) => {
+        const quizEvolution = el.lastTested!.map((lastTestedDate, index) => {
             return {
                 label: new Intl.DateTimeFormat(navigator.language, {
                     day: 'numeric',
@@ -27,32 +27,32 @@ function DecksPerfectionEvolution({
                 perfectionScore: el.perfectionScore![index],
             }
         })
-        // deckEvolution.reverse()
 
         const arrayWithoutDuplicates = new Map(
-            deckEvolution.map((el) => [el.label, el.perfectionScore])
+            quizEvolution.map((el) => [el.label, el.perfectionScore])
         )
-        const deckEvolutionPerDay = Array.from(arrayWithoutDuplicates).map(
+        const quizEvolutionPerDay = Array.from(arrayWithoutDuplicates).map(
             (el) => {
                 return { label: el[0], perfectionScore: el[1] }
             }
         )
 
         return {
-            deckName: el.lesson,
-            deckEvolution: deckEvolutionPerDay,
+            quizName: el.quizName,
+            quizEvolution: quizEvolutionPerDay,
         }
     })
 
     return (
-        <div className="flex-shrink flex-grow px-6  phone:px-12  phone:py-2 tab-land:px-6">
+        <div className="flex-shrink flex-grow px-6  phone:px-12  phone:py-2 tab-land:w-half-minus-arrows tab-land:px-6">
             <Carousel className="h-full">
                 <CarouselContent className="perspective--big h-full p-2">
-                    {decksPerfectionEvolution?.map((data) => (
-                        <DecksPerfectionEvolutionCard
-                            key={data.deckName}
+                    {quizPerfectionEvolution?.map((data) => (
+                        <QuizesPerfectionEvolutionCard
+                            key={data.quizName}
                             data={data}
-                        ></DecksPerfectionEvolutionCard>
+                            typeOfEvolution="per day"
+                        ></QuizesPerfectionEvolutionCard>
                     ))}
                 </CarouselContent>
                 <CarouselPrevious className="text-center">
@@ -70,4 +70,4 @@ function DecksPerfectionEvolution({
     )
 }
 
-export default DecksPerfectionEvolution
+export default QuizesPerfectionEvolutionPerDay

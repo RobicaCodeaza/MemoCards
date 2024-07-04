@@ -10,7 +10,11 @@ import { useRecentQuizes } from '../quiz/useRecentQuizes'
 import { useRecentDecksAndCards } from '../decks/useRecentDecksAndCards'
 import Heading from '@/ui/Heading'
 import DecksQuizesQuestions from './DecksQuizesQuestions'
-import DecksPerfectionEvolution from './DecksPerfectionEvolution'
+import DecksPerfectionEvolution from './DecksPerfectionEvolutionPerDay'
+import DecksPerfectionEvolutionPerDay from './DecksPerfectionEvolutionPerDay'
+import DecksPerfectionEvolutionAll from './DecksPerfectionEvolutionAll'
+import QuizesPerfectionEvolutionPerDay from './QuizesPerfectionEvolutionPerDay'
+import QuizesPerfectionEvolutionAll from './QuizesPerfectionEvolutionAll'
 
 function DasboardLayout() {
     const navigate = useNavigate()
@@ -120,10 +124,21 @@ function DasboardLayout() {
 
             <div className="flex flex-col gap-14">
                 <Heading as="h4">Decks & Quizes - Individual Evolution</Heading>
-                <div className="tab-land:px-32">
-                    <DecksPerfectionEvolution
+                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                    <DecksPerfectionEvolutionPerDay
                         recentDecksAndCardsTested={recentDecksAndCardsTested}
-                    ></DecksPerfectionEvolution>
+                    ></DecksPerfectionEvolutionPerDay>
+                    <DecksPerfectionEvolutionAll
+                        recentDecksAndCardsTested={recentDecksAndCardsTested}
+                    ></DecksPerfectionEvolutionAll>
+                </div>
+                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                    <QuizesPerfectionEvolutionPerDay
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                    ></QuizesPerfectionEvolutionPerDay>
+                    <QuizesPerfectionEvolutionAll
+                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
+                    ></QuizesPerfectionEvolutionAll>
                 </div>
             </div>
         </div>
