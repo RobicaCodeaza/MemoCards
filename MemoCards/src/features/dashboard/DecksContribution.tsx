@@ -72,7 +72,7 @@ function DecksContribution({
                     pointsPerQuestionQuiz
 
                 return {
-                    value: pointsDeckInQuiz,
+                    value: Number(pointsDeckInQuiz.toFixed(1)),
                     name: `Lesson: ${deckOfQuiz.lesson.toUpperCase()}`,
                     color: findColor(deckOfQuiz.perfectionScore!.at(-1)!),
                 }
