@@ -11,39 +11,49 @@ import {
     YAxis,
 } from 'recharts'
 
-type DecksPerfectionEvolutionCardProps = {
+type QuizesPerfectionEvolutionCardProps = {
     data: {
-        deckName: string
-        deckEvolution: {
+        quizName: string
+        quizEvolution: {
             label: string
             perfectionScore: number
         }[]
     }
+    typeOfEvolution: 'per day' | 'all'
 }
 
-function DecksPerfectionEvolutionCard({
+function QuizesPerfectionEvolutionCard({
     data,
-}: DecksPerfectionEvolutionCardProps) {
+    typeOfEvolution,
+}: QuizesPerfectionEvolutionCardProps) {
     const mediaPhone = useMediaQueryResize(phone)
     const fontSizeAxis = mediaPhone ? '1.2rem' : '1.4rem'
     const fontSizeLabel = mediaPhone ? '1.4rem' : '1.5rem'
     // const fontSizeLegend = mediaPhone ? '1.5rem' : '1.6rem'
-    console.log(data)
+    console.log('data', data)
     const marginRightChart = mediaPhone ? 10 : 25
     const marginLeftChart = mediaPhone ? -2 : 5
+    const areaColors = {
+        stroke: typeOfEvolution === 'per day' ? '#ee5c08' : '#fe902d',
+        fill: typeOfEvolution === 'per day' ? '#ffd9a9' : '#ffeed4',
+    }
 
     return (
         <CarouselItem className=" flex h-[37.5rem] flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300   phone:px-12 phone:py-12">
             <div className="h-full w-full">
                 <p className="text-[1.4rem] text-mako-grey-500">
-                    Deck Evolution Lesson:{' '}
+                    Quiz Evolution/
+                    <strong className="tracking-wider">
+                        {typeOfEvolution}
+                    </strong>
+                    :{' '}
                     <span className="text-[1.4rem] font-medium uppercase tracking-wide text-picton-blue-700">
-                        {data.deckName}
+                        {data.quizName}
                     </span>
                 </p>
                 <ResponsiveContainer height="100%" width="100%">
                     <AreaChart
-                        data={data.deckEvolution}
+                        data={data.quizEvolution}
                         margin={{
                             top: 25,
                             right: marginRightChart,
@@ -115,9 +125,9 @@ function DecksPerfectionEvolutionCard({
                         <Area
                             dataKey="perfectionScore"
                             type="monotone"
-                            stroke={'#0881c1'}
-                            fill={'#bce5fb'}
-                            strokeWidth="3"
+                            stroke={areaColors.stroke}
+                            fill={areaColors.fill}
+                            strokeWidth="2"
                             name="Perfection Score"
                             unit="p"
                         ></Area>
@@ -137,4 +147,4 @@ function DecksPerfectionEvolutionCard({
     )
 }
 
-export default DecksPerfectionEvolutionCard
+export default QuizesPerfectionEvolutionCard
