@@ -10,11 +10,11 @@ import { useRecentQuizes } from '../quiz/useRecentQuizes'
 import { useRecentDecksAndCards } from '../decks/useRecentDecksAndCards'
 import Heading from '@/ui/Heading'
 import DecksQuizesQuestions from './DecksQuizesQuestions'
-import DecksPerfectionEvolution from './DecksPerfectionEvolutionPerDay'
 import DecksPerfectionEvolutionPerDay from './DecksPerfectionEvolutionPerDay'
 import DecksPerfectionEvolutionAll from './DecksPerfectionEvolutionAll'
 import QuizesPerfectionEvolutionPerDay from './QuizesPerfectionEvolutionPerDay'
 import QuizesPerfectionEvolutionAll from './QuizesPerfectionEvolutionAll'
+import { motion } from 'framer-motion'
 
 function DasboardLayout() {
     const navigate = useNavigate()
@@ -39,51 +39,72 @@ function DasboardLayout() {
         (!settingsRecapUser || !areRecapWeeksDefined)
     )
         return (
-            <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
-                <Empty resource="Tested Quizes && Settings"></Empty>
-                <Button
-                    variation="simpleSecondary"
-                    size="small"
-                    onClick={() => navigate('/quiz')}
-                >
-                    Take Quiz
-                </Button>
-                <Button
-                    variation="simpleSecondary"
-                    size="small"
-                    onClick={() => navigate('/settings')}
-                >
-                    Set Recap Plan
-                </Button>
-            </div>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
+            >
+                <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
+                    <Empty resource="Tested Quizes && Settings"></Empty>
+                    <Button
+                        variation="simpleSecondary"
+                        size="small"
+                        onClick={() => navigate('/quiz')}
+                    >
+                        Take Quiz
+                    </Button>
+                    <Button
+                        variation="simpleSecondary"
+                        size="small"
+                        onClick={() => navigate('/settings')}
+                    >
+                        Set Recap Plan
+                    </Button>
+                </div>
+            </motion.div>
         )
 
     if (!recentQuizes || recentQuizes.length === 0)
         return (
-            <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
-                <Empty resource="Tested Quizes"></Empty>
-                <Button
-                    variation="simpleSecondary"
-                    size="small"
-                    onClick={() => navigate('/quiz')}
-                >
-                    Take Quiz
-                </Button>
-            </div>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
+            >
+                <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
+                    <Empty resource="Tested Quizes"></Empty>
+                    <Button
+                        variation="simpleSecondary"
+                        size="small"
+                        onClick={() => navigate('/quiz')}
+                    >
+                        Take Quiz
+                    </Button>
+                </div>
+            </motion.div>
         )
 
     if (!settingsRecapUser || !areRecapWeeksDefined)
         return (
-            <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
-                <Empty resource="Settings"></Empty>
-                <Button
-                    variation="simpleSecondary"
-                    size="small"
-                    onClick={() => navigate('/settings')}
-                >
-                    Set Recap Plan
-                </Button>
-            </div>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
+            >
+                <div className="flex w-full items-center justify-center gap-6 text-mako-grey-600">
+                    <Empty resource="Settings"></Empty>
+                    <Button
+                        variation="simpleSecondary"
+                        size="small"
+                        onClick={() => navigate('/settings')}
+                    >
+                        Set Recap Plan
+                    </Button>
+                </div>
+            </motion.div>
         )
 
     const recentQuizesAndCardsTested = recentQuizes?.filter(
@@ -96,52 +117,97 @@ function DasboardLayout() {
     return (
         // <div className="grid w-full grid-cols-[1fr_1fr] grid-rows-[min-content_auto] gap-20">
         <div className="flex w-full  flex-col gap-24">
-            <div className="flex flex-col gap-14">
-                <Heading as="h4">Recap Plan & Overall Stats</Heading>
-                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
-                    <RecapPlan
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                    ></RecapPlan>
-                    <OverallStats
-                        recentDecksAndCardsTested={recentDecksAndCardsTested}
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                    ></OverallStats>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
+            >
+                <div className="flex flex-col gap-14">
+                    <Heading as="h4">Recap Plan & Overall Stats</Heading>
+                    <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                        <RecapPlan
+                            recentQuizesAndCardsTested={
+                                recentQuizesAndCardsTested
+                            }
+                        ></RecapPlan>
+                        <OverallStats
+                            recentDecksAndCardsTested={
+                                recentDecksAndCardsTested
+                            }
+                            recentQuizesAndCardsTested={
+                                recentQuizesAndCardsTested
+                            }
+                        ></OverallStats>
+                    </div>
                 </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col gap-14">
-                <Heading as="h4">Decks & Quizes - Combined Data</Heading>
-                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
-                    <DecksQuizesQuestions
-                        recentDecksAndCardsTested={recentDecksAndCardsTested}
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                    ></DecksQuizesQuestions>
-                    <DecksContribution
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                        recentDecksAndCardsTested={recentDecksAndCardsTested}
-                    ></DecksContribution>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
+            >
+                <div className="flex flex-col gap-14">
+                    <Heading as="h4">Decks & Quizes - Combined Data</Heading>
+                    <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                        <DecksQuizesQuestions
+                            recentDecksAndCardsTested={
+                                recentDecksAndCardsTested
+                            }
+                            recentQuizesAndCardsTested={
+                                recentQuizesAndCardsTested
+                            }
+                        ></DecksQuizesQuestions>
+                        <DecksContribution
+                            recentQuizesAndCardsTested={
+                                recentQuizesAndCardsTested
+                            }
+                            recentDecksAndCardsTested={
+                                recentDecksAndCardsTested
+                            }
+                        ></DecksContribution>
+                    </div>
                 </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col gap-14">
-                <Heading as="h4">Decks & Quizes - Individual Evolution</Heading>
-                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
-                    <DecksPerfectionEvolutionPerDay
-                        recentDecksAndCardsTested={recentDecksAndCardsTested}
-                    ></DecksPerfectionEvolutionPerDay>
-                    <DecksPerfectionEvolutionAll
-                        recentDecksAndCardsTested={recentDecksAndCardsTested}
-                    ></DecksPerfectionEvolutionAll>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.2, y: -50 }}
+                transition={{ duration: 0.3 }}
+            >
+                <div className="flex flex-col gap-14">
+                    <Heading as="h4">
+                        Decks & Quizes - Individual Evolution
+                    </Heading>
+                    <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                        <DecksPerfectionEvolutionPerDay
+                            recentDecksAndCardsTested={
+                                recentDecksAndCardsTested
+                            }
+                        ></DecksPerfectionEvolutionPerDay>
+                        <DecksPerfectionEvolutionAll
+                            recentDecksAndCardsTested={
+                                recentDecksAndCardsTested
+                            }
+                        ></DecksPerfectionEvolutionAll>
+                    </div>
+                    <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
+                        <QuizesPerfectionEvolutionPerDay
+                            recentQuizesAndCardsTested={
+                                recentQuizesAndCardsTested
+                            }
+                        ></QuizesPerfectionEvolutionPerDay>
+                        <QuizesPerfectionEvolutionAll
+                            recentQuizesAndCardsTested={
+                                recentQuizesAndCardsTested
+                            }
+                        ></QuizesPerfectionEvolutionAll>
+                    </div>
                 </div>
-                <div className="flex flex-col gap-12 tab-land:flex-row tab-land:items-center tab-land:gap-20">
-                    <QuizesPerfectionEvolutionPerDay
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                    ></QuizesPerfectionEvolutionPerDay>
-                    <QuizesPerfectionEvolutionAll
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                    ></QuizesPerfectionEvolutionAll>
-                </div>
-            </div>
+            </motion.div>
         </div>
     )
 }
