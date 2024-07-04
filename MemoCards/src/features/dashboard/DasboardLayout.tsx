@@ -25,6 +25,7 @@ function DasboardLayout() {
 
     const { settingsRecapUser } = useGetRecapSettings()
     const areRecapWeeksDefined =
+        !Array.isArray(settingsRecapUser) &&
         settingsRecapUser?.recap_weekstime_p25 &&
         settingsRecapUser?.recap_weekstime_p50 &&
         settingsRecapUser?.recap_weekstime_p75 &&
