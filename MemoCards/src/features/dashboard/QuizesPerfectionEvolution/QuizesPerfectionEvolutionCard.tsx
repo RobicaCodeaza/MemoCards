@@ -30,7 +30,6 @@ function QuizesPerfectionEvolutionCard({
     const fontSizeAxis = mediaPhone ? '1.2rem' : '1.4rem'
     const fontSizeLabel = mediaPhone ? '1.4rem' : '1.5rem'
     // const fontSizeLegend = mediaPhone ? '1.5rem' : '1.6rem'
-    console.log('data', data)
     const marginRightChart = mediaPhone ? 10 : 25
     const marginLeftChart = mediaPhone ? -2 : 5
     const areaColors = {
