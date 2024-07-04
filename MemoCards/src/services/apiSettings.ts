@@ -1,4 +1,4 @@
-import { fromThisDay, fromToday } from '@/utils/helpers'
+import { fromThisDay } from '@/utils/helpers'
 import supabase from './supabase'
 import { SettingsType } from '@/features/settings/UpdateRecap'
 import { Tables } from '@/types/database.types'
@@ -74,8 +74,10 @@ export async function updateRecapSettings(
     })
     if (!quizesUpdated || quizesUpdated.length === 0) return
 
-    const { data: dataUpdated, error: errorUpdatingCompletionTime } =
-        await supabase.from('Quizes').upsert(quizesUpdated).select('*')
+    const { error: errorUpdatingCompletionTime } = await supabase
+        .from('Quizes')
+        .upsert(quizesUpdated)
+        .select('*')
 
     if (errorUpdatingCompletionTime)
         throw new Error(

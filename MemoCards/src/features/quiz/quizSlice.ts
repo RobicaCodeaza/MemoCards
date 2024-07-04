@@ -6,7 +6,6 @@ import toast from 'react-hot-toast'
 import { fromThisDay, fromToday } from '@/utils/helpers'
 import { getRecapSettings } from '@/services/apiSettings'
 import { UserType } from '@/ui/ProtectedRoute'
-import { getQuizById, updateQuizesRecapPlan } from '@/services/apiQuiz'
 
 type quizStateType = {
     quizId: number
@@ -337,7 +336,9 @@ export function finish() {
 
             const typeOfRecap =
                 `recap_weekstime_p${score}` as keyof Tables<'Settings'>
-            const daysToBeTested = (settings?.[typeOfRecap] as number) * 7
+            const daysToBeTested = !Array.isArray(settings)
+                ? (settings?.[typeOfRecap] as number) * 7
+                : 7
 
             //Setting The ToBeTested time based on perfectionScore
             const toBeTested = fromThisDay(

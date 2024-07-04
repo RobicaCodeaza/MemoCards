@@ -1,8 +1,7 @@
 import { Tables } from '@/types/database.types'
 import supabase from './supabase'
 import { PAGE_SIZE_QUIZES } from '@/utils/constants'
-import { fromThisDay, getToday } from '@/utils/helpers'
-import toast from 'react-hot-toast'
+import { getToday } from '@/utils/helpers'
 
 export async function createEditQuiz(
     newQuiz: Tables<'Quizes'>,

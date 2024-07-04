@@ -1,7 +1,6 @@
 import ButtonIcon from '@/ui/ButtonIcon'
 import Modal from '@/ui/Modal'
 import { PiInfoThin } from 'react-icons/pi'
-import { IoStatsChartOutline } from 'react-icons/io5'
 import { PiPuzzlePieceThin } from 'react-icons/pi'
 import { PiStackThin } from 'react-icons/pi'
 import { PiStackSimpleThin } from 'react-icons/pi'
