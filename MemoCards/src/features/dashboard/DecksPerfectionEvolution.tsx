@@ -27,6 +27,14 @@ function DecksPerfectionEvolution({
                 perfectionScore: el.perfectionScore![index],
             }
         })
+        deckEvolution.reverse()
+
+        const arrayWithoutDuplicates = new Map(
+            deckEvolution.map((el) => [el.label, el.perfectionScore])
+        )
+        const deckEvolutionPerDay = Object.fromEntries(arrayWithoutDuplicates)
+
+        console.log('deckEvolution', deckEvolutionPerDay)
 
         return {
             deckName: el.lesson,

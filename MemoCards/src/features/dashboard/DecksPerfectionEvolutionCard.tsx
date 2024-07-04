@@ -27,10 +27,11 @@ function DecksPerfectionEvolutionCard({
     const mediaPhone = useMediaQueryResize(phone)
     const fontSizeAxis = mediaPhone ? '1.2rem' : '1.4rem'
     const fontSizeLabel = mediaPhone ? '1.4rem' : '1.5rem'
-    const fontSizeLegend = mediaPhone ? '1.5rem' : '1.6rem'
+    // const fontSizeLegend = mediaPhone ? '1.5rem' : '1.6rem'
     console.log(data)
     const marginRightChart = mediaPhone ? 10 : 25
     const marginLeftChart = mediaPhone ? -2 : 5
+
     return (
         <CarouselItem className=" flex h-[37.5rem] flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300   phone:px-12 phone:py-12">
             <div className="h-full w-full">
@@ -110,6 +111,7 @@ function DecksPerfectionEvolutionCard({
                                 backgroundColor: '#08679c',
                             }}
                         />
+
                         <Area
                             dataKey="perfectionScore"
                             type="monotone"
