@@ -20,8 +20,9 @@ function Authentication() {
                     Take a look at the next flashcards app
                 </p>
                 <Button
+                    otherClasses="w-full"
                     variation="accentPrimary"
-                    size="medium"
+                    size="large"
                     onClick={() => loginDemo()}
                 >
                     Login With Demo Account
