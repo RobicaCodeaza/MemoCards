@@ -88,9 +88,9 @@ const quizSlice = createSlice({
             state.secondsRemainingQuiz = state.quizTime
             state.answer = null
             state.revealAnswer = false
+            state.index = 0
             state.isFlippingCard =
                 state.questions[state.index].answers.length > 1 ? false : true
-            state.index = 0
             state.answerTimeFinished = false
             state.perfectionScore = 0
             state.completionTime = state.quizTime ? state.quizTime : 0
@@ -103,7 +103,6 @@ const quizSlice = createSlice({
             }>
         ) {
             const question = state.questions.at(state.index) as Tables<'Card'>
-            console.log('newAnswer', action.payload)
 
             if (action.payload.type === 'normalQuestion') {
                 const pointsToBeAdded =
@@ -182,8 +181,10 @@ const quizSlice = createSlice({
                     numQuestions: 0,
                 }
             })
-            console.log('deckReset', decksData)
             state.decksData = decksData
+            state.index = 0
+            state.isFlippingCard =
+                state.questions[state.index].answers.length > 1 ? false : true
         },
         reset(state) {
             state.status = 'notTesting'

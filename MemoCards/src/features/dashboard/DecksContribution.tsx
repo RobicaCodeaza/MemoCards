@@ -59,14 +59,24 @@ function DecksContribution({
             const deckOfQuiz = recentDecksAndCardsTested?.filter(
                 (recent) => recent.id === id
             )?.[0]
+            const pointsPerQuestionDeck =
+                deckOfQuiz && deckOfQuiz.cards
+                    ? 100 / deckOfQuiz.cards.length
+                    : 0
+            const pointsPerQuestionQuiz = 100 / el.cards.length
 
-            if (deckOfQuiz)
+            if (deckOfQuiz) {
+                const pointsDeckInQuiz: number =
+                    (deckOfQuiz.perfectionScore!.at(-1)! /
+                        pointsPerQuestionDeck) *
+                    pointsPerQuestionQuiz
+
                 return {
-                    value: deckOfQuiz.perfectionScore!.at(-1)!,
+                    value: pointsDeckInQuiz,
                     name: `Lesson: ${deckOfQuiz.lesson.toUpperCase()}`,
                     color: findColor(deckOfQuiz.perfectionScore!.at(-1)!),
                 }
-            else return { value: -1, name: '', color: '' }
+            } else return { value: -1, name: '', color: '' }
         })
         deckContribution = deckContribution.filter((el) => el.value !== -1)
 
@@ -80,7 +90,7 @@ function DecksContribution({
                 name: 'Incorrect Answers',
                 color: '#656d75',
             })
-
+        console.log(deckContribution)
         decksContribution.push({
             quizName: `${el.quizName}`,
             deckContribution,
