@@ -80,7 +80,7 @@ function DecksContribution({
                 name: 'Incorrect Answers',
                 color: '#656d75',
             })
-
+        console.log(deckContribution)
         decksContribution.push({
             quizName: `${el.quizName}`,
             deckContribution,
