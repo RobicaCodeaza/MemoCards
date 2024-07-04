@@ -120,14 +120,10 @@ function DasboardLayout() {
 
             <div className="flex flex-col gap-14">
                 <Heading as="h4">Decks & Quizes - Individual Evolution</Heading>
-                <div className="flex flex-col gap-20 tab-land:flex-row">
+                <div className="tab-land:px-32">
                     <DecksPerfectionEvolution
                         recentDecksAndCardsTested={recentDecksAndCardsTested}
                     ></DecksPerfectionEvolution>
-                    <DecksContribution
-                        recentQuizesAndCardsTested={recentQuizesAndCardsTested}
-                        recentDecksAndCardsTested={recentDecksAndCardsTested}
-                    ></DecksContribution>
                 </div>
             </div>
         </div>

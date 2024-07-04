@@ -25,7 +25,7 @@ function DecksContributionCard({ data }: DeckContributionCardProps) {
     const legendLayout = mediaTabLand ? 'horizontal' : 'vertical'
 
     return (
-        <CarouselItem className=" flex h-[30rem] flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:h-[25rem] phone:px-6 phone:py-6 tab-land:h-[30rem] tab-land:px-8 tab-land:py-8">
+        <CarouselItem className="  flex h-[30rem] w-1/2 flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:px-6 phone:py-6  tab-land:px-4 tab-land:py-4 particular-small-laptop:px-8 particular-small-laptop:py-8">
             <div className="h-full w-full">
                 <p className="text-[1.4rem] text-mako-grey-500">
                     Decks Contribution:{' '}
@@ -33,7 +33,7 @@ function DecksContributionCard({ data }: DeckContributionCardProps) {
                         {data.quizName}
                     </span>
                 </p>
-                <ResponsiveContainer width={'100%'}>
+                <ResponsiveContainer width={'100%'} height={'100%'}>
                     <PieChart
                         margin={{
                             top: 100,
