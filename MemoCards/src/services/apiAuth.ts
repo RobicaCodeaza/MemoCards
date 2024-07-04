@@ -73,3 +73,13 @@ export async function updateUser(updateData: UpdateData) {
 
     return updatedUser?.user
 }
+
+export async function loginDemo() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: 'stoicarobert38@yahoo.com',
+        password: 'RestInPeace22',
+    })
+    if (error) throw new Error('Could not login with the demo account')
+
+    return data
+}
