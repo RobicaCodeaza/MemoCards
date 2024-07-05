@@ -114,7 +114,7 @@ export default {
                 'inset-glow-1': 'inset 0 0 15px 5px rgba(251, 110, 119, 0.6)',
             },
             spacing: {
-                'half-minus-arrows': 'calc(50% - 20rem)',
+                'half-minus-arrows': 'calc(50% - 2.5rem)',
             },
 
             screens: {

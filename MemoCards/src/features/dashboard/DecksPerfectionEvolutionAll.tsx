@@ -40,9 +40,9 @@ function DecksPerfectionEvolutionAll({
     })
 
     return (
-        <div className="flex-shrink flex-grow px-6  phone:px-12  phone:py-2 tab-land:w-1/2  tab-land:px-6">
+        <div className=" px-6  phone:px-12  phone:py-2  tab-land:w-half-minus-arrows  tab-land:px-6 ">
             <Carousel className="h-full w-full">
-                <CarouselContent className="perspective--big h-full p-2">
+                <CarouselContent className="perspective--big h-full w-full p-2">
                     {decksPerfectionEvolution?.map((data) => (
                         <DecksPerfectionEvolutionCard
                             key={data.deckName}

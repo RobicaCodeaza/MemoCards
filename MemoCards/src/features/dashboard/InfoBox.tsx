@@ -16,7 +16,7 @@ function InfoBox() {
                     <PiInfoThin></PiInfoThin>
                 </ButtonIcon>
             </Modal.Open>
-            <Modal.Window name="info">
+            <Modal.Window animation="no" name="info">
                 <div
                     className="flex w-[90vw] flex-col rounded-lg border border-mako-grey-200 px-14 py-10 text-mako-grey-600
               phone:max-w-[75vw]  tab-port:max-w-[60vw] tab-land:max-w-[45vw] particular-small-laptop:max-w-[30vw]"

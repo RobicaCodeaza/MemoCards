@@ -56,58 +56,49 @@ function OverallStats({
     ).toFixed(2)
 
     return (
-        <div className="flex-shrink flex-grow  tab-land:w-1/2">
-            <table className="h-[25rem] w-full  min-w-max border-collapse   tab-land:h-full ">
+        <div className="flex-shrink flex-grow tab-land:w-half-minus-arrows ">
+            <table className="h-[25rem] w-full border-collapse   tab-land:h-full ">
                 <thead>
                     <tr className="bg-chateau-green-400 text-[1.5rem] text-mako-grey-50">
-                        <th className=" w-[33.33%] border-r-2 px-2 py-2 phone:px-6 phone:py-3 ">
+                        <th className=" w-[33.33%] border-r-2 px-2 py-2 phone:px-4 phone:py-3 tab-land:px-5 particular-small-laptop:px-6">
                             Stats
                         </th>
-                        <th className=" w-[33.33%] border-r-2 px-2 py-2 phone:px-6 phone:py-3">
+                        <th className=" w-[33.33%] border-r-2 px-2 py-2 phone:px-4 phone:py-3 tab-land:px-5 particular-small-laptop:px-6">
                             Decks
                         </th>
-                        <th className="w-[33.34%] px-2 py-2 phone:px-6 phone:py-3 ">
+                        <th className="w-[33.34%] px-2 py-2 phone:px-4 phone:py-3  tab-land:px-5 particular-small-laptop:px-6">
                             Quizes
                         </th>
                     </tr>
                 </thead>
                 <tbody className="">
                     <tr className="bg-picton-blue-150">
-                        <th className="border-r-2 border-mako-grey-100 px-6  py-3  text-[1.4rem] text-mako-grey-700 ">
+                        <th className="border-r-2 border-mako-grey-100   px-2 py-2  text-[1.4rem] text-mako-grey-700 phone:px-4 phone:py-3  tab-land:px-5 particular-small-laptop:px-6">
                             Total
                         </th>
-                        <td className="border-r-2 border-mako-grey-100 px-2 py-2 text-center phone:px-6 phone:py-3">
+                        <td className="border-r-2 border-mako-grey-100 px-2 py-2 text-center phone:px-4 phone:py-3  tab-land:px-5 particular-small-laptop:px-6">
                             {totalDecks}
                         </td>
-                        <td className="px-2 py-2 text-center phone:px-6 phone:py-3">
+                        <td className="px-2 py-2   text-center phone:px-4  phone:py-3  tab-land:px-5 particular-small-laptop:px-6">
                             {totalQuizes}
                         </td>
                     </tr>
                     <tr className="bg-picton-blue-200">
-                        <th className="border-r-2 border-mako-grey-100 px-6  py-3   text-[1.4rem] text-mako-grey-700">
+                        <th className="border-r-2 border-mako-grey-100 px-2  py-2  text-center text-[1.4rem] text-mako-grey-700  phone:px-4 phone:py-3  tab-land:px-5 particular-small-laptop:px-6">
                             Avg Points
                         </th>
-                        <td
-                            className="border-r-2 border-mako-grey-100    px-6
-                            py-3 text-center"
-                        >
+                        <td className="particular-small-laptop:px-6text-center border-r-2   border-mako-grey-100 px-2 py-2 text-center phone:px-4  phone:py-3 tab-land:px-5">
                             {averagePointsDecks}/100
                         </td>
-                        <td
-                            className="px-6
-                            py-3 text-center"
-                        >
+                        <td className="px-2 py-2 text-center  phone:px-4  phone:py-3 tab-land:px-5 particular-small-laptop:px-6">
                             {averagePointsQuizes}/100
                         </td>
                     </tr>
                     <tr className="bg-picton-blue-150">
-                        <th className="border-r-2 border-mako-grey-100 px-2 py-2  text-[1.4rem] text-mako-grey-700 phone:px-6 phone:py-3">
+                        <th className="border-r-2 border-mako-grey-100 px-2 py-2 text-center text-[1.4rem] text-mako-grey-700  phone:px-4  phone:py-3 tab-land:px-5 particular-small-laptop:px-6">
                             Avg Questions/Deck
                         </th>
-                        <td
-                            className="border-r-2 border-mako-grey-100 px-6
-                            py-3 text-center"
-                        >
+                        <td className="border-r-2 border-mako-grey-100 px-2 py-2 text-center phone:px-4  phone:py-3 tab-land:px-5 particular-small-laptop:px-6">
                             {averageQuestionsDecks}
                         </td>
                         <td
@@ -118,19 +109,13 @@ function OverallStats({
                         </td>
                     </tr>
                     <tr className="bg-picton-blue-200">
-                        <th className="border-r-2 border-mako-grey-100 px-6  py-3   text-[1.4rem] text-mako-grey-700">
+                        <th className="border-r-2 border-mako-grey-100 px-2 py-2 text-center text-[1.4rem] text-mako-grey-700  phone:px-4 phone:py-3  tab-land:px-5 particular-small-laptop:px-6">
                             Avg Points/Question
                         </th>
-                        <td
-                            className="border-r-2 border-mako-grey-100   px-6
-                            py-3 text-center"
-                        >
+                        <td className="border-r-2 border-mako-grey-100   px-2 py-2 text-center phone:px-4  phone:py-3 tab-land:px-5 particular-small-laptop:px-6">
                             {totalPointsPerQuestionDecks}
                         </td>
-                        <td
-                            className="px-6
-                            py-3 text-center"
-                        >
+                        <td className="px-2 py-2 text-center text-center phone:px-4  phone:py-3 tab-land:px-5 particular-small-laptop:px-6">
                             {totalPointsPerQuestionQuizes}
                         </td>
                     </tr>
