@@ -56,7 +56,7 @@ function OverallStats({
     ).toFixed(2)
 
     return (
-        <div className="flex-shrink flex-grow  tab-land:w-1/2">
+        <div className="flex-shrink flex-grow tab-land:w-half-minus-arrows ">
             <table className="h-[25rem] w-full border-collapse   tab-land:h-full ">
                 <thead>
                     <tr className="bg-chateau-green-400 text-[1.5rem] text-mako-grey-50">
