@@ -23,6 +23,7 @@ type DeckContributionCardProps = {
 function DecksContributionCard({ data }: DeckContributionCardProps) {
     const mediaTabLand = useMediaQueryResize(tabLand)
     const legendLayout = mediaTabLand ? 'horizontal' : 'vertical'
+    const marginRightPie = mediaTabLand ? 20 : 40
 
     return (
         <CarouselItem className="  flex h-[30rem] w-1/2 flex-col gap-6 rounded-lg border border-mako-grey-100 bg-picton-blue-50 px-4 py-4 shadow-md transition-all duration-300 phone:px-6 phone:py-6  tab-land:px-4 tab-land:py-4 particular-small-laptop:px-8 particular-small-laptop:py-8">
@@ -37,7 +38,7 @@ function DecksContributionCard({ data }: DeckContributionCardProps) {
                     <PieChart
                         margin={{
                             top: 100,
-                            right: 0,
+                            right: marginRightPie,
                             bottom: 5,
                             left: 0,
                         }}
