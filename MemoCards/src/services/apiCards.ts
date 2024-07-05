@@ -43,6 +43,7 @@ export async function getCardsPaginated(
         const to = page * PAGE_SIZE_CARDS
         // console.log(from, to);
         queryCards = queryCards.range(from, to - 1)
+        console.log(from, to)
     }
 
     const { data: cards, error: errorGettingCard, count } = await queryCards
