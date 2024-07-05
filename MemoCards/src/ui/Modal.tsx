@@ -90,17 +90,16 @@ function Window({
     const ref = useOutsideClick(close, true) as LegacyRef<HTMLDivElement>
 
     if (openName !== name) return
-    console.log(animation)
 
     if (animation === 'yes')
         return createPortal(
-            <motion.div
+            <div
                 className={`fixed left-0 top-0 h-screen w-full ${type === 'regular' ? 'bg-backdrop-color-50' : 'bg-chateau-green-100 bg-opacity-30'}  backdrop-blur-sm`}
                 key="modal"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                exit={{ opacity: 0 }}
+                // initial={{ opacity: 0 }}
+                // animate={{ opacity: 1 }}
+                // transition={{ duration: 0.3 }}
+                // exit={{ opacity: 0 }}
             >
                 <motion.div
                     className={`tab-land:px-18 tab-land:py-18 fixed left-1/2 top-1/2 flex  translate-x-[-50%] translate-y-[-50%]  flex-col gap-4 rounded-2xl bg-picton-blue-50  px-4 py-4 shadow-lg phone:px-8 phone:py-8 tab-port:px-12 tab-port:py-12 ${type === 'regular' ? '' : 'bg-gradient-to-tl from-picton-blue-50 to-chateau-green-300'}`}
@@ -137,7 +136,7 @@ function Window({
                         })}
                     </div>
                 </motion.div>
-            </motion.div>,
+            </div>,
             document.body
         )
     else
