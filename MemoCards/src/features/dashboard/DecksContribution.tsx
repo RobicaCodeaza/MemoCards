@@ -86,7 +86,7 @@ function DecksContribution({
         )
         if (perfectionScorePerQuiz > 0)
             deckContribution.push({
-                value: 100 - perfectionScorePerQuiz,
+                value: Number((100 - perfectionScorePerQuiz).toFixed(1)),
                 name: 'Incorrect Answers',
                 color: '#656d75',
             })
