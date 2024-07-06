@@ -23,8 +23,8 @@ function Authentication() {
 
     return (
         <div className="flex min-h-screen flex-col tab-port:flex-row">
-            <div className="flex items-center bg-picton-blue-100 px-16 py-12  phone:px-52 tab-port:w-1/2 tab-port:px-20 tab-land:px-44 particular-small-laptop:px-64">
-                <div className="w-full rounded-[12px] border-2 border-mako-grey-200 bg-picton-blue-50 p-6 shadow-md phone:p-10 tab-port:p-12  tab-land:p-16  particular-small-laptop:p-24">
+            <div className="flex items-center bg-picton-blue-75 px-16 py-12  phone:px-52 tab-port:w-1/2 tab-port:px-20 tab-land:px-44 particular-small-laptop:px-64">
+                <div className="w-full rounded-[12px] p-6 shadow-lg  phone:p-10 tab-port:p-12  tab-land:p-16  particular-small-laptop:p-24">
                     <Logo height="big"></Logo>
                     <p className="mb-10 mt-10 text-center">
                         Take a look at the next flashcards app
@@ -40,7 +40,7 @@ function Authentication() {
                     <Login></Login>
                 </div>
             </div>
-            <div className="bg-login-video-part flex flex-col items-center justify-center gap-16 px-16  py-12 phone:px-52 tab-port:w-1/2 tab-port:px-20 tab-land:px-44 particular-small-laptop:-mt-24 particular-small-laptop:px-64">
+            <div className="flex flex-col items-center justify-center gap-16 bg-login-video-part px-16  py-24 phone:px-52 tab-port:w-1/2 tab-port:px-20 tab-land:px-44 particular-small-laptop:-mt-24 particular-small-laptop:px-64">
                 <h1
                     className="text-center text-[3.4rem] font-semibold"
                     ref={ref}
