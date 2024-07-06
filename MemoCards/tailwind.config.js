@@ -103,6 +103,8 @@ export default {
         extend: {
             backgroundImage: {
                 'recap-gradient': 'linear-gradient(135deg, #ffe1e3, #ffc9cc)',
+                'login-video-part':
+                    'linear-gradient(135deg, #d3effc , #e1f2fd)',
             },
             boxShadow: {
                 'custom-inset': 'inset 0 2px 4px 0 rgba(31, 38, 135, 0.37)',
