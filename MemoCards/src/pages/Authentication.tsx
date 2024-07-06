@@ -55,10 +55,10 @@ function Authentication() {
                 </h1>
                 <div className="aspect-video  w-full">
                     <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/fx6KMItwJAw?si=tIS-SkEGZpsk8mWI"
-                        title="YouTube video player"
+                        width="1851"
+                        height="742"
+                        src="https://www.youtube.com/embed/nE2FkVp-fwE"
+                        title=""
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerPolicy="strict-origin-when-cross-origin"
