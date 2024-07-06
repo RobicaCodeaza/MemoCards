@@ -40,7 +40,7 @@ function RecapPlanCard({
 
     return (
         <div
-            className={`relative flex h-[12rem]  w-[14rem] flex-shrink-0  flex-col justify-center gap-3 rounded-lg   border  border-danger-300 bg-picton-blue-50 px-2 py-2 text-mako-grey-500  transition-shadow duration-300 hover:shadow-inner phone:px-4 phone:py-4 tab-port:px-6 tab-port:py-6`}
+            className={`relative flex h-[12rem]  w-[14rem] flex-shrink-0  flex-col justify-center gap-3 rounded-lg   border  border-danger-300 bg-picton-blue-75 px-2 py-2 text-mako-grey-500  transition-shadow duration-300 hover:shadow-inner phone:px-4 phone:py-4 tab-port:px-6 tab-port:py-6`}
             style={{ boxShadow: glowingShadow[`${score}`] }}
         >
             <p className="border-b border-mako-grey-100 py-1 text-[1.3rem] font-semibold tracking-wide">
