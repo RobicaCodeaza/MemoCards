@@ -10,16 +10,20 @@ A card app created for perfecting your revisions before your Multiple Choice Exa
 - `React.js`
 - `TypeScript`
 - `React-Router`
-- `Redux`
+- `Redux ToolKit`
 - `React Query`
 - `React-Hook-Form`
 - `ContextApi`
 - `React-Hot-Toast`
 - `Context`
+- `Date-Fns`
+- `Recharts`
 - `Supabase`
 - `EsLint`
 - `TailwindCSS`
+- `ShadCn`
 - `CSS`
+- `React-Icons`
 
 
 
