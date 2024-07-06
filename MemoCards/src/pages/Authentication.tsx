@@ -55,8 +55,8 @@ function Authentication() {
                 </h1>
                 <div className="aspect-video  w-full">
                     <iframe
-                        width="1851"
-                        height="742"
+                        width="100%"
+                        height="100%"
                         src="https://www.youtube.com/embed/nE2FkVp-fwE"
                         title=""
                         frameBorder="0"
