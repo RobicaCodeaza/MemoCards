@@ -1,41 +1,42 @@
 # 🥷🏽 NinjaSketch
 
-An Excalidraw clone with React and TypeScript. Rough.js is used for the sketchy, hand-drawn style. I built the side project for learning purposes. The app is not responsive. I mainly focused on the functionalities since I already have plenty of projects that are responsive.
+A card app created for perfecting your revisions before your Multiple Choice Exams. This way the students can engage in a more pleasurable experience when Reviewing possible Chapters - Subchapters - Lessons via Questions with multiple-choice variants or even Questions that require self-rating your knowledge. It is a perfect App for medicine students or students who want to outperform the job competition when it comes to assignments tests.
 
 ## 📦 Technologies
 
 - `Vite`
 - `React.js`
 - `TypeScript`
-- `Rough.js`
+- `React-Router`
+- `Redux`
+- `React Query`
+- `React-Hook-Form`
+- `ContextApi`
+- `React-Hot-Toast`
+- `Context`
+- `Supabase`
+- `EsLint`
+- `TailwindCSS`
 - `CSS`
-- `Vitest`
-- `Cypress` 
-- `Testing Library`
 
 ## 🦄 Features
 
-Here's what you can do with NinjaSketch:
 
-- **Choose a Tool**: You have pencils, lines, rectangles, and text tools. Pick one and start creating.
 
-- **Draw and Move**: Click and drag on the canvas to draw. To move something, select it and drag it to a new spot. Also, resize elements by dragging the corners. Resizing only works on rectangles or lines.
+Here's what you can do with MemoCards:
 
-- **Edit Text**: Click on the canvas and start typing to add text to your drawings. You can also edit existing text.
+- **Deck Creation**: Working as a box that contains the *Cards*. It is the *Lesson* from a select *Chapter* and *Subchapter* allowing us to stack cards in it and test them. 
 
-- **Zoom**: Use Ctrl + Scroll or click on the buttons to zoom in for detail or out to see the whole picture.
+- **Cards Creation**: Working as a question and answer holder. It allows us to create questions with multiple-choice answers or even questions with one answer(**Flipping Card**) that require us to review our knowledge to that specific question. 
 
-- **Pan**: Hold the Space bar and drag or use the middle mouse button to move around the whiteboard canvas.
+- **Quiz Creation**: Create your *Quiz*. You can select multiple *Decks* from the ones created. Your *Cards* will appear in your quiz based on the type of the card(with multiple-choice answers or single answer).
 
-### 🎯 Keyboard Shortcuts:
+- **Set your Recap Plan**: In the *Settings* Panel you can set your *Recap Period* allowing for quiz testing and reminders based on last performances.
 
-Speed up your work with these shortcuts:
+- **Dashboard**: Here you can review your performance: *Recap Plan, Overall Stats,Decks Contribution in Quizes and Perfection Scores Evolution*. 
 
-- **Canvas Navigation**: Press the Space bar and drag or use the middle mouse button.
-- **Undo**: Ctrl + Z.
-- **Redo**: Ctrl + Y or Ctrl + Shift + Z.
-- **Zoom In**: Ctrl + Plus.
-- **Zoom Out**: Ctrl + Minus.
+Short Summary: Just create a *Deck*, then create some *Cards*, afterwards you can quiz yourself based on those created previously.
+
 
 ## 👩🏽‍🍳 The Process
 
