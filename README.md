@@ -2,6 +2,8 @@
 
 A card app created for perfecting your revisions before your Multiple Choice Exams. This way the students can engage in a more pleasurable experience when Reviewing possible Chapters - Subchapters - Lessons via Questions with multiple-choice variants or even Questions that require self-rating your knowledge. It is a perfect App for medicine students or students who want to outperform the job competition when it comes to assignments tests.
 
+
+
 ## 📦 Technologies
 
 - `Vite`
@@ -19,9 +21,9 @@ A card app created for perfecting your revisions before your Multiple Choice Exa
 - `TailwindCSS`
 - `CSS`
 
+
+
 ## 🦄 Features
-
-
 
 Here's what you can do with MemoCards:
 
@@ -36,6 +38,7 @@ Here's what you can do with MemoCards:
 - **Dashboard**: Here you can review your performance: *Recap Plan, Overall Stats,Decks Contribution in Quizes and Perfection Scores Evolution*. 
 
 Short Summary: Just create a *Deck*, then create some *Cards*, afterwards you can quiz yourself based on those created previously.
+
 
 
 ## 👩🏽‍🍳 The Process
@@ -53,6 +56,8 @@ Finally, I added testing with Cypress and Testing Library. I conducted end-to-en
 Along the way, while building everything, I took notes on what I've learned so I don't miss out on it. I also documented the behind-the-scenes processes every time a feature was added.
 
 This way, I understood what I've built. The funny thing is, as soon as I started to document what happened behind the scenes and the features I've added, it made me realize that we fully understand something once we've actually taken a step back, thought about it, and documented what we've done. I think this is a good practice to follow when learning something new.
+
+
 
 ## 📚 What I Learned
 
@@ -91,6 +96,8 @@ During this project, I've picked up important skills and a better understanding 
 
 Each part of this project helped me understand more about building apps, managing complex information, and improving user experience. It was more than just making a tool. It was about solving problems, learning new things, and improving my skills for future work.
 
+
+
 ## 💭 How can it be improved?
 
 - Add more colors to the color picker.
@@ -101,27 +108,33 @@ Each part of this project helped me understand more about building apps, managin
 - Add more text options like font size, font color, and more.
 - Instead of have any in two places, create a type for the rough.js elements.
 
+
+
 ## 🚦 Running the Project
 
 To run the project in your local environment, follow these steps:
 
-1. Clone the repository to your local machine.
-2. Run `npm install` or `yarn` in the project directory to install the required dependencies.
-3. Run `npm run start` or `yarn start` to get the project started.
-4. Open [http://localhost:5173](http://localhost:5173) (or the address shown in your console) in your web browser to view the app.
-
-## 🍿 Video
-
-https://github.com/mirayatech/NinjaSketch/assets/71933266/6a16c9e5-6380-4317-96e7-d132768f7b40
-
-
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-project.git
+git clone https://github.com/RobicaCodeaza/MemoCards.git
 
 # Navigate to the project directory
 cd your-project
 
 # Install dependencies
 npm install
+
+# Run the project
+npm run dev
+
+# Open [http://localhost:5173](http://localhost:5173) (or the address shown in your console) in your web browser to view the app.
+
+# Enjoy
 ```
+
+
+## 🍿 Video
+
+https://github.com/mirayatech/NinjaSketch/assets/71933266/6a16c9e5-6380-4317-96e7-d132768f7b40
+
+
