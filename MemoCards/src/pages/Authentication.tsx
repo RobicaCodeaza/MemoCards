@@ -24,7 +24,7 @@ function Authentication() {
     return (
         <div className="flex min-h-screen flex-col tab-port:flex-row">
             <div className="flex items-center bg-picton-blue-75 px-16 py-12  phone:px-52 tab-port:w-1/2 tab-port:px-20 tab-land:px-44 particular-small-laptop:px-64">
-                <div className="w-full rounded-[12px] p-6 shadow-lg  phone:p-10 tab-port:p-12  tab-land:p-16  particular-small-laptop:p-24">
+                <div className="w-full rounded-[12px] bg-picton-blue-50 p-6  shadow-lg phone:p-10  tab-port:p-12 tab-land:p-16 particular-small-laptop:p-24">
                     <Logo height="big"></Logo>
                     <p className="mb-10 mt-10 text-center">
                         Take a look at the next flashcards app
