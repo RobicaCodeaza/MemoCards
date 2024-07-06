@@ -1,10 +1,10 @@
-# 🥷🏽 NinjaSketch
+# 🎴 MemoCards
 
 A card app created for perfecting your revisions before your Multiple Choice Exams. This way the students can engage in a more pleasurable experience when Reviewing possible Chapters - Subchapters - Lessons via Questions with multiple-choice variants or even Questions that require self-rating your knowledge. It is a perfect App for medicine students or students who want to outperform the job competition when it comes to assignments tests.
 
 
 
-## 📦 Technologies
+## ❇️ Technologies
 
 - `Vite`
 - `React.js`
@@ -23,7 +23,7 @@ A card app created for perfecting your revisions before your Multiple Choice Exa
 
 
 
-## 🦄 Features
+## 💎 Features
 
 Here's what you can do with MemoCards:
 
@@ -35,23 +35,16 @@ Here's what you can do with MemoCards:
 
 - **Set your Recap Plan**: In the *Settings* Panel you can set your *Recap Period* allowing for quiz testing and reminders based on last performances.
 
-- **Dashboard**: Here you can review your performance: *Recap Plan, Overall Stats,Decks Contribution in Quizes and Perfection Scores Evolution*. 
+- **Dashboard**: Here you can review your performance: *Recap Plan, Overall Stats, Decks' Contribution in Quizes and Perfection Scores Evolution*. 
 
 Short Summary: Just create a *Deck*, then create some *Cards*, afterwards you can quiz yourself based on those created previously.
 
 
+  
+## 🧑‍🍳 The Process
 
-## 👩🏽‍🍳 The Process
-
-I started by rendering a canvas with rough.js to create the base for all the drawings. Then, I focused on drawing on the canvas, allowing users to make lines, rectangles, and other shapes.
-
-Next, I made sure users could move elements around. This was important for adjusting drawings. After that, I added the ability to resize elements to give more control over the shapes.
-
-To make sure mistakes could be fixed, I implemented undo and redo features. I also added freehand drawing for a more natural sketching experience and a text tool to label or note on the canvas.
-
-To navigate larger drawings, I put in pan and zoom tools. With everything functioning, I designed the whole UI to make it user-friendly and appealing.
-
-Finally, I added testing with Cypress and Testing Library. I conducted end-to-end tests on drawing and manipulating text, lines, rectangles, and freehand drawings to make sure everything worked smoothly.
+The project represents a special request from my girlfriend  to prepare for the medical exams. 
+I developed it following a User Story structure, then I defined the main features of the app, afterwards I thought about the Routing and necessary Tech Stack to bring her idea and my personal touch to life.
 
 Along the way, while building everything, I took notes on what I've learned so I don't miss out on it. I also documented the behind-the-scenes processes every time a feature was added.
 
@@ -63,34 +56,32 @@ This way, I understood what I've built. The funny thing is, as soon as I started
 
 During this project, I've picked up important skills and a better understanding of complex ideas, which improved my logical thinking.
 
-### 🧠 `useHistory` Hook:
+### ❔ React Query :
 
-- **Logical Thinking**: Creating the `useHistory` hook taught me to think about how to manage saving, undoing, and redoing actions. I had to really understand how to track changes and plan out user actions.
+- Using an efficient, functional and clean way of interacting with the database while maintaining abstraction and respecting an opinionated way of programming.
 
-### 📏 Coordinates and Measurements:
+### 👤 User Management and User's Data:
 
-- **Accuracy**: I've become better at working with shapes and points, like knowing if a point is inside a shape. This required careful measurements.
-- **Math Skills**: I used math functions to make sure everything was placed correctly and to calculate distances.
+- Managed every user's data via login and ensured every interaction with the app had its signature based on its unique ID.
+- Thus Cards, Decks, Quizzes and Settings are associated with every logged user.
 
-### 🎨 Discovering Rough.js:
+### 🇫 Discovering React-Hook-Form:
 
-- **New Tools**: I found out about Rough.js, which lets me make graphics look hand-drawn. This was a new and exciting tool for me.
+- Easy management of the forms having access to default values served in conjunction with the data coming from supabase via React Query.
 
-### 🔍 Deep Dive into Functions:
+### 🔍 Deep Dive into Redux:
 
-- **Complex Functions**: I spent time understanding the `getSvgPathFromStroke` function, which turns drawing movements into smooth paths.
+- Redux provided easy management of the state required for the creation of complex Quizzes as in our needed case.
 
-### ✏️ Managing Points and Drawing:
+### ✏️ SQL editor and PostgreSQL:
 
-- **Working with Points**: I learned how to collect and use points from drawings, which involved understanding and managing data to reflect what the user does.
+- Supabase Provides a CLI for JavaScript but sometimes updating Arrays inside a Row needed a personal touch and help from our friend SQL.
 
-### 🎣 React Hooks and Rendering:
+### 🪝 React Custom Hooks and TypeScript Practices:
 
-- **New Knowledge**: I learned about `useLayoutEffect`, which helps make sure changes are done before the screen updates. This was useful for certain drawing functions.
+- TypeScript allowed to catch errors early in production while working with defined data provided by Supabase dataTypes. Defining custom hooks(ex: usage of local storage) represented a good principle of DRY.
 
-### 🎡 Advanced Event Handling:
-
-- **User Interaction**: I worked with the wheel event listener, which allowed me to add zooming and panning features. This made the app more interactive and user-friendly.
+### 🏰 UI Component Library and Reusable Components
 
 ### 📈 Overall Growth:
 
@@ -98,19 +89,16 @@ Each part of this project helped me understand more about building apps, managin
 
 
 
-## 💭 How can it be improved?
+## 💡 How can it be improved?
 
-- Add more colors to the color picker.
-- Add more tools like a circle, eraser, and more.
-- Add more shapes like triangles, stars, and more.
-- Add more keyboard shortcuts to make things faster.
-- Add more themes like dark mode, light mode, and more.
-- Add more text options like font size, font color, and more.
-- Instead of have any in two places, create a type for the rough.js elements.
+- Add Code Related Questions
+- Add AI integration that:
+  -> Creates Questions and Answers based on Pdf
+- Add other Dashboard Statistics
+- Other Open Source Ideas(A
 
 
-
-## 🚦 Running the Project
+## 🏃 Running the Project
 
 To run the project in your local environment, follow these steps:
 
@@ -135,6 +123,5 @@ npm run dev
 
 ## 🍿 Video
 
-https://github.com/mirayatech/NinjaSketch/assets/71933266/6a16c9e5-6380-4317-96e7-d132768f7b40
-
+To be Added
 
