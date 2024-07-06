@@ -119,8 +119,10 @@ npm install
 # Run the project
 npm run dev
 
+# Open http://localhost:5173 (or the address shown in your console) in your web browser to view the app.
+
+
 ```
- Open [http://localhost:5173](http://localhost:5173) (or the address shown in your console) in your web browser to view the app.
 
 
 ## 🍿 Video
