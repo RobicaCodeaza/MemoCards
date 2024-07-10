@@ -15,7 +15,6 @@ A card app created for perfecting your revisions before your Multiple Choice Exa
 - `React-Hook-Form`
 - `ContextApi`
 - `React-Hot-Toast`
-- `Context`
 - `Date-Fns`
 - `Recharts`
 - `Supabase`
@@ -77,7 +76,7 @@ During this project, I've picked up important skills and a better understanding 
 
 - Redux provided easy management of the state required for the creation of complex Quizzes as in our needed case.
 
-### ✏️ SQL editor and PostgreSQL:
+### ✏️Supabase with SQL editor and PostgreSQL:
 
 - Supabase Provides a CLI for JavaScript but sometimes updating Arrays inside a Row needed a personal touch and help from our friend SQL.
 
