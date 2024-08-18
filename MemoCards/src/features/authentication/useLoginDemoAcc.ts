@@ -8,7 +8,6 @@ export function useLoginDemoAcc() {
     const { isLoading: isLoggingInDemo, mutate: loginDemoAcc } = useMutation({
         mutationFn: loginDemo,
         onSuccess: (user) => {
-            console.log('user', user)
             queryClient.setQueryData(['user'], user)
             // toast.success("User's data has been updated successfully.")
         },

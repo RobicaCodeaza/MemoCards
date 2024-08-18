@@ -1,14 +1,20 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import eslint from 'vite-plugin-eslint';
+import react from '@vitejs/plugin-react'
+import eslint from 'vite-plugin-eslint'
 // https://vitejs.dev/config/
-import path from 'path';
+import path from 'path'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [react(), eslint()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
+    plugins: [react(), eslint()],
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        // this points to the setup file created earlier
+        setupFiles: './src/setupTests.js',
     },
-  },
-});
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
+        },
+    },
+})

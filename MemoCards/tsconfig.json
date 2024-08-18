@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "types": ["vitest/globals"],
         "target": "ES2020",
         "useDefineForClassFields": true,
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -11,7 +12,8 @@
 
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "*": ["node_modules/*", "src/types/*"]
         },
 
         /* Bundler mode */
@@ -26,7 +28,8 @@
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "typeRoots": ["./src/types", "./node_modules/@types"]
     },
     "include": ["src", "src/types"],
     "references": [{ "path": "./tsconfig.node.json" }]
