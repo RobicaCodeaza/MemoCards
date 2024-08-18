@@ -15,6 +15,7 @@ import Decks from './pages/Decks'
 import { Toaster } from 'react-hot-toast'
 import QuizLayout from './features/quiz/QuizLayout'
 import Testing from './pages/Testing'
+import { notification } from 'antd'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -25,6 +26,8 @@ const queryClient = new QueryClient({
 })
 
 function App() {
+    const [api, contextHolder] = notification.useNotification()
+
     return (
         <>
             <MobileNavProvider>
@@ -33,6 +36,7 @@ function App() {
                         initialIsOpen={false}
                     ></ReactQueryDevtools>
                     <BrowserRouter>
+                        {contextHolder}
                         <Routes>
                             <Route
                                 element={
