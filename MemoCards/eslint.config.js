@@ -7,6 +7,12 @@ import tseslint from 'typescript-eslint'
 import vitest from 'eslint-plugin-vitest'
 import jestDom from 'eslint-plugin-jest-dom'
 import testingLibrary from 'eslint-plugin-testing-library'
+import path, { dirname } from 'path'
+// import { fileURLToPath } from 'url'
+// import { dirname } from 'path'
+
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = dirname(__filename)
 
 export default tseslint.config(
     { ignores: ['dist', 'build'] },
@@ -14,7 +20,7 @@ export default tseslint.config(
         extends: [
             js.configs.recommended,
             ...tseslint.configs.recommendedTypeChecked,
-            ...tseslint.configs.stylisticTypeChecked,˜
+            ...tseslint.configs.stylisticTypeChecked,
             react.configs.flat.recommended, // 'plugin:react/recommended',
             react.configs.flat['jsx-runtime'], // 'plugin:react/jsx-runtime',
             vitest.configs.recommended,
@@ -34,9 +40,18 @@ export default tseslint.config(
                 // provides a URL string representing the location of the current module. This URL includes the full path to the module file, which is helpful for resolving paths to other files relative to the module.
             },
         },
+        settings: {},
         settings: {
             react: {
                 version: 'detect',
+            },
+            'import/resolver': {
+                alias: {
+                    map: [
+                        ['@', path.resolve(import.meta.url, 'src')], // Adjust 'src' to your actual source directory if different
+                    ],
+                    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+                },
             },
         }, // What version of react we use to be available to the eslint-plugin-react
         plugins: {
@@ -50,6 +65,7 @@ export default tseslint.config(
                 'warn',
                 { allowConstantExport: true },
             ],
+            'react/prop-types': 'off',
             'react/react-in-jsx-scope': 'off',
             'react/jsx-no-target-blank': 'off',
             '@typescript-eslint/no-misused-promises': 'off',
