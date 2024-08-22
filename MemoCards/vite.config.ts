@@ -4,6 +4,10 @@ import eslint from 'vite-plugin-eslint'
 const typedEslintPlugin = eslint as () => import('vite').Plugin
 // https://vitejs.dev/config/
 import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export default defineConfig({
     plugins: [react(), typedEslintPlugin()],

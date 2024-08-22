@@ -48,7 +48,13 @@ export default tseslint.config(
             'import/resolver': {
                 alias: {
                     map: [
-                        ['@', path.resolve(import.meta.url, 'src')], // Adjust 'src' to your actual source directory if different
+                        [
+                            '@',
+                            path.resolve(
+                                toString(import.meta.__dirname),
+                                'src'
+                            ),
+                        ], // Adjust 'src' to your actual source directory if different
                     ],
                     extensions: ['.ts', '.tsx', '.js', '.jsx'],
                 },
