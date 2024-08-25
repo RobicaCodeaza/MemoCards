@@ -12,7 +12,7 @@
         "generate:types": " supabase gen types typescript --project-id bicvqgmxkyigtsiltrns  --schema public > src/types/database.types.ts"
     },
     "dependencies": {
-        "@eslint/js": "^9.9.0",
+        "@eslint/js": "^8.0.0",
         "@lottiefiles/dotlottie-react": "^0.8.8",
         "@radix-ui/react-dialog": "^1.1.1",
         "@radix-ui/react-progress": "^1.1.0",
@@ -61,7 +61,7 @@
         "@vitejs/plugin-react": "^4.3.1",
         "@vitest/ui": "^2.0.5",
         "autoprefixer": "^10.4.20",
-        "eslint": "^9.9.0",
+        "eslint": "^8.0.0",
         "eslint-plugin-react-hooks": "^5.1.0-rc.0",
         "eslint-plugin-react-refresh": "^0.4.10",
         "eslint-plugin-vitest": "^0.5.4",

@@ -7,12 +7,11 @@ import tseslint from 'typescript-eslint'
 import vitest from 'eslint-plugin-vitest'
 import jestDom from 'eslint-plugin-jest-dom'
 import testingLibrary from 'eslint-plugin-testing-library'
-import path, { dirname } from 'path'
-// import { fileURLToPath } from 'url'
-// import { dirname } from 'path'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = dirname(__filename)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export default tseslint.config(
     { ignores: ['dist', 'build'] },
@@ -32,31 +31,17 @@ export default tseslint.config(
             ecmaVersion: 2020,
             globals: { ...vitest.environments.env.globals, ...globals.browser },
             parserOptions: {
-                projectService: ['./tsconfig.json'],
-                // setting that is required to use rules which require type information
-                // If true, each source file's parse will find the nearest tsconfig.json file to that source file.
-                // This is done by checking that source file's directory tree for the nearest tsconfig.json
-                tsconfigRootDir: import.meta.url,
-                // provides a URL string representing the location of the current module. This URL includes the full path to the module file, which is helpful for resolving paths to other files relative to the module.
+                projectService: path.resolve(__dirname, './tsconfig.json'),
+                tsconfigRootDir: __dirname,
             },
         },
-        settings: {},
         settings: {
             react: {
                 version: 'detect',
             },
             'import/resolver': {
-                alias: {
-                    map: [
-                        [
-                            '@',
-                            path.resolve(
-                                toString(import.meta.__dirname),
-                                'src'
-                            ),
-                        ], // Adjust 'src' to your actual source directory if different
-                    ],
-                    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+                typescript: {
+                    project: path.resolve(__dirname, './tsconfig.json'),
                 },
             },
         }, // What version of react we use to be available to the eslint-plugin-react
