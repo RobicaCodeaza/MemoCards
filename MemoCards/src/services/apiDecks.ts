@@ -135,7 +135,7 @@ export async function getRecentDecksAndCards(
     userId: string,
     date: string | null
 ) {
-    console.log('getting recent')
+    // console.log('getting recent')
     let query
     if (!date) query = supabase.from('Decks').select('*').eq('user_id', userId)
     else

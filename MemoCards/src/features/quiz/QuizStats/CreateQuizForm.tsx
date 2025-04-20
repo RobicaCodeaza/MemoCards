@@ -102,7 +102,7 @@ function CreateQuizForm({ quizToEdit, onCloseModal }: CreateQuizFormProps) {
             questionTime: data.questionTime ? Number(data.questionTime) : null,
             decksId,
         }
-        console.log(newData)
+        // console.log(newData)
         if (isEditingSession)
             updateQuiz(
                 { newData, id: editId! },

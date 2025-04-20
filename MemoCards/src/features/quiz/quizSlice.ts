@@ -402,7 +402,7 @@ export function finish() {
                     perfectionScore,
                 }
             })
-            console.log('updates', updates)
+            // console.log('updates', updates)
 
             const { error: errorUpdatingDecks } = await supabase
                 .from('Decks')

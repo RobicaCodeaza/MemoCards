@@ -9,7 +9,7 @@ export async function getRecapSettings(userId: string) {
         .select('*')
         .eq('user_id', userId)
 
-    console.log('error', errorGettingRecapSettings, settings)
+    // console.log('error', errorGettingRecapSettings, settings)
     if (errorGettingRecapSettings)
         throw new Error('Could not get settings for your account.')
 

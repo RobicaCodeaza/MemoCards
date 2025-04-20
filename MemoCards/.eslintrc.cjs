@@ -34,5 +34,6 @@ module.exports = {
         '@typescript-eslint/no-misused-promises': 'off',
         '@typescript-eslint/consistent-type-definitions': 0,
         '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off', // or 'off'
     },
 }

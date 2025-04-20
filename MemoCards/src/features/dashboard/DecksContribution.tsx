@@ -90,7 +90,7 @@ function DecksContribution({
                 name: 'Incorrect Answers',
                 color: '#656d75',
             })
-        console.log(deckContribution)
+        // console.log(deckContribution)
         decksContribution.push({
             quizName: `${el.quizName}`,
             deckContribution,
@@ -98,7 +98,7 @@ function DecksContribution({
     })
 
     return (
-        <div className="flex-shrink  px-6 phone:px-12  phone:py-2   tab-land:w-1/2 tab-land:px-6">
+        <div className="flex-shrink px-6 phone:px-12 phone:py-2 tab-land:w-1/2 tab-land:px-6">
             <Carousel className="h-full">
                 <CarouselContent className="perspective--big h-full p-2">
                     {decksContribution.map((data) => (

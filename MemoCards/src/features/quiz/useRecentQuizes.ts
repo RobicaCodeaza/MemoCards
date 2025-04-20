@@ -23,7 +23,7 @@ export function useRecentQuizes() {
     if (numDays === 'All') date = null
     if (numDays === 7 || numDays === 14 || numDays === 30) {
         date = subDays(new Date(), numDays).toDateString()
-        console.log(date)
+        // console.log(date)
     }
 
     const {
