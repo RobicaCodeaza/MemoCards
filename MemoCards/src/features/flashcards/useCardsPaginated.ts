@@ -77,7 +77,7 @@ export function useCardsPaginated() {
                     pagination + 1,
                 ],
                 queryFn: () => {
-                    console.log('pre-fetch')
+                    // console.log('pre-fetch')
 
                     return getCardsPaginated(
                         user.user_id,
@@ -102,7 +102,7 @@ export function useCardsPaginated() {
                     pagination - 1,
                 ],
                 queryFn: () => {
-                    console.log('pre-fetch')
+                    // console.log('pre-fetch')
                     return getCardsPaginated(
                         user.user_id,
                         {

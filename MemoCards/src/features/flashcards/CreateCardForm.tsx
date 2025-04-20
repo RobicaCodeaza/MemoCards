@@ -68,7 +68,7 @@ function CreateCardForm({
     const onSubmit: SubmitHandler<Tables<'Card'>> = (data) => {
         if (isEditingSession) {
             const newData = { ...data, deckId }
-            console.log(newData)
+            // console.log(newData)
             updateCard(
                 { newData, id: editId! },
                 {

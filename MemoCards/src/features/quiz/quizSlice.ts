@@ -238,7 +238,7 @@ export function dataReceived(quizId: string) {
             const { data, error: errorGettingDecks } = await supabase
                 .from('Quizes')
                 .select('decksId,questionTime,quizTime,id')
-                .eq('id', quizId)
+                .eq('id', Number(quizId))
 
             if (errorGettingDecks ?? data === null)
                 throw new Error('Error in finding coresponding decks.')
@@ -402,7 +402,7 @@ export function finish() {
                     perfectionScore,
                 }
             })
-            console.log('updates', updates)
+            // console.log('updates', updates)
 
             const { error: errorUpdatingDecks } = await supabase
                 .from('Decks')

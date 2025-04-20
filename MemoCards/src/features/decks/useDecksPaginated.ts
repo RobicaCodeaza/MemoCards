@@ -35,7 +35,7 @@ export function useDecksPaginated() {
             void queryClient.prefetchQuery({
                 queryKey: ['decks', pagination + 1],
                 queryFn: () => {
-                    console.log('pre-fetch')
+                    // console.log('pre-fetch')
                     return getDecksPaginated(user.user_id, pagination + 1)
                 },
                 retry: false,
@@ -45,7 +45,7 @@ export function useDecksPaginated() {
             void queryClient.prefetchQuery({
                 queryKey: ['decks', pagination - 1],
                 queryFn: () => {
-                    console.log('pre-fetch')
+                    // console.log('pre-fetch')
                     return getDecksPaginated(user.user_id, pagination - 1)
                 },
                 retry: false,
